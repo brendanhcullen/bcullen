@@ -20,9 +20,9 @@ interests:
 name: Brendan Cullen
 organizations:
 - name: Social and Affective Neuroscience Lab
-  url: "http://sanlab.uoregon.edu"
+  url: https://sanlab.uoregon.edu
 - name: Center for Translational Neuroscience
-  url: "http://ctn.uoregon.edu"
+  url: https://ctn.uoregon.edu
 role: Doctoral Student
 social:
 - icon: envelope
