@@ -22,7 +22,7 @@ organizations:
 - name: Social and Affective Neuroscience Lab
   url: https://sanlab.uoregon.edu
 - name: Center for Translational Neuroscience
-  url: https://ctn.uoregon.edu
+  url: https://ctn.uoregon.edu/profile/bcullen
 role: Doctoral Student
 social:
 - icon: envelope
