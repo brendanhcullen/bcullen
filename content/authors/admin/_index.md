@@ -1,7 +1,7 @@
 ---
 authors:
 - admin
-bio: My interests include data science, R programming, and translational neuroscience.
+bio: Translational neuroscientist and aspiring data scientist studying precision medicine approaches to health behavior change.
 education:
   courses:
   - course: PhD - Psychology 
