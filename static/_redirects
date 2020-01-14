@@ -1,0 +1,3 @@
+http://bcullen.rbind.io/*      https://bcullen.rbind.io/:splat  301!
+https://bcullen.netlify.com/*  https://bcullen.rbind.io/:splat  301!
+http://bcullen.netlify.com/*   https://bcullen.rbind.io/:splat  301!
