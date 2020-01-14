@@ -4,6 +4,9 @@ authors:
 bio: My interests include data science, R programming, and translational neuroscience.
 education:
   courses:
+  - course: PhD - Psychology 
+    institution: University of Oregon
+    year: expected 2022
   - course: MS - Psychology 
     institution: University of Oregon
     year: 2019
@@ -23,7 +26,7 @@ organizations:
   url: https://sanlab.uoregon.edu
 - name: Center for Translational Neuroscience
   url: https://ctn.uoregon.edu/profile/bcullen
-role: Doctoral Student
+role: Doctoral Student & NSF GRFP Fellow
 social:
 - icon: envelope
   icon_pack: fas
