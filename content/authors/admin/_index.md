@@ -16,6 +16,7 @@ education:
 email: "bcullen@uoregon.edu"
 interests:
 - Data science & statistics
+- Predictive modeling
 - R programming
 - Health behavior change
 - Precision medicine
