@@ -46,7 +46,7 @@ user_groups:
 - Visitors
 ---
 
-I am a 3rd-year PhD student and [National Science Foundation GRFP Fellow](https://www.nsfgrfp.org/general_resources/about) in the Department of Psychology at the University of Oregon. My work focuses on predicting real-world health behaviors and health outcomes in an effort to advance a precision medicine framework for behavioral health.
+I am a 3rd-year PhD student and [National Science Foundation GRFP Fellow](https://www.nsfgrfp.org/general_resources/about) in the Department of Psychology at the University of Oregon. My work in the [Social and Affective Neuroscience Lab](https://sanlab.uoregon.edu/) focuses on predicting real-world health behaviors and health outcomes in an effort to advance a precision medicine framework for behavioral health.
 
 I love working with data and constantly strive toward a more open and reproducible workflow. To that end, I am pursuing a [Data Science Specialization](https://github.com/uo-datasci-specialization) at UO and currently serve as a lab instructor for the graduate-level [Data Analysis Sequence](https://github.com/uopsych) in the Department of Psychology. 
 
