@@ -122,7 +122,7 @@ Last updated on `r Sys.Date()`.
 Main
 ================================================================================
 
-Nick Strayer {#title}
+Brendan Cullen {#title}
 --------------------------------------------------------------------------------
 
 ```{r}
@@ -138,6 +138,13 @@ Education {data-icon=graduation-cap data-concise=true}
 print_section(position_data, 'education')
 ```
 
+
+Honors & Awards {data-icon=trophy}
+--------------------------------------------------------------------------------
+
+```{r}
+print_section(position_data, 'honors_awards')
+```
 
 
 Research Experience {data-icon=laptop}
