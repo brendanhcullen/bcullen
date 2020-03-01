@@ -130,7 +130,6 @@ print_text_block(text_blocks, 'intro')
 ```
 
 
-
 Education {data-icon=graduation-cap data-concise=true}
 --------------------------------------------------------------------------------
 
@@ -155,24 +154,10 @@ print_section(position_data, 'research_positions')
 ```
 
 
-
-Industry Experience {data-icon=suitcase}
---------------------------------------------------------------------------------
-
-::: aside
-```{r}
-print_text_block(text_blocks, 'industy_experience_aside')
-```
-:::
-
-```{r}
-print_section(position_data, 'industry_positions')
-```
-
-<!-- These breaks just force a new page so section doesnt get cut off -->
-<br>
-<br>
-<br>
+<!-- <!-- These breaks just force a new page so section doesnt get cut off --> 
+<!-- <br> -->
+<!-- <br> -->
+<!-- <br> -->
 
 Teaching Experience {data-icon=chalkboard-teacher}
 --------------------------------------------------------------------------------
@@ -187,20 +172,23 @@ print_text_block(text_blocks, 'teaching_experience_aside')
 print_section(position_data, 'teaching_positions')
 ```
 
-
-
-
-
 <br>
 <br>
 
 
-
-Selected Publications, Posters, and Talks {data-icon=book}
+Publications{data-icon=book}
 --------------------------------------------------------------------------------
 
 ```{r}
 print_section(position_data, 'academic_articles')
+```
+
+
+Conference Posters and Talks{data-icon=comments}
+--------------------------------------------------------------------------------
+
+```{r}
+print_section(position_data, 'posters')
 ```
 
 
