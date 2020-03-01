@@ -78,7 +78,7 @@ Aside
 ================================================================================
 
 
-![logo](logo.png){width=100%}
+![headshot](../img/cullen_headshot.jpg)
 
 ```{r}
 # When in export mode the little dots are unaligned, so fix that. 
@@ -113,7 +113,7 @@ Disclaimer {#disclaimer}
 
 Made with the R package [**pagedown**](https://github.com/rstudio/pagedown). 
 
-The source code is available at [github.com/nstrayer/cv](https://github.com/nstrayer/cv).
+The source code is available at [github.com/brendanhcullen/bcullen](https://github.com/brendanhcullen/static/cv).
 
 Last updated on `r Sys.Date()`.
 
