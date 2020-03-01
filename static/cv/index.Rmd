@@ -78,7 +78,7 @@ Aside
 ================================================================================
 
 
-![headshot](../img/cullen_headshot.jpg)
+![headshot](../img/cullen_headshot.jpg){width=100%}
 
 ```{r}
 # When in export mode the little dots are unaligned, so fix that. 
@@ -146,7 +146,7 @@ print_section(position_data, 'honors_awards')
 ```
 
 
-Research Experience {data-icon=laptop}
+Professional Research Experience {data-icon=suitcase}
 --------------------------------------------------------------------------------
 
 ```{r}
@@ -176,7 +176,7 @@ print_section(position_data, 'teaching_positions')
 <br>
 
 
-Workshops Taught {data-icon=chalkboard-teacher}
+Workshops Taught {data-icon=code-branch}
 --------------------------------------------------------------------------------
 
 ```{r}
@@ -192,13 +192,36 @@ print_section(position_data, 'academic_articles')
 ```
 
 
-Conference Posters and Talks{data-icon=comments}
+Selected Poster Presentations{data-icon=image}
 --------------------------------------------------------------------------------
 
 ```{r}
 print_section(position_data, 'posters')
 ```
 
+
+Talks{data-icon=users}
+--------------------------------------------------------------------------------
+
+```{r}
+print_section(position_data, 'talks')
+```
+
+Workshops & Training {data-icon=laptop}
+--------------------------------------------------------------------------------
+
+```{r}
+print_section(position_data, 'training')
+```
+
+
+
+Service & Leadership{data-icon=hands-helping}
+--------------------------------------------------------------------------------
+
+```{r}
+print_section(position_data, 'service')
+```
 
 
 ```{r}
