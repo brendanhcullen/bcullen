@@ -40,8 +40,8 @@ sheet_is_publicly_readable <- TRUE
 PDF_EXPORT <- FALSE
 
 
-CV_PDF_LOC <- "https://github.com/nstrayer/cv/raw/master/strayer_cv.pdf"
-CV_HTML_LOC <- "nickstrayer.me/cv/"
+CV_PDF_LOC <- "https://github.com/brendanhcullen/bcullen/raw/update-cv/static/cv/cullen_cv.pdf"
+CV_HTML_LOC <- "bcullen.rbind.io/cv/"
 
 
 # A global (gasp) variable that holds all the links that were inserted for
