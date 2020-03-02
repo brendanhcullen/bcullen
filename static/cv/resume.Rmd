@@ -1,0 +1,175 @@
+---
+title: Brendan Cullen's Résumé
+author: Brendan Cullen
+date: "`r Sys.Date()`"
+output:
+  pagedown::html_resume:
+    css: ['css/custom_resume.css', 'css/styles.css', 'resume']
+    # set it to true for a self-contained HTML page but it'll take longer to render
+    self_contained: true
+---
+
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(
+  results='asis', 
+  echo = FALSE
+)
+library(tidyverse)
+library(glue)
+
+# ======================================================================
+# These variables determine how the the data is loaded and how the exports are
+# done.
+
+# Is data stored in google sheets? If no data will be gather from the csvs/
+# folder in project
+using_googlesheets <- TRUE
+
+# Just the copied URL from the sheet
+positions_sheet_loc <- "https://docs.google.com/spreadsheets/d/1Zs3UoRaZEXoNiX-RFWNHTnr5KL8SCB_e-bik5mftt-k/"
+
+# Is this sheet available for anyone to read? If you're using a private sheet
+# set this to false and go to gather_data.R and run the data loading manually
+# once to cache authentication
+sheet_is_publicly_readable <- TRUE
+
+# Is the goal of this knit to build a document that is exported to PDF? If so
+# set this to true to have links turned into footnotes at the end of the
+# document
+PDF_EXPORT <- FALSE
+
+
+# A global (gasp) variable that holds all the links that were inserted for
+# placement at the end
+links <- c()
+
+# ======================================================================
+# Now we source two external scripts. One contains functions for building the
+# text output and the other loads up our data from either googlesheets or csvs
+
+# Functions for building sections from CSV data
+source('parsing_functions.R') 
+
+# Load data for CV/Resume
+source('gather_data.R')
+
+# Now we just need to filter down the position data to include less verbose
+# categories and only the entries we have designated for the resume
+position_data <- position_data %>% 
+  filter(in_resume) %>% 
+  mutate(
+    # Build some custom sections by collapsing others
+    section = case_when(
+      section %in% c('research_positions', 'teaching_positions') ~ 'positions', 
+      section %in% c('academic_articles') ~ 'writings',
+      #section %in% c('workshops') ~ 'workshops',
+      TRUE ~ section
+    )
+  ) 
+```
+
+
+
+Aside
+================================================================================
+
+
+![headshot](headshot.jpg){width=100%}
+
+Contact {#contact}
+--------------------------------------------------------------------------------
+
+```{r}
+contact_info %>% 
+  glue_data("- <i class='fa fa-{icon}'></i> [{contact}]({link})")
+```
+
+
+
+Programming Skills {#skills}
+--------------------------------------------------------------------------------
+
+```{r}
+build_skill_bars(skills)
+```
+
+
+More info {#more-info}
+--------------------------------------------------------------------------------
+
+See full CV at [bcullen.rbind.io/cv](bcullen.rbind.io/cv) for more complete list of positions and publications.
+
+
+Disclaimer {#disclaimer}
+--------------------------------------------------------------------------------
+
+Created with [pagedown](https://github.com/rstudio/pagedown). 
+<br>Source code on [GitHub](https://github.com/brendanhcullen/bcullen/tree/update-cv/static/cv). <i class="fa fa-github"></i> 
+<br>Last updated on `r Sys.Date()`.
+
+
+
+Main
+================================================================================
+
+Brendan Cullen {#title}
+--------------------------------------------------------------------------------
+
+```{r}
+print_text_block(text_blocks, 'intro')
+```
+
+
+
+Education {data-icon=graduation-cap data-concise=true}
+--------------------------------------------------------------------------------
+
+```{r}
+position_data %>% print_section('education')
+```
+
+
+
+Selected Positions {data-icon=suitcase}
+--------------------------------------------------------------------------------
+
+```{r}
+position_data %>% print_section('positions')
+```
+
+
+
+Selected Publications {data-icon=book}
+--------------------------------------------------------------------------------
+
+```{r}
+position_data %>% print_section('writings')
+```
+
+
+Workshops Taught {data-icon=code-branch}
+--------------------------------------------------------------------------------
+
+```{r}
+position_data %>% print_section('workshops')
+```
+
+
+
+Additional Training {data-icon=laptop}
+--------------------------------------------------------------------------------
+
+```{r}
+position_data %>% print_section('training')
+```
+
+
+
+Selected Service {data-icon=hands-helping}
+--------------------------------------------------------------------------------
+
+```{r}
+position_data %>% print_section('service')
+```
+

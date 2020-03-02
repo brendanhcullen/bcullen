@@ -1,0 +1,236 @@
+---
+title: "Brendan Cullen's CV"
+author: Brendan Cullen
+date: "`r Sys.Date()`"
+output:
+  pagedown::html_resume:
+    css: ['css/styles.css', 'resume']
+    # set it to true for a self-contained HTML page but it'll take longer to render
+    self_contained: true
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(
+  results='asis', 
+  echo = FALSE
+)
+
+library(glue)
+library(tidyverse)
+
+# ======================================================================
+# These variables determine how the the data is loaded and how the exports are
+# done.
+
+# Is data stored in google sheets? If no data will be gather from the csvs/
+# folder in project
+using_googlesheets <- TRUE
+
+# Just the copied URL from the sheet
+positions_sheet_loc <- "https://docs.google.com/spreadsheets/d/1Zs3UoRaZEXoNiX-RFWNHTnr5KL8SCB_e-bik5mftt-k/"
+
+# Is this sheet available for anyone to read? If you're using a private sheet
+# set this to false and go to gather_data.R and run the data loading manually
+# once to cache authentication
+sheet_is_publicly_readable <- TRUE
+
+# Is the goal of this knit to build a document that is exported to PDF? If so
+# set this to true to have links turned into footnotes at the end of the
+# document
+PDF_EXPORT <- FALSE
+
+
+CV_PDF_LOC <- "https://github.com/brendanhcullen/bcullen/raw/update-cv/static/cv/cullen_cv.pdf"
+CV_HTML_LOC <- "bcullen.rbind.io/cv/"
+
+
+# A global (gasp) variable that holds all the links that were inserted for
+# placement at the end
+links <- c()
+
+# ======================================================================
+# Now we source two external scripts. One contains functions for building the
+# text output and the other loads up our data from either googlesheets or csvs
+
+# Functions for building sections from CSV data
+source('parsing_functions.R') 
+
+# Load data for CV/Resume
+source('gather_data.R')
+```
+
+
+
+```{r}
+# When in export mode the little dots are unaligned, so fix that. 
+if(PDF_EXPORT){
+  cat("
+  <style>
+  :root{
+    --decorator-outer-offset-left: -6.5px;
+  }
+  </style>")
+}
+```
+
+
+Aside
+================================================================================
+
+
+![headshot](headshot.jpg){width=100%}
+
+```{r}
+# When in export mode the little dots are unaligned, so fix that.
+if(PDF_EXPORT){
+  glue("View this CV online with links at _{CV_HTML_LOC}_")
+} else {
+  glue("[<i class='fas fa-download'></i> Download a PDF of this CV]({CV_PDF_LOC})")
+}
+```
+
+Contact {#contact}
+--------------------------------------------------------------------------------
+
+```{r}
+contact_info %>% 
+  glue_data("- <i class='fa fa-{icon}'></i> [{contact}]({link})")
+```
+
+
+
+Programming Skills {#skills}
+--------------------------------------------------------------------------------
+
+```{r}
+build_skill_bars(skills)
+```
+
+
+Disclaimer {#disclaimer}
+--------------------------------------------------------------------------------
+
+Created with [pagedown](https://github.com/rstudio/pagedown). 
+<br>Source code on [GitHub](https://github.com/brendanhcullen/bcullen/tree/update-cv/static/cv). <i class="fa fa-github"></i> 
+<br>Last updated on `r Sys.Date()`.
+
+Main
+================================================================================
+
+Brendan Cullen {#title}
+--------------------------------------------------------------------------------
+
+```{r}
+print_text_block(text_blocks, 'intro')
+```
+
+
+Education {data-icon=graduation-cap data-concise=true}
+--------------------------------------------------------------------------------
+
+```{r}
+print_section(position_data, 'education')
+```
+
+
+Honors & Awards {data-icon=trophy}
+--------------------------------------------------------------------------------
+
+```{r}
+print_section(position_data, 'honors_awards')
+```
+
+
+Professional Research Experience {data-icon=suitcase}
+--------------------------------------------------------------------------------
+
+```{r}
+print_section(position_data, 'research_positions')
+```
+
+
+Teaching Experience {data-icon=chalkboard-teacher}
+--------------------------------------------------------------------------------
+
+::: aside
+```{r}
+print_text_block(text_blocks, 'teaching_experience_aside')
+```
+:::
+
+```{r}
+print_section(position_data, 'teaching_positions')
+```
+
+Workshops Taught {data-icon=code-branch}
+--------------------------------------------------------------------------------
+
+```{r}
+print_section(position_data, 'workshops')
+```
+
+Peer-reviewed Publications{data-icon=book}
+--------------------------------------------------------------------------------
+
+```{r}
+print_section(position_data, 'academic_articles')
+```
+
+Works in Progress{data-icon=edit}
+--------------------------------------------------------------------------------
+
+```{r}
+print_section(position_data, 'works_in_progress')
+```
+
+
+Selected Poster Presentations{data-icon=image}
+--------------------------------------------------------------------------------
+
+```{r}
+print_section(position_data, 'posters')
+```
+
+<br>
+
+Talks{data-icon=users}
+--------------------------------------------------------------------------------
+
+```{r}
+print_section(position_data, 'talks')
+```
+
+Additional Training {data-icon=laptop}
+--------------------------------------------------------------------------------
+
+```{r}
+print_section(position_data, 'training')
+```
+
+Service & Leadership{data-icon=hands-helping}
+--------------------------------------------------------------------------------
+
+```{r}
+print_section(position_data, 'service')
+```
+
+
+```{r}
+if(PDF_EXPORT){
+  cat("
+  
+Links {data-icon=link}
+--------------------------------------------------------------------------------
+
+<br>
+
+
+")
+  
+  walk2(links, 1:length(links), function(link, index){
+    print(glue('{index}. {link}'))
+  })
+}
+```
+
+

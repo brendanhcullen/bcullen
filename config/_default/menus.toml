@@ -24,9 +24,22 @@
   weight = 40
 
 [[main]]
-  name = "CV"
-  url = "files/cv.pdf"
+  name = "CV & Résumé"
+  identifier = "cv"
+  url = "#"
   weight = 50
+  
+[[main]]
+  name = "CV"
+  parent = "cv"
+  url = "/cv/index.html"
+  weight = 50.1
+  
+[[main]]
+  name = "Résumé"
+  parent = "cv"
+  url = "/cv/resume.html"
+  weight = 50.2
 
 [[main]]
   name = "Contact"
