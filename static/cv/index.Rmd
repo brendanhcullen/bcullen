@@ -80,14 +80,14 @@ Aside
 
 ![headshot](headshot.jpg){width=100%}
 
-```{r}
-# When in export mode the little dots are unaligned, so fix that. 
-if(PDF_EXPORT){
-  glue("View this CV online with links at _{CV_HTML_LOC}_")
-} else {
-  glue("[<i class='fas fa-download'></i> Download a PDF of this CV]({CV_PDF_LOC})")
-}
-```
+<!-- ```{r} -->
+<!-- # When in export mode the little dots are unaligned, so fix that.  -->
+<!-- if(PDF_EXPORT){ -->
+<!--   glue("View this CV online with links at _{CV_HTML_LOC}_") -->
+<!-- } else { -->
+<!--   glue("[<i class='fas fa-download'></i> Download a PDF of this CV]({CV_PDF_LOC})") -->
+<!-- } -->
+<!-- ``` -->
 
 Contact {#contact}
 --------------------------------------------------------------------------------
@@ -171,12 +171,20 @@ Workshops Taught {data-icon=code-branch}
 print_section(position_data, 'workshops')
 ```
 
-Publications{data-icon=book}
+Peer-reviewed Publications{data-icon=book}
 --------------------------------------------------------------------------------
 
 ```{r}
 print_section(position_data, 'academic_articles')
 ```
+
+Works in Progress{data-icon=edit}
+--------------------------------------------------------------------------------
+
+```{r}
+print_section(position_data, 'works_in_progress')
+```
+
 
 Selected Poster Presentations{data-icon=image}
 --------------------------------------------------------------------------------
@@ -185,6 +193,8 @@ Selected Poster Presentations{data-icon=image}
 print_section(position_data, 'posters')
 ```
 
+<br>
+
 Talks{data-icon=users}
 --------------------------------------------------------------------------------
 
@@ -192,7 +202,7 @@ Talks{data-icon=users}
 print_section(position_data, 'talks')
 ```
 
-Workshops & Training {data-icon=laptop}
+Additional Training {data-icon=laptop}
 --------------------------------------------------------------------------------
 
 ```{r}
