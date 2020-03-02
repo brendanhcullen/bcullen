@@ -98,14 +98,14 @@ build_skill_bars(skills)
 More info {#more-info}
 --------------------------------------------------------------------------------
 
-See full CV at [bcullen.rbind.io/cv](bcullen.rbind.io/cv) for more complete list of positions and publications.
+See full CV at [bcullen.rbind.io/cv](https://bcullen.rbind.io/cv/index.html) for more complete list of positions and publications.
 
 
 Disclaimer {#disclaimer}
 --------------------------------------------------------------------------------
 
 Created with [pagedown](https://github.com/rstudio/pagedown). 
-<br>Source code on [GitHub](https://github.com/brendanhcullen/bcullen/tree/update-cv/static/cv). <i class="fa fa-github"></i> 
+<br>Source code on [GitHub](https://github.com/brendanhcullen/bcullen/tree/master/static/cv). <i class="fa fa-github"></i> 
 <br>Last updated on `r Sys.Date()`.
 
 
