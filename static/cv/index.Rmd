@@ -80,14 +80,14 @@ Aside
 
 ![headshot](headshot.jpg){width=100%}
 
-<!-- ```{r} -->
-<!-- # When in export mode the little dots are unaligned, so fix that.  -->
-<!-- if(PDF_EXPORT){ -->
-<!--   glue("View this CV online with links at _{CV_HTML_LOC}_") -->
-<!-- } else { -->
-<!--   glue("[<i class='fas fa-download'></i> Download a PDF of this CV]({CV_PDF_LOC})") -->
-<!-- } -->
-<!-- ``` -->
+```{r}
+# When in export mode the little dots are unaligned, so fix that. 
+if(PDF_EXPORT){
+  glue("View this CV online with links at _{CV_HTML_LOC}_")
+} else {
+  glue("[<i class='fas fa-download'></i> Download a PDF of this CV]({CV_PDF_LOC})")
+}
+```
 
 Contact {#contact}
 --------------------------------------------------------------------------------
@@ -110,11 +110,9 @@ build_skill_bars(skills)
 Disclaimer {#disclaimer}
 --------------------------------------------------------------------------------
 
-Made with the R package <br>[**pagedown**](https://github.com/rstudio/pagedown). 
-
-The source code is available at [https://bit.ly/2I6Cqyb](https://bit.ly/2I6Cqyb).
-
-Last updated on `r Sys.Date()`.
+Created with [pagedown](https://github.com/rstudio/pagedown). 
+<br>Source code on [GitHub](https://github.com/brendanhcullen/bcullen/tree/update-cv/static/cv). <i class="fa fa-github"></i> 
+<br>Last updated on `r Sys.Date()`.
 
 Main
 ================================================================================
