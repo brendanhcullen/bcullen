@@ -27,7 +27,7 @@ library(glue)
 using_googlesheets <- TRUE
 
 # Just the copied URL from the sheet
-positions_sheet_loc <- "https://docs.google.com/spreadsheets/d/14MQICF2F8-vf8CKPF1m4lyGKO6_thG-4aSwat1e2TWc"
+positions_sheet_loc <- "https://docs.google.com/spreadsheets/d/1Zs3UoRaZEXoNiX-RFWNHTnr5KL8SCB_e-bik5mftt-k/"
 
 # Is this sheet available for anyone to read? If you're using a private sheet
 # set this to false and go to gather_data.R and run the data loading manually
@@ -61,8 +61,9 @@ position_data <- position_data %>%
   mutate(
     # Build some custom sections by collapsing others
     section = case_when(
-      section %in% c('research_positions', 'industry_positions') ~ 'positions', 
-      section %in% c('data_science_writings', 'by_me_press') ~ 'writings',
+      section %in% c('research_positions', 'teaching_positions') ~ 'positions', 
+      section %in% c('academic_articles') ~ 'writings',
+      #section %in% c('workshops') ~ 'workshops',
       TRUE ~ section
     )
   ) 
@@ -86,7 +87,7 @@ contact_info %>%
 
 
 
-Language Skills {#skills}
+Programming Skills {#skills}
 --------------------------------------------------------------------------------
 
 ```{r}
@@ -94,39 +95,25 @@ build_skill_bars(skills)
 ```
 
 
-
-Open Source Contributions {#open-source}
---------------------------------------------------------------------------------
-
-All projects available at `github.com/nstrayer/<name>`
-
-
-- `shinysense`: R package to use sensor data in Shiny apps
-- `tuftesque`: Hugo theme (behind LiveFreeOrDichotomize.com)
-- `sbmR`: R package for fitting stochasitic block models
-
-
 More info {#more-info}
 --------------------------------------------------------------------------------
 
-See full CV at nickstrayer.me/cv for more complete list of positions and publications.
+See full CV at [bcullen.rbind.io/cv](bcullen.rbind.io/cv) for more complete list of positions and publications.
 
 
 Disclaimer {#disclaimer}
 --------------------------------------------------------------------------------
 
-Made w/ [**pagedown**](https://github.com/rstudio/pagedown). 
-
-Source code: [github.com/nstrayer/cv](https://github.com/nstrayer/cv).
-
-Last updated on `r Sys.Date()`.
+Created with [pagedown](https://github.com/rstudio/pagedown). 
+<br>Source code on [GitHub](https://github.com/brendanhcullen/bcullen/tree/update-cv/static/cv). <i class="fa fa-github"></i> 
+<br>Last updated on `r Sys.Date()`.
 
 
 
 Main
 ================================================================================
 
-Nick Strayer {#title}
+Brendan Cullen {#title}
 --------------------------------------------------------------------------------
 
 ```{r}
@@ -153,11 +140,36 @@ position_data %>% print_section('positions')
 
 
 
-Selected Writing {data-icon=newspaper}
+Selected Publications {data-icon=book}
 --------------------------------------------------------------------------------
 
 ```{r}
 position_data %>% print_section('writings')
 ```
 
+
+Workshops Taught {data-icon=code-branch}
+--------------------------------------------------------------------------------
+
+```{r}
+position_data %>% print_section('workshops')
+```
+
+
+
+Additional Training {data-icon=laptop}
+--------------------------------------------------------------------------------
+
+```{r}
+position_data %>% print_section('training')
+```
+
+
+
+Selected Service {data-icon=hands-helping}
+--------------------------------------------------------------------------------
+
+```{r}
+position_data %>% print_section('service')
+```
 
