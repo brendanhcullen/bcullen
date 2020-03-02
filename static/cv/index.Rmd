@@ -78,7 +78,7 @@ Aside
 ================================================================================
 
 
-![headshot](../img/cullen_headshot.jpg){width=100%}
+![headshot](headshot.jpg){width=100%}
 
 ```{r}
 # When in export mode the little dots are unaligned, so fix that. 
@@ -149,6 +149,7 @@ Professional Research Experience {data-icon=suitcase}
 ```{r}
 print_section(position_data, 'research_positions')
 ```
+
 
 Teaching Experience {data-icon=chalkboard-teacher}
 --------------------------------------------------------------------------------
