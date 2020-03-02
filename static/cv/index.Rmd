@@ -81,7 +81,7 @@ Aside
 ![headshot](headshot.jpg){width=100%}
 
 ```{r}
-# When in export mode the little dots are unaligned, so fix that. 
+# When in export mode the little dots are unaligned, so fix that.
 if(PDF_EXPORT){
   glue("View this CV online with links at _{CV_HTML_LOC}_")
 } else {

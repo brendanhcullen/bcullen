@@ -1,6 +1,6 @@
 ---
-title: Nick Strayer's Resume"
-author: Nick Strayer
+title: Brendan Cullen's Résumé
+author: Brendan Cullen
 date: "`r Sys.Date()`"
 output:
   pagedown::html_resume:
@@ -82,7 +82,7 @@ Contact {#contact}
 
 ```{r}
 contact_info %>% 
-  glue_data("- <i class='fa fa-{icon}'></i> {contact}")
+  glue_data("- <i class='fa fa-{icon}'></i> [{contact}]({link})")
 ```
 
 
