@@ -99,7 +99,7 @@ contact_info %>%
 
 
 
-Language Skills {#skills}
+Programming Skills {#skills}
 --------------------------------------------------------------------------------
 
 ```{r}
@@ -107,17 +107,14 @@ build_skill_bars(skills)
 ```
 
 
-
 Disclaimer {#disclaimer}
 --------------------------------------------------------------------------------
 
-Made with the R package [**pagedown**](https://github.com/rstudio/pagedown). 
+Made with the R package <br>[**pagedown**](https://github.com/rstudio/pagedown). 
 
-The source code is available at [github.com/brendanhcullen/bcullen](https://github.com/brendanhcullen/static/cv).
+The source code is available at [https://bit.ly/2I6Cqyb](https://bit.ly/2I6Cqyb).
 
 Last updated on `r Sys.Date()`.
-
-
 
 Main
 ================================================================================
@@ -153,12 +150,6 @@ Professional Research Experience {data-icon=suitcase}
 print_section(position_data, 'research_positions')
 ```
 
-
-<!-- <!-- These breaks just force a new page so section doesnt get cut off --> 
-<!-- <br> -->
-<!-- <br> -->
-<!-- <br> -->
-
 Teaching Experience {data-icon=chalkboard-teacher}
 --------------------------------------------------------------------------------
 
@@ -172,17 +163,12 @@ print_text_block(text_blocks, 'teaching_experience_aside')
 print_section(position_data, 'teaching_positions')
 ```
 
-<br>
-<br>
-
-
 Workshops Taught {data-icon=code-branch}
 --------------------------------------------------------------------------------
 
 ```{r}
 print_section(position_data, 'workshops')
 ```
-
 
 Publications{data-icon=book}
 --------------------------------------------------------------------------------
@@ -191,14 +177,12 @@ Publications{data-icon=book}
 print_section(position_data, 'academic_articles')
 ```
 
-
 Selected Poster Presentations{data-icon=image}
 --------------------------------------------------------------------------------
 
 ```{r}
 print_section(position_data, 'posters')
 ```
-
 
 Talks{data-icon=users}
 --------------------------------------------------------------------------------
@@ -213,8 +197,6 @@ Workshops & Training {data-icon=laptop}
 ```{r}
 print_section(position_data, 'training')
 ```
-
-
 
 Service & Leadership{data-icon=hands-helping}
 --------------------------------------------------------------------------------
