@@ -78,7 +78,7 @@ Aside
 ================================================================================
 
 
-![headshot](headshot.jpg){width=100%}
+![headshot_circle](headshot_circle.png){width=100%}
 
 ```{r}
 # When in export mode the little dots are unaligned, so fix that.
