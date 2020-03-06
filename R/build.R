@@ -1,1 +1,1 @@
-blogdown::build_dir('static', force = TRUE)
+blogdown::build_dir('static')
