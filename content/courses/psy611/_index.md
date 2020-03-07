@@ -2,12 +2,12 @@
 date: "2020-03-06T00:00:00Z"
 draft: false
 editable: false
-linktitle: PSY611 Data Analysis I
+linktitle: PSY611 Data Analysis I (Fall 2019)
 menu:
   example:
     name: PSY611
     weight: 1
-summary: 
+summary: Labs taught include R basics and descriptives, Matrix Algebra in R, Data Transformation with dyplr, Pre-registration, and Paired samples t-tests.
 title: "PSY611: Data Analysis I"
 toc: false
 type: docs
