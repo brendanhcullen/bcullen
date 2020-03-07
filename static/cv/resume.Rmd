@@ -89,18 +89,6 @@ More info {#more-info}
 
 See full CV at [bcullen.rbind.io/cv](https://bcullen.rbind.io/cv/index.html) for more complete list of positions and publications.
 
-
-Programming Skills {#skills}
---------------------------------------------------------------------------------
-
-```{r}
-build_skill_bars(skills)
-```
-
-
-Disclaimer {#disclaimer}
---------------------------------------------------------------------------------
-
 Created with [pagedown](https://github.com/rstudio/pagedown). 
 <br>Source code on [GitHub](https://github.com/brendanhcullen/bcullen/tree/master/static/cv). <i class="fa fa-github"></i> 
 <br>Last updated on `r Sys.Date()`.
@@ -111,7 +99,12 @@ RESUME_PDF_LOC <- "https://github.com/brendanhcullen/bcullen/raw/master/static/c
 glue("[<i class='fas fa-download'></i> Download a PDF copy]({RESUME_PDF_LOC})")
 ```
 
+Programming Skills {#skills}
+--------------------------------------------------------------------------------
 
+```{r}
+build_skill_bars(skills)
+```
 
 Main
 ================================================================================
