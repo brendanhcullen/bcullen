@@ -14,7 +14,7 @@ type: docs
 weight: 1
 ---
 
->**Below are links to the labs that I created and taught for this class.** 
+>**Below are links to the labs that I created and taught in Fall 2019.** 
 
 [R basics and descriptives](https://brendanhcullen.github.io/psy611/labs/lab-2.html)
 
