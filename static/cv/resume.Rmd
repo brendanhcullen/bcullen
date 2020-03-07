@@ -84,6 +84,11 @@ contact_info %>%
 ```
 
 
+More info {#more-info}
+--------------------------------------------------------------------------------
+
+See full CV at [bcullen.rbind.io/cv](https://bcullen.rbind.io/cv/index.html) for more complete list of positions and publications.
+
 
 Programming Skills {#skills}
 --------------------------------------------------------------------------------
@@ -91,12 +96,6 @@ Programming Skills {#skills}
 ```{r}
 build_skill_bars(skills)
 ```
-
-
-More info {#more-info}
---------------------------------------------------------------------------------
-
-See full CV at [bcullen.rbind.io/cv](https://bcullen.rbind.io/cv/index.html) for more complete list of positions and publications.
 
 
 Disclaimer {#disclaimer}
@@ -120,6 +119,7 @@ Main
 Brendan Cullen {#title}
 --------------------------------------------------------------------------------
 
+
 ```{r}
 print_text_block(text_blocks, 'intro')
 ```
@@ -138,6 +138,13 @@ position_data %>% print_section('education')
 Selected Positions {data-icon=suitcase}
 --------------------------------------------------------------------------------
 
+::: aside
+```{r}
+print_text_block(text_blocks, 'position_experience_aside_resume')
+```
+:::
+
+
 ```{r}
 position_data %>% print_section('positions')
 ```
@@ -147,6 +154,12 @@ position_data %>% print_section('positions')
 Selected Publications {data-icon=book}
 --------------------------------------------------------------------------------
 
+::: aside
+```{r}
+print_text_block(text_blocks, 'publications_aside_resume')
+```
+:::
+
 ```{r}
 position_data %>% print_section('writings')
 ```
@@ -154,6 +167,12 @@ position_data %>% print_section('writings')
 
 Workshops Taught {data-icon=code-branch}
 --------------------------------------------------------------------------------
+
+::: aside
+```{r}
+print_text_block(text_blocks, 'workshop_experience_aside_resume')
+```
+:::
 
 ```{r}
 position_data %>% print_section('workshops')
@@ -164,6 +183,12 @@ position_data %>% print_section('workshops')
 Additional Training {data-icon=laptop}
 --------------------------------------------------------------------------------
 
+::: aside
+```{r}
+print_text_block(text_blocks, 'training_experience_aside_resume')
+```
+:::
+
 ```{r}
 position_data %>% print_section('training')
 ```
@@ -172,6 +197,12 @@ position_data %>% print_section('training')
 
 Selected Service {data-icon=hands-helping}
 --------------------------------------------------------------------------------
+
+::: aside
+```{r}
+print_text_block(text_blocks, 'service_experience_aside_resume')
+```
+:::
 
 ```{r}
 position_data %>% print_section('service')
