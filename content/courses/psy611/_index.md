@@ -30,7 +30,7 @@ weight: 1
 
 [Pre-registration](https://brendanhcullen.github.io/psy611/labs/lab-7.html) 
 
-*The purpose of this lab is to walk through how to create a pre-registration on the [Open Science Framework](https://osf.io/). Rather than serve as a step-by-step tutorial, this page will mostly contain links to other resources on pre-registration and open science that you can use when drafting your own preregistrations, along with a few questions/prompts to guide our discussion.
+* The purpose of this lab is to walk through how to create a pre-registration on the [Open Science Framework](https://osf.io/). Rather than serve as a step-by-step tutorial, this page will mostly contain links to other resources on pre-registration and open science that you can use when drafting your own preregistrations, along with a few questions/prompts to guide our discussion.
 
 [Paired samples t-tests](https://brendanhcullen.github.io/psy611/labs/lab-9.html)
 
