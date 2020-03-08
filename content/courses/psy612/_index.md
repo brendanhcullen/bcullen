@@ -2,7 +2,7 @@
 date: "2020-03-06T00:00:00Z"
 draft: false
 editable: false
-linktitle: PSY612 Data Analysis II (Winter 2020)
+linktitle: PSY612 - Data Analysis II (Winter 2020)
 menu:
   example:
     name: PSY612
