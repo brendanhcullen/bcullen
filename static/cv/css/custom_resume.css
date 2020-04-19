@@ -3,8 +3,8 @@
   /* Override default right margin for sidebar*/
   --pagedjs-margin-right: 0.2in !important;
   --pagedjs-margin-left: 0;
-  --pagedjs-margin-top: 0.2in;
-  --pagedjs-margin-bottom: 0.2in;
+  --pagedjs-margin-top: 0.1in;
+  --pagedjs-margin-bottom: 0.1in;
 }
 
 [data-id="main"] { 
@@ -39,7 +39,7 @@
 }
 
 .aside .level2 {
-  margin-top: 0.2in;
+  margin-top: 0.1in;
 }
 
 .aside p {
@@ -47,14 +47,12 @@
   margin-block-end: 0;
 }
 
-[data-id="skills"] ul {
-  margin: 0.05in 0 0.05in;
-}
 
 [data-id="contact"] ul {
   padding-left: 0 !important;
   margin-top: 0.75rem;
 }
+
 
 [data-id="disclaimer"] p {
   margin-block-start: 0.15em;
