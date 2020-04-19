@@ -21,7 +21,7 @@ weight: 1
 * This lab will focus on correlations. We will discuss how to calculate a correlation coefficient between two variables, how to assess statistical significance of correlations, and a variety of tools for visualizing correlations, especially among large groups of variables.
 
 
-[*Simple Regression and the General Linear Model](https://brendanhcullen.github.io/psy612/labs/lab-3/lab-3-learnr.html)
+[Simple Regression and the General Linear Model](https://brendanhcullen.github.io/psy612/labs/lab-3/lab-3.html)
 
 
 * This lab will briefly review univariate regression and then will discuss how to summarize and visualize uncertainty in regression models using a variety of plotting methods. We will then touch on how to estimate regression coefficients using matrix algebra. Lastly, we will introduce the General Linear Model and demonstrate how GLM can be used to understand all of the statistical tests we have learned so far (*t*-tests, ANOVA, correlations, regressions) within one (beautiful!) unifying framework.
@@ -43,7 +43,3 @@ weight: 1
 
 
 >See the full course website [here.](https://brendanhcullen.github.io/psy612/)
-
-<br>
-
-\* *contains interactive [learnR](https://rstudio.github.io/learnr/) components*
