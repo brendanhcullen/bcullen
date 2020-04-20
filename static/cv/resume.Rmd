@@ -88,7 +88,7 @@ contact_info %>%
 Other Training <i class="fa fa-chalkboard-teacher"></i> {#training}
 --------------------------------------------------------------------------------
 
-As part of my doctoral training, I am currently pursuing a 5-course [Data Science Specialization](https://github.com/uo-datasci-specialization) taught entirely in R, focused on data visualization, functional programming, and machine learning. I also attended [Introduction to Machine Learning with the Tidyverse](https://conf20-intro-ml.netlify.app/) at [rstudio::conf(2020)](https://rstudio.com/conference/).
+As part of my doctoral training, I am currently pursuing a 5-course [Data Science Specialization](https://github.com/uo-datasci-specialization) taught entirely in R, focused on reproducible analysis, data visualization, functional programming, and machine learning within a tidyverse framework.
 
 <br>
 
@@ -101,19 +101,19 @@ build_skill_bars(skills)
 
 <br>
 
+Philosophy <i class="fa fa-lightbulb"></i> {#philosophy}
+--------------------------------------------------------------------------------
+
+I am a strong advocate for open science and continually strive for a more shareable, efficient and reproducible workflow. I enjoy learning and teaching statistics within communities that are friendly, inclusive, and supportive, and I have had the privilege of co-organizing several workshops and conferences dedicated to sharing open-source data science tools within such communities.
+
+<br>
+
 More info <i class="fa fa-info-circle"></i> {#more-info}
 --------------------------------------------------------------------------------
 
 See full CV at [bcullen.rbind.io/cv](https://bcullen.rbind.io/cv/index.html) for more complete list of positions and [peer-reviewed publications](https://scholar.google.com/citations?user=02RYe4UAAAAJ&hl=en).
 
 <br> 
-
-Philosophy <i class="fa fa-lightbulb"></i> {#philosophy}
---------------------------------------------------------------------------------
-
-I am passionate about contributing to open-source communities that are friendly, inclusive, and supportive. During my time in graduate school, I have had the privilege of participating in and helping to organize several workshops and conferences focused on sharing open-source data science tools within such communities.
-
-<br>
 
 Disclaimer {#disclaimer}
 --------------------------------------------------------------------------------
@@ -123,10 +123,10 @@ Created with [pagedown](https://github.com/rstudio/pagedown).
 <br>Last updated on `r Sys.Date()`.
 
 
-```{r}
-RESUME_PDF_LOC <- "https://github.com/brendanhcullen/bcullen/raw/master/static/cv/cullen_resume.pdf"
-glue("[<i class='fas fa-download'></i> Download a PDF copy]({RESUME_PDF_LOC})")
-```
+<!-- ```{r} -->
+<!-- RESUME_PDF_LOC <- "https://github.com/brendanhcullen/bcullen/raw/master/static/cv/cullen_resume.pdf" -->
+<!-- glue("[<i class='fas fa-download'></i> Download a PDF copy]({RESUME_PDF_LOC})") -->
+<!-- ``` -->
 
 
 Main
