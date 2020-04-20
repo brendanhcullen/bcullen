@@ -143,6 +143,12 @@ print_section(position_data, 'honors_awards')
 Professional Research Experience {data-icon=suitcase}
 --------------------------------------------------------------------------------
 
+::: aside
+```{r}
+print_text_block(text_blocks, 'position_experience_aside')
+```
+:::
+
 ```{r}
 print_section(position_data, 'research_positions')
 ```
@@ -164,12 +170,24 @@ print_section(position_data, 'teaching_positions')
 Workshops Taught {data-icon=code-branch}
 --------------------------------------------------------------------------------
 
+::: aside
+```{r}
+print_text_block(text_blocks, 'workshop_experience_aside')
+```
+:::
+
 ```{r}
 print_section(position_data, 'workshops')
 ```
 
 Peer-reviewed Publications{data-icon=book}
 --------------------------------------------------------------------------------
+
+::: aside
+```{r}
+print_text_block(text_blocks, 'publications_aside')
+```
+:::
 
 ```{r}
 print_section(position_data, 'academic_articles')
@@ -202,12 +220,14 @@ print_section(position_data, 'talks')
 Additional Training {data-icon=laptop}
 --------------------------------------------------------------------------------
 
+
 ```{r}
 print_section(position_data, 'training')
 ```
 
 Service & Leadership{data-icon=hands-helping}
 --------------------------------------------------------------------------------
+
 
 ```{r}
 print_section(position_data, 'service')
