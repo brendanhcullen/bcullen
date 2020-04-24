@@ -30,21 +30,21 @@ subtitle = ""
     tag = "R"
   
   [[content.filter_button]]
-    name = "Data Science"
-    tag = "Data Science"
+    name = "data science"
+    tag = "data science"
 
   [[content.filter_button]]
-    name = "Data Viz"
-    tag = "Data Viz"
+    name = "data viz"
+    tag = "data viz"
 
   [[content.filter_button]]
-    name = "Neuroscience"
-    tag = "Neuroscience"
+    name = "neuroscience"
+    tag = "neuroscience"
     
     
   [[content.filter_button]]
-    name = "Health"
-    tag = "Health"
+    name = "health"
+    tag = "health"
 
 
 [design]

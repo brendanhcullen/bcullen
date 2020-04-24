@@ -6,9 +6,9 @@ image:
   focal_point: Smart
 summary: A flexdashboard demonstrating the evolution of three data visualizations
 tags:
-- Data Viz
+- data viz
 - R
-- Data Science
+- data science
 
 title: Data Visualization Dashboard
 ---
