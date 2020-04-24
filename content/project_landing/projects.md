@@ -46,6 +46,10 @@ subtitle = ""
     name = "health"
     tag = "health"
 
+    
+  [[content.filter_button]]
+    name = "machine learning"
+    tag = "machine learning"
 
 [design]
   # Choose how many columns the section has. Valid values: 1 or 2.
