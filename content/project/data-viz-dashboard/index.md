@@ -1,15 +1,15 @@
 ---
-date: "2020-01-29"
+date: "2020-04-24"
 external_link: https://brendanhcullen.github.io/data-viz-dashboard/
 image:
-  caption: Brendan Cullen
+  caption:
   focal_point: Smart
-summary: A flexdashboard demonstrating the evolution of three data visualizations
+summary: A flexdashboard that visualizes data from the Big Cities Health Inventory. 
 tags:
 - data viz
 - R
 - data science
 
-title: Data Visualization Dashboard
+title: Data Vizualization Dashboard
 ---
 
