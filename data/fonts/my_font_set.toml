@@ -1,14 +1,23 @@
 # Font style metadata
 name = "my_font_set"
 
+## Google fonts URL
+#google_fonts = "Noto+Sans+JP"
+#
+## Font families
+#heading_font = "Noto Sans JP"
+#body_font = "Noto Sans JP"
+#nav_font = "Noto Sans JP"
+#mono_font = "Noto Sans JP"
+
 # Google fonts URL
-google_fonts = "Noto+Sans+JP"
+google_fonts = "Scope+One"
 
 # Font families
-heading_font = "Noto Sans JP"
-body_font = "Noto Sans JP"
-nav_font = "Noto Sans JP"
-mono_font = "Noto Sans JP"
+heading_font = "Scope One"
+body_font = "Scope One"
+nav_font = "Scope One"
+mono_font = "Scope One"
 
 # Font size
 font_size = "18"
