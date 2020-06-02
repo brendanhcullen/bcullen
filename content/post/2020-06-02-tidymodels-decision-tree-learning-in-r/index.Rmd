@@ -1,0 +1,284 @@
+---
+title: 'Tidymodels: Decision Tree Learning in R'
+author: Cianna Bedford-Petersen, Chris Loan & Brendan Cullen
+date: '2020-06-02'
+slug: []
+categories: []
+tags: []
+subtitle: ''
+summary: ''
+authors: []
+lastmod: '2020-06-02T10:57:23-07:00'
+featured: no
+image:
+  caption: ''
+  focal_point: ''
+  preview_only: no
+projects: []
+---
+
+# Setup
+
+```{r}
+library(tidyverse)
+library(tidymodels)
+library(tictoc)
+library(xgboost)
+library(baguette)
+```
+
+# Import the data
+
+```{r cache = TRUE}
+set.seed(100)
+dat <- read_csv(here::here("data", "train.csv")) %>% 
+  select(-classification)
+
+
+# import fall membership report data
+sheets <- readxl::excel_sheets(here::here("data", "fallmembershipreport_20192020.xlsx"))
+
+ode_schools <- readxl::read_xlsx(here::here("data", "fallmembershipreport_20192020.xlsx",
+                                 sheet = sheets[4]))
+
+# select relevant vars
+ethnicities <- ode_schools %>%
+  select(attnd_schl_inst_id = `Attending School ID`,
+         attnd_dist_inst_id = `Attending District Institution ID`,
+         sch_name = `School Name`,
+         contains("%")) %>%
+  janitor::clean_names()
+
+names(ethnicities) <- gsub("x2019_20_percent", "p", names(ethnicities))
+
+# join ethnicity data with original train data
+dat <- left_join(dat, ethnicities)
+
+# import free and reduced lunch data
+frl <- rio::import("https://nces.ed.gov/ccd/Data/zip/ccd_sch_033_1718_l_1a_083118.zip",
+              setclass = "tbl_df")  %>% 
+  janitor::clean_names()  %>% 
+  filter(st == "OR")  %>%
+  select(ncessch, lunch_program, student_count)  %>% 
+  mutate(student_count = replace_na(student_count, 0))  %>% 
+  pivot_wider(names_from = lunch_program,
+              values_from = student_count)  %>% 
+  janitor::clean_names()  %>% 
+  mutate(ncessch = as.double(ncessch))
+
+# import student counts for each school across grades
+stu_counts <- rio::import("https://github.com/datalorax/ach-gap-variability/raw/master/data/achievement-gaps-geocoded.csv",setclass = "tbl_df")  %>% 
+  filter(state == "OR" & year == 1718)  %>% 
+  count(ncessch, wt = n)  %>% 
+  mutate(ncessch = as.double(ncessch))
+
+
+frl <- left_join(frl, stu_counts)
+
+# add frl data to train data
+dat <- left_join(dat, frl)
+```
+
+# Explore the data
+
+*use skimr package 
+
+# Split data and resample
+
+```{r}
+split <- initial_split(dat)
+train <- training(split)
+cv <- vfold_cv(train)
+```
+
+# Pre-processing
+
+```{r}
+rec <- recipe(score ~ ., train) %>% 
+  step_mutate(tst_dt = as.numeric(lubridate::mdy_hms(tst_dt))) %>% 
+  update_role(contains("id"), ncessch, new_role = "id vars") %>% 
+  step_nzv(all_predictors(), freq_cut = 0, unique_cut = 0) %>% 
+  step_novel(all_nominal()) %>% 
+  step_unknown(all_nominal()) %>% 
+  step_medianimpute(all_numeric(), -all_outcomes(), -has_role("id vars"))  %>% 
+  step_dummy(all_nominal(), -has_role("id vars"))
+```
+
+
+# Create a model and workflow
+
+# Fit the model
+
+# Our 3 models
+
+## Bagged trees
+
+* Introduce model
+
+### Specify model
+
+```{r}
+set.seed(100)
+mod_bag <- bag_tree() %>%
+  set_mode("regression") %>%
+  set_engine("rpart", times = 10) # 10 bootstrap resamples
+```
+
+### Create workflow
+
+```{r}
+wflow_bag <- workflow() %>% 
+  add_recipe(rec) %>%
+  add_model(mod_bag)
+```
+
+### Fit the model
+
+```{r}
+fit_bag <- fit_resamples(
+  wflow_bag,
+  cv,
+  metrics = metric_set(rmse, rsq, huber_loss),
+  control = control_resamples(verbose = T,
+                              save_pred = T,
+                              extract = function(x) extract_model(x)))
+```
+
+### Visualize
+
+```{r}
+# extract roots
+bag_roots <-  function(x){
+  x %>% 
+  select(.extracts) %>% 
+  unnest(cols = c(.extracts)) %>% 
+  mutate(models = map(.extracts,
+                  ~.x$model_df)) %>% 
+  select(-.extracts) %>% 
+  unnest(cols = c(models)) %>% 
+  mutate(root = map_chr(model,
+                     ~as.character(.x$fit$frame[1, 1]))) %>%
+  select(root)  
+}
+
+# plot
+bag_roots(fit_bag) %>% 
+  ggplot(mapping = aes(x = fct_rev(fct_infreq(root)))) + 
+  geom_bar() + 
+  coord_flip()
+```
+
+
+## Random forest
+
+* Introduce the model
+
+### Specify the model
+
+```{r}
+set.seed(100)
+mod_rf <-rand_forest() %>%
+  set_engine("ranger",
+             num.threads = parallel::detectCores(), #argument from {ranger}
+             importance = "permutation", #argument from {ranger}
+             verbose = TRUE) %>% #argument from {ranger}
+  set_mode("regression") %>% set_args(trees = 1000)
+```
+
+### Create workflow
+
+```{r}
+rf_workflow <- workflow() %>% 
+  add_model(mod_rf) %>% 
+  add_recipe(rec)
+```
+
+### Fit the model
+
+```{r}
+fit_rf <- fit_resamples(
+  rf_workflow,
+  cv,
+  metrics = metric_set(rmse, rsq, huber_loss),
+  control = control_resamples(verbose = T,
+                              save_pred = T,
+                              extract = function(x) x)
+)
+```
+
+### Visualize
+
+```{r}
+# extract roots
+rf_tree_roots <- function(x){
+  map_chr(1:1000, 
+           ~ranger::treeInfo(x, tree = .)[1, "splitvarName"])
+}
+
+rf_roots <- function(x){
+  x %>% 
+  select(.extracts) %>% 
+  unnest(cols = c(.extracts)) %>% 
+  mutate(fit = map(.extracts,
+                   ~.x$fit$fit$fit),
+         oob_rmse = map_dbl(fit,
+                         ~sqrt(.x$prediction.error)),
+         roots = map(fit, 
+                        ~rf_tree_roots(.))
+         ) %>% 
+  select(roots) %>% 
+  unnest(cols = c(roots))
+}
+
+# plot
+rf_roots(fit_rf) %>% 
+  ggplot(mapping = aes(x = fct_rev(fct_infreq(roots)))) + 
+  geom_bar() + coord_flip()
+```
+
+## Boosted trees
+
+* Introduce the model
+
+### Specify the model
+
+```{r}
+mod_boost <- boost_tree() %>% 
+  set_engine("xgboost", nthreads = parallel::detectCores()) %>% 
+  set_mode("regression")
+```
+
+### Create workflow
+
+```{r}
+wf_boost <- workflow() %>% 
+  add_recipe(rec) %>% 
+  add_model(mod_boost)
+```
+
+### Fit the model
+
+```{r}
+fit_default <- fit_resamples(wf_boost, cv)
+```
+
+### Visualize
+
+* Probs don't include graph here, just explain learning rate/what makes boosted trees unique 
+
+# Model evaluation
+
+```{r}
+## EXAMPLE CODE FROM BAGGED TREES
+show_best(fit_bag, metric = "rmse", n = 1) %>% 
+  bind_rows(show_best(fit_bag, metric = "rsq", n = 1)) %>%
+    bind_rows(show_best(fit_bag, metric = "huber_loss", n = 1)) %>%
+  group_by(.metric) %>%
+  slice(1:5)
+```
+
+* Show metrics in table and rmse/rsq graph
+
+# Apply model to test data
+
+
