@@ -31,9 +31,10 @@ library(baguette)
 
 ```{r cache = TRUE}
 set.seed(100)
-dat <- read_csv(here::here("data", "train.csv")) %>% 
-  select(-classification)
 
+# import train data
+dat <- read_csv("train.csv") %>% 
+  select(-classification)
 
 # import fall membership report data
 sheets <- readxl::excel_sheets(here::here("data", "fallmembershipreport_20192020.xlsx"))
