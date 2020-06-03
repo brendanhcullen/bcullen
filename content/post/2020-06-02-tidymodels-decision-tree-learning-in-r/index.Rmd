@@ -25,6 +25,7 @@ library(tidymodels)
 library(tictoc)
 library(xgboost)
 library(baguette)
+library(here)
 ```
 
 # Import the data
@@ -33,14 +34,14 @@ library(baguette)
 set.seed(100)
 
 # import train data
-dat <- read_csv("train.csv") %>% 
+dat <- read_csv(here("static", "data", "train.csv")) %>% 
   select(-classification)
 
 # import fall membership report data
-sheets <- readxl::excel_sheets(here::here("data", "fallmembershipreport_20192020.xlsx"))
+sheets <- readxl::excel_sheets(here("static", "data", "fallmembershipreport_20192020.xlsx"))
 
-ode_schools <- readxl::read_xlsx(here::here("data", "fallmembershipreport_20192020.xlsx",
-                                 sheet = sheets[4]))
+ode_schools <- readxl::read_xlsx(here("static", "data", "fallmembershipreport_20192020.xlsx"),
+                                 sheet = sheets[4])
 
 # select relevant vars
 ethnicities <- ode_schools %>%
@@ -73,7 +74,7 @@ stu_counts <- rio::import("https://github.com/datalorax/ach-gap-variability/raw/
   count(ncessch, wt = n)  %>% 
   mutate(ncessch = as.double(ncessch))
 
-
+# join frl and stu_counts data
 frl <- left_join(frl, stu_counts)
 
 # add frl data to train data
@@ -139,9 +140,9 @@ wflow_bag <- workflow() %>%
 fit_bag <- fit_resamples(
   wflow_bag,
   cv,
-  metrics = metric_set(rmse, rsq, huber_loss),
-  control = control_resamples(verbose = T,
-                              save_pred = T,
+  metrics = metric_set(rmse, rsq),
+  control = control_resamples(verbose = TRUE,
+                              save_pred = TRUE,
                               extract = function(x) extract_model(x)))
 ```
 
@@ -183,7 +184,8 @@ mod_rf <-rand_forest() %>%
              num.threads = parallel::detectCores(), #argument from {ranger}
              importance = "permutation", #argument from {ranger}
              verbose = TRUE) %>% #argument from {ranger}
-  set_mode("regression") %>% set_args(trees = 1000)
+  set_mode("regression") %>% 
+  set_args(trees = 1000)
 ```
 
 ### Create workflow
@@ -200,9 +202,9 @@ rf_workflow <- workflow() %>%
 fit_rf <- fit_resamples(
   rf_workflow,
   cv,
-  metrics = metric_set(rmse, rsq, huber_loss),
-  control = control_resamples(verbose = T,
-                              save_pred = T,
+  metrics = metric_set(rmse, rsq),
+  control = control_resamples(verbose = TRUE,
+                              save_pred = TRUE,
                               extract = function(x) x)
 )
 ```
