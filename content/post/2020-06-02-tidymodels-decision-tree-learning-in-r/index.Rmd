@@ -26,6 +26,7 @@ library(tictoc)
 library(xgboost)
 library(baguette)
 library(here)
+library(future)
 ```
 
 # Import the data
@@ -35,7 +36,8 @@ set.seed(100)
 
 # import train data
 dat <- read_csv(here("static", "data", "train.csv")) %>% 
-  select(-classification)
+  select(-classification) %>%
+  sample_frac(.01)
 
 # import fall membership report data
 sheets <- readxl::excel_sheets(here("static", "data", "fallmembershipreport_20192020.xlsx"))
@@ -83,7 +85,9 @@ dat <- left_join(dat, frl)
 
 # Explore the data
 
-*use skimr package 
+* make VIP plot, then take top 10 and throw into correlation matrix
+* call the data out of the list from VIP
+* use skimr package 
 
 # Split data and resample
 
@@ -136,7 +140,7 @@ wflow_bag <- workflow() %>%
 
 ### Fit the model
 
-```{r}
+```{r cache = TRUE}
 fit_bag <- fit_resamples(
   wflow_bag,
   cv,
@@ -198,7 +202,10 @@ rf_workflow <- workflow() %>%
 
 ### Fit the model
 
-```{r}
+```{r cache = TRUE}
+set.seed(100)
+plan(multisession)
+
 fit_rf <- fit_resamples(
   rf_workflow,
   cv,
@@ -207,6 +214,13 @@ fit_rf <- fit_resamples(
                               save_pred = TRUE,
                               extract = function(x) x)
 )
+# set.seed(100)
+# plan(multisession)
+# 
+# fit_rf <- fit(
+#   rf_workflow,
+#   train
+# )
 ```
 
 ### Visualize
@@ -262,7 +276,16 @@ wf_boost <- workflow() %>%
 ### Fit the model
 
 ```{r}
-fit_default <- fit_resamples(wf_boost, cv)
+set.seed(100)
+plan(multisession)
+
+fit_boost <- fit_resamples(
+  wf_boost, 
+  cv,
+  metrics = metric_set(rmse, rsq),
+  control = control_resamples(verbose = TRUE,
+                              save_pred = TRUE)
+)
 ```
 
 ### Visualize
@@ -274,14 +297,22 @@ fit_default <- fit_resamples(wf_boost, cv)
 ```{r}
 ## EXAMPLE CODE FROM BAGGED TREES
 show_best(fit_bag, metric = "rmse", n = 1) %>% 
-  bind_rows(show_best(fit_bag, metric = "rsq", n = 1)) %>%
-    bind_rows(show_best(fit_bag, metric = "huber_loss", n = 1)) %>%
-  group_by(.metric) %>%
-  slice(1:5)
+  bind_rows(show_best(fit_rf, metric = "rmse", n = 1)) %>%
+  bind_rows(show_best(fit_boost, metric = "rmse", n = 1))
 ```
 
 * Show metrics in table and rmse/rsq graph
 
 # Apply model to test data
+
+```{r}
+bag_final_fit <- last_fit(
+  wflow_bag,
+  split = split
+)
+
+bag_final_fit %>% collect_metrics()
+```
+
 
 
