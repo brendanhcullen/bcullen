@@ -88,8 +88,25 @@ dat <- left_join(dat, frl)
 
 * make VIP plot, then take top 10 and throw into correlation matrix
 
+
+```{r}
+# # remove id variables for VIP plots
+# dat_noid <- dat %>% 
+#   select(-contains("id"), -ncessch, -calc_admn_cd, -lang_cd)
+# 
+# # Produce a plot displaying a rank ordering of variables by their importance
+# vip(lm(score ~ ., dat_noid), 
+#     mapping = aes(fill = Sign))
+# 
+# vip(lm(score ~ ., dat), 
+#     mapping = aes(fill = Sign))
+```
+
+
 * call the data out of the list from VIP
 * use skimr package 
+
+
 
 # Split data and resample
 
@@ -143,6 +160,9 @@ wflow_bag <- workflow() %>%
 ### Fit the model
 
 ```{r cache=TRUE, message=FALSE}
+set.seed(100)
+plan(multisession)
+
 fit_bag <- fit_resamples(
   wflow_bag,
   cv,
@@ -173,7 +193,8 @@ bag_roots <-  function(x){
 bag_roots(fit_bag) %>% 
   ggplot(mapping = aes(x = fct_rev(fct_infreq(root)))) + 
   geom_bar() + 
-  coord_flip()
+  coord_flip() + 
+  labs(x = "root", y = "count")
 ```
 
 
@@ -244,8 +265,14 @@ rf_roots <- function(x){
 
 # plot
 rf_roots(fit_rf) %>% 
-  ggplot(mapping = aes(x = fct_rev(fct_infreq(roots)))) + 
-  geom_bar() + coord_flip()
+  group_by(roots) %>% 
+  count() %>% 
+  arrange(desc(n)) %>% 
+  filter(n > 75) %>% 
+  ggplot(aes(fct_reorder(roots, n), n)) +
+           geom_col() + 
+           coord_flip() + 
+  labs(x = "root", y = "count")
 ```
 
 ## Boosted trees
