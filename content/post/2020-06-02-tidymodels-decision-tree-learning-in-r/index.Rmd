@@ -32,7 +32,7 @@ library(vip)
 
 # Import the data
 
-```{r cache=TRUE, message=FALSE}
+```{r cache=TRUE, message=FALSE, warning=FALSE}
 set.seed(100)
 
 # import train data
@@ -218,7 +218,7 @@ mod_rf <-rand_forest() %>%
 ### Create workflow
 
 ```{r}
-rf_workflow <- workflow() %>% 
+wflow_rf <- workflow() %>% 
   add_model(mod_rf) %>% 
   add_recipe(rec)
 ```
@@ -230,7 +230,7 @@ set.seed(100)
 plan(multisession)
 
 fit_rf <- fit_resamples(
-  rf_workflow,
+  wflow_rf,
   cv,
   metrics = metric_set(rmse, rsq),
   control = control_resamples(verbose = TRUE,
@@ -290,7 +290,7 @@ mod_boost <- boost_tree() %>%
 ### Create workflow
 
 ```{r}
-wf_boost <- workflow() %>% 
+wflow_boost <- workflow() %>% 
   add_recipe(rec) %>% 
   add_model(mod_boost)
 ```
@@ -302,7 +302,7 @@ set.seed(100)
 plan(multisession)
 
 fit_boost <- fit_resamples(
-  wf_boost, 
+  wflow_boost, 
   cv,
   metrics = metric_set(rmse, rsq),
   control = control_resamples(verbose = TRUE,
@@ -317,23 +317,44 @@ fit_boost <- fit_resamples(
 # Model evaluation
 
 ```{r}
-## EXAMPLE CODE FROM BAGGED TREES
-show_best(fit_bag, metric = "rmse", n = 1) %>% 
-  bind_rows(show_best(fit_rf, metric = "rmse", n = 1)) %>%
-  bind_rows(show_best(fit_boost, metric = "rmse", n = 1))
+collect_metrics(fit_bag) %>% 
+  bind_rows(collect_metrics(fit_rf)) %>%
+  bind_rows(collect_metrics(fit_boost)) %>% 
+  filter(.metric == "rmse") %>% 
+  mutate(model = c("bag", "rf", "boost")) %>% 
+  select(model, everything())
 ```
 
 * Show metrics in table and rmse/rsq graph
 
 # Apply model to test data
 
-```{r}
-bag_final_fit <- last_fit(
+```{r cache=TRUE}
+# bagged trees
+final_fit_bag <- last_fit(
   wflow_bag,
   split = split
 )
 
-bag_final_fit %>% collect_metrics()
+# random forest
+final_fit_rf <- last_fit(
+  wflow_rf,
+  split = split
+)
+
+# boosted trees
+final_fit_boost <- last_fit(
+  wflow_boost,
+  split = split
+)
+
+# show performance on test data
+collect_metrics(final_fit_bag) %>% 
+  bind_rows(collect_metrics(final_fit_rf)) %>%
+  bind_rows(collect_metrics(final_fit_boost)) %>% 
+  filter(.metric == "rmse") %>% 
+  mutate(model = c("bag", "rf", "boost")) %>% 
+  select(model, everything())
 ```
 
 
