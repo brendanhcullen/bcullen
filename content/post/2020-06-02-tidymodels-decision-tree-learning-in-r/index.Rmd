@@ -19,7 +19,7 @@ projects: []
 
 # Setup
 
-```{r}
+```{r message=FALSE}
 library(tidyverse)
 library(tidymodels)
 library(tictoc)
@@ -27,11 +27,12 @@ library(xgboost)
 library(baguette)
 library(here)
 library(future)
+library(vip)
 ```
 
 # Import the data
 
-```{r cache = TRUE}
+```{r cache=TRUE, message=FALSE}
 set.seed(100)
 
 # import train data
@@ -86,6 +87,7 @@ dat <- left_join(dat, frl)
 # Explore the data
 
 * make VIP plot, then take top 10 and throw into correlation matrix
+
 * call the data out of the list from VIP
 * use skimr package 
 
@@ -140,7 +142,7 @@ wflow_bag <- workflow() %>%
 
 ### Fit the model
 
-```{r cache = TRUE}
+```{r cache=TRUE, message=FALSE}
 fit_bag <- fit_resamples(
   wflow_bag,
   cv,
@@ -152,7 +154,7 @@ fit_bag <- fit_resamples(
 
 ### Visualize
 
-```{r}
+```{r echo=FALSE}
 # extract roots
 bag_roots <-  function(x){
   x %>% 
@@ -202,7 +204,7 @@ rf_workflow <- workflow() %>%
 
 ### Fit the model
 
-```{r cache = TRUE}
+```{r cache=TRUE, message=FALSE}
 set.seed(100)
 plan(multisession)
 
@@ -214,18 +216,11 @@ fit_rf <- fit_resamples(
                               save_pred = TRUE,
                               extract = function(x) x)
 )
-# set.seed(100)
-# plan(multisession)
-# 
-# fit_rf <- fit(
-#   rf_workflow,
-#   train
-# )
 ```
 
 ### Visualize
 
-```{r}
+```{r echo=FALSE}
 # extract roots
 rf_tree_roots <- function(x){
   map_chr(1:1000, 
@@ -275,7 +270,7 @@ wf_boost <- workflow() %>%
 
 ### Fit the model
 
-```{r}
+```{r cache=TRUE, message=FALSE}
 set.seed(100)
 plan(multisession)
 
