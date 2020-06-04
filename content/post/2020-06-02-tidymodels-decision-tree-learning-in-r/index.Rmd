@@ -2,6 +2,9 @@
 title: 'Tidymodels: Decision Tree Learning in R'
 author: Cianna Bedford-Petersen, Chris Loan & Brendan Cullen
 date: '2020-06-02'
+output:
+    blogdown::html_page:
+      toc: TRUE
 slug: []
 categories: []
 tags: []
@@ -16,6 +19,10 @@ image:
   preview_only: no
 projects: []
 ---
+
+# Intro
+
+Tidyverse’s newest release has recently come together to form a cohesive suite of packages for modeling and machine learning. The successor to Max Kuhn’s caret package, tidymodel’s collection of tools allows for a tidy approach to your data from start to finish. We’re going to l, walk through the basics for getting off the ground with tidymodels and demonstrate its application to three different decision tree methods for predicting student test scores. For further information about tidymodels packages and capabilities you can visit https://www.tidymodels.org/.
 
 # Setup
 
