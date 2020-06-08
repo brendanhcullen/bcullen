@@ -2,9 +2,6 @@
 title: 'Tidymodels: Decision Tree Learning in R'
 author: Cianna Bedford-Petersen, Chris Loan & Brendan Cullen
 date: '2020-06-02'
-output:
-    blogdown::html_page:
-      toc: TRUE
 slug: []
 categories: []
 tags: []
@@ -32,7 +29,7 @@ Load both the tidyverse and tidymodel packages into your environment. We’ll al
 library(here)
 library(tidyverse)
 library(tidymodels)
-library(psych)
+library(skimr)
 library(xgboost)
 library(baguette)
 library(future)
@@ -41,7 +38,7 @@ library(vip)
 
 # Import the data
 
-We’re going to be using simulated student test data based on 3rd-8th grade math and reading scores from 189,000 students in the state of Oregon. These data have a variety of variables to choose from when thinking about what might predict test scores, from student grade to enrollment in special education/talented and gifted programs to school latitude and longitude. To highlight the differences in modeling techniques in this tutorial we’re going to include all variables in our analysis. All school IDs in the data are real, so we can use that information to link the data with other sources. Specifically, we’re also going to pull in some free and reduced lunch data from the National Center for Education statistics and some ethnicity data from ???. After loading in our three datasets, we’ll join them together to make one cohesive data set and remove any intermediate data sets from our environment. For the purpose of demonstration, we’ll be sampling 1% of the data to keep computer processing time manageable. 
+We’re going to be using simulated student test data based on 3rd-8th grade math and reading scores from 189,000 students in the state of Oregon. These data have a variety of student-level variables (e.g. gender, ethnicity, enrollment in special education/talented and gifted programs, etc.) and district-level variables (e.g. school longitude and latitude, proportion of students who qualify for free and reduced-price lunch) to choose from when thinking about what might predict test scores. To highlight the differences in modeling techniques in this tutorial we’re going to include all variables in our analysis. All school IDs in the data are real, so we can use that information to link the data with other sources. Specifically, we’re also going to pull in some free and reduced lunch data from the National Center for Education statistics and some ethnicity data from the Oregon Department of Education. After loading in our three datasets, we’ll join them together to make one cohesive data set and remove any intermediate data sets from our environment. For the purpose of demonstration, we’ll be sampling 1% of the data to keep computer processing time manageable. 
 
 ```{r cache=TRUE, message=FALSE, warning=FALSE}
 set.seed(100)
@@ -97,28 +94,25 @@ dat <- left_join(dat, frl)
 
 # Explore the data
 
-We’ll use the describe function from the psych package to take a closer look at our data. We can also take a look at a correlation plot to get an idea of what variables might be our strongest predictors of student scores and the relationships we see among our predictor variables.
-
+We’ll use the `skim()` function from the `{skimr}` package to take a closer look at our (numeric) variables. The histograms show that many of the predictors are highly skewed, but the tree-based models we'll use below are robust to non-normal data. 
 
 ```{r}
 dat %>% 
-  select(-contains("id"), -ncessch) %>% 
+  select(score, -contains("id"), -ncessch) %>% 
   select_if(is.numeric) %>% 
-  skimr::skim()
+  skimr::skim() %>% 
+  select(-starts_with("numeric.p"))
 ```
 
+While most of our predictors are categorical, we can use `{corrplot}` to better visualize the relationships among the numeric variables.
 
-```{r}
-# # remove id variables for VIP plots
-# dat_noid <- dat %>% 
-#   select(-contains("id"), -ncessch, -calc_admn_cd, -lang_cd)
-# 
-# # Produce a plot displaying a rank ordering of variables by their importance
-# vip(lm(score ~ ., dat_noid), 
-#     mapping = aes(fill = Sign))
-# 
-# vip(lm(score ~ ., dat), 
-#     mapping = aes(fill = Sign))
+```{r warning=FALSE}
+dat %>% 
+  select(-contains("id"), -ncessch, -missing, -not_applicable) %>% 
+  select_if(is.numeric) %>% 
+  select(score, everything()) %>% 
+  cor(use = "complete.obs") %>% 
+  corrplot::corrplot()
 ```
 
 
@@ -142,25 +136,20 @@ cv <- vfold_cv(train)
 
 # Pre-processing
 
-Create a recipe - Before we add in our data to the model, we’re going to set up an object that directs our variables into specific roles, this is called a recipe. First, you’ll specify a formula for your model, indicating which variable is your outcome and which are your predictors. Using . here will indicate that we want to use all variables other than score as predictors. 
-
-Then, we can specify a series of pre-processing steps for our data that directs our recipe to assign our variables a role or manipulates the data. A few commonly used preprocessing steps:
-  * step_novel( ) should be used on all nominal predictors in preparation for a new level of categorical variable in the test data that is not present in the training set
-  * step_dummy() should be used to dummy code all nominal variables 
-  * step_center() and step_scale() should be used on numeric variables (did we do this in our data?)
+Before we add in our data to the model, we’re going to set up an object that directs our variables into specific roles, this is called a *recipe*. First, you’ll specify a formula for your model, indicating which variable is your outcome and which are your predictors. Using `.` here will indicate that we want to use all variables other than `score` as predictors. Then, we can specify a series of pre-processing steps for our data that directs our recipe to assign our variables a role or manipulates the data. 
 
 A complete list of possible pre-processing steps can be found here: https://recipes.tidymodels.org/articles/Custom_Steps.html
 
 
 ```{r}
 rec <- recipe(score ~ ., train) %>% 
-  step_mutate(tst_dt = as.numeric(lubridate::mdy_hms(tst_dt))) %>% 
-  update_role(contains("id"), ncessch, new_role = "id vars") %>% 
-  step_nzv(all_predictors(), freq_cut = 0, unique_cut = 0) %>% 
-  step_novel(all_nominal()) %>% 
-  step_unknown(all_nominal()) %>% 
-  step_medianimpute(all_numeric(), -all_outcomes(), -has_role("id vars"))  %>% 
-  step_dummy(all_nominal(), -has_role("id vars"))
+  step_mutate(tst_dt = as.numeric(lubridate::mdy_hms(tst_dt))) %>% # convert `tst_dt` variable to a date 
+  update_role(contains("id"), ncessch, new_role = "id vars") %>% # declare ID variables
+  step_nzv(all_predictors(), freq_cut = 0, unique_cut = 0) %>% # remove varaibles with zero variances
+  step_novel(all_nominal()) %>% # prepares test data to handle previously unseen factor levels 
+  step_unknown(all_nominal()) %>% # categorizes missing categorical data (NA's) as `unknown`
+  step_medianimpute(all_numeric(), -all_outcomes(), -has_role("id vars"))  %>% # replaces missing numeric observations with the median
+  step_dummy(all_nominal(), -has_role("id vars")) # dummy codes categorical variables
 ```
 
 
@@ -180,7 +169,7 @@ The arguments - set_args() allows you to set values for various parameters for y
 
 Up to this point we’ve been setting up a lot of individual elements and now it is time to combine them to create a cohesive framework, called a workflow, so we can run our desired models. First, we’ll use the workflow command and then, we’ll pullin the recipe and model we already created. Below are three examples of specifying models and creating a workflow for different decision tree methods.
 
-# Our 3 models
+# Model Examples
 
 ## Bagged trees
 
@@ -219,6 +208,8 @@ fit_bag <- fit_resamples(
 ```
 
 ### Visualize
+
+* The plot below shows counts of each tree's root node.
 
 ```{r echo=FALSE}
 # extract roots
@@ -370,7 +361,8 @@ collect_metrics(fit_bag) %>%
   bind_rows(collect_metrics(fit_boost)) %>% 
   filter(.metric == "rmse") %>% 
   mutate(model = c("bag", "rf", "boost")) %>% 
-  select(model, everything())
+  select(model, everything()) %>% 
+  knitr::kable()
 ```
 
 * Show metrics in table and rmse/rsq graph
@@ -397,15 +389,20 @@ final_fit_boost <- last_fit(
   wflow_boost,
   split = split
 )
+```
 
+
+```{r}
 # show performance on test data
 collect_metrics(final_fit_bag) %>% 
   bind_rows(collect_metrics(final_fit_rf)) %>%
   bind_rows(collect_metrics(final_fit_boost)) %>% 
   filter(.metric == "rmse") %>% 
   mutate(model = c("bag", "rf", "boost")) %>% 
-  select(model, everything())
+  select(model, everything()) %>% 
+  knitr::kable()
 ```
 
+# Conclusions
 
 

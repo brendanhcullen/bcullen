@@ -2,9 +2,6 @@
 title: 'Tidymodels: Decision Tree Learning in R'
 author: Cianna Bedford-Petersen, Chris Loan & Brendan Cullen
 date: '2020-06-02'
-output:
-    blogdown::html_page:
-      toc: TRUE
 slug: []
 categories: []
 tags: []
@@ -21,40 +18,6 @@ projects: []
 ---
 
 
-<div id="TOC">
-<ul>
-<li><a href="#intro">Intro</a></li>
-<li><a href="#setup">Setup</a></li>
-<li><a href="#import-the-data">Import the data</a></li>
-<li><a href="#explore-the-data">Explore the data</a></li>
-<li><a href="#split-data-and-resample">Split data and resample</a></li>
-<li><a href="#pre-processing">Pre-processing</a></li>
-<li><a href="#create-a-model">Create a model</a></li>
-<li><a href="#create-a-workflow">Create a workflow</a></li>
-<li><a href="#our-3-models">Our 3 models</a><ul>
-<li><a href="#bagged-trees">Bagged trees</a><ul>
-<li><a href="#specify-model">Specify model</a></li>
-<li><a href="#create-workflow">Create workflow</a></li>
-<li><a href="#fit-the-model">Fit the model</a></li>
-<li><a href="#visualize">Visualize</a></li>
-</ul></li>
-<li><a href="#random-forest">Random forest</a><ul>
-<li><a href="#specify-the-model">Specify the model</a></li>
-<li><a href="#create-workflow-1">Create workflow</a></li>
-<li><a href="#fit-the-model-1">Fit the model</a></li>
-<li><a href="#visualize-1">Visualize</a></li>
-</ul></li>
-<li><a href="#boosted-trees">Boosted trees</a><ul>
-<li><a href="#specify-the-model-1">Specify the model</a></li>
-<li><a href="#create-workflow-2">Create workflow</a></li>
-<li><a href="#fit-the-model-2">Fit the model</a></li>
-<li><a href="#visualize-2">Visualize</a></li>
-</ul></li>
-</ul></li>
-<li><a href="#model-evaluation">Model evaluation</a></li>
-<li><a href="#apply-model-to-test-data">Apply model to test data</a></li>
-</ul>
-</div>
 
 <div id="intro" class="section level1">
 <h1>Intro</h1>
@@ -66,7 +29,7 @@ projects: []
 <pre class="r"><code>library(here)
 library(tidyverse)
 library(tidymodels)
-library(psych)
+library(skimr)
 library(xgboost)
 library(baguette)
 library(future)
@@ -74,7 +37,7 @@ library(vip)</code></pre>
 </div>
 <div id="import-the-data" class="section level1">
 <h1>Import the data</h1>
-<p>We’re going to be using simulated student test data based on 3rd-8th grade math and reading scores from 189,000 students in the state of Oregon. These data have a variety of variables to choose from when thinking about what might predict test scores, from student grade to enrollment in special education/talented and gifted programs to school latitude and longitude. To highlight the differences in modeling techniques in this tutorial we’re going to include all variables in our analysis. All school IDs in the data are real, so we can use that information to link the data with other sources. Specifically, we’re also going to pull in some free and reduced lunch data from the National Center for Education statistics and some ethnicity data from ???. After loading in our three datasets, we’ll join them together to make one cohesive data set and remove any intermediate data sets from our environment. For the purpose of demonstration, we’ll be sampling 1% of the data to keep computer processing time manageable.</p>
+<p>We’re going to be using simulated student test data based on 3rd-8th grade math and reading scores from 189,000 students in the state of Oregon. These data have a variety of student-level variables (e.g. gender, ethnicity, enrollment in special education/talented and gifted programs, etc.) and district-level variables (e.g. school longitude and latitude, proportion of students who qualify for free and reduced-price lunch) to choose from when thinking about what might predict test scores. To highlight the differences in modeling techniques in this tutorial we’re going to include all variables in our analysis. All school IDs in the data are real, so we can use that information to link the data with other sources. Specifically, we’re also going to pull in some free and reduced lunch data from the National Center for Education statistics and some ethnicity data from the Oregon Department of Education. After loading in our three datasets, we’ll join them together to make one cohesive data set and remove any intermediate data sets from our environment. For the purpose of demonstration, we’ll be sampling 1% of the data to keep computer processing time manageable.</p>
 <pre class="r"><code>set.seed(100)
 
 # import train data
@@ -127,11 +90,12 @@ dat &lt;- left_join(dat, frl)</code></pre>
 </div>
 <div id="explore-the-data" class="section level1">
 <h1>Explore the data</h1>
-<p>We’ll use the describe function from the psych package to take a closer look at our data. We can also take a look at a correlation plot to get an idea of what variables might be our strongest predictors of student scores and the relationships we see among our predictor variables.</p>
+<p>We’ll use the <code>skim()</code> function from the <code>{skimr}</code> package to take a closer look at our (numeric) variables. The histograms show that many of the predictors are highly skewed, but the tree-based models we’ll use below are robust to non-normal data.</p>
 <pre class="r"><code>dat %&gt;% 
-  select(-contains(&quot;id&quot;), -ncessch) %&gt;% 
+  select(score, -contains(&quot;id&quot;), -ncessch) %&gt;% 
   select_if(is.numeric) %&gt;% 
-  skimr::skim()</code></pre>
+  skimr::skim() %&gt;% 
+  select(-starts_with(&quot;numeric.p&quot;))</code></pre>
 <table>
 <caption><span id="tab:unnamed-chunk-3">Table 1: </span>Data summary</caption>
 <tbody>
@@ -145,7 +109,7 @@ dat &lt;- left_join(dat, frl)</code></pre>
 </tr>
 <tr class="odd">
 <td align="left">Number of columns</td>
-<td align="left">17</td>
+<td align="left">1</td>
 </tr>
 <tr class="even">
 <td align="left">_______________________</td>
@@ -157,7 +121,7 @@ dat &lt;- left_join(dat, frl)</code></pre>
 </tr>
 <tr class="even">
 <td align="left">numeric</td>
-<td align="left">17</td>
+<td align="left">1</td>
 </tr>
 <tr class="odd">
 <td align="left">________________________</td>
@@ -178,248 +142,28 @@ dat &lt;- left_join(dat, frl)</code></pre>
 <th align="right">complete_rate</th>
 <th align="right">mean</th>
 <th align="right">sd</th>
-<th align="right">p0</th>
-<th align="right">p25</th>
-<th align="right">p50</th>
-<th align="right">p75</th>
-<th align="right">p100</th>
 <th align="left">hist</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">enrl_grd</td>
-<td align="right">0</td>
-<td align="right">1.00</td>
-<td align="right">5.43</td>
-<td align="right">1.69</td>
-<td align="right">3.00</td>
-<td align="right">4.00</td>
-<td align="right">5.00</td>
-<td align="right">7.00</td>
-<td align="right">8.00</td>
-<td align="left">▇▃▅▃▃</td>
-</tr>
-<tr class="even">
 <td align="left">score</td>
 <td align="right">0</td>
-<td align="right">1.00</td>
+<td align="right">1</td>
 <td align="right">2496.13</td>
 <td align="right">115.51</td>
-<td align="right">1607.00</td>
-<td align="right">2419.00</td>
-<td align="right">2499.00</td>
-<td align="right">2573.00</td>
-<td align="right">2934.00</td>
 <td align="left">▁▁▂▇▁</td>
-</tr>
-<tr class="odd">
-<td align="left">lat</td>
-<td align="right">32</td>
-<td align="right">0.98</td>
-<td align="right">44.79</td>
-<td align="right">0.99</td>
-<td align="right">42.01</td>
-<td align="right">44.23</td>
-<td align="right">45.24</td>
-<td align="right">45.50</td>
-<td align="right">46.18</td>
-<td align="left">▂▁▂▅▇</td>
-</tr>
-<tr class="even">
-<td align="left">lon</td>
-<td align="right">32</td>
-<td align="right">0.98</td>
-<td align="right">-122.51</td>
-<td align="right">1.16</td>
-<td align="right">-124.50</td>
-<td align="right">-123.03</td>
-<td align="right">-122.80</td>
-<td align="right">-122.52</td>
-<td align="right">-116.94</td>
-<td align="left">▅▇▁▁▁</td>
-</tr>
-<tr class="odd">
-<td align="left">p_american_indian_alaska_native</td>
-<td align="right">1</td>
-<td align="right">1.00</td>
-<td align="right">0.01</td>
-<td align="right">0.06</td>
-<td align="right">0.00</td>
-<td align="right">0.00</td>
-<td align="right">0.01</td>
-<td align="right">0.01</td>
-<td align="right">0.88</td>
-<td align="left">▇▁▁▁▁</td>
-</tr>
-<tr class="even">
-<td align="left">p_asian</td>
-<td align="right">1</td>
-<td align="right">1.00</td>
-<td align="right">0.04</td>
-<td align="right">0.07</td>
-<td align="right">0.00</td>
-<td align="right">0.01</td>
-<td align="right">0.01</td>
-<td align="right">0.04</td>
-<td align="right">0.62</td>
-<td align="left">▇▁▁▁▁</td>
-</tr>
-<tr class="odd">
-<td align="left">p_native_hawaiian_pacific_islander</td>
-<td align="right">1</td>
-<td align="right">1.00</td>
-<td align="right">0.01</td>
-<td align="right">0.01</td>
-<td align="right">0.00</td>
-<td align="right">0.00</td>
-<td align="right">0.00</td>
-<td align="right">0.01</td>
-<td align="right">0.08</td>
-<td align="left">▇▁▁▁▁</td>
-</tr>
-<tr class="even">
-<td align="left">p_black_african_american</td>
-<td align="right">1</td>
-<td align="right">1.00</td>
-<td align="right">0.02</td>
-<td align="right">0.04</td>
-<td align="right">0.00</td>
-<td align="right">0.00</td>
-<td align="right">0.01</td>
-<td align="right">0.02</td>
-<td align="right">0.50</td>
-<td align="left">▇▁▁▁▁</td>
-</tr>
-<tr class="odd">
-<td align="left">p_hispanic_latino</td>
-<td align="right">1</td>
-<td align="right">1.00</td>
-<td align="right">0.25</td>
-<td align="right">0.18</td>
-<td align="right">0.00</td>
-<td align="right">0.10</td>
-<td align="right">0.19</td>
-<td align="right">0.33</td>
-<td align="right">0.99</td>
-<td align="left">▇▅▂▁▁</td>
-</tr>
-<tr class="even">
-<td align="left">p_white</td>
-<td align="right">1</td>
-<td align="right">1.00</td>
-<td align="right">0.60</td>
-<td align="right">0.20</td>
-<td align="right">0.00</td>
-<td align="right">0.45</td>
-<td align="right">0.65</td>
-<td align="right">0.77</td>
-<td align="right">0.97</td>
-<td align="left">▁▃▅▇▅</td>
-</tr>
-<tr class="odd">
-<td align="left">p_multiracial</td>
-<td align="right">1</td>
-<td align="right">1.00</td>
-<td align="right">0.07</td>
-<td align="right">0.03</td>
-<td align="right">0.00</td>
-<td align="right">0.04</td>
-<td align="right">0.07</td>
-<td align="right">0.08</td>
-<td align="right">0.35</td>
-<td align="left">▇▆▁▁▁</td>
-</tr>
-<tr class="even">
-<td align="left">free_lunch_qualified</td>
-<td align="right">30</td>
-<td align="right">0.98</td>
-<td align="right">231.07</td>
-<td align="right">147.41</td>
-<td align="right">0.00</td>
-<td align="right">126.00</td>
-<td align="right">210.00</td>
-<td align="right">309.00</td>
-<td align="right">813.00</td>
-<td align="left">▇▇▃▁▁</td>
-</tr>
-<tr class="odd">
-<td align="left">reduced_price_lunch_qualified</td>
-<td align="right">30</td>
-<td align="right">0.98</td>
-<td align="right">39.81</td>
-<td align="right">24.77</td>
-<td align="right">0.00</td>
-<td align="right">22.00</td>
-<td align="right">36.00</td>
-<td align="right">52.00</td>
-<td align="right">132.00</td>
-<td align="left">▆▇▃▁▁</td>
-</tr>
-<tr class="even">
-<td align="left">missing</td>
-<td align="right">30</td>
-<td align="right">0.98</td>
-<td align="right">0.00</td>
-<td align="right">0.00</td>
-<td align="right">0.00</td>
-<td align="right">0.00</td>
-<td align="right">0.00</td>
-<td align="right">0.00</td>
-<td align="right">0.00</td>
-<td align="left">▁▁▇▁▁</td>
-</tr>
-<tr class="odd">
-<td align="left">not_applicable</td>
-<td align="right">30</td>
-<td align="right">0.98</td>
-<td align="right">0.00</td>
-<td align="right">0.00</td>
-<td align="right">0.00</td>
-<td align="right">0.00</td>
-<td align="right">0.00</td>
-<td align="right">0.00</td>
-<td align="right">0.00</td>
-<td align="left">▁▁▇▁▁</td>
-</tr>
-<tr class="even">
-<td align="left">no_category_codes</td>
-<td align="right">30</td>
-<td align="right">0.98</td>
-<td align="right">270.88</td>
-<td align="right">165.30</td>
-<td align="right">0.00</td>
-<td align="right">156.00</td>
-<td align="right">245.00</td>
-<td align="right">357.00</td>
-<td align="right">920.00</td>
-<td align="left">▆▇▃▁▁</td>
-</tr>
-<tr class="odd">
-<td align="left">n</td>
-<td align="right">30</td>
-<td align="right">0.98</td>
-<td align="right">815.34</td>
-<td align="right">536.12</td>
-<td align="right">18.00</td>
-<td align="right">420.00</td>
-<td align="right">601.50</td>
-<td align="right">1157.00</td>
-<td align="right">3144.00</td>
-<td align="left">▇▃▂▁▁</td>
 </tr>
 </tbody>
 </table>
-<pre class="r"><code># # remove id variables for VIP plots
-# dat_noid &lt;- dat %&gt;% 
-#   select(-contains(&quot;id&quot;), -ncessch, -calc_admn_cd, -lang_cd)
-# 
-# # Produce a plot displaying a rank ordering of variables by their importance
-# vip(lm(score ~ ., dat_noid), 
-#     mapping = aes(fill = Sign))
-# 
-# vip(lm(score ~ ., dat), 
-#     mapping = aes(fill = Sign))</code></pre>
+<p>While most of our predictors are categorical, we can use <code>{corrplot}</code> to better visualize the relationships among the numeric variables.</p>
+<pre class="r"><code>dat %&gt;% 
+  select(-contains(&quot;id&quot;), -ncessch, -missing, -not_applicable) %&gt;% 
+  select_if(is.numeric) %&gt;% 
+  select(score, everything()) %&gt;% 
+  cor(use = &quot;complete.obs&quot;) %&gt;% 
+  corrplot::corrplot()</code></pre>
+<p><img src="/post/2020-06-02-tidymodels-decision-tree-learning-in-r/index_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 </div>
 <div id="split-data-and-resample" class="section level1">
 <h1>Split data and resample</h1>
@@ -436,20 +180,16 @@ cv &lt;- vfold_cv(train)</code></pre>
 </div>
 <div id="pre-processing" class="section level1">
 <h1>Pre-processing</h1>
-<p>Create a recipe - Before we add in our data to the model, we’re going to set up an object that directs our variables into specific roles, this is called a recipe. First, you’ll specify a formula for your model, indicating which variable is your outcome and which are your predictors. Using . here will indicate that we want to use all variables other than score as predictors.</p>
-<p>Then, we can specify a series of pre-processing steps for our data that directs our recipe to assign our variables a role or manipulates the data. A few commonly used preprocessing steps:
-* step_novel( ) should be used on all nominal predictors in preparation for a new level of categorical variable in the test data that is not present in the training set
-* step_dummy() should be used to dummy code all nominal variables
-* step_center() and step_scale() should be used on numeric variables (did we do this in our data?)</p>
+<p>Before we add in our data to the model, we’re going to set up an object that directs our variables into specific roles, this is called a <em>recipe</em>. First, you’ll specify a formula for your model, indicating which variable is your outcome and which are your predictors. Using <code>.</code> here will indicate that we want to use all variables other than <code>score</code> as predictors. Then, we can specify a series of pre-processing steps for our data that directs our recipe to assign our variables a role or manipulates the data.</p>
 <p>A complete list of possible pre-processing steps can be found here: <a href="https://recipes.tidymodels.org/articles/Custom_Steps.html" class="uri">https://recipes.tidymodels.org/articles/Custom_Steps.html</a></p>
 <pre class="r"><code>rec &lt;- recipe(score ~ ., train) %&gt;% 
-  step_mutate(tst_dt = as.numeric(lubridate::mdy_hms(tst_dt))) %&gt;% 
-  update_role(contains(&quot;id&quot;), ncessch, new_role = &quot;id vars&quot;) %&gt;% 
-  step_nzv(all_predictors(), freq_cut = 0, unique_cut = 0) %&gt;% 
-  step_novel(all_nominal()) %&gt;% 
-  step_unknown(all_nominal()) %&gt;% 
-  step_medianimpute(all_numeric(), -all_outcomes(), -has_role(&quot;id vars&quot;))  %&gt;% 
-  step_dummy(all_nominal(), -has_role(&quot;id vars&quot;))</code></pre>
+  step_mutate(tst_dt = as.numeric(lubridate::mdy_hms(tst_dt))) %&gt;% # convert `tst_dt` variable to a date 
+  update_role(contains(&quot;id&quot;), ncessch, new_role = &quot;id vars&quot;) %&gt;% # declare ID variables
+  step_nzv(all_predictors(), freq_cut = 0, unique_cut = 0) %&gt;% # remove varaibles with zero variances
+  step_novel(all_nominal()) %&gt;% # prepares test data to handle previously unseen factor levels 
+  step_unknown(all_nominal()) %&gt;% # categorizes missing categorical data (NA&#39;s) as `unknown`
+  step_medianimpute(all_numeric(), -all_outcomes(), -has_role(&quot;id vars&quot;))  %&gt;% # replaces missing numeric observations with the median
+  step_dummy(all_nominal(), -has_role(&quot;id vars&quot;)) # dummy codes categorical variables</code></pre>
 </div>
 <div id="create-a-model" class="section level1">
 <h1>Create a model</h1>
@@ -463,8 +203,8 @@ cv &lt;- vfold_cv(train)</code></pre>
 <h1>Create a workflow</h1>
 <p>Up to this point we’ve been setting up a lot of individual elements and now it is time to combine them to create a cohesive framework, called a workflow, so we can run our desired models. First, we’ll use the workflow command and then, we’ll pullin the recipe and model we already created. Below are three examples of specifying models and creating a workflow for different decision tree methods.</p>
 </div>
-<div id="our-3-models" class="section level1">
-<h1>Our 3 models</h1>
+<div id="model-examples" class="section level1">
+<h1>Model Examples</h1>
 <div id="bagged-trees" class="section level2">
 <h2>Bagged trees</h2>
 <p>A bagged tree approach creates multiple subsets of data from the training set which are randomly chosen with replacement. Each subset of data is used to train a given decision tree. In the end, we have an ensemble of different models. The predictions from all the different trees are averaged together giving us a stronger prediction than one tree alone could.</p>
@@ -496,6 +236,9 @@ fit_bag &lt;- fit_resamples(
 </div>
 <div id="visualize" class="section level3">
 <h3>Visualize</h3>
+<ul>
+<li>The plot below shows counts of each tree’s root node.</li>
+</ul>
 <p><img src="/post/2020-06-02-tidymodels-decision-tree-learning-in-r/index_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 </div>
 </div>
@@ -582,13 +325,46 @@ fit_boost &lt;- fit_resamples(
   bind_rows(collect_metrics(fit_boost)) %&gt;% 
   filter(.metric == &quot;rmse&quot;) %&gt;% 
   mutate(model = c(&quot;bag&quot;, &quot;rf&quot;, &quot;boost&quot;)) %&gt;% 
-  select(model, everything())</code></pre>
-<pre><code>## # A tibble: 3 x 6
-##   model .metric .estimator  mean     n std_err
-##   &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;      &lt;dbl&gt; &lt;int&gt;   &lt;dbl&gt;
-## 1 bag   rmse    standard    98.4    10    2.50
-## 2 rf    rmse    standard    95.2    10    3.47
-## 3 boost rmse    standard    94.8    10    3.09</code></pre>
+  select(model, everything()) %&gt;% 
+  knitr::kable()</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">model</th>
+<th align="left">.metric</th>
+<th align="left">.estimator</th>
+<th align="right">mean</th>
+<th align="right">n</th>
+<th align="right">std_err</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">bag</td>
+<td align="left">rmse</td>
+<td align="left">standard</td>
+<td align="right">98.42890</td>
+<td align="right">10</td>
+<td align="right">2.504904</td>
+</tr>
+<tr class="even">
+<td align="left">rf</td>
+<td align="left">rmse</td>
+<td align="left">standard</td>
+<td align="right">95.20828</td>
+<td align="right">10</td>
+<td align="right">3.466279</td>
+</tr>
+<tr class="odd">
+<td align="left">boost</td>
+<td align="left">rmse</td>
+<td align="left">standard</td>
+<td align="right">94.82690</td>
+<td align="right">10</td>
+<td align="right">3.094577</td>
+</tr>
+</tbody>
+</table>
 <ul>
 <li>Show metrics in table and rmse/rsq graph</li>
 </ul>
@@ -612,19 +388,46 @@ final_fit_rf &lt;- last_fit(
 final_fit_boost &lt;- last_fit(
   wflow_boost,
   split = split
-)
-
-# show performance on test data
+)</code></pre>
+<pre class="r"><code># show performance on test data
 collect_metrics(final_fit_bag) %&gt;% 
   bind_rows(collect_metrics(final_fit_rf)) %&gt;%
   bind_rows(collect_metrics(final_fit_boost)) %&gt;% 
   filter(.metric == &quot;rmse&quot;) %&gt;% 
   mutate(model = c(&quot;bag&quot;, &quot;rf&quot;, &quot;boost&quot;)) %&gt;% 
-  select(model, everything())</code></pre>
-<pre><code>## # A tibble: 3 x 4
-##   model .metric .estimator .estimate
-##   &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt;
-## 1 bag   rmse    standard       100. 
-## 2 rf    rmse    standard        93.9
-## 3 boost rmse    standard        94.2</code></pre>
+  select(model, everything()) %&gt;% 
+  knitr::kable()</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">model</th>
+<th align="left">.metric</th>
+<th align="left">.estimator</th>
+<th align="right">.estimate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">bag</td>
+<td align="left">rmse</td>
+<td align="left">standard</td>
+<td align="right">99.99022</td>
+</tr>
+<tr class="even">
+<td align="left">rf</td>
+<td align="left">rmse</td>
+<td align="left">standard</td>
+<td align="right">93.86375</td>
+</tr>
+<tr class="odd">
+<td align="left">boost</td>
+<td align="left">rmse</td>
+<td align="left">standard</td>
+<td align="right">94.24961</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="conclusions" class="section level1">
+<h1>Conclusions</h1>
 </div>
