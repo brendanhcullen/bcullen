@@ -29,25 +29,25 @@ projects: []
 <li><a href="#explore-the-data">Explore the data</a></li>
 <li><a href="#split-data-and-resample">Split data and resample</a></li>
 <li><a href="#pre-processing">Pre-processing</a></li>
-<li><a href="#create-a-model-and-workflow">Create a model and workflow</a></li>
-<li><a href="#fit-the-model">Fit the model</a></li>
+<li><a href="#create-a-model">Create a model</a></li>
+<li><a href="#create-a-workflow">Create a workflow</a></li>
 <li><a href="#our-3-models">Our 3 models</a><ul>
 <li><a href="#bagged-trees">Bagged trees</a><ul>
 <li><a href="#specify-model">Specify model</a></li>
 <li><a href="#create-workflow">Create workflow</a></li>
-<li><a href="#fit-the-model-1">Fit the model</a></li>
+<li><a href="#fit-the-model">Fit the model</a></li>
 <li><a href="#visualize">Visualize</a></li>
 </ul></li>
 <li><a href="#random-forest">Random forest</a><ul>
 <li><a href="#specify-the-model">Specify the model</a></li>
 <li><a href="#create-workflow-1">Create workflow</a></li>
-<li><a href="#fit-the-model-2">Fit the model</a></li>
+<li><a href="#fit-the-model-1">Fit the model</a></li>
 <li><a href="#visualize-1">Visualize</a></li>
 </ul></li>
 <li><a href="#boosted-trees">Boosted trees</a><ul>
 <li><a href="#specify-the-model-1">Specify the model</a></li>
 <li><a href="#create-workflow-2">Create workflow</a></li>
-<li><a href="#fit-the-model-3">Fit the model</a></li>
+<li><a href="#fit-the-model-2">Fit the model</a></li>
 <li><a href="#visualize-2">Visualize</a></li>
 </ul></li>
 </ul></li>
@@ -62,17 +62,19 @@ projects: []
 </div>
 <div id="setup" class="section level1">
 <h1>Setup</h1>
-<pre class="r"><code>library(tidyverse)
+<p>Load both the tidyverse and tidymodel packages into your environment. We’ll also load in the psych package to help us with some descriptives for our data.</p>
+<pre class="r"><code>library(here)
+library(tidyverse)
 library(tidymodels)
-library(tictoc)
+library(psych)
 library(xgboost)
 library(baguette)
-library(here)
 library(future)
 library(vip)</code></pre>
 </div>
 <div id="import-the-data" class="section level1">
 <h1>Import the data</h1>
+<p>We’re going to be using simulated student test data based on 3rd-8th grade math and reading scores from 189,000 students in the state of Oregon. These data have a variety of variables to choose from when thinking about what might predict test scores, from student grade to enrollment in special education/talented and gifted programs to school latitude and longitude. To highlight the differences in modeling techniques in this tutorial we’re going to include all variables in our analysis. All school IDs in the data are real, so we can use that information to link the data with other sources. Specifically, we’re also going to pull in some free and reduced lunch data from the National Center for Education statistics and some ethnicity data from ???. After loading in our three datasets, we’ll join them together to make one cohesive data set and remove any intermediate data sets from our environment. For the purpose of demonstration, we’ll be sampling 1% of the data to keep computer processing time manageable.</p>
 <pre class="r"><code>set.seed(100)
 
 # import train data
@@ -125,9 +127,289 @@ dat &lt;- left_join(dat, frl)</code></pre>
 </div>
 <div id="explore-the-data" class="section level1">
 <h1>Explore the data</h1>
-<ul>
-<li>make VIP plot, then take top 10 and throw into correlation matrix</li>
-</ul>
+<p>We’ll use the describe function from the psych package to take a closer look at our data. We can also take a look at a correlation plot to get an idea of what variables might be our strongest predictors of student scores and the relationships we see among our predictor variables.</p>
+<pre class="r"><code>dat %&gt;% 
+  select(-contains(&quot;id&quot;), -ncessch) %&gt;% 
+  select_if(is.numeric) %&gt;% 
+  skimr::skim()</code></pre>
+<table>
+<caption><span id="tab:unnamed-chunk-3">Table 1: </span>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td align="left">Name</td>
+<td align="left">Piped data</td>
+</tr>
+<tr class="even">
+<td align="left">Number of rows</td>
+<td align="left">1894</td>
+</tr>
+<tr class="odd">
+<td align="left">Number of columns</td>
+<td align="left">17</td>
+</tr>
+<tr class="even">
+<td align="left">_______________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Column type frequency:</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">numeric</td>
+<td align="left">17</td>
+</tr>
+<tr class="odd">
+<td align="left">________________________</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">Group variables</td>
+<td align="left">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: numeric</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">mean</th>
+<th align="right">sd</th>
+<th align="right">p0</th>
+<th align="right">p25</th>
+<th align="right">p50</th>
+<th align="right">p75</th>
+<th align="right">p100</th>
+<th align="left">hist</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">enrl_grd</td>
+<td align="right">0</td>
+<td align="right">1.00</td>
+<td align="right">5.43</td>
+<td align="right">1.69</td>
+<td align="right">3.00</td>
+<td align="right">4.00</td>
+<td align="right">5.00</td>
+<td align="right">7.00</td>
+<td align="right">8.00</td>
+<td align="left">▇▃▅▃▃</td>
+</tr>
+<tr class="even">
+<td align="left">score</td>
+<td align="right">0</td>
+<td align="right">1.00</td>
+<td align="right">2496.13</td>
+<td align="right">115.51</td>
+<td align="right">1607.00</td>
+<td align="right">2419.00</td>
+<td align="right">2499.00</td>
+<td align="right">2573.00</td>
+<td align="right">2934.00</td>
+<td align="left">▁▁▂▇▁</td>
+</tr>
+<tr class="odd">
+<td align="left">lat</td>
+<td align="right">32</td>
+<td align="right">0.98</td>
+<td align="right">44.79</td>
+<td align="right">0.99</td>
+<td align="right">42.01</td>
+<td align="right">44.23</td>
+<td align="right">45.24</td>
+<td align="right">45.50</td>
+<td align="right">46.18</td>
+<td align="left">▂▁▂▅▇</td>
+</tr>
+<tr class="even">
+<td align="left">lon</td>
+<td align="right">32</td>
+<td align="right">0.98</td>
+<td align="right">-122.51</td>
+<td align="right">1.16</td>
+<td align="right">-124.50</td>
+<td align="right">-123.03</td>
+<td align="right">-122.80</td>
+<td align="right">-122.52</td>
+<td align="right">-116.94</td>
+<td align="left">▅▇▁▁▁</td>
+</tr>
+<tr class="odd">
+<td align="left">p_american_indian_alaska_native</td>
+<td align="right">1</td>
+<td align="right">1.00</td>
+<td align="right">0.01</td>
+<td align="right">0.06</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="right">0.01</td>
+<td align="right">0.01</td>
+<td align="right">0.88</td>
+<td align="left">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td align="left">p_asian</td>
+<td align="right">1</td>
+<td align="right">1.00</td>
+<td align="right">0.04</td>
+<td align="right">0.07</td>
+<td align="right">0.00</td>
+<td align="right">0.01</td>
+<td align="right">0.01</td>
+<td align="right">0.04</td>
+<td align="right">0.62</td>
+<td align="left">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td align="left">p_native_hawaiian_pacific_islander</td>
+<td align="right">1</td>
+<td align="right">1.00</td>
+<td align="right">0.01</td>
+<td align="right">0.01</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="right">0.01</td>
+<td align="right">0.08</td>
+<td align="left">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td align="left">p_black_african_american</td>
+<td align="right">1</td>
+<td align="right">1.00</td>
+<td align="right">0.02</td>
+<td align="right">0.04</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="right">0.01</td>
+<td align="right">0.02</td>
+<td align="right">0.50</td>
+<td align="left">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td align="left">p_hispanic_latino</td>
+<td align="right">1</td>
+<td align="right">1.00</td>
+<td align="right">0.25</td>
+<td align="right">0.18</td>
+<td align="right">0.00</td>
+<td align="right">0.10</td>
+<td align="right">0.19</td>
+<td align="right">0.33</td>
+<td align="right">0.99</td>
+<td align="left">▇▅▂▁▁</td>
+</tr>
+<tr class="even">
+<td align="left">p_white</td>
+<td align="right">1</td>
+<td align="right">1.00</td>
+<td align="right">0.60</td>
+<td align="right">0.20</td>
+<td align="right">0.00</td>
+<td align="right">0.45</td>
+<td align="right">0.65</td>
+<td align="right">0.77</td>
+<td align="right">0.97</td>
+<td align="left">▁▃▅▇▅</td>
+</tr>
+<tr class="odd">
+<td align="left">p_multiracial</td>
+<td align="right">1</td>
+<td align="right">1.00</td>
+<td align="right">0.07</td>
+<td align="right">0.03</td>
+<td align="right">0.00</td>
+<td align="right">0.04</td>
+<td align="right">0.07</td>
+<td align="right">0.08</td>
+<td align="right">0.35</td>
+<td align="left">▇▆▁▁▁</td>
+</tr>
+<tr class="even">
+<td align="left">free_lunch_qualified</td>
+<td align="right">30</td>
+<td align="right">0.98</td>
+<td align="right">231.07</td>
+<td align="right">147.41</td>
+<td align="right">0.00</td>
+<td align="right">126.00</td>
+<td align="right">210.00</td>
+<td align="right">309.00</td>
+<td align="right">813.00</td>
+<td align="left">▇▇▃▁▁</td>
+</tr>
+<tr class="odd">
+<td align="left">reduced_price_lunch_qualified</td>
+<td align="right">30</td>
+<td align="right">0.98</td>
+<td align="right">39.81</td>
+<td align="right">24.77</td>
+<td align="right">0.00</td>
+<td align="right">22.00</td>
+<td align="right">36.00</td>
+<td align="right">52.00</td>
+<td align="right">132.00</td>
+<td align="left">▆▇▃▁▁</td>
+</tr>
+<tr class="even">
+<td align="left">missing</td>
+<td align="right">30</td>
+<td align="right">0.98</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="left">▁▁▇▁▁</td>
+</tr>
+<tr class="odd">
+<td align="left">not_applicable</td>
+<td align="right">30</td>
+<td align="right">0.98</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="left">▁▁▇▁▁</td>
+</tr>
+<tr class="even">
+<td align="left">no_category_codes</td>
+<td align="right">30</td>
+<td align="right">0.98</td>
+<td align="right">270.88</td>
+<td align="right">165.30</td>
+<td align="right">0.00</td>
+<td align="right">156.00</td>
+<td align="right">245.00</td>
+<td align="right">357.00</td>
+<td align="right">920.00</td>
+<td align="left">▆▇▃▁▁</td>
+</tr>
+<tr class="odd">
+<td align="left">n</td>
+<td align="right">30</td>
+<td align="right">0.98</td>
+<td align="right">815.34</td>
+<td align="right">536.12</td>
+<td align="right">18.00</td>
+<td align="right">420.00</td>
+<td align="right">601.50</td>
+<td align="right">1157.00</td>
+<td align="right">3144.00</td>
+<td align="left">▇▃▂▁▁</td>
+</tr>
+</tbody>
+</table>
 <pre class="r"><code># # remove id variables for VIP plots
 # dat_noid &lt;- dat %&gt;% 
 #   select(-contains(&quot;id&quot;), -ncessch, -calc_admn_cd, -lang_cd)
@@ -138,19 +420,28 @@ dat &lt;- left_join(dat, frl)</code></pre>
 # 
 # vip(lm(score ~ ., dat), 
 #     mapping = aes(fill = Sign))</code></pre>
-<ul>
-<li>call the data out of the list from VIP</li>
-<li>use skimr package</li>
-</ul>
 </div>
 <div id="split-data-and-resample" class="section level1">
 <h1>Split data and resample</h1>
-<pre class="r"><code>split &lt;- initial_split(dat)
+<p>The first step of our analysis is to split our data into two separate sets, one for training and one for testing. The training set allows us the flexibility to fit a model and adjust or tune the parameters before evaluating the model’s final performance on our test. We can do this efficiently with the initial_split function. This comes from the rsample package, which is included in the tidymodels package that we loaded earlier. By default this will split your data into 75% for the training set and 25%, but you can change this by setting the prop argument (include a prop argument in our example for clarity). We can also specify the argument strata in order to use stratified sampling. Here, we set strata to our score variable to ensure that our resamples incorporate the full range of scores present in our data (is this what strata does?). Then, we’ll extract the training and the testing data sets from our split object and assign them a name.</p>
+<p>Finally, we’ll resample our data using the v-fold command. Though a slightly confusing name, the v-fold command will give us a k-fold cross-validated version of our training data. This will allow us to better estimate the ability of a machine learning model to predict unseen data, this is particularly important if we plan to tune any parameters but also a good choice to prevent overfitting of our model. Though there are many different forms of cross-validation we could apply here, we’ll stick with k-fold as it’s a popular method known for reducing bias in our estimates.</p>
+<pre class="r"><code># split the data
+split &lt;- initial_split(dat)
+
+# extract the training data
 train &lt;- training(split)
+
+# resample the data with 10-fold cross-validation
 cv &lt;- vfold_cv(train)</code></pre>
 </div>
 <div id="pre-processing" class="section level1">
 <h1>Pre-processing</h1>
+<p>Create a recipe - Before we add in our data to the model, we’re going to set up an object that directs our variables into specific roles, this is called a recipe. First, you’ll specify a formula for your model, indicating which variable is your outcome and which are your predictors. Using . here will indicate that we want to use all variables other than score as predictors.</p>
+<p>Then, we can specify a series of pre-processing steps for our data that directs our recipe to assign our variables a role or manipulates the data. A few commonly used preprocessing steps:
+* step_novel( ) should be used on all nominal predictors in preparation for a new level of categorical variable in the test data that is not present in the training set
+* step_dummy() should be used to dummy code all nominal variables
+* step_center() and step_scale() should be used on numeric variables (did we do this in our data?)</p>
+<p>A complete list of possible pre-processing steps can be found here: <a href="https://recipes.tidymodels.org/articles/Custom_Steps.html" class="uri">https://recipes.tidymodels.org/articles/Custom_Steps.html</a></p>
 <pre class="r"><code>rec &lt;- recipe(score ~ ., train) %&gt;% 
   step_mutate(tst_dt = as.numeric(lubridate::mdy_hms(tst_dt))) %&gt;% 
   update_role(contains(&quot;id&quot;), ncessch, new_role = &quot;id vars&quot;) %&gt;% 
@@ -160,19 +451,23 @@ cv &lt;- vfold_cv(train)</code></pre>
   step_medianimpute(all_numeric(), -all_outcomes(), -has_role(&quot;id vars&quot;))  %&gt;% 
   step_dummy(all_nominal(), -has_role(&quot;id vars&quot;))</code></pre>
 </div>
-<div id="create-a-model-and-workflow" class="section level1">
-<h1>Create a model and workflow</h1>
+<div id="create-a-model" class="section level1">
+<h1>Create a model</h1>
+<p>The last step before bringing in our data is to specify our model. This will call upon functions from the parsnip package which standardizes language for specifying a multitude of statistical models. There are a few core elements that you will need to specify for each model</p>
+<p>The type of model - this indicates what type of model you choose to fit, each of which will be a different function. We’ll be focusing on decision tree methods using bag_tree(), random_forest(), and boost_tree(). A full list of models can be found here <a href="https://www.tidymodels.org/find/parsnip/" class="uri">https://www.tidymodels.org/find/parsnip/</a></p>
+<p>The engine - set_engine() calls the package to support the model you specified above.</p>
+<p>The mode - set_mode() indicates the type of prediction you’d like to use in your model, you’ll choose between regression and classification. Since we are looking to predict student scores, which is a continuous predictor, we’ll be choosing regression.</p>
+<p>The arguments - set_args() allows you to set values for various parameters for your model, each model type will have a specific set of parameters that can be altered. For these parameters, you can either set a particular value or you can use the tune function to search for the optimal value of each parameter. Tuning requires a few extra steps, so we will leave the default arguments for clarity. For more information on tuning check out ???</p>
 </div>
-<div id="fit-the-model" class="section level1">
-<h1>Fit the model</h1>
+<div id="create-a-workflow" class="section level1">
+<h1>Create a workflow</h1>
+<p>Up to this point we’ve been setting up a lot of individual elements and now it is time to combine them to create a cohesive framework, called a workflow, so we can run our desired models. First, we’ll use the workflow command and then, we’ll pullin the recipe and model we already created. Below are three examples of specifying models and creating a workflow for different decision tree methods.</p>
 </div>
 <div id="our-3-models" class="section level1">
 <h1>Our 3 models</h1>
 <div id="bagged-trees" class="section level2">
 <h2>Bagged trees</h2>
-<ul>
-<li>Introduce model</li>
-</ul>
+<p>A bagged tree approach creates multiple subsets of data from the training set which are randomly chosen with replacement. Each subset of data is used to train a given decision tree. In the end, we have an ensemble of different models. The predictions from all the different trees are averaged together giving us a stronger prediction than one tree alone could.</p>
 <div id="specify-model" class="section level3">
 <h3>Specify model</h3>
 <pre class="r"><code>set.seed(100)
@@ -186,7 +481,7 @@ mod_bag &lt;- bag_tree() %&gt;%
   add_recipe(rec) %&gt;%
   add_model(mod_bag)</code></pre>
 </div>
-<div id="fit-the-model-1" class="section level3">
+<div id="fit-the-model" class="section level3">
 <h3>Fit the model</h3>
 <pre class="r"><code>set.seed(100)
 plan(multisession)
@@ -201,14 +496,12 @@ fit_bag &lt;- fit_resamples(
 </div>
 <div id="visualize" class="section level3">
 <h3>Visualize</h3>
-<p><img src="/post/2020-06-02-tidymodels-decision-tree-learning-in-r/index_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p><img src="/post/2020-06-02-tidymodels-decision-tree-learning-in-r/index_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 </div>
 </div>
 <div id="random-forest" class="section level2">
 <h2>Random forest</h2>
-<ul>
-<li>Introduce the model</li>
-</ul>
+<p>Random forest is similar to bagged tree methodology but goes one step further. In addition to taking random subsets of data, the model also draws a random selection of features. Instead of utilizing all features, the random subset of features allows more predictors to be eligible root nodes. This is particularly useful for handling high dimensionality data.</p>
 <div id="specify-the-model" class="section level3">
 <h3>Specify the model</h3>
 <pre class="r"><code>set.seed(100)
@@ -226,7 +519,7 @@ mod_rf &lt;-rand_forest() %&gt;%
   add_model(mod_rf) %&gt;% 
   add_recipe(rec)</code></pre>
 </div>
-<div id="fit-the-model-2" class="section level3">
+<div id="fit-the-model-1" class="section level3">
 <h3>Fit the model</h3>
 <pre class="r"><code>set.seed(100)
 plan(multisession)
@@ -242,14 +535,12 @@ fit_rf &lt;- fit_resamples(
 </div>
 <div id="visualize-1" class="section level3">
 <h3>Visualize</h3>
-<p><img src="/post/2020-06-02-tidymodels-decision-tree-learning-in-r/index_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<p><img src="/post/2020-06-02-tidymodels-decision-tree-learning-in-r/index_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
 </div>
 </div>
 <div id="boosted-trees" class="section level2">
 <h2>Boosted trees</h2>
-<ul>
-<li>Introduce the model</li>
-</ul>
+<p>Boosted trees are a type of additive model that makes predictions by combining decisions from a sequence of base models. These models are learned in succession with the first learners fitting simple models and then analyzing data for errors, with the goal of solving for the net error from the prior tree.</p>
 <div id="specify-the-model-1" class="section level3">
 <h3>Specify the model</h3>
 <pre class="r"><code>mod_boost &lt;- boost_tree() %&gt;% 
@@ -262,7 +553,7 @@ fit_rf &lt;- fit_resamples(
   add_recipe(rec) %&gt;% 
   add_model(mod_boost)</code></pre>
 </div>
-<div id="fit-the-model-3" class="section level3">
+<div id="fit-the-model-2" class="section level3">
 <h3>Fit the model</h3>
 <pre class="r"><code>set.seed(100)
 plan(multisession)
@@ -285,6 +576,7 @@ fit_boost &lt;- fit_resamples(
 </div>
 <div id="model-evaluation" class="section level1">
 <h1>Model evaluation</h1>
+<p>After running these three models, it’s time to evaluate their performance. We can do this with <code>tune::collect_metrics()</code>.</p>
 <pre class="r"><code>collect_metrics(fit_bag) %&gt;% 
   bind_rows(collect_metrics(fit_rf)) %&gt;%
   bind_rows(collect_metrics(fit_boost)) %&gt;% 
@@ -303,6 +595,7 @@ fit_boost &lt;- fit_resamples(
 </div>
 <div id="apply-model-to-test-data" class="section level1">
 <h1>Apply model to test data</h1>
+<p>The final step is to apply the model we have chosen to our test data.</p>
 <pre class="r"><code># bagged trees
 final_fit_bag &lt;- last_fit(
   wflow_bag,
