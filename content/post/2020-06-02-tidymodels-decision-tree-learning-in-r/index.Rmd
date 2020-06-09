@@ -46,10 +46,21 @@ We’re going to be using simulated student test data based on 3rd-8th grade mat
 ```{r cache=TRUE, message=FALSE, warning=FALSE}
 set.seed(100)
 
-# import data (NOTE: the data called 'train.csv', but we will actually further split this into its own training and testing data)
+# import data and perform initial cleaning
+# initial cleaning steps include: 
+# *recode NA's for lang_cd and ayp_lep to more meaningful values
+# *convert tst_dt to date
+# *remove vars with entirely missing data
+# Note: the data is called 'train.csv', but we will actually further split this into its own training and testing data
 dat <- read_csv(here::here("static", "data", "train.csv")) %>% 
   select(-classification) %>% # remove this variable because it's redundant with `score`
-  sample_frac(.01)
+  mutate(lang_cd = ifelse(is.na(lang_cd), "E", lang_cd), 
+         ayp_lep = ifelse(is.na(ayp_lep), "G", ayp_lep),
+         tst_dt = lubridate::as_date(lubridate::mdy_hms(tst_dt))) %>% 
+  sample_frac(.01) %>% # sample 1% of the data to reduce run time
+  janitor::remove_empty(c("rows", "cols")) %>% 
+  drop_na() %>% 
+  select_if(~length(unique(.x)) > 1)
 
 # import fall membership report ethcnicity data and do some basic cleaning and renaming
 sheets <- readxl::excel_sheets(here::here("static", "data", "fallmembershipreport_20192020.xlsx"))
@@ -101,7 +112,7 @@ We’ll use the `skim()` function from the `{skimr}` package to take a closer lo
 ```{r}
 dat %>% 
   select(-contains("id"), -ncessch, -missing, -not_applicable) %>%  # remove ID and irrelevant variables
-  select_if(is.numeric) %>% 
+  modify_if(is.character, as.factor) %>%  # convert character vars to factors
   skim() %>% 
   select(-starts_with("numeric.p")) # remove quartiles
 ```

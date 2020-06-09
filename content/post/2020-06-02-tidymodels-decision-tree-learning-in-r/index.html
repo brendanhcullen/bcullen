@@ -38,10 +38,21 @@ library(future)</code></pre>
 <p>We’re going to be using simulated student test data based on 3rd-8th grade math and reading scores from ~189,000 students in the state of Oregon. These data have a variety of student-level variables (e.g. gender, ethnicity, enrollment in special education/talented and gifted programs, etc.) and district-level variables (e.g. school longitude and latitude, proportion of students who qualify for free and reduced-price lunch, etc.) to choose from when thinking about what might predict test scores. To highlight the differences in modeling techniques in this tutorial we’re going to include all variables in our analysis. All school IDs in the data are real, so we can use that information to link the data with other sources. Specifically, we’re also going to pull in some data on student enrollment in free and reduced lunch from the National Center for Education Statistics and some ethnicity data from the Oregon Department of Education. After loading in our three datasets, we’ll join them together to make one cohesive data set to use for modelling. For the purpose of demonstration, we’ll be sampling 1% of the data to keep computer processing time manageable.</p>
 <pre class="r"><code>set.seed(100)
 
-# import data (NOTE: the data called &#39;train.csv&#39;, but we will actually further split this into its own training and testing data)
+# import data and perform initial cleaning
+# initial cleaning steps include: 
+# *recode NA&#39;s for lang_cd and ayp_lep to more meaningful values
+# *convert tst_dt to date
+# *remove vars with entirely missing data
+# Note: the data is called &#39;train.csv&#39;, but we will actually further split this into its own training and testing data
 dat &lt;- read_csv(here::here(&quot;static&quot;, &quot;data&quot;, &quot;train.csv&quot;)) %&gt;% 
   select(-classification) %&gt;% # remove this variable because it&#39;s redundant with `score`
-  sample_frac(.01)
+  mutate(lang_cd = ifelse(is.na(lang_cd), &quot;E&quot;, lang_cd), 
+         ayp_lep = ifelse(is.na(ayp_lep), &quot;G&quot;, ayp_lep),
+         tst_dt = lubridate::as_date(lubridate::mdy_hms(tst_dt))) %&gt;% 
+  sample_frac(.01) %&gt;% # sample 1% of the data to reduce run time
+  janitor::remove_empty(c(&quot;rows&quot;, &quot;cols&quot;)) %&gt;% 
+  drop_na() %&gt;% 
+  select_if(~length(unique(.x)) &gt; 1)
 
 # import fall membership report ethcnicity data and do some basic cleaning and renaming
 sheets &lt;- readxl::excel_sheets(here::here(&quot;static&quot;, &quot;data&quot;, &quot;fallmembershipreport_20192020.xlsx&quot;))
@@ -90,7 +101,7 @@ dat &lt;- left_join(dat, frl)</code></pre>
 <p>We’ll use the <code>skim()</code> function from the <code>{skimr}</code> package to take a closer look at our numeric variables. The histograms show that many of the predictors are highly skewed, but the tree-based models we’ll use below are robust to non-normal data.</p>
 <pre class="r"><code>dat %&gt;% 
   select(-contains(&quot;id&quot;), -ncessch, -missing, -not_applicable) %&gt;%  # remove ID and irrelevant variables
-  select_if(is.numeric) %&gt;% 
+  modify_if(is.character, as.factor) %&gt;%  # convert character vars to factors
   skim() %&gt;% 
   select(-starts_with(&quot;numeric.p&quot;)) # remove quartiles</code></pre>
 <table>
@@ -102,11 +113,11 @@ dat &lt;- left_join(dat, frl)</code></pre>
 </tr>
 <tr class="even">
 <td align="left">Number of rows</td>
-<td align="left">1894</td>
+<td align="left">1857</td>
 </tr>
 <tr class="odd">
 <td align="left">Number of columns</td>
-<td align="left">15</td>
+<td align="left">41</td>
 </tr>
 <tr class="even">
 <td align="left">_______________________</td>
@@ -115,6 +126,14 @@ dat &lt;- left_join(dat, frl)</code></pre>
 <tr class="odd">
 <td align="left">Column type frequency:</td>
 <td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">Date</td>
+<td align="left">1</td>
+</tr>
+<tr class="odd">
+<td align="left">factor</td>
+<td align="left">25</td>
 </tr>
 <tr class="even">
 <td align="left">numeric</td>
@@ -127,6 +146,246 @@ dat &lt;- left_join(dat, frl)</code></pre>
 <tr class="even">
 <td align="left">Group variables</td>
 <td align="left">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: Date</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="left">min</th>
+<th align="left">max</th>
+<th align="left">median</th>
+<th align="right">n_unique</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">tst_dt</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="left">2018-03-16</td>
+<td align="left">2018-06-07</td>
+<td align="left">2018-05-18</td>
+<td align="right">47</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: factor</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="left">ordered</th>
+<th align="right">n_unique</th>
+<th align="left">top_counts</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">gndr</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="left">FALSE</td>
+<td align="right">2</td>
+<td align="left">M: 939, F: 918</td>
+</tr>
+<tr class="even">
+<td align="left">ethnic_cd</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="left">FALSE</td>
+<td align="right">7</td>
+<td align="left">W: 1151, H: 458, M: 100, A: 79</td>
+</tr>
+<tr class="odd">
+<td align="left">tst_bnch</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="left">FALSE</td>
+<td align="right">6</td>
+<td align="left">G6: 343, 1B: 330, G4: 304, G7: 304</td>
+</tr>
+<tr class="even">
+<td align="left">migrant_ed_fg</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="left">FALSE</td>
+<td align="right">2</td>
+<td align="left">N: 1793, Y: 64</td>
+</tr>
+<tr class="odd">
+<td align="left">ind_ed_fg</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="left">FALSE</td>
+<td align="right">2</td>
+<td align="left">N: 1842, Y: 15</td>
+</tr>
+<tr class="even">
+<td align="left">sp_ed_fg</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="left">FALSE</td>
+<td align="right">2</td>
+<td align="left">N: 1614, Y: 243</td>
+</tr>
+<tr class="odd">
+<td align="left">tag_ed_fg</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="left">FALSE</td>
+<td align="right">2</td>
+<td align="left">N: 1759, Y: 98</td>
+</tr>
+<tr class="even">
+<td align="left">econ_dsvntg</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="left">FALSE</td>
+<td align="right">2</td>
+<td align="left">Y: 1100, N: 757</td>
+</tr>
+<tr class="odd">
+<td align="left">ayp_lep</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="left">FALSE</td>
+<td align="right">10</td>
+<td align="left">G: 1471, F: 164, Y: 72, E: 58</td>
+</tr>
+<tr class="even">
+<td align="left">stay_in_dist</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="left">FALSE</td>
+<td align="right">2</td>
+<td align="left">Y: 1811, N: 46</td>
+</tr>
+<tr class="odd">
+<td align="left">stay_in_schl</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="left">FALSE</td>
+<td align="right">2</td>
+<td align="left">Y: 1803, N: 54</td>
+</tr>
+<tr class="even">
+<td align="left">dist_sped</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="left">FALSE</td>
+<td align="right">2</td>
+<td align="left">N: 1846, Y: 11</td>
+</tr>
+<tr class="odd">
+<td align="left">trgt_assist_fg</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="left">FALSE</td>
+<td align="right">3</td>
+<td align="left">N: 1773, Y: 83, y: 1</td>
+</tr>
+<tr class="even">
+<td align="left">ayp_schl_partic</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="left">FALSE</td>
+<td align="right">2</td>
+<td align="left">Y: 1846, N: 11</td>
+</tr>
+<tr class="odd">
+<td align="left">ayp_dist_prfrm</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="left">FALSE</td>
+<td align="right">2</td>
+<td align="left">Y: 1803, N: 54</td>
+</tr>
+<tr class="even">
+<td align="left">ayp_schl_prfrm</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="left">FALSE</td>
+<td align="right">2</td>
+<td align="left">Y: 1785, N: 72</td>
+</tr>
+<tr class="odd">
+<td align="left">rc_schl_partic</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="left">FALSE</td>
+<td align="right">2</td>
+<td align="left">Y: 1846, N: 11</td>
+</tr>
+<tr class="even">
+<td align="left">rc_dist_prfrm</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="left">FALSE</td>
+<td align="right">2</td>
+<td align="left">Y: 1803, N: 54</td>
+</tr>
+<tr class="odd">
+<td align="left">rc_schl_prfrm</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="left">FALSE</td>
+<td align="right">2</td>
+<td align="left">Y: 1785, N: 72</td>
+</tr>
+<tr class="even">
+<td align="left">lang_cd</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="left">FALSE</td>
+<td align="right">2</td>
+<td align="left">E: 1815, S: 42</td>
+</tr>
+<tr class="odd">
+<td align="left">tst_atmpt_fg</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="left">FALSE</td>
+<td align="right">2</td>
+<td align="left">Y: 1853, P: 4</td>
+</tr>
+<tr class="even">
+<td align="left">grp_rpt_schl_partic</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="left">FALSE</td>
+<td align="right">2</td>
+<td align="left">Y: 1846, N: 11</td>
+</tr>
+<tr class="odd">
+<td align="left">grp_rpt_dist_prfrm</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="left">FALSE</td>
+<td align="right">2</td>
+<td align="left">Y: 1845, N: 12</td>
+</tr>
+<tr class="even">
+<td align="left">grp_rpt_schl_prfrm</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="left">FALSE</td>
+<td align="right">2</td>
+<td align="left">Y: 1834, N: 23</td>
+</tr>
+<tr class="odd">
+<td align="left">sch_name</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="left">FALSE</td>
+<td align="right">699</td>
+<td align="left">Hig: 14, Jud: 14, Hou: 13, Fiv: 11</td>
 </tr>
 </tbody>
 </table>
@@ -146,31 +405,31 @@ dat &lt;- left_join(dat, frl)</code></pre>
 <tr class="odd">
 <td align="left">enrl_grd</td>
 <td align="right">0</td>
-<td align="right">1.00</td>
-<td align="right">5.43</td>
+<td align="right">1</td>
+<td align="right">5.44</td>
 <td align="right">1.69</td>
 <td align="left">▇▃▅▃▃</td>
 </tr>
 <tr class="even">
 <td align="left">score</td>
 <td align="right">0</td>
-<td align="right">1.00</td>
-<td align="right">2496.13</td>
-<td align="right">115.51</td>
+<td align="right">1</td>
+<td align="right">2495.34</td>
+<td align="right">115.19</td>
 <td align="left">▁▁▂▇▁</td>
 </tr>
 <tr class="odd">
 <td align="left">lat</td>
-<td align="right">32</td>
-<td align="right">0.98</td>
+<td align="right">0</td>
+<td align="right">1</td>
 <td align="right">44.79</td>
 <td align="right">0.99</td>
 <td align="left">▂▁▂▅▇</td>
 </tr>
 <tr class="even">
 <td align="left">lon</td>
-<td align="right">32</td>
-<td align="right">0.98</td>
+<td align="right">0</td>
+<td align="right">1</td>
 <td align="right">-122.51</td>
 <td align="right">1.16</td>
 <td align="left">▅▇▁▁▁</td>
@@ -178,7 +437,7 @@ dat &lt;- left_join(dat, frl)</code></pre>
 <tr class="odd">
 <td align="left">p_american_indian_alaska_native</td>
 <td align="right">1</td>
-<td align="right">1.00</td>
+<td align="right">1</td>
 <td align="right">0.01</td>
 <td align="right">0.06</td>
 <td align="left">▇▁▁▁▁</td>
@@ -186,7 +445,7 @@ dat &lt;- left_join(dat, frl)</code></pre>
 <tr class="even">
 <td align="left">p_asian</td>
 <td align="right">1</td>
-<td align="right">1.00</td>
+<td align="right">1</td>
 <td align="right">0.04</td>
 <td align="right">0.07</td>
 <td align="left">▇▁▁▁▁</td>
@@ -194,7 +453,7 @@ dat &lt;- left_join(dat, frl)</code></pre>
 <tr class="odd">
 <td align="left">p_native_hawaiian_pacific_islander</td>
 <td align="right">1</td>
-<td align="right">1.00</td>
+<td align="right">1</td>
 <td align="right">0.01</td>
 <td align="right">0.01</td>
 <td align="left">▇▁▁▁▁</td>
@@ -202,7 +461,7 @@ dat &lt;- left_join(dat, frl)</code></pre>
 <tr class="even">
 <td align="left">p_black_african_american</td>
 <td align="right">1</td>
-<td align="right">1.00</td>
+<td align="right">1</td>
 <td align="right">0.02</td>
 <td align="right">0.04</td>
 <td align="left">▇▁▁▁▁</td>
@@ -210,7 +469,7 @@ dat &lt;- left_join(dat, frl)</code></pre>
 <tr class="odd">
 <td align="left">p_hispanic_latino</td>
 <td align="right">1</td>
-<td align="right">1.00</td>
+<td align="right">1</td>
 <td align="right">0.25</td>
 <td align="right">0.18</td>
 <td align="left">▇▅▂▁▁</td>
@@ -218,7 +477,7 @@ dat &lt;- left_join(dat, frl)</code></pre>
 <tr class="even">
 <td align="left">p_white</td>
 <td align="right">1</td>
-<td align="right">1.00</td>
+<td align="right">1</td>
 <td align="right">0.60</td>
 <td align="right">0.20</td>
 <td align="left">▁▃▅▇▅</td>
@@ -226,41 +485,41 @@ dat &lt;- left_join(dat, frl)</code></pre>
 <tr class="odd">
 <td align="left">p_multiracial</td>
 <td align="right">1</td>
-<td align="right">1.00</td>
-<td align="right">0.07</td>
+<td align="right">1</td>
+<td align="right">0.06</td>
 <td align="right">0.03</td>
 <td align="left">▇▆▁▁▁</td>
 </tr>
 <tr class="even">
 <td align="left">free_lunch_qualified</td>
-<td align="right">30</td>
-<td align="right">0.98</td>
-<td align="right">231.07</td>
-<td align="right">147.41</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">231.23</td>
+<td align="right">147.55</td>
 <td align="left">▇▇▃▁▁</td>
 </tr>
 <tr class="odd">
 <td align="left">reduced_price_lunch_qualified</td>
-<td align="right">30</td>
-<td align="right">0.98</td>
-<td align="right">39.81</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">39.86</td>
 <td align="right">24.77</td>
 <td align="left">▆▇▃▁▁</td>
 </tr>
 <tr class="even">
 <td align="left">no_category_codes</td>
-<td align="right">30</td>
-<td align="right">0.98</td>
-<td align="right">270.88</td>
-<td align="right">165.30</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">271.09</td>
+<td align="right">165.44</td>
 <td align="left">▆▇▃▁▁</td>
 </tr>
 <tr class="odd">
 <td align="left">n</td>
-<td align="right">30</td>
-<td align="right">0.98</td>
-<td align="right">815.34</td>
-<td align="right">536.12</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">816.07</td>
+<td align="right">536.55</td>
 <td align="left">▇▃▂▁▁</td>
 </tr>
 </tbody>
