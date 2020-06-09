@@ -1,11 +1,11 @@
 ---
 title: 'Tidymodels: Decision Tree Learning in R'
-author: Cianna Bedford-Petersen, Chris Loan & Brendan Cullen
+author: Cianna Bedford-Petersen, Christopher Loan & Brendan Cullen
 date: '2020-06-02'
 slug: []
 categories: []
 tags: []
-subtitle: ''
+subtitle: 'Cianna Bedford-Petersen, Christopher Loan & Brendan Cullen'
 summary: ''
 authors: []
 lastmod: '2020-06-02T10:57:23-07:00'
@@ -19,7 +19,7 @@ projects: []
 
 # Intro
 
-Tidyverse’s newest release has recently come together to form a cohesive suite of packages for modeling and machine learning, called `{tidymodels}`. The successor to Max Kuhn’s `{caret}` package, `{tidymodels}` allows for a tidy approach to your data from start to finish. We’re going to walk through the basics for getting off the ground with `{tidymodels}` and demonstrate its application to three different decision tree methods for predicting student test scores. For further information you can visit https://www.tidymodels.org/.
+Tidyverse’s newest release has recently come together to form a cohesive suite of packages for modeling and machine learning, called `{tidymodels}`. The successor to Max Kuhn’s `{caret}` package, `{tidymodels}` allows for a tidy approach to your data from start to finish. We’re going to walk through the basics for getting off the ground with `{tidymodels}` and demonstrate its application to three different tree-based methods for predicting student test scores. For further information about the package, you can visit https://www.tidymodels.org/.
 
 # Setup
 
@@ -31,17 +31,17 @@ options(scipen = 17)
 Load both the `{tidyverse}` and `{tidymodels}` packages into your environment. We’ll also load in the `{skimr}` package to help us with some descriptives for our data and a host of other packages that will be required to run our machine learning models.
 
 ```{r message=FALSE}
-library(tidyverse)
-library(tidymodels)
-library(skimr)
-library(xgboost)
-library(baguette)
-library(future)
+library(tidymodels) 
+library(tidyverse) # manipulating data
+library(skimr) # data visualization
+library(baguette) # bagged trees
+library(future) # parallel processing & decrease computation time
+library(xgboost) # boosted trees
 ```
 
 # Import the data
 
-We’re going to be using simulated student test data based on 3rd-8th grade math and reading scores from ~189,000 students in the state of Oregon. These data have a variety of student-level variables (e.g. gender, ethnicity, enrollment in special education/talented and gifted programs, etc.) and district-level variables (e.g. school longitude and latitude, proportion of students who qualify for free and reduced-price lunch, etc.) to choose from when thinking about what might predict test scores. To highlight the differences in modeling techniques in this tutorial we’re going to include all variables in our analysis. All school IDs in the data are real, so we can use that information to link the data with other sources. Specifically, we’re also going to pull in some data on student enrollment in free and reduced lunch from the National Center for Education Statistics and some ethnicity data from the Oregon Department of Education. After loading in our three datasets, we’ll join them together to make one cohesive data set to use for modelling. For the purpose of demonstration, we’ll be sampling 1% of the data to keep computer processing time manageable. 
+We use simulated data which approximates reading and math scores for ~189,000 3rd-8th grade students in Oregon public schools see [this Kaggle page](https://www.kaggle.com/c/edld-654-spring-2020) for details. For the purpose of demonstration, we’ll be sampling 1% of the data with `sample_frac()` to keep computer processing time manageable. All school IDs in the data are real, so we can use that information to link the data with other sources. Specifically, we’re also going to pull in some data on student enrollment in free and reduced lunch from the National Center for Education Statistics and some ethnicity data from the Oregon Department of Education. 
 
 ```{r cache=TRUE, message=FALSE, warning=FALSE}
 set.seed(100)
@@ -55,8 +55,7 @@ set.seed(100)
 dat <- read_csv(here::here("static", "data", "train.csv")) %>% 
   select(-classification) %>% # remove this variable because it's redundant with `score`
   mutate(lang_cd = ifelse(is.na(lang_cd), "E", lang_cd), 
-         ayp_lep = ifelse(is.na(ayp_lep), "G", ayp_lep),
-         tst_dt = lubridate::as_date(lubridate::mdy_hms(tst_dt))) %>% 
+         ayp_lep = ifelse(is.na(ayp_lep), "G", ayp_lep)) %>% 
   sample_frac(.01) %>% # sample 1% of the data to reduce run time
   janitor::remove_empty(c("rows", "cols")) %>% 
   drop_na() %>% 
@@ -105,13 +104,16 @@ frl <- left_join(frl, stu_counts)
 dat <- left_join(dat, frl)
 ```
 
+After loading in our three datasets, we’ll join them together to make one cohesive data set to use for modelling.  After joining, the data contains both student-level variables (e.g. gender, ethnicity, enrollment in special education/talented and gifted programs, etc.) and district-level variables (e.g. school longitude and latitude, proportion of students who qualify for free and reduced-price lunch, etc.), all of which will be included for each 3 of our `{tidymodels}` tree-based examples.
+
 # Explore the data
 
-We’ll use the `skim()` function from the `{skimr}` package to take a closer look at our numeric variables. The histograms show that many of the predictors are highly skewed, but the tree-based models we'll use below are robust to non-normal data. 
+We’ll use the `skim()` function from `{skimr}` to take a closer look at our variables. Many numeric predictors are clearly non-normal (see histograms below), but this is no problem as tree-based methods are robust to non-normality.
 
 ```{r}
 dat %>% 
   select(-contains("id"), -ncessch, -missing, -not_applicable) %>%  # remove ID and irrelevant variables
+  mutate(tst_dt = lubridate::as_date(lubridate::mdy_hms(tst_dt))) %>% # covert test date to date
   modify_if(is.character, as.factor) %>%  # convert character vars to factors
   skim() %>% 
   select(-starts_with("numeric.p")) # remove quartiles
@@ -131,9 +133,9 @@ dat %>%
 
 # Split data and resample
 
-The first step of our analysis is to split our data into two separate sets, one for training and one for testing. The training set allows us the flexibility to fit a model and adjust or tune the parameters before evaluating the model’s final performance on our test data. We can do this efficiently with the `initial_split()` function. This comes from the `{rsample}` package, which is part of the `{tidymodels}` package that we loaded earlier. By default this will split the data into 75% for the training set and 25% for the test set, but you can change this by setting the `prop` argument. Then, we’ll extract the training data from our split object and assign it a name. 
+The first step of our analysis is to split our data into two separate sets: a "training" set and a "testing" set. The training set is used to train a model and, if desired, to adjust (i.e., "tune") the model's hyperparameters before evaluating its final performance on our test data. By allowing us to test a model on a new sample, we assess "out of sample" accuracy (i.e., unseen data-—what all predictive models are interested in) and limit overfitting to the training set. We can do this efficiently with the `initial_split()` function. This comes from the `{rsample}` package, which is part of the `{tidymodels}` package that we already loaded. Defaults put 75% of the data in the training set and 25% in the test set, but this can be adjusted with the `prop` argument. Then, we’ll extract the training data from our split object and assign it a name. 
 
-Finally, we’ll resample our data using the `vfold_cv()` function. Though a slightly confusing name, this function will give us a k-fold cross-validated version of our training data. This will allow us to better estimate the ability of a machine learning model to predict unseen data, this is particularly important if we plan to tune any parameters but also a good choice to prevent overfitting of our model. Though there are many different forms of cross-validation we could apply here, we’ll stick with k-fold (10-fold, to be specific) as it’s a popular method known for reducing bias in our estimates.
+To further prevent over-fitting, we’ll resample our data using `vfold_cv()`. This function outputs k-*fold* *c*ross-*v*alidated versions of our training data, where k = the number of times we resample (unsure why v- is used instead of k- here). By using k = 10 data sets, we get a better estimate of the model's out-of-sample accuracy. On top of decreasing bias from over-fitting, this is essential when tuning hyperparameters (though we plan to apply defaults and not tune here, for brevity). Though our use of 10-fold cross validation is both frequently used and effective, it should be noted that other methods (e.g., bootstrap resampling) or other k-values are sometimes used to accomplish the same goal.
 
 ```{r}
 # split the data
@@ -148,7 +150,7 @@ cv <- vfold_cv(train)
 
 # Pre-processing
 
-Before we add in our data to the model, we’re going to set up an object that pre-processes our data. This is called a *recipe*. To create a recipe, you’ll first specify a formula for your model, indicating which variable is your outcome and which are your predictors. Using `.` here will indicate that we want to use all variables other than `score` as predictors. Then, we can specify a series of pre-processing steps for our data that directs our recipe to assign our variables a role or performs feature engineering steps. 
+Before we add in our data to the model, we’re going to set up an object that pre-processes our data. This is called a *recipe*. To create a recipe, you’ll first specify a formula for your model, indicating which variable is your outcome and which are your predictors. Using `~.` here will indicate that we want to use all variables other than `score` as predictors. Then, we can specify a series of pre-processing steps for our data that directs our recipe to assign our variables a role or performs feature engineering steps. Pre-processing may be sound uncommon, but if you've ever used `lm()` (or several other `R` functions) you've done some of this by simply calling the function (e.g., automatic dummy-coding to handle categorical data). This is beneficial because it gives the analyst more control, despite adding complexity to the process.
 
 A complete list of possible pre-processing steps can be found here: https://recipes.tidymodels.org/articles/Custom_Steps.html
 
@@ -193,7 +195,7 @@ Up to this point we’ve been setting up a lot of individual elements and now it
 
 ## Bagged trees
 
-A bagged tree approach creates multiple subsets of data from the training set which are randomly chosen with replacement. Each subset of data is used to train a given decision tree. In the end, we have an ensemble of different models. The predictions from all the different trees are averaged together, giving us a stronger prediction than one tree alone could. 
+A bagged tree approach creates multiple subsets of data from the training set which are randomly chosen with replacement. Each subset of data is used to train a given decision tree. In the end, we have an ensemble of different models. The predictions from all the different trees are averaged together, giving us a stronger prediction than one tree could independently. 
 
 ### Specify model
 
@@ -229,7 +231,7 @@ fit_bag <- fit_resamples(
 
 ### Visualize
 
-The plot below shows the root nodes from a bagged tree with 100 trees (10 folds x 10 bootstrapped resamples).
+The plot below shows the root nodes from a bagged tree made of 100 trees (10 folds x 10 bootstrapped resamples). Root nodes are the 1st node in a decision tree, and they are determined by which variable best optimizes a loss function (e.g., minimizes mean square error [MSE] for continuous outcomes or Gini Index for categorical outcomes). Put roughly, the most common root nodes can be thought of as the most "important" predictors.
 
 ```{r echo=FALSE}
 # extract roots
@@ -254,10 +256,9 @@ bag_roots(fit_bag) %>%
   labs(x = "root", y = "count")
 ```
 
-
 ## Random forest
 
-Random forest is similar to bagged tree methodology but goes one step further. In addition to taking random subsets of data, the model also draws a random selection of features. Instead of utilizing all features, the random subset of features allows more predictors to be eligible root nodes. This is particularly useful for handling high dimensionality data.
+Random forest is similar to bagged tree methodology but goes one step further. In addition to taking random subsets of data, the model also draws a random selection of features. Instead of utilizing all features, the random subset of features allows more predictors to be eligible root nodes. This is particularly useful for handling high dimensionality data (e.g., have more variables than participants/cases).
 
 ### Specify the model
 
@@ -336,7 +337,7 @@ rf_roots(fit_rf) %>%
 
 ## Boosted trees
 
-Boosted trees are a type of additive model that makes predictions by combining decisions from a sequence of base models. These models are learned in succession with the first learners fitting simple models and then analyzing data for errors, with the goal of solving for the net error from the prior tree. 
+Boosted trees, like bagged trees, are an ensemble model. Instead of applying successive models to resampled data and pooling estimates, boosted trees fit the next tree to the residuals (i.e., error term) of the prior tree. The goal is to minimize residual error through multiple trees, and is typically done with fairly "shallow" decision tree (i.e., 1-6 splits in each tree). Though each model is only slightly improving the error rate, the sequential use of many shallow trees makes computationally efficient (i.e. reduced run time) and highly accurate predictions.
 
 ### Specify the model
 
@@ -371,9 +372,9 @@ fit_boost <- fit_resamples(
 
 ### Visualize
 
-* Probs don't include graph here, just explain learning rate/what makes boosted trees unique 
+One of the few downfalls of `{tidymodels}` is its (current) inability to plot these tree-based models. For the past two models, it was simplier to extract root nodes and plot them, but their interpretation (as we're fitting to residuals instead of data sets) are not straightforward. For that reason, we don't have any pretty plots here. Instead, we'll skip to evaluating the metrics of all models. 
 
-# Model evaluation
+# Evaluate metrics
 
 After running these three models, it’s time to evaluate their performance. We can do this with `tune::collect_metrics()`. The table below shows the estimate of the out-of-sample performance for each of our 3 models.
 
@@ -387,7 +388,9 @@ collect_metrics(fit_bag) %>%
   knitr::kable()
 ```
 
-# Apply model to test data
+Here, we are faced with a common problem in the machine learning world: choosing between models that perform similarly (e.g. overlapping standard errors). Whether we would prefer random forests or bagged trees may depend on computational efficiency (i.e., time) or other factors. In practice, tuning several hyperparameters may have made one model clearly preferrable over the others, but in our case - relying on all defaults - we would probably have similar performance with both models on a new data set and would prefer random forest or boosted tree models for their efficiency.
+
+# Out-of-sample performance
 
 The final step is to apply each trained model to our test data using `last_fit()`.
 
@@ -424,6 +427,4 @@ collect_metrics(final_fit_bag) %>%
   knitr::kable()
 ```
 
-# Conclusions
-
-
+After applying our 3 trained models to the unseen test data, it looks like random forest is the winner. In this example, we only used 1% of the data to train these models, which could make it difficult to meaningfully compare their performance. However, random forest alse results in the best out-of-sample prediction (RMSE = 83.47) when using all of the available data, which we did for the [Kaggle competition](https://www.kaggle.com/c/edld-654-spring-2020/leaderboard). 
