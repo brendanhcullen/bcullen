@@ -41,9 +41,9 @@ library(xgboost) # boosted trees</code></pre>
 # import data and perform initial cleaning
 # initial cleaning steps include: 
 # *recode NA&#39;s for lang_cd and ayp_lep to more meaningful values
-# *convert tst_dt to date
 # *remove vars with entirely missing data
 # Note: the data is called &#39;train.csv&#39;, but we will actually further split this into its own training and testing data
+
 dat &lt;- read_csv(here::here(&quot;static&quot;, &quot;data&quot;, &quot;train.csv&quot;)) %&gt;% 
   select(-classification) %&gt;% # remove this variable because it&#39;s redundant with `score`
   mutate(lang_cd = ifelse(is.na(lang_cd), &quot;E&quot;, lang_cd), 
@@ -538,7 +538,7 @@ dat &lt;- left_join(dat, frl)</code></pre>
 <div id="split-data-and-resample" class="section level1">
 <h1>Split data and resample</h1>
 <p>The first step of our analysis is to split our data into two separate sets: a “training” set and a “testing” set. The training set is used to train a model and, if desired, to adjust (i.e., “tune”) the model’s hyperparameters before evaluating its final performance on our test data. By allowing us to test a model on a new sample, we assess “out of sample” accuracy (i.e., unseen data-—what all predictive models are interested in) and limit overfitting to the training set. We can do this efficiently with the <code>initial_split()</code> function. This comes from the <code>{rsample}</code> package, which is part of the <code>{tidymodels}</code> package that we already loaded. Defaults put 75% of the data in the training set and 25% in the test set, but this can be adjusted with the <code>prop</code> argument. Then, we’ll extract the training data from our split object and assign it a name.</p>
-<p>To further prevent over-fitting, we’ll resample our data using <code>vfold_cv()</code>. This function outputs k-<em>fold</em> <em>c</em>ross-<em>v</em>alidated versions of our training data, where k = the number of times we resample (unsure why v- is used instead of k- here). By using k = 10 data sets, we get a better estimate of the model’s out-of-sample accuracy. On top of decreasing bias from over-fitting, this is essential when tuning hyperparameters (though we plan to apply defaults and not tune here, for brevity). Though our use of 10-fold cross validation is both frequently used and effective, it should be noted that other methods (e.g., bootstrap resampling) or other k-values are sometimes used to accomplish the same goal.</p>
+<p>To further prevent over-fitting, we’ll resample our data using <code>vfold_cv()</code>. This function outputs k-<em>fold</em> cross-validated versions of our training data, where k = the number of times we resample (unsure why v- is used instead of k- here). By using k = 10 data sets, we get a better estimate of the model’s out-of-sample accuracy. On top of decreasing bias from over-fitting, this is essential when tuning hyperparameters (though we plan to apply defaults and not tune here, for brevity). Though our use of 10-fold cross validation is both frequently used and effective, it should be noted that other methods (e.g., bootstrap resampling) or other k-values are sometimes used to accomplish the same goal.</p>
 <pre class="r"><code># split the data
 split &lt;- initial_split(dat)
 
@@ -692,7 +692,7 @@ fit_boost &lt;- fit_resamples(
 </div>
 <div id="visualize-2" class="section level3">
 <h3>Visualize</h3>
-<p>One of the few downfalls of <code>{tidymodels}</code> is its (current) inability to plot these tree-based models. For the past two models, it was simplier to extract root nodes and plot them, but their interpretation (as we’re fitting to residuals instead of data sets) are not straightforward. For that reason, we don’t have any pretty plots here. Instead, we’ll skip to evaluating the metrics of all models.</p>
+<p>One of the few downfalls of <code>{tidymodels}</code> is its (current) inability to plot these tree-based models. For the past two models, it was simpler to extract root nodes and plot them, but their interpretation (as we’re fitting to residuals instead of data sets) are not straightforward. For that reason, we don’t have any pretty plots here. Instead, we’ll skip to evaluating the metrics of all models.</p>
 </div>
 </div>
 </div>
@@ -744,7 +744,7 @@ fit_boost &lt;- fit_resamples(
 </tr>
 </tbody>
 </table>
-<p>Here, we are faced with a common problem in the machine learning world: choosing between models that perform similarly (e.g. overlapping standard errors). Whether we would prefer random forests or bagged trees may depend on computational efficiency (i.e., time) or other factors. In practice, tuning several hyperparameters may have made one model clearly preferrable over the others, but in our case - relying on all defaults - we would probably have similar performance with both models on a new data set and would prefer random forest or boosted tree models for their efficiency.</p>
+<p>Here, we are faced with a common problem in the machine learning world: choosing between models that perform similarly (see overlapping standard errors). Whether we would prefer random forests or bagged trees may depend on computational efficiency (i.e., time) or other factors. In practice, tuning several hyperparameters may have made one model clearly preferable over the others, but in our case - relying on all defaults - we would probably have similar performance with both models on a new data set and would prefer random forest or boosted tree models for their efficiency.</p>
 </div>
 <div id="out-of-sample-performance" class="section level1">
 <h1>Out-of-sample performance</h1>
@@ -789,21 +789,21 @@ collect_metrics(final_fit_bag) %&gt;%
 <td align="left">bag</td>
 <td align="left">rmse</td>
 <td align="left">standard</td>
-<td align="right">99.99022</td>
+<td align="right">93.36504</td>
 </tr>
 <tr class="even">
 <td align="left">rf</td>
 <td align="left">rmse</td>
 <td align="left">standard</td>
-<td align="right">93.86375</td>
+<td align="right">91.18114</td>
 </tr>
 <tr class="odd">
 <td align="left">boost</td>
 <td align="left">rmse</td>
 <td align="left">standard</td>
-<td align="right">94.24961</td>
+<td align="right">94.22609</td>
 </tr>
 </tbody>
 </table>
-<p>After applying our 3 trained models to the unseen test data, it looks like random forest is the winner. In this example, we only used 1% of the data to train these models, which could make it difficult to meaningfully compare their performance. However, random forest alse results in the best out-of-sample prediction (RMSE = 83.47) when using all of the available data, which we did for the <a href="https://www.kaggle.com/c/edld-654-spring-2020/leaderboard">Kaggle competition</a>.</p>
+<p>After applying our 3 trained models to the unseen test data, it looks like random forest is the winner since it has the lowest RMSE. In this example, we only used 1% of the data to train these models, which could make it difficult to meaningfully compare their performance. However, the random forest model also results in the best out-of-sample prediction (RMSE = 83.47) when using all of the available data, which we did for the <a href="https://www.kaggle.com/c/edld-654-spring-2020/leaderboard">Kaggle competition</a>.</p>
 </div>

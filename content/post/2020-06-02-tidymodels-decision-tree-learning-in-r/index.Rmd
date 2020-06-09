@@ -49,9 +49,9 @@ set.seed(100)
 # import data and perform initial cleaning
 # initial cleaning steps include: 
 # *recode NA's for lang_cd and ayp_lep to more meaningful values
-# *convert tst_dt to date
 # *remove vars with entirely missing data
 # Note: the data is called 'train.csv', but we will actually further split this into its own training and testing data
+
 dat <- read_csv(here::here("static", "data", "train.csv")) %>% 
   select(-classification) %>% # remove this variable because it's redundant with `score`
   mutate(lang_cd = ifelse(is.na(lang_cd), "E", lang_cd), 
@@ -137,7 +137,7 @@ dat %>%
 
 The first step of our analysis is to split our data into two separate sets: a "training" set and a "testing" set. The training set is used to train a model and, if desired, to adjust (i.e., "tune") the model's hyperparameters before evaluating its final performance on our test data. By allowing us to test a model on a new sample, we assess "out of sample" accuracy (i.e., unseen data-—what all predictive models are interested in) and limit overfitting to the training set. We can do this efficiently with the `initial_split()` function. This comes from the `{rsample}` package, which is part of the `{tidymodels}` package that we already loaded. Defaults put 75% of the data in the training set and 25% in the test set, but this can be adjusted with the `prop` argument. Then, we’ll extract the training data from our split object and assign it a name. 
 
-To further prevent over-fitting, we’ll resample our data using `vfold_cv()`. This function outputs k-*fold* *c*ross-*v*alidated versions of our training data, where k = the number of times we resample (unsure why v- is used instead of k- here). By using k = 10 data sets, we get a better estimate of the model's out-of-sample accuracy. On top of decreasing bias from over-fitting, this is essential when tuning hyperparameters (though we plan to apply defaults and not tune here, for brevity). Though our use of 10-fold cross validation is both frequently used and effective, it should be noted that other methods (e.g., bootstrap resampling) or other k-values are sometimes used to accomplish the same goal.
+To further prevent over-fitting, we’ll resample our data using `vfold_cv()`. This function outputs k-*fold* cross-validated versions of our training data, where k = the number of times we resample (unsure why v- is used instead of k- here). By using k = 10 data sets, we get a better estimate of the model's out-of-sample accuracy. On top of decreasing bias from over-fitting, this is essential when tuning hyperparameters (though we plan to apply defaults and not tune here, for brevity). Though our use of 10-fold cross validation is both frequently used and effective, it should be noted that other methods (e.g., bootstrap resampling) or other k-values are sometimes used to accomplish the same goal.
 
 ```{r}
 # split the data
@@ -374,7 +374,7 @@ fit_boost <- fit_resamples(
 
 ### Visualize
 
-One of the few downfalls of `{tidymodels}` is its (current) inability to plot these tree-based models. For the past two models, it was simplier to extract root nodes and plot them, but their interpretation (as we're fitting to residuals instead of data sets) are not straightforward. For that reason, we don't have any pretty plots here. Instead, we'll skip to evaluating the metrics of all models. 
+One of the few downfalls of `{tidymodels}` is its (current) inability to plot these tree-based models. For the past two models, it was simpler to extract root nodes and plot them, but their interpretation (as we're fitting to residuals instead of data sets) are not straightforward. For that reason, we don't have any pretty plots here. Instead, we'll skip to evaluating the metrics of all models. 
 
 # Evaluate metrics
 
@@ -390,7 +390,7 @@ collect_metrics(fit_bag) %>%
   knitr::kable()
 ```
 
-Here, we are faced with a common problem in the machine learning world: choosing between models that perform similarly (e.g. overlapping standard errors). Whether we would prefer random forests or bagged trees may depend on computational efficiency (i.e., time) or other factors. In practice, tuning several hyperparameters may have made one model clearly preferrable over the others, but in our case - relying on all defaults - we would probably have similar performance with both models on a new data set and would prefer random forest or boosted tree models for their efficiency.
+Here, we are faced with a common problem in the machine learning world: choosing between models that perform similarly (see overlapping standard errors). Whether we would prefer random forests or bagged trees may depend on computational efficiency (i.e., time) or other factors. In practice, tuning several hyperparameters may have made one model clearly preferable over the others, but in our case - relying on all defaults - we would probably have similar performance with both models on a new data set and would prefer random forest or boosted tree models for their efficiency.
 
 # Out-of-sample performance
 
@@ -429,4 +429,4 @@ collect_metrics(final_fit_bag) %>%
   knitr::kable()
 ```
 
-After applying our 3 trained models to the unseen test data, it looks like random forest is the winner. In this example, we only used 1% of the data to train these models, which could make it difficult to meaningfully compare their performance. However, random forest alse results in the best out-of-sample prediction (RMSE = 83.47) when using all of the available data, which we did for the [Kaggle competition](https://www.kaggle.com/c/edld-654-spring-2020/leaderboard). 
+After applying our 3 trained models to the unseen test data, it looks like random forest is the winner since it has the lowest RMSE. In this example, we only used 1% of the data to train these models, which could make it difficult to meaningfully compare their performance. However, the random forest model also results in the best out-of-sample prediction (RMSE = 83.47) when using all of the available data, which we did for the [Kaggle competition](https://www.kaggle.com/c/edld-654-spring-2020/leaderboard). 
