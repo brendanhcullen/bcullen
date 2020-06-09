@@ -19,42 +19,44 @@ projects: []
 
 # Intro
 
-Tidyverse’s newest release has recently come together to form a cohesive suite of packages for modeling and machine learning. The successor to Max Kuhn’s caret package, tidymodel’s collection of tools allows for a tidy approach to your data from start to finish. We’re going to l, walk through the basics for getting off the ground with tidymodels and demonstrate its application to three different decision tree methods for predicting student test scores. For further information about tidymodels packages and capabilities you can visit https://www.tidymodels.org/.
+Tidyverse’s newest release has recently come together to form a cohesive suite of packages for modeling and machine learning, called `{tidymodels}`. The successor to Max Kuhn’s `{caret}` package, `{tidymodels}` allows for a tidy approach to your data from start to finish. We’re going to walk through the basics for getting off the ground with `{tidymodels}` and demonstrate its application to three different decision tree methods for predicting student test scores. For further information you can visit https://www.tidymodels.org/.
 
 # Setup
 
-Load both the tidyverse and tidymodel packages into your environment. We’ll also load in the psych package to help us with some descriptives for our data.
+```{r echo=FALSE}
+options(scipen = 17)
+```
+
+
+Load both the `{tidyverse}` and `{tidymodels}` packages into your environment. We’ll also load in the `{skimr}` package to help us with some descriptives for our data and a host of other packages that will be required to run our machine learning models.
 
 ```{r message=FALSE}
-library(here)
 library(tidyverse)
 library(tidymodels)
 library(skimr)
 library(xgboost)
 library(baguette)
 library(future)
-library(vip)
 ```
 
 # Import the data
 
-We’re going to be using simulated student test data based on 3rd-8th grade math and reading scores from 189,000 students in the state of Oregon. These data have a variety of student-level variables (e.g. gender, ethnicity, enrollment in special education/talented and gifted programs, etc.) and district-level variables (e.g. school longitude and latitude, proportion of students who qualify for free and reduced-price lunch) to choose from when thinking about what might predict test scores. To highlight the differences in modeling techniques in this tutorial we’re going to include all variables in our analysis. All school IDs in the data are real, so we can use that information to link the data with other sources. Specifically, we’re also going to pull in some free and reduced lunch data from the National Center for Education statistics and some ethnicity data from the Oregon Department of Education. After loading in our three datasets, we’ll join them together to make one cohesive data set and remove any intermediate data sets from our environment. For the purpose of demonstration, we’ll be sampling 1% of the data to keep computer processing time manageable. 
+We’re going to be using simulated student test data based on 3rd-8th grade math and reading scores from ~189,000 students in the state of Oregon. These data have a variety of student-level variables (e.g. gender, ethnicity, enrollment in special education/talented and gifted programs, etc.) and district-level variables (e.g. school longitude and latitude, proportion of students who qualify for free and reduced-price lunch, etc.) to choose from when thinking about what might predict test scores. To highlight the differences in modeling techniques in this tutorial we’re going to include all variables in our analysis. All school IDs in the data are real, so we can use that information to link the data with other sources. Specifically, we’re also going to pull in some data on student enrollment in free and reduced lunch from the National Center for Education Statistics and some ethnicity data from the Oregon Department of Education. After loading in our three datasets, we’ll join them together to make one cohesive data set to use for modelling. For the purpose of demonstration, we’ll be sampling 1% of the data to keep computer processing time manageable. 
 
 ```{r cache=TRUE, message=FALSE, warning=FALSE}
 set.seed(100)
 
-# import train data
-dat <- read_csv(here("static", "data", "train.csv")) %>% 
-  select(-classification) %>%
+# import data (NOTE: the data called 'train.csv', but we will actually further split this into its own training and testing data)
+dat <- read_csv(here::here("static", "data", "train.csv")) %>% 
+  select(-classification) %>% # remove this variable because it's redundant with `score`
   sample_frac(.01)
 
-# import fall membership report data
-sheets <- readxl::excel_sheets(here("static", "data", "fallmembershipreport_20192020.xlsx"))
+# import fall membership report ethcnicity data and do some basic cleaning and renaming
+sheets <- readxl::excel_sheets(here::here("static", "data", "fallmembershipreport_20192020.xlsx"))
 
-ode_schools <- readxl::read_xlsx(here("static", "data", "fallmembershipreport_20192020.xlsx"),
+ode_schools <- readxl::read_xlsx(here::here("static", "data", "fallmembershipreport_20192020.xlsx"),
                                  sheet = sheets[4])
 
-# select relevant vars
 ethnicities <- ode_schools %>%
   select(attnd_schl_inst_id = `Attending School ID`,
          attnd_dist_inst_id = `Attending District Institution ID`,
@@ -64,10 +66,10 @@ ethnicities <- ode_schools %>%
 
 names(ethnicities) <- gsub("x2019_20_percent", "p", names(ethnicities))
 
-# join ethnicity data with original train data
+# join ethnicity data with original dataset
 dat <- left_join(dat, ethnicities)
 
-# import free and reduced lunch data
+# import and tidy free and reduced lunch data 
 frl <- rio::import("https://nces.ed.gov/ccd/Data/zip/ccd_sch_033_1718_l_1a_083118.zip",
               setclass = "tbl_df")  %>% 
   janitor::clean_names()  %>% 
@@ -80,7 +82,7 @@ frl <- rio::import("https://nces.ed.gov/ccd/Data/zip/ccd_sch_033_1718_l_1a_08311
   mutate(ncessch = as.double(ncessch))
 
 # import student counts for each school across grades
-stu_counts <- rio::import("https://github.com/datalorax/ach-gap-variability/raw/master/data/achievement-gaps-geocoded.csv",setclass = "tbl_df")  %>% 
+stu_counts <- rio::import("https://github.com/datalorax/ach-gap-variability/raw/master/data/achievement-gaps-geocoded.csv", setclass = "tbl_df")  %>% 
   filter(state == "OR" & year == 1718)  %>% 
   count(ncessch, wt = n)  %>% 
   mutate(ncessch = as.double(ncessch))
@@ -94,14 +96,14 @@ dat <- left_join(dat, frl)
 
 # Explore the data
 
-We’ll use the `skim()` function from the `{skimr}` package to take a closer look at our (numeric) variables. The histograms show that many of the predictors are highly skewed, but the tree-based models we'll use below are robust to non-normal data. 
+We’ll use the `skim()` function from the `{skimr}` package to take a closer look at our numeric variables. The histograms show that many of the predictors are highly skewed, but the tree-based models we'll use below are robust to non-normal data. 
 
 ```{r}
 dat %>% 
-  select(score, -contains("id"), -ncessch) %>% 
+  select(-contains("id"), -ncessch, -missing, -not_applicable) %>%  # remove ID and irrelevant variables
   select_if(is.numeric) %>% 
-  skimr::skim() %>% 
-  select(-starts_with("numeric.p"))
+  skim() %>% 
+  select(-starts_with("numeric.p")) # remove quartiles
 ```
 
 While most of our predictors are categorical, we can use `{corrplot}` to better visualize the relationships among the numeric variables.
@@ -118,10 +120,9 @@ dat %>%
 
 # Split data and resample
 
-The first step of our analysis is to split our data into two separate sets, one for training and one for testing. The training set allows us the flexibility to fit a model and adjust or tune the parameters before evaluating the model’s final performance on our test. We can do this efficiently with the initial_split function. This comes from the rsample package, which is included in the tidymodels package that we loaded earlier. By default this will split your data into 75% for the training set and 25%, but you can change this by setting the prop argument (include a prop argument in our example for clarity). We can also specify the argument strata in order to use stratified sampling. Here, we set strata to our score variable to ensure that our resamples incorporate the full range of scores present in our data (is this what strata does?). Then, we’ll extract the training and the testing data sets from our split object and assign them a name. 
+The first step of our analysis is to split our data into two separate sets, one for training and one for testing. The training set allows us the flexibility to fit a model and adjust or tune the parameters before evaluating the model’s final performance on our test data. We can do this efficiently with the `initial_split()` function. This comes from the `{rsample}` package, which is part of the `{tidymodels}` package that we loaded earlier. By default this will split the data into 75% for the training set and 25% for the test set, but you can change this by setting the `prop` argument. Then, we’ll extract the training data from our split object and assign it a name. 
 
-Finally, we’ll resample our data using the v-fold command. Though a slightly confusing name, the v-fold command will give us a k-fold cross-validated version of our training data. This will allow us to better estimate the ability of a machine learning model to predict unseen data, this is particularly important if we plan to tune any parameters but also a good choice to prevent overfitting of our model. Though there are many different forms of cross-validation we could apply here, we’ll stick with k-fold as it’s a popular method known for reducing bias in our estimates.
-
+Finally, we’ll resample our data using the `vfold_cv()` function. Though a slightly confusing name, this function will give us a k-fold cross-validated version of our training data. This will allow us to better estimate the ability of a machine learning model to predict unseen data, this is particularly important if we plan to tune any parameters but also a good choice to prevent overfitting of our model. Though there are many different forms of cross-validation we could apply here, we’ll stick with k-fold (10-fold, to be specific) as it’s a popular method known for reducing bias in our estimates.
 
 ```{r}
 # split the data
@@ -130,22 +131,22 @@ split <- initial_split(dat)
 # extract the training data
 train <- training(split)
 
-# resample the data with 10-fold cross-validation
+# resample the data with 10-fold cross-validation (10-fold by default)
 cv <- vfold_cv(train)
 ```
 
 # Pre-processing
 
-Before we add in our data to the model, we’re going to set up an object that directs our variables into specific roles, this is called a *recipe*. First, you’ll specify a formula for your model, indicating which variable is your outcome and which are your predictors. Using `.` here will indicate that we want to use all variables other than `score` as predictors. Then, we can specify a series of pre-processing steps for our data that directs our recipe to assign our variables a role or manipulates the data. 
+Before we add in our data to the model, we’re going to set up an object that pre-processes our data. This is called a *recipe*. To create a recipe, you’ll first specify a formula for your model, indicating which variable is your outcome and which are your predictors. Using `.` here will indicate that we want to use all variables other than `score` as predictors. Then, we can specify a series of pre-processing steps for our data that directs our recipe to assign our variables a role or performs feature engineering steps. 
 
 A complete list of possible pre-processing steps can be found here: https://recipes.tidymodels.org/articles/Custom_Steps.html
 
 
 ```{r}
 rec <- recipe(score ~ ., train) %>% 
-  step_mutate(tst_dt = as.numeric(lubridate::mdy_hms(tst_dt))) %>% # convert `tst_dt` variable to a date 
+  step_mutate(tst_dt = as.numeric(lubridate::mdy_hms(tst_dt))) %>% # convert `test date` variable to a date 
   update_role(contains("id"), ncessch, new_role = "id vars") %>% # declare ID variables
-  step_nzv(all_predictors(), freq_cut = 0, unique_cut = 0) %>% # remove varaibles with zero variances
+  step_nzv(all_predictors(), freq_cut = 0, unique_cut = 0) %>% # remove variables with zero variances
   step_novel(all_nominal()) %>% # prepares test data to handle previously unseen factor levels 
   step_unknown(all_nominal()) %>% # categorizes missing categorical data (NA's) as `unknown`
   step_medianimpute(all_numeric(), -all_outcomes(), -has_role("id vars"))  %>% # replaces missing numeric observations with the median
@@ -155,25 +156,33 @@ rec <- recipe(score ~ ., train) %>%
 
 # Create a model
 
-The last step before bringing in our data is to specify our model. This will call upon functions from the parsnip package which standardizes language for specifying a multitude of statistical models. There are a few core elements that you will need to specify for each model 
+The last step before bringing in our data is to specify our model. This will call upon functions from the `{parsnip}` package, which standardizes language for specifying a multitude of statistical models. There are a few core elements that you will need to specify for each model 
 
-The type of model - this indicates what type of model you choose to fit, each of which will be a different function. We’ll be focusing on decision tree methods using bag_tree(), random_forest(), and boost_tree(). A full list of models can be found here https://www.tidymodels.org/find/parsnip/
+## The type of model
 
-The engine - set_engine() calls the package to support the model you specified above.
+This indicates what type of model you choose to fit, each of which will be a different function. We’ll be focusing on decision tree methods using `bag_tree()`, `random_forest()`, and `boost_tree()`. A full list of models can be found here https://www.tidymodels.org/find/parsnip/
 
-The mode - set_mode() indicates the type of prediction you’d like to use in your model, you’ll choose between regression and classification. Since we are looking to predict student scores, which is a continuous predictor, we’ll be choosing regression. 
+## The engine 
 
-The arguments - set_args() allows you to set values for various parameters for your model, each model type will have a specific set of parameters that can be altered. For these parameters, you can either set a particular value or you can use the tune function to search for the optimal value of each parameter. Tuning requires a few extra steps, so we will leave the default arguments for clarity. For more information on tuning check out ???
+`set_engine()` calls the package to support the model you specified above.
+
+## The mode
+
+`set_mode()` indicates the type of prediction you’d like to use in your model, you’ll choose between regression and classification. Since we are looking to predict student scores, which is a continuous predictor, we’ll be choosing regression. 
+
+## The arguments 
+
+`set_args()` allows you to set values for various parameters for your model, each model type will have a specific set of parameters that can be altered. For these parameters, you can either set a particular value or you can use the tune function to search for the optimal value of each parameter. Tuning requires a few extra steps, so we will leave the default arguments for clarity. For more information on tuning check out https://tune.tidymodels.org/.
 
 # Create a workflow
 
-Up to this point we’ve been setting up a lot of individual elements and now it is time to combine them to create a cohesive framework, called a workflow, so we can run our desired models. First, we’ll use the workflow command and then, we’ll pullin the recipe and model we already created. Below are three examples of specifying models and creating a workflow for different decision tree methods.
+Up to this point we’ve been setting up a lot of individual elements and now it is time to combine them to create a cohesive framework, called a *workflow*, so we can run our desired models. First, we’ll use the `workflow()` command and then we’ll pulling the recipe and model we already created. The next section shows three examples of specifying models and creating a workflow for different decision tree methods.
 
 # Model Examples
 
 ## Bagged trees
 
-A bagged tree approach creates multiple subsets of data from the training set which are randomly chosen with replacement. Each subset of data is used to train a given decision tree. In the end, we have an ensemble of different models. The predictions from all the different trees are averaged together giving us a stronger prediction than one tree alone could. 
+A bagged tree approach creates multiple subsets of data from the training set which are randomly chosen with replacement. Each subset of data is used to train a given decision tree. In the end, we have an ensemble of different models. The predictions from all the different trees are averaged together, giving us a stronger prediction than one tree alone could. 
 
 ### Specify model
 
@@ -209,7 +218,7 @@ fit_bag <- fit_resamples(
 
 ### Visualize
 
-* The plot below shows counts of each tree's root node.
+The plot below shows the root nodes from a bagged tree with 100 trees (10 folds x 10 bootstrapped resamples).
 
 ```{r echo=FALSE}
 # extract roots
@@ -245,9 +254,9 @@ Random forest is similar to bagged tree methodology but goes one step further. I
 set.seed(100)
 mod_rf <-rand_forest() %>%
   set_engine("ranger",
-             num.threads = parallel::detectCores(), #argument from {ranger}
-             importance = "permutation", #argument from {ranger}
-             verbose = TRUE) %>% #argument from {ranger}
+             num.threads = parallel::detectCores(), 
+             importance = "permutation", 
+             verbose = TRUE) %>% 
   set_mode("regression") %>% 
   set_args(trees = 1000)
 ```
@@ -277,6 +286,8 @@ fit_rf <- fit_resamples(
 ```
 
 ### Visualize
+
+The plot below shows the root nodes from a random forest with 1000 trees (specified using `set_args(trees = 1000)` in the parsnip model object).
 
 ```{r echo=FALSE}
 # extract roots
@@ -353,7 +364,7 @@ fit_boost <- fit_resamples(
 
 # Model evaluation
 
-After running these three models, it’s time to evaluate their performance. We can do this with `tune::collect_metrics()`.
+After running these three models, it’s time to evaluate their performance. We can do this with `tune::collect_metrics()`. The table below shows the estimate of the out-of-sample performance for each of our 3 models.
 
 ```{r}
 collect_metrics(fit_bag) %>% 
@@ -365,11 +376,9 @@ collect_metrics(fit_bag) %>%
   knitr::kable()
 ```
 
-* Show metrics in table and rmse/rsq graph
-
 # Apply model to test data
 
-The final step is to apply the model we have chosen to our test data. 
+The final step is to apply each trained model to our test data using `last_fit()`.
 
 ```{r cache=TRUE}
 # bagged trees
@@ -391,6 +400,7 @@ final_fit_boost <- last_fit(
 )
 ```
 
+The table below shows the actual out-of-sample performance for each of our 3 models.
 
 ```{r}
 # show performance on test data
