@@ -95,6 +95,7 @@ frl &lt;- left_join(frl, stu_counts)
 # add frl data to train data
 dat &lt;- left_join(dat, frl)</code></pre>
 <p>After loading in our three datasets, we’ll join them together to make one cohesive data set to use for modelling. After joining, the data contains both student-level variables (e.g. gender, ethnicity, enrollment in special education/talented and gifted programs, etc.) and district-level variables (e.g. school longitude and latitude, proportion of students who qualify for free and reduced-price lunch, etc.), all of which will be included for each 3 of our <code>{tidymodels}</code> tree-based examples.</p>
+<p>For a more complete description of the variables, you can download the data dictionary <a href="data_dictionary.csv">here</a>.</p>
 </div>
 <div id="explore-the-data" class="section level1">
 <h1>Explore the data</h1>
