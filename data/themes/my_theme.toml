@@ -1,0 +1,20 @@
+# Theme metadata
+name = "Brendan's Theme"
+
+# Is theme light or dark?
+light = true
+
+# Primary
+primary = "#69a297"
+#primary = "#62b6cb"
+
+# Menu
+menu_primary = "#69a297" # 500
+#menu_primary = "#62b6cb" # 500
+menu_text = "#fff"
+menu_text_active = "#50808e" # A100
+menu_title = "#fff"
+
+# Home sections
+home_section_odd = "rgb(255, 255, 255)"
+home_section_even = "rgb(255, 255, 255)"
