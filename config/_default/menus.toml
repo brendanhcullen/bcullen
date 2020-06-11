@@ -30,7 +30,7 @@
   weight = 50
   
 [[main]]
-  name = "cv"
+  name = "CV"
   parent = "cv"
   url = "/cv/index.html"
   weight = 50.1
