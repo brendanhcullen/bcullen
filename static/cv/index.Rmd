@@ -40,7 +40,7 @@ sheet_is_publicly_readable <- TRUE
 PDF_EXPORT <- FALSE
 
 
-CV_PDF_LOC <- "https://github.com/brendanhcullen/bcullen/raw/master/static/cv/cullen_cv.pdf"
+CV_PDF_LOC <- "/cv/cullen_cv.pdf"
 CV_HTML_LOC <- "https://bcullen.rbind.io/cv/index.html"
 
 
