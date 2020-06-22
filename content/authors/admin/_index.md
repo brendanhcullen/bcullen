@@ -1,7 +1,7 @@
 ---
 authors:
 - admin
-bio: Translational neuroscientist and aspiring data scientist studying precision medicine approaches to health behavior change.
+bio: Psychology PhD student and aspiring data scientist studying precision medicine approaches to health behavior change.
 education:
   courses:
   - course: PhD - Psychology 
@@ -58,4 +58,4 @@ I am a PhD student and [NSF GRFP Fellow](https://www.nsfgrfp.org/resources/about
 
 As part of my doctoral training, I am pursuing a [Data Science Specialization](https://github.com/uo-datasci-specialization) focused on reproducibility, data visualization, functional programming, and machine learning. I have also served as a lab instructor for the graduate-level [Data Analysis Sequence](https://github.com/uopsych) in the Department of Psychology. 
 
-As an aspiring data scientist, my goal is to implement my skills as a researcher in an applied industry setting to develop analytical tools that support health and wellness across the lifespan.
+As an aspiring data scientist, my goal is to implement my skills as a researcher in an applied industry setting to develop open-source analytical tools that support health and wellness across the lifespan.
