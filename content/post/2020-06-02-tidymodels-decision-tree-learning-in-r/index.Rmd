@@ -154,7 +154,7 @@ cv <- vfold_cv(train)
 
 Before we add in our data to the model, we’re going to set up an object that pre-processes our data. This is called a *recipe*. To create a recipe, you’ll first specify a formula for your model, indicating which variable is your outcome and which are your predictors. Using `~.` here will indicate that we want to use all variables other than `score` as predictors. Then, we can specify a series of pre-processing steps for our data that directs our recipe to assign our variables a role or performs feature engineering steps. Pre-processing may be sound uncommon, but if you've ever used `lm()` (or several other `R` functions) you've done some of this by simply calling the function (e.g., automatic dummy-coding to handle categorical data). This is beneficial because it gives the analyst more control, despite adding complexity to the process.
 
-A complete list of possible pre-processing steps can be found here: https://recipes.tidymodels.org/articles/Custom_Steps.html
+A complete list of possible pre-processing steps can be found here: https://www.tidymodels.org/find/recipes/
 
 
 ```{r}
