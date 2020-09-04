@@ -1,6 +1,6 @@
 /* -----------div tips------------- */
 
-  div.puzzle, div.fyi, div.demo, div.note {
+  div.puzzle, div.fyi, div.demo, div.note, div.book {
     padding: 1em;
     margin: 1em 0;
     padding-left: 100px;
@@ -28,4 +28,8 @@ div.demo {
 
 div.note {
   background-image: url("../lightbulb.png");
+}
+
+div.book {
+  background-image: url("../book.png");
 }
