@@ -1,0 +1,21 @@
+---
+title: Reflections on RStudio Instructor Training
+author: Brendan Cullen
+date: '2020-09-03'
+slug: []
+categories: []
+tags:
+  - data science
+  - education
+  - R
+subtitle: ''
+summary: ''
+authors: []
+lastmod: '2020-09-03T21:28:31-07:00'
+featured: no
+image:
+  caption: ''
+  focal_point: ''
+  preview_only: no
+projects: []
+---
