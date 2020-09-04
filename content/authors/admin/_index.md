@@ -54,8 +54,8 @@ user_groups:
 - Visitors
 ---
 
-I am a PhD student and [NSF GRFP Fellow](https://www.nsfgrfp.org/resources/about_grfp) in the Department of Psychology at the University of Oregon. My work in the [Social and Affective Neuroscience Lab](https://sanlab.uoregon.edu/) focuses on predicting real-world health behaviors and health outcomes in an effort to advance a precision medicine framework for behavioral health.
+I am a PhD student and [NSF GRFP Fellow](https://www.nsfgrfp.org/resources/about_grfp) in the Department of Psychology at the University of Oregon. My work in the [Social and Affective Neuroscience Lab](https://sanlab.uoregon.edu/) focuses on individual differences in health behavior and predictive modelling of real-world health outcomes in an effort to advance a precision medicine framework for behavioral health.
 
-As part of my doctoral training, I am pursuing a [Data Science Specialization](https://github.com/uo-datasci-specialization) focused on reproducibility, data visualization, functional programming, and machine learning. I have also served as a lab instructor for the graduate-level [Data Analysis Sequence](https://github.com/uopsych) in the Department of Psychology. 
+As part of my doctoral training, I am pursuing a [Data Science Specialization](https://github.com/uo-datasci-specialization) focused on reproducible data analysis, data visualization, functional programming, and machine learning in R. In addition, I have served as a [lab instructor](/courses/) for both undergraduate statistics and the graduate-level [Data Analysis Sequence](https://github.com/uopsych) in the Department of Psychology. 
 
 I am also an [RStudio Certified Instructor](https://education.rstudio.com/trainers/people/cullen+brendan/) in the [tidyverse](https://www.tidyverse.org/) -- please feel free to [reach out](mailto:bcullen@uoregon.edu) if you're interested in having me lead a workshop or training for you.
