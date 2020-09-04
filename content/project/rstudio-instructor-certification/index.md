@@ -17,12 +17,8 @@ links:
   url: https://github.com/brendanhcullen/rstudio-instructor-certification
 - icon: link
   icon_pack: fas
-  name: Slides
+  name: Slides for Teaching Exam
   url: https://columnwise-operations-dplyr.netlify.app/
-- icon: link
-  icon_pack: fas
-  name: Formative assessment
-  url: https://brendancullen.shinyapps.io/columnwise_operations_formative_assessment/
 
 tags:
 - R
