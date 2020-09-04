@@ -34,11 +34,16 @@ The best place the start is to read about the RStudio Instructor Training and Ce
 
 The first step is to sign up for the training course, which will likely be held over Zoom and chunked into 3-4 hour segments across 2-3 days. You can access the training materials [here](https://drive.google.com/drive/folders/13ohFt3D0EJ5PDbMaWTxnHH-hwA7G0IvY).
 
-The training course is an interactive introduction to applying evidence-based teaching methods, such as learning personas, concept maps, and formative assessment (i.e. using questions or exercises to figure out if learners are forming accurate mental models), to data science education. The course also covers how to design teaching materials that take into account cognitive load, multiple learning styles, and issues of inclusivity and student motivation in the classroom.
+The training course is an interactive introduction to applying evidence-based teaching methods to data science education, such as [learner personas](https://docs.google.com/presentation/d/1aOnX-B9XlAzkrlIeZa5db3_X2Dk8cS27k3klvPn1SQI/edit), [concept maps](https://docs.google.com/presentation/d/1k45SqyM-w4DtK7dmedeX7pk_r8B9Aq0FKKCxC04pTRM/edit), and [formative assessment](https://docs.google.com/presentation/d/1PBxBFpkB4w-C3_l2rWdGMtjxaxDeu8gVP0K0CHJfbdQ/edit) (i.e. short, diagnostic questions or exercises to figure out if learners are forming accurate mental models). The course also covers how to design teaching materials with [reverse instructional design](https://docs.google.com/presentation/d/1PBxBFpkB4w-C3_l2rWdGMtjxaxDeu8gVP0K0CHJfbdQ/edit#slide=id.g5501944768_0_197) that takes into account [cognitive load](https://docs.google.com/presentation/d/1t9QTkRfGP9WYQjiXoaVAuceFe3ySVe_wLT7j2MYC8bE/edit#slide=id.g39e398e252_0_14), [multiple learning strategies](https://docs.google.com/presentation/d/1bq599QkDdaWXmw-B8JM5jwdl5In9O-NTxLPT2iES0vY/edit#slide=id.g5479673425_0_87), and issues of [inclusivity and student motivation](https://docs.google.com/presentation/d/1uYQCbs88aao7Ho4d4mUfYi6hOXhgHWV6noR_-jOaE50/edit) in the classroom.
 
 ## (2) Technical Exam `r fontawesome::fa("laptop-code")`
 
-The tidyverse exam assesses technical skills in the Tidyverse by a series of live coding challenges related to data cleaning and wrangling, data visualization, string manipulation, functional programming, basic statistical modeling, and creating reproducible documents with R Markdown. As many others have suggested, a great way to prepare for this exam is to work through the exercises [R for Data Science](https://r4ds.had.co.nz/), particularly for topics that feel rusty to you, and review the community-contributed [solutions](https://jrnold.github.io/r4ds-exercise-solutions/).
+The technical exam assesses your profiency in whatever topic for which you are attempting to become a certified instructor. Currently there are options to become a certified instructor in [tidyverse](https://www.tidyverse.org/) and [shiny](https://shiny.rstudio.com/), and each has its own accompanying technical exam. I took the tidyverse exam, which, broadly speaking, consists of a series of live coding challenges related to using core tidyverse packages for data cleaning and wrangling, data visualization, string manipulation, functional programming, basic statistical modeling, and creating reproducible documents with R Markdown. As many others have suggested, a great way to prepare for this exam is to work through the exercises [R for Data Science](https://r4ds.had.co.nz/), particularly for topics that feel rusty to you, and review the community-contributed [solutions](https://jrnold.github.io/r4ds-exercise-solutions/).
+
+I highly recommend going through these sample exams start to finish to get a sense of what you might need to review:
+
+* [Sample Tidyverse Exam 1](https://education.rstudio.com/blog/2020/02/instructor-certification-exams/#tidyverse-certification-exam) ([solutions](https://marlycormar.github.io/tidyverse_sample_exam/sample_exam_sols/sols.html)) 
+* [Sample Tidyverse Exam 2](https://education.rstudio.com/blog/2020/08/more-example-exams/#tidyverse-exam)
 
 ## (3) Teaching Exam `r fontawesome::fa("user-graduate")`
 
@@ -89,10 +94,20 @@ Here's a quick look.
 
 # The *why*
 
+Ok, that might seem like quite a bit of time and work. Why go to the trouble of doing this traning? 
+
+In a word, [Greg Wilson](https://third-bit.com/).
+
+Ok, there are many reasons, but in all seriousness 
+
+Greg's most important [advice for teaching](https://third-bit.com/10rules/#teaching), in my opinion: 
+
+> "Be kind: all else is details."
+
 ***
 
 # Get in touch
 
-That's all for now! Please feel free to [reach out](https://twitter.com/_bcullen) any time if you are thinking of participating in the training yourself and want to know more. My door is always open, and I would be glad to chat.
+That's all for now. Please feel free to [reach out](https://twitter.com/_bcullen) any time if you are thinking of participating in the training yourself and want to hear more from someone who's gone through it recently. I would be glad to chat!
 
 ![](https://media.giphy.com/media/3o7btQsLqXMJAPu6Na/giphy.gif)
