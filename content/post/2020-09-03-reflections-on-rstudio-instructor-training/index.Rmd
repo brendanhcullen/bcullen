@@ -19,3 +19,74 @@ image:
   preview_only: no
 projects: []
 ---
+
+Some time ago I wrote about how we [need more data science training](https://bcullen.rbind.io/post/2020-03-08-data-science-training-needs-in-grad-school/) as grad students in psychology and that one of the best ways for us to get this training is to [learn from each other](https://twitter.com/_bcullen/status/1237414725081653249). This is just one of many reasons why I'm so humbled and excited to have recently become an [RStudio Certified Instructor](https://education.rstudio.com/trainers/people/cullen+brendan/) in the tidyverse. 
+
+As a small way of paying it forward, I wanted to offer a reflection on what I think makes this training so unique and worthwhile along with a summary of what's involved and some resources for those who might be interested in knowing more. 
+
+***
+
+# The *what*
+
+The best place the start is to read about the RStudio Instructor Training and Certification Program [here](https://education.rstudio.com/trainers/#info). The process boils down to three steps.
+
+## (1) Training Course `r fontawesome::fa("chalkboard-teacher")`
+
+The first step is to sign up for the training course, which will likely be held over Zoom and chunked into 3-4 hour segments across 2-3 days. You can access the training materials [here](https://drive.google.com/drive/folders/13ohFt3D0EJ5PDbMaWTxnHH-hwA7G0IvY).
+
+The training course is an interactive introduction to applying evidence-based teaching methods, such as learning personas, concept maps, and formative assessment (i.e. using questions or exercises to figure out if learners are forming accurate mental models), to data science education. The course also covers how to design teaching materials that take into account cognitive load, multiple learning styles, and issues of inclusivity and student motivation in the classroom.
+
+## (2) Technical Exam `r fontawesome::fa("laptop-code")`
+
+The tidyverse exam assesses technical skills in the Tidyverse by a series of live coding challenges related to data cleaning and wrangling, data visualization, string manipulation, functional programming, basic statistical modeling, and creating reproducible documents with R Markdown. As many others have suggested, a great way to prepare for this exam is to work through the exercises [R for Data Science](https://r4ds.had.co.nz/), particularly for topics that feel rusty to you, and review the community-contributed [solutions](https://jrnold.github.io/r4ds-exercise-solutions/).
+
+## (3) Teaching Exam `r fontawesome::fa("user-graduate")`
+
+The first certification exam assesses pedagogical skills related to teaching data science with R and requires giving a demonstration lesson, creating formative assessments on unseen material (e.g. multiple choice questions and fill-in-the-blank coding exercises), developing concept maps on data science topics, and giving feedback on example educational exercises based on pedagogical theory.
+
+
+If you'd like to see an example of a demonstration lesson, below are the materials I created for this portion of the teaching exam. I used [`palmerpenguins`](https://allisonhorst.github.io/palmerpenguins/) an example dataset. (why? because penguins `r emo::ji("penguin")` `r emo::ji("penguin")` `r emo::ji("penguin")`). 
+
+> You can find all of this material and the accompanying code on [Github](https://github.com/brendanhcullen/rstudio-instructor-certification). Feel free to share, adapt and re-use for your own teaching.
+
+**Column-wise operations with `dplyr`: Old and New**
+
+### Slides `r fontawesome::fa("film")`
+
+You can access the slides [here](https://columnwise-operations-dplyr.netlify.app/).
+
+```{r echo=FALSE}
+xaringanExtra::embed_xaringan(
+  url = "https://columnwise-operations-dplyr.netlify.app/"
+)
+```
+
+### Concept Map `r fontawesome::fa("sitemap")`
+
+```{r echo=FALSE}
+knitr::include_graphics("columnwise_concept_map.png")
+```
+
+### Learner Persona `r fontawesome::fa("user")`
+
+```{r echo=FALSE}
+knitr::include_graphics("learner_persona.png")
+```
+
+### Formative Assessment `r fontawesome::fa("user-edit")`
+
+You can find an example of formative assessment exercises [here](https://brendancullen.shinyapps.io/columnwise_operations_formative_assessment/). I created this using the [`learnr`](https://rstudio.github.io/learnr/) package, which I highly recommend you check out. Here's a quick look:
+
+![](columnwise_formative_assessment.gif)
+
+***
+
+# The *why*
+
+***
+
+# Get in touch
+
+That's all for now! Please feel free to [reach out](https://twitter.com/_bcullen) any time if you are thinking of participating in the training yourself and want to know more. My door is always open, and I would be glad to chat.
+
+![](https://media.giphy.com/media/3o7btQsLqXMJAPu6Na/giphy.gif)
