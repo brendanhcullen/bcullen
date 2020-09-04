@@ -49,11 +49,11 @@ If you'd like to see an example of a demonstration lesson, below are the materia
 
 > You can find all of this material and the accompanying code on [Github](https://github.com/brendanhcullen/rstudio-instructor-certification). Feel free to share, adapt and re-use for your own teaching.
 
-**Column-wise operations with `dplyr`: Old and New**
+## Sample lesson: **Column-wise operations with `dplyr`: Old and New**
 
-### Slides `r fontawesome::fa("film")`
+### `r emo::ji("link")` [Slides](https://columnwise-operations-dplyr.netlify.app/) `r fontawesome::fa("film")`
 
-You can access the slides [here](https://columnwise-operations-dplyr.netlify.app/).
+I made heavy use of [`{xaringan}`](https://slides.yihui.org/xaringan/), [`{xaringanExtra}`](https://pkg.garrickadenbuie.com/xaringanExtra/#/), and [`{flair}`](https://kbodwin.github.io/flair/index.html) along with [Allison Horst](https://www.allisonhorst.com/)'s unbeatable [artwork](https://github.com/allisonhorst/stats-illustrations). For an excellent `{xaringan}` tutorial, I recommend you check out [these slides](https://arm.rbind.io/slides/xaringan.html#1), from the R Markdown whisperer herself, [Alison Hill](https://alison.rbind.io/). 
 
 ```{r echo=FALSE}
 xaringanExtra::embed_xaringan(
@@ -67,15 +67,21 @@ xaringanExtra::embed_xaringan(
 knitr::include_graphics("columnwise_concept_map.png")
 ```
 
+For other re-useable data science concept maps, see [here](https://docs.google.com/presentation/d/1ForBjP0pVhljBLuqOyYfyHw_1rrwJzpWW1ZHzCqAJpU/edit#slide=id.p).
+
 ### Learner Persona `r fontawesome::fa("user")`
 
 ```{r echo=FALSE}
 knitr::include_graphics("learner_persona.png")
 ```
 
-### Formative Assessment `r fontawesome::fa("user-edit")`
+For a list of other example learner personas, see [here](https://rstudio-education.github.io/learner-personas/).
 
-You can find an example of formative assessment exercises [here](https://brendancullen.shinyapps.io/columnwise_operations_formative_assessment/). I created this using the [`learnr`](https://rstudio.github.io/learnr/) package, which I highly recommend you check out. Here's a quick look:
+### `r emo::ji("link")` [Formative Assessment](https://brendancullen.shinyapps.io/columnwise_operations_formative_assessment/) `r fontawesome::fa("user-edit")`
+
+I created these exercises using the [`learnr`](https://rstudio.github.io/learnr/) package, which I highly recommend you check out. It's quite powerful and versatile. 
+
+Here's a quick look.
 
 ![](columnwise_formative_assessment.gif)
 
