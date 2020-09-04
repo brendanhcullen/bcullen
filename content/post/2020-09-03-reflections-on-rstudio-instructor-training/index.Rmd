@@ -8,7 +8,7 @@ tags:
   - data science
   - education
   - R
-subtitle: ''
+subtitle: 'tl;dr You should do it'
 summary: ''
 authors: []
 lastmod: '2020-09-03T21:28:31-07:00'
@@ -18,9 +18,21 @@ image:
   focal_point: ''
   preview_only: no
 projects: []
+output: 
+  blogdown::html_page:
+    toc: TRUE
+    toc_depth: 4
 ---
 
-Some time ago I wrote about how we [need more data science training](https://bcullen.rbind.io/post/2020-03-08-data-science-training-needs-in-grad-school/) as grad students in psychology and that one of the best ways for us to get this training is to [learn from each other](https://twitter.com/_bcullen/status/1237414725081653249). This is just one of many reasons why I'm so humbled and excited to have recently become an [RStudio Certified Instructor](https://education.rstudio.com/trainers/people/cullen+brendan/) in the tidyverse. 
+A while back I wrote about how we [need more data science training](https://bcullen.rbind.io/post/2020-03-08-data-science-training-needs-in-grad-school/) as grad students in psychology and that one of the best ways for us to get this training is to [learn from each other](https://twitter.com/_bcullen/status/1237414725081653249). This is just one of many reasons why I'm so humbled and excited to have recently become an [RStudio Certified Instructor](https://education.rstudio.com/trainers/people/cullen+brendan/) in the tidyverse. 
+
+I'm excited to start implementing and sharing what I learned with my fellow grad students, especially at the end of this month when I will be leading an introductory R workshop for the new cohort of first year PhD and master's students in my department.
+
+<center>
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">In the meantime, I&#39;m very much looking forward to sharing and implementing all the great things I learned throughout this process in a few weeks, when I&#39;ll be leading an Intro to R &amp; Tidyverse workshop for <a href="https://twitter.com/UOPsych?ref_src=twsrc%5Etfw">@UOPsych</a> 🥳</p>&mdash; Brendan Cullen (@_bcullen) <a href="https://twitter.com/_bcullen/status/1300904563562536960?ref_src=twsrc%5Etfw">September 1, 2020</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</center>
+
+<br>
 
 As a small way of paying it forward, I wanted to offer a reflection on what I think makes this training so unique and worthwhile along with a summary of what's involved and some resources for those who might be interested in knowing more. 
 
@@ -29,6 +41,7 @@ As a small way of paying it forward, I wanted to offer a reflection on what I th
 # The *what*
 
 :::book
+<br>
 The best place the start is to read about the RStudio Instructor Training and Certification Program [here](https://education.rstudio.com/trainers/#info). The [RStudio Education Blog](https://education.rstudio.com/categories/certify/) also has lots of helpful posts about the program.
 :::
 
@@ -70,16 +83,21 @@ There are also sample teaching exams available.
 * [Sample Teaching Exam 2](https://education.rstudio.com/blog/2020/08/more-example-exams/#teaching-exam)
 :::
 
+### Demonstration Lesson 
 
-If you'd like to see an example of a demonstration lesson, below are the materials I created for this portion of the teaching exam. I used [`palmerpenguins`](https://allisonhorst.github.io/palmerpenguins/) an example dataset. (why? because penguins `r emo::ji("penguin")` `r emo::ji("penguin")` `r emo::ji("penguin")`). 
+If you'd like to see an example of a demonstration lesson, below are the materials I created for this portion of the teaching exam. I used `penguins` from the [`{palmerpenguins}`](https://allisonhorst.github.io/palmerpenguins/) package an example dataset. (why? because penguins `r emo::ji("penguin")` `r emo::ji("penguin")` `r emo::ji("penguin")`). 
 
-> You can find all of this material and the accompanying code on [Github](https://github.com/brendanhcullen/rstudio-instructor-certification). Feel free to share, adapt and re-use for your own teaching.
 
-## Sample lesson: **Column-wise operations with `dplyr`: Old and New**
+**Column-wise operations with `dplyr`: Old and New**
 
-### `r emo::ji("link")` [Slides](https://columnwise-operations-dplyr.netlify.app/) `r fontawesome::fa("film")`
+:::github
+<br>
+You can find all of the materials for this lesson and the accompanying code on [Github](https://github.com/brendanhcullen/rstudio-instructor-certification). Feel free to share, adapt and re-use for your own teaching.
+:::
 
-I made heavy use of [`{xaringan}`](https://slides.yihui.org/xaringan/), [`{xaringanExtra}`](https://pkg.garrickadenbuie.com/xaringanExtra/#/), and [`{flair}`](https://kbodwin.github.io/flair/index.html) along with [Allison Horst](https://www.allisonhorst.com/)'s unbeatable [artwork](https://github.com/allisonhorst/stats-illustrations). For an excellent `{xaringan}` tutorial, I recommend you check out [these slides](https://arm.rbind.io/slides/xaringan.html#1), from the R Markdown whisperer herself, [Alison Hill](https://alison.rbind.io/). 
+#### Slides `r fontawesome::fa("film")`
+
+I made heavy use of [Yihui Xie](https://yihui.org/en/about/)'s [`{xaringan}`](https://slides.yihui.org/xaringan/), [Garrick Aden-Buie](https://www.garrickadenbuie.com/)'s [`{xaringanExtra}`](https://pkg.garrickadenbuie.com/xaringanExtra/#/), and [Kelly Bodwin](https://www.kelly-bodwin.com/)'s [`{flair}`](https://kbodwin.github.io/flair/index.html) along with [Allison Horst](https://www.allisonhorst.com/)'s unbeatable [artwork](https://github.com/allisonhorst/stats-illustrations). For an excellent `{xaringan}` tutorial, I recommend you check out [these slides](https://arm.rbind.io/slides/xaringan.html#1), from the R Markdown whisperer herself, [Alison Hill](https://alison.rbind.io/). 
 
 ```{r echo=FALSE}
 xaringanExtra::embed_xaringan(
@@ -87,7 +105,9 @@ xaringanExtra::embed_xaringan(
 )
 ```
 
-### Concept Map `r fontawesome::fa("sitemap")`
+Full slides available [here](https://columnwise-operations-dplyr.netlify.app/).
+
+#### Concept Map `r fontawesome::fa("sitemap")`
 
 ```{r echo=FALSE}
 knitr::include_graphics("columnwise_concept_map.png")
@@ -95,7 +115,7 @@ knitr::include_graphics("columnwise_concept_map.png")
 
 For other re-useable data science concept maps, see [here](https://docs.google.com/presentation/d/1ForBjP0pVhljBLuqOyYfyHw_1rrwJzpWW1ZHzCqAJpU/edit#slide=id.p).
 
-### Learner Persona `r fontawesome::fa("user")`
+#### Learner Persona `r fontawesome::fa("user")`
 
 ```{r echo=FALSE}
 knitr::include_graphics("learner_persona.png")
@@ -103,7 +123,7 @@ knitr::include_graphics("learner_persona.png")
 
 For a list of other example learner personas, see [here](https://rstudio-education.github.io/learner-personas/).
 
-### `r emo::ji("link")` [Formative Assessment](https://brendancullen.shinyapps.io/columnwise_operations_formative_assessment/) `r fontawesome::fa("user-edit")`
+#### Formative Assessment `r fontawesome::fa("user-edit")`
 
 I created these exercises using the [`learnr`](https://rstudio.github.io/learnr/) package, which I highly recommend you check out. It's quite powerful and versatile. 
 
@@ -111,19 +131,23 @@ Here's a quick look.
 
 ![](columnwise_formative_assessment.gif)
 
+You can access these exercises [here](https://brendancullen.shinyapps.io/columnwise_operations_formative_assessment/).
+
 ***
 
 # The *why*
 
-Ok, that might seem like quite a bit of time and work. Why go to the trouble of doing this traning? 
+Ok, this might seem like quite a bit of time and effort. Why go to the trouble of doing this traning? 
 
-In a word, [Greg Wilson](https://third-bit.com/).
+In a word, [Greg Wilson](https://third-bit.com/). For the most part, Greg runs the the training courses and delivers the exams over Zoom. 
 
 Ok, there are many reasons, but in all seriousness 
 
 Greg's most important [advice for teaching](https://third-bit.com/10rules/#teaching), in my opinion: 
 
 > "Be kind: all else is details."
+
+## Why now? 
 
 ***
 
