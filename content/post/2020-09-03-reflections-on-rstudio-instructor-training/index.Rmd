@@ -14,7 +14,7 @@ authors: []
 lastmod: '2020-09-03T21:28:31-07:00'
 featured: no
 image:
-  caption: ''
+  caption: '<span>Photo by <a href="https://unsplash.com/@alinnnaaaa?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Alina Grubnyak</a> on <a href="https://unsplash.com/?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></span>'
   focal_point: ''
   preview_only: no
 projects: []
@@ -107,6 +107,10 @@ xaringanExtra::embed_xaringan(
 
 Full slides available [here](https://columnwise-operations-dplyr.netlify.app/).
 
+
+<center><br>❖ ❖ ❖<br></center>
+
+
 #### Concept Map `r fontawesome::fa("sitemap")`
 
 ```{r echo=FALSE}
@@ -115,6 +119,8 @@ knitr::include_graphics("columnwise_concept_map.png")
 
 For other re-useable data science concept maps, see [here](https://docs.google.com/presentation/d/1ForBjP0pVhljBLuqOyYfyHw_1rrwJzpWW1ZHzCqAJpU/edit#slide=id.p).
 
+<center><br>❖ ❖ ❖<br></center>
+
 #### Learner Persona `r fontawesome::fa("user")`
 
 ```{r echo=FALSE}
@@ -122,6 +128,8 @@ knitr::include_graphics("learner_persona.png")
 ```
 
 For a list of other example learner personas, see [here](https://rstudio-education.github.io/learner-personas/).
+
+<center><br>❖ ❖ ❖<br></center>
 
 #### Formative Assessment `r fontawesome::fa("user-edit")`
 
@@ -141,13 +149,26 @@ Ok, this might seem like quite a bit of time and effort. Why go to the trouble o
 
 In a word, [Greg Wilson](https://third-bit.com/). For the most part, Greg runs the the training courses and delivers the exams over Zoom. 
 
-Ok, there are many reasons, but in all seriousness 
-
 Greg's most important [advice for teaching](https://third-bit.com/10rules/#teaching), in my opinion: 
 
 > "Be kind: all else is details."
 
-## Why now? 
+There are many other great reasons, too. Here are a few that come to mind.
+
+## Teaching resources galore `r fontawesome::fa("gem")`
+
+The [RStudio Education Blog](https://education.rstudio.com/blog/) is a `r emo::ji("gem")` TREASURE TROVE! `r emo::ji("gem")`
+
+## Surge in online teaching `r fontawesome::fa("cloud")`
+
+## Tried and tested `r fontawesome::fa("comments")`
+
+## A community of practice `r fontawesome::fa("users")`
+
+***Bonus*** - You get a fancy certificate. `r emo::ji("sparkles")`
+
+![](certificate.png)
+
 
 ***
 
