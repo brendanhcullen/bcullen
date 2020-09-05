@@ -1,6 +1,6 @@
 /* -----------div tips------------- */
 
-  div.puzzle, div.fyi, div.demo, div.note, div.book, div.github {
+  div.puzzle, div.fyi, div.demo, div.note, div.book, div.github, div.profile, div.bookmark, div.link, div.code{
     padding: 1em;
     margin: 1em 0;
     padding-left: 100px;
@@ -15,25 +15,41 @@
   
 
 div.puzzle {
-  background-image: url("../Your-turn.png");
+  background-image: url("../note_box_icons/Your-turn.png");
 }
 
 div.fyi {
- background-image: url("../fyi.png");
+ background-image: url("../note_box_icons/fyi.png");
 }
 
 div.demo {
-  background-image: url("../Live-code.png");
+  background-image: url("../note_box_icons/Live-code.png");
 }
 
 div.note {
-  background-image: url("../lightbulb.png");
+  background-image: url("../note_box_icons/lightbulb.png");
 }
 
 div.book {
-  background-image: url("../book.png");
+  background-image: url("../note_box_icons/book.png");
 }
 
 div.github {
-  background-image: url("../github.png");
+  background-image: url("../note_box_icons/github.png");
+}
+
+div.profile {
+  background-image: url("../note_box_icons/profile.png");
+}
+
+div.bookmark {
+  background-image: url("../note_box_icons/bookmark.png");
+}
+
+div.link {
+  background-image: url("../note_box_icons/link.png");
+}
+
+div.code {
+  background-image: url("../note_box_icons/code.png");
 }
