@@ -8,7 +8,7 @@ tags:
   - data science
   - education
   - R
-subtitle: 'tl;dr You should look into it.'
+subtitle: 'tl;dr You should definitely look into it.'
 summary: ''
 authors: []
 lastmod: '2020-09-03T21:28:31-07:00'
@@ -146,7 +146,7 @@ Greg's most important [advice for teaching](https://third-bit.com/10rules/#teach
 > "Be kind: all else is details."
 
 
-**Here are some other reasons why you should do this training...**
+**Now, here are some other reasons why you should do this training...**
 
 ## Surge in online teaching `r fontawesome::fa("cloud")`
 
@@ -161,7 +161,7 @@ As online data science education is becoming increasingly the norm, it seems nat
 Another great reason to become a certified instructor is that, as a data science educator, you have a huge and ever-increasing bank of resources at your disposal. What's more, as a certified instructor, you are eligible for free licenses to [RStudio Pro products](https://rstudio.com/products/) and a significant discount for [RStudio Cloud](https://rstudio.cloud/). Here are just some of the great teaching tools from RStudio and the #rstats community. 
 
 :::bookmark
-The [RStudio Education Blog](https://education.rstudio.com/blog/) is a `r emo::ji("gem")` TREASURE TROVE `r emo::ji("gem")` of resources. Add it to your bookmarks. 
+The [RStudio Education Blog](https://education.rstudio.com/blog/) is a `r emo::ji("gem")` TREASURE TROVE `r emo::ji("gem")` of resources. Add it to your bookmarks immediately. 
 :::
 
 **Teaching with RStudio Cloud**
@@ -203,9 +203,9 @@ The instructor training program started back in February 2019 and [as of August 
 
 ## A focus on inclusivity `r fontawesome::fa("hands-helping")`
 
-The focus of this training is not technical competency -- it's how be an effective teacher. And one of the most critical components of teaching effectively is to be inclusive of all learners, regardless of race, religion, sexual orientation, gender identity, disability, etc. 
+The focus of this training is not technical competency -- it's how be an effective teacher. One of the most critical components of teaching effectively is to be inclusive of all learners, regardless of race, religion, sexual orientation, gender identity, disability, etc. 
 
-The [#rstats learning community](https://twitter.com/R4DScommunity) is known for being welcoming and inclusive, so it's no surprise that the training course emphasizes these values as well. What I appreciate most about this aspect of the training is that it involves pondering questions and hypothetical scenarios that to which there are no easy answers. However, being pushed out of your comfort zone and making a concious effort to reflect on how you will confront issues such as systemic racism and sexism that will inevitably arise in the classroom, is extremely important -- even if you've been teaching for years. 
+The [#rstats learning community](https://twitter.com/R4DScommunity) is known for being welcoming and inclusive, so it's no surprise that the training course emphasizes these values as well. What I appreciate most about this aspect of the training is that it involves pondering questions and hypothetical scenarios that to which there are no easy answers. However, it is extremely important to be pushed out of your comfort zone to consciously and proactively reflect on how you will confront issues such as systemic racism and sexism that inevitably arise in the classroom -- now more than ever. 
 
 :::book
 For further reading on inclusivity and social justice in data science education, I recommend you read [this post](https://education.rstudio.com/blog/2020/06/native-classroom/) by [Nicole Thompson Gonzalez](http://www.nicolethompsongonzalez.com/) and [this one](https://medium.com/@yimregister/10-ways-to-integrate-social-justice-into-teaching-data-science-f48d13f2337c) by [Yim Register](http://students.washington.edu/yreg/). Also check out the amazing work that [JooYoung Seo](https://jooyoungseo.com/), the first blind certified instructor, has been doing to make data science tools [more accessible](https://education.rstudio.com/blog/2020/07/a11y-midterm/).
@@ -217,7 +217,7 @@ For further reading on inclusivity and social justice in data science education,
 
 To extend the idea of including *everyone* who wants to learn data science, we must be active in building teaching communities that extend beyond just the walls of academic institutions.
 
-RStudio's [mission](https://education.rstudio.com/teach/#:~:text=RStudio's%20mission%20is%20to%20equip,economy%20that%20rewards%20data%20literacy.&amp;text=All%20of%20RStudio's%20resources%20are,materials%20in%20their%20own%20ways.) is to...
+RStudio's [mission](https://education.rstudio.com/teach/#:~:text=RStudio's%20mission%20is%20to%20equip,economy%20that%20rewards%20data%20literacy.&amp;text=All%20of%20RStudio's%20resources%20are,materials%20in%20their%20own%20ways.) is to
 
 > "equip everyone, regardless of means, to participate in a global economy that rewards data literacy." 
 
@@ -227,7 +227,7 @@ Read more about building a community of practice [here](https://teachtogether.te
 
 ***
 
-*Bonus...* You get a fancy certificate. `r emo::ji("sparkles")`
+*P.S.* If you need another reason to do this training, you get a fancy certificate at the end. `r emo::ji("sparkles")`
 
 ![](certificate.png)
 
@@ -235,6 +235,6 @@ Read more about building a community of practice [here](https://teachtogether.te
 
 # Get in touch
 
-That's all for now. Please feel free to [reach out](https://twitter.com/_bcullen) any time if you are thinking of participating in the training yourself and want to hear more from someone who's gone through it recently. I would be glad to chat!
+Please feel free to [reach out](https://twitter.com/_bcullen) if you are thinking of participating in the training yourself and want to hear more from someone who's gone through it recently. I would be glad to chat any time!
 
 ![](https://media.giphy.com/media/3o7btQsLqXMJAPu6Na/giphy.gif)
