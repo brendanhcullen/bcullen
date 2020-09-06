@@ -1,5 +1,5 @@
 ---
-title: Data Science Training in Grad School
+title: Data Science Training in Psychology
 author: Brendan Cullen
 date: '2020-03-08'
 slug: []
@@ -15,13 +15,13 @@ authors: []
 lastmod: '2020-03-08T21:38:45-07:00'
 featured: no
 image:
-  caption: ''
+  caption: '<span>Photo by <a href="https://unsplash.com/@emilep?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Emile Perron</a> on <a href="https://unsplash.com/s/photos/r-programming?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></span>'
   focal_point: ''
   preview_only: true
 projects: []
 ---
 
-### Why we need data science training in psychology
+![](featured.jpg)
 
 Psychology is generally considered a "soft" science, on the opposite end of the spectrum from the "hard" sciences of physics, chemistry, and biology. This often creates a misconception that psychology is somehow not as quantitative, computational, or rigorous, methodologically. To the contrary, psychology is in fact very "hard" (some might even say, ["the hardest"](https://thehardestscience.com/2009/03/14/making-progress-in-the-hardest-science/){target="_blank"}). Why? Because explaining human cognition and behavior is really difficult. People do not think and behave in predictable and consistent ways like atoms and molecules. 
 
@@ -53,7 +53,7 @@ But the way things seem to be moving, it's becoming more common for many student
 
 I created the plot below (using ggplot2) to visualize how much students report they need these skills compared to how much training they feel they already have. 
 
-![](/img/training_dotplot_se.png)
+![](training_dotplot_se.png)
 
 Interestingly, the top two skills that students reported needing the most on average for their careers are data visualization and data wrangling. Fortunately, this was the first year (to my knowledge) that PSY611, the first course in the gradstats sequence, included entire labs devoted to [data visualization](https://uopsych.github.io/psy611/labs/lab-6.html){target="_blank"} and [data wrangling](https://uopsych.github.io/psy611/labs/lab-5.html){target="_blank"}. More good news is that other faculty in the psych department are starting to offer courses that focus more on these skills that students seem to need the most. For example, [Rob Chavez](https://twitter.com/robchavez){target="_blank"} has offered a fantastic seminar called [Data Science Methods in Psychology](https://robchavez.github.io/datascience_gallery/syllabus.html){target="_blank"} that covered a wide range of data science topics from [programming in R](https://robchavez.github.io/datascience_gallery/html_only/general_programming.html){target="_blank"} to [text processing](https://robchavez.github.io/datascience_gallery/html_only/text_processing.html){target="_blank"} to [package creation](https://robchavez.github.io/datascience_gallery/html_only/packages.html){target="_blank"} that ultimately turned into a great collection of student-created tutorials (all of which are available [here](https://robchavez.github.io/datascience_gallery/index.html){target="_blank"}).
 
@@ -64,7 +64,7 @@ Interestingly, the top two skills that students reported needing the most on ave
 
 Among other crucial research skills like study design, data collection, and research ethics, the other most coveted technical skill seems to be *programming*. In fact, general programming skills seems to be where there is currently the biggest gap in training in our department. The graph below shows skills ranked in descending order by how large the gap is between how much training in those skills students need and how much they currently have.
 
-![](/img/training_gaps.png)
+![](training_gaps.png)
 
 On the whole, it seems that that there are bigger training gaps for more general data science skills (e.g., programming in R and Python, data wrangling, data visualization). In contrast, the smallest gaps exist for more specialized skills like advanced statistics (e.g., computational modeling, network analysis, structural equation modeling) -- likely because our department has an entire class devoted to each of these topics. 
 
@@ -84,3 +84,7 @@ To that end, I am currently working with [Sara Weston](https://twitter.com/saraw
 Reflecting on all this has brought home a thought that I think is worth sharing. I have come to realize that, **as grad students, one of the best resources we have access to during our time in grad school is *each other***. Personally, I have learned so much over the years from my [fellow lab members](https://sanlab.uoregon.edu/people/){target="_blank"}. Without them, I would not have conquered my fear of Github or felt inspired to learn more about R and other programming languages. Perhaps the most impactful benefit I've received from them, though, is their *encouragement* -- and that, in particular, is something I hope to pay forward as much as possible. 
 
 We all enter grad school with different backgrounds and skill sets, and in so many situations the combination of our different strengths can lead to mutual benefit. So why not help each other out?
+
+<center>
+![](https://media.giphy.com/media/phJ6eMRFYI6CQ/giphy.gif)
+</center>
