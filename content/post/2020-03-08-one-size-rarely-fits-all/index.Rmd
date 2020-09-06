@@ -14,12 +14,11 @@ authors: []
 lastmod: '2020-03-08T16:36:57-07:00'
 featured: no
 image:
-  caption: ''
+  caption: 'Source: Shutterstock / HelloRF Zcool'
   focal_point: ''
-  preview_only: true
+  preview_only: FALSE
 projects: []
 ---
-![](/img/precision.jpg)
 
 Think about the last time you had a splitting headache and needed some quick relief. Which bottle did you reach for? Tylenol or Advil? Why? Maybe you think of yourself as a “Tylenol person” or an “Advil person” because one of these has worked for you before. Or maybe one always upsets your stomach. The point is that not everyone experiences the same pain relief from one pill. Some people prefer Tylenol and others Advil, but nobody quite knows why.
 

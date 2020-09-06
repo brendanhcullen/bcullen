@@ -17,11 +17,9 @@ featured: no
 image:
   caption: '<span>Photo by <a href="https://unsplash.com/@emilep?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Emile Perron</a> on <a href="https://unsplash.com/s/photos/r-programming?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></span>'
   focal_point: ''
-  preview_only: true
+  preview_only: no
 projects: []
 ---
-
-![](featured.jpg)
 
 Psychology is generally considered a "soft" science, on the opposite end of the spectrum from the "hard" sciences of physics, chemistry, and biology. This often creates a misconception that psychology is somehow not as quantitative, computational, or rigorous, methodologically. To the contrary, psychology is in fact very "hard" (some might even say, ["the hardest"](https://thehardestscience.com/2009/03/14/making-progress-in-the-hardest-science/){target="_blank"}). Why? Because explaining human cognition and behavior is really difficult. People do not think and behave in predictable and consistent ways like atoms and molecules. 
 
