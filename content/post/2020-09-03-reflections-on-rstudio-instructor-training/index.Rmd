@@ -68,7 +68,7 @@ I highly recommend going through these sample exams from the RStudio Education B
 
 ## Teaching Exam `r fontawesome::fa("user-graduate")`
 
-The first certification exam assesses pedagogical skills related to teaching data science with R and requires giving a demonstration lesson, creating formative assessments on unseen material (e.g. multiple choice questions and fill-in-the-blank coding exercises), developing concept maps on data science topics, and giving feedback on example educational exercises based on pedagogical theory.
+The first certification exam assesses pedagogical skills related to teaching data science with R and requires giving a 15-minute demonstration lesson on a topic of your choide followed by a series of applied questions, which will likely involve creating formative assessments on unseen material (e.g. multiple choice questions and fill-in-the-blank coding exercises), developing concept maps on data science topics and giving feedback on example teaching based on pedagogical theory.
 
 :::note
 There are also sample teaching exams available.
@@ -77,7 +77,7 @@ There are also sample teaching exams available.
 * [Sample Teaching Exam 2](https://education.rstudio.com/blog/2020/08/more-example-exams/#teaching-exam)
 :::
 
-### Demonstration Lesson 
+### Demonstration Lesson: Example
 
 If you'd like to see an example of a demonstration lesson, below are the materials I created for this portion of the teaching exam. I used `penguins` from the [`{palmerpenguins}`](https://allisonhorst.github.io/palmerpenguins/) package an example dataset. (why? because penguins `r emo::ji("penguin")` `r emo::ji("penguin")` `r emo::ji("penguin")`). 
 
@@ -197,7 +197,7 @@ The [RStudio Education Blog](https://education.rstudio.com/blog/) is a `r emo::j
 
 ## Tried and tested `r fontawesome::fa("comments")`
 
-The instructor training program started back in February 2019 and [as of August 2020](https://education.rstudio.com/blog/2020/08/august-2020-instructors/) there are almost 150 certified tidyverse instructors and 20 shiny instructors. This means that the program has gone through multiple iterations and has made data-driven improvements and updates based on [feedback from participants](https://education.rstudio.com/blog/2020/07/instructor-certification-findings/) -- especially in the realm of supporting online teaching in the aftermath of COVID-19. So you can rest assured that, while it is still a relatively new program, all the kinks have been worked out. 
+The instructor training program started back in February 2019 and [as of August 2020](https://education.rstudio.com/blog/2020/08/august-2020-instructors/) there are almost 150 certified tidyverse instructors and 20 shiny instructors. This means that the program has gone through multiple iterations and has made data-driven improvements based on [feedback from participants](https://education.rstudio.com/blog/2020/07/instructor-certification-findings/) -- especially in the realm of supporting online teaching in the aftermath of COVID-19. So you can rest assured that, while it is still a relatively new program, all the kinks have been worked out. 
 
 <center><br>❖ ❖ ❖<br></center>
 
@@ -208,6 +208,7 @@ The focus of this training is not technical competency -- it's how be an effecti
 The [#rstats learning community](https://twitter.com/R4DScommunity) is known for being welcoming and inclusive, so it's no surprise that the training course emphasizes these values as well. What I appreciate most about this aspect of the training is that it involves pondering questions and hypothetical scenarios that to which there are no easy answers. However, it is extremely important to be pushed out of your comfort zone to consciously and proactively reflect on how you will confront issues such as systemic racism and sexism that inevitably arise in the classroom -- now more than ever. 
 
 :::book
+<br>
 For further reading on inclusivity and social justice in data science education, I recommend you read [this post](https://education.rstudio.com/blog/2020/06/native-classroom/) by [Nicole Thompson Gonzalez](http://www.nicolethompsongonzalez.com/) and [this one](https://medium.com/@yimregister/10-ways-to-integrate-social-justice-into-teaching-data-science-f48d13f2337c) by [Yim Register](http://students.washington.edu/yreg/). Also check out the amazing work that [JooYoung Seo](https://jooyoungseo.com/), the first blind certified instructor, has been doing to make data science tools [more accessible](https://education.rstudio.com/blog/2020/07/a11y-midterm/).
 :::
 
@@ -221,13 +222,16 @@ RStudio's [mission](https://education.rstudio.com/teach/#:~:text=RStudio's%20mis
 
 > "equip everyone, regardless of means, to participate in a global economy that rewards data literacy." 
 
-A more concrete goal, put forth by [Carl Howe](https://education.rstudio.com/trainers/people/howe+carl/), Director of Education at RStudio, is to train the [next million R users](https://rstudio.com/resources/rstudioconf-2019/the-next-million-r-users/). In becoming an RStudio certified instructor, you can better position yourself to actively participate in reaching this goal. 
+A more concrete goal, put forth by [Carl Howe](https://education.rstudio.com/trainers/people/howe+carl/), Director of Education at RStudio, is to train the [next million R users](https://rstudio.com/resources/rstudioconf-2019/the-next-million-r-users/). In becoming an RStudio certified instructor, you can better position yourself to actively participate in reaching this goal. But it's worth reflecting on the fact that teaching and learning doesn't happen in a vacuum -- this is where the idea of community comes in. In my opinion, the fact that R users around the world already have a strong sense of community will make it that much easier to welcome new learners into the fold and make it more likely that they themselves will start to train others one day. 
 
+:::book
+<br>
 Read more about building a community of practice [here](https://teachtogether.tech/en/index.html#s:community).
+:::
 
 ***
 
-*P.S.* If you need another reason to do this training, you get a fancy certificate at the end. `r emo::ji("sparkles")`
+*P.S.* If you need yet another reason to do this training, you get a fancy certificate at the end. `r emo::ji("sparkles")`
 
 ![](certificate.png)
 
