@@ -17,9 +17,7 @@ image:
 projects: []
 ---
 
-# Intro
-
-Tidyverse’s newest release has recently come together to form a cohesive suite of packages for modeling and machine learning, called `{tidymodels}`. The successor to Max Kuhn’s `{caret}` package, `{tidymodels}` allows for a tidy approach to your data from start to finish. We’re going to walk through the basics for getting off the ground with `{tidymodels}` and demonstrate its application to three different tree-based methods for predicting student test scores. For further information about the package, you can visit https://www.tidymodels.org/.
+RStudio has recently released a cohesive suite of packages for modelling and machine learning, called `{tidymodels}`. The successor to Max Kuhn’s `{caret}` package, `{tidymodels}` allows for a tidy approach to your data from start to finish. We’re going to walk through the basics for getting off the ground with `{tidymodels}` and demonstrate its application to three different tree-based methods for predicting student test scores. For further information about the package, you can visit https://www.tidymodels.org/.
 
 # Setup
 
