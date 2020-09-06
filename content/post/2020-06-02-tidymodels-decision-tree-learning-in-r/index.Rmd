@@ -11,9 +11,9 @@ authors: []
 lastmod: '2020-06-02T10:57:23-07:00'
 featured: no
 image:
-  caption: ''
+  caption: 'Image by <a href="https://pixabay.com/users/ilyessuti-3558510/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=4634225">Ilona Ilyés</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=4634225">Pixabay</a>'
   focal_point: ''
-  preview_only: no
+  preview_only: FALSE
 projects: []
 ---
 
