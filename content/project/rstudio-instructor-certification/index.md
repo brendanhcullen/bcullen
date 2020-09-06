@@ -13,15 +13,18 @@ links:
   url: https://education.rstudio.com/trainers/people/cullen+brendan/
 - icon: github
   icon_pack: fab
-  name: Github Repo
+  name: Demonstration Lesson Repo
   url: https://github.com/brendanhcullen/rstudio-instructor-certification
-- icon: link
+- icon: book
   icon_pack: fas
-  name: Slides for Teaching Exam
-  url: https://columnwise-operations-dplyr.netlify.app/
+  name: Blog post
+  url: /post/2020-09-03-reflections-on-rstudio-instructor-training/index.html
 
 tags:
 - R
 - data science
 ---
 
+I recently went through RStudio's [Instructor Training and Certification Program](https://education.rstudio.com/trainers/), and I am now an RStudio Certified Instructor in the [tidyverse](https://www.tidyverse.org/). You can read more details in the links above. 
+
+If you'd like to hire me to lead a workshop or training for your group, please don't hesitate to [reach out](mailto:bcullen@uoregon.edu). I would love to hear from you!
