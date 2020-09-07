@@ -18,6 +18,10 @@ image:
   focal_point: ''
   preview_only: no
 projects: []
+output: 
+  blogdown::html_page:
+    toc: TRUE
+    toc_depth: 4
 ---
 
 A while back I wrote about how we [need more data science training](https://bcullen.rbind.io/post/2020-03-08-data-science-training-needs-in-grad-school/) as grad students in psychology and that one of the best ways for us to get this training is to [learn from each other](https://twitter.com/_bcullen/status/1237414725081653249). This is just one of many reasons why I'm so humbled and excited to have recently become an [RStudio Certified Instructor](https://education.rstudio.com/trainers/people/cullen+brendan/) in the tidyverse. 
