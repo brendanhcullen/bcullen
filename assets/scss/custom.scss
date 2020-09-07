@@ -1,5 +1,10 @@
 /*----CSS Credit: Desirée De Leon: https://desiree.rbind.io/ -----*/
 
+/* Whole document: */
+body {
+  font-weight: 100;
+}
+
 /*----NAV LINK HOVER ANIMATION -----*/
 
 .nav-link:hover {
@@ -35,6 +40,7 @@ a.nav-link:after {
 a.nav-link:hover:after {
   width: 70%;
 }
+
 
 /* -----------div tips------------- */
 
