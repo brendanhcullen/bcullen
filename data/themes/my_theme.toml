@@ -5,14 +5,17 @@ name = "Brendan's Theme"
 light = true
 
 # Primary
-primary = "#69a297"
+primary = "#88BDBC"
 #primary = "#62b6cb"
 
+# Links
+link = "#DAAD86"
+link_hover = "#88BDBC"
+
 # Menu
-menu_primary = "#69a297" # 500
-#menu_primary = "#62b6cb" # 500
+menu_primary = "#88BDBC" # 500
 menu_text = "#fff"
-menu_text_active = "#50808e" # A100
+menu_text_active = "#112D32" # A100
 menu_title = "#fff"
 
 # Home sections

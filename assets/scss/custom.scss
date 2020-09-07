@@ -11,36 +11,6 @@ body {
   color: black !important;
 }
 
-
-/* stroke */
-
-a.nav-link,
-a.nav-link:after,
-a.nav-link:before {
-  transition: all .5s;
-}
-
-a.nav-link {
-  position: relative;
-}
-
-a.nav-link:after {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  margin: auto;
-  width: 0%;
-  content: '.'; /* make invisible, dot beneath links */
-  color: transparent;
-  background: #999999;
-  height: 2px;
-}
-
-a.nav-link:hover:after {
-  width: 70%;
-}
-
 /*----------------------------------*/
 
 .hljs { /* code font size */
@@ -72,16 +42,6 @@ a.navbar-brand {
   font-weight: 100;
 }
 
-/* Links within blog posts */
-
-.article-style .section a {
-  color: #E14675;
-}
-
-.article-style .section a:hover {
-  color: #DCA0B2;
-}
-
 /* -----------div tips------------- */
 
   div.puzzle, div.fyi, div.demo, div.note, div.book, div.github, div.profile, div.bookmark, div.link, div.code{
@@ -92,8 +52,8 @@ a.navbar-brand {
     background-repeat: no-repeat;
     background-position: 15px center;
     min-height: 120px;
-    color: #1f5386;
-    background-color: #bed3ec;
+    color: #FFFFFF;
+    background-color: #5a9998;
     border: solid 5px #dfedff;
   }
   
