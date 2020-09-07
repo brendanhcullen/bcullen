@@ -134,6 +134,14 @@ Education {data-icon=graduation-cap data-concise=true}
 print_section(position_data, 'education')
 ```
 
+Certification {data-icon=award data-concise=true}
+--------------------------------------------------------------------------------
+
+
+```{r}
+print_section(position_data, 'certification')
+```
+
 
 Honors & Awards {data-icon=trophy}
 --------------------------------------------------------------------------------
@@ -145,12 +153,6 @@ print_section(position_data, 'honors_awards')
 
 Professional Research Experience {data-icon=suitcase}
 --------------------------------------------------------------------------------
-
-::: aside
-```{r}
-print_text_block(text_blocks, 'position_experience_aside')
-```
-:::
 
 ```{r}
 print_section(position_data, 'research_positions')
@@ -183,6 +185,8 @@ print_text_block(text_blocks, 'workshop_experience_aside')
 print_section(position_data, 'workshops')
 ```
 
+<br><br>
+
 Peer-reviewed Publications{data-icon=book}
 --------------------------------------------------------------------------------
 
@@ -196,7 +200,7 @@ print_text_block(text_blocks, 'publications_aside')
 print_section(position_data, 'academic_articles')
 ```
 
-Works in Progress{data-icon=edit}
+Pre-prints & Works in Progress{data-icon=edit}
 --------------------------------------------------------------------------------
 
 ```{r}
@@ -219,6 +223,8 @@ Talks{data-icon=users}
 ```{r}
 print_section(position_data, 'talks')
 ```
+
+<br><br><br><br>
 
 Additional Training {data-icon=laptop}
 --------------------------------------------------------------------------------
