@@ -85,6 +85,13 @@ contact_info %>%
 
 <br>
 
+Certification <i class="fab fa-r-project"></i> {#certification}
+--------------------------------------------------------------------------------
+
+I am an [RStudio Certified Instructor](https://education.rstudio.com/trainers/people/cullen+brendan/) in the [tidyverse](https://www.tidyverse.org/) (see [certificate](https://github.com/brendanhcullen/rstudio-instructor-certification/blob/master/certificate.png)).
+
+<br>
+
 Other Training <i class="fa fa-chalkboard-teacher"></i> {#training}
 --------------------------------------------------------------------------------
 
@@ -104,7 +111,7 @@ build_skill_bars(skills)
 Philosophy <i class="fa fa-lightbulb"></i> {#philosophy}
 --------------------------------------------------------------------------------
 
-I am a strong advocate for open science and continually strive for a more shareable, efficient and reproducible workflow. I enjoy learning and teaching statistics within communities that are friendly, inclusive, and supportive, and I have had the privilege of co-organizing several workshops and conferences dedicated to sharing open-source data science tools within such communities.
+I am a strong advocate for open science and open-source data science software. I particularly enjoy helping others learn data science skills, and I value kindness and inclusivity above all else in my teaching.
 
 <br>
 
@@ -118,8 +125,8 @@ See full CV at [bcullen.rbind.io/cv](https://bcullen.rbind.io/cv/index.html) for
 Disclaimer {#disclaimer}
 --------------------------------------------------------------------------------
 
-Created with [pagedown](https://github.com/rstudio/pagedown). 
-<br>Source code on [GitHub](https://github.com/brendanhcullen/bcullen/tree/master/static/cv). <i class="fa fa-github"></i> 
+Created with [pagedown](https://github.com/rstudio/pagedown).
+<br>Source code on [GitHub](https://github.com/brendanhcullen/bcullen/tree/master/static/cv). <i class="fa fa-github"></i>
 <br>Last updated on `r Sys.Date()`.
 
 
