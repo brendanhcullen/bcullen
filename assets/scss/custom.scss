@@ -1,3 +1,49 @@
+/*----CSS Credit: 
+Adapted from code by Desirée De Leon: https://desiree.rbind.io/ 
+-----*/
+
+/* Whole document: */
+body {
+  font-weight: 100;
+}
+
+/*----NAV LINK HOVER ANIMATION -----*/
+
+.nav-link:hover {
+  color: black !important;
+}
+
+/*----------------------------------*/
+
+.hljs { /* code font size */
+font-size: 16px;
+padding: 1rem;
+}
+
+/* -------About/Home Section-------- */
+
+#about .portrait-title h2 {
+  text-transform: uppercase !important;
+  margin-bottom: 30px;
+  font-weight: 200;
+}
+
+a.navbar-brand { 
+  font-family: Raleway;
+  font-weight: 100;
+}
+
+/* --------Blog posts--------- */
+/* Headers within blogs */
+
+.article-style .section.level1 h1,
+.article-style .section.level2 h2,
+.article-style .section.level3 h3 {
+  padding-top: 0.75em;
+  padding-bottom: 0.75em;
+  font-weight: 100;
+}
+
 /* -----------div tips------------- */
 
   div.puzzle, div.fyi, div.demo, div.note, div.book, div.github, div.profile, div.bookmark, div.link, div.code{
@@ -8,8 +54,8 @@
     background-repeat: no-repeat;
     background-position: 15px center;
     min-height: 120px;
-    color: #1f5386;
-    background-color: #bed3ec;
+    color: #FFFFFF;
+    background-color: #5a9998;
     border: solid 5px #dfedff;
   }
   

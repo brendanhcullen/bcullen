@@ -22,7 +22,7 @@ font = "my_font_set"
 
 # Choose a font size.
 # Sizes: XS (extra small), S (small), M (medium), L (large - DEFAULT), XL (extra large)
-font_size = "L"
+font_size = ""
 
 ############################
 ## Basic Info
@@ -114,7 +114,8 @@ contact_links = [
 ############################
 
 # Default image for social sharing and search engines. Place image in `static/img/` folder and specify image name here.
-sharing_image = "cullen_headshot.jpg"
+sharing_image = "sharing_image.jpg"
+twitter_image = "sharing_image.jpg"
 
 # Twitter username (without @). Used when a visitor shares your site on Twitter.
 twitter = "_bcullen"
