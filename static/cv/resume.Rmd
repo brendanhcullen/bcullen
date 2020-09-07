@@ -88,7 +88,7 @@ contact_info %>%
 Certification <i class="fab fa-r-project"></i> {#certification}
 --------------------------------------------------------------------------------
 
-I am an [RStudio Certified Instructor](https://education.rstudio.com/trainers/people/cullen+brendan/) in the [tidyverse](https://www.tidyverse.org/).
+I am an [RStudio Certified Instructor](https://education.rstudio.com/trainers/people/cullen+brendan/) in the [tidyverse](https://www.tidyverse.org/). You can see my certificate [here](https://github.com/brendanhcullen/rstudio-instructor-certification/blob/master/certificate.png).
 
 <br>
 
