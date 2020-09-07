@@ -41,6 +41,46 @@ a.nav-link:hover:after {
   width: 70%;
 }
 
+/*----------------------------------*/
+
+.hljs { /* code font size */
+font-size: 16px;
+padding: 1rem;
+}
+
+/* -------About/Home Section-------- */
+
+#about .portrait-title h2 {
+  text-transform: uppercase !important;
+  margin-bottom: 30px;
+  font-weight: 200;
+}
+
+a.navbar-brand { 
+  font-family: Raleway;
+  font-weight: 100;
+}
+
+/* --------Blog posts--------- */
+/* Headers within blogs */
+
+.article-style .section.level1 h1,
+.article-style .section.level2 h2,
+.article-style .section.level3 h3 {
+  padding-top: 0.75em;
+  padding-bottom: 0.75em;
+  font-weight: 100;
+}
+
+/* Links within blog posts */
+
+.article-style .section a {
+  color: #E14675;
+}
+
+.article-style .section a:hover {
+  color: #DCA0B2;
+}
 
 /* -----------div tips------------- */
 
