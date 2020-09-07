@@ -125,8 +125,8 @@ See full CV at [bcullen.rbind.io/cv](https://bcullen.rbind.io/cv/index.html) for
 Disclaimer {#disclaimer}
 --------------------------------------------------------------------------------
 
-Created with [pagedown](https://github.com/rstudio/pagedown). 
-<br>Source code on [GitHub](https://github.com/brendanhcullen/bcullen/tree/master/static/cv). <i class="fa fa-github"></i> 
+Created with [pagedown](https://github.com/rstudio/pagedown).
+<br>Source code on [GitHub](https://github.com/brendanhcullen/bcullen/tree/master/static/cv). <i class="fa fa-github"></i>
 <br>Last updated on `r Sys.Date()`.
 
 

@@ -101,8 +101,8 @@ build_skill_bars(skills)
 Disclaimer {#disclaimer}
 --------------------------------------------------------------------------------
 
-Created with [pagedown](https://github.com/rstudio/pagedown). 
-<br>Source code on [GitHub](https://github.com/brendanhcullen/bcullen/tree/master/static/cv). <i class="fa fa-github"></i> 
+Created with [pagedown](https://github.com/rstudio/pagedown).
+<br>Source code on [GitHub](https://github.com/brendanhcullen/bcullen/tree/master/static/cv). <i class="fa fa-github"></i>
 <br>Last updated on `r Sys.Date()`.
 
 
