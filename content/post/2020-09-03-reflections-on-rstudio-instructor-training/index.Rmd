@@ -79,7 +79,7 @@ There are also sample teaching exams available.
 
 ### Demonstration Lesson: Example
 
-If you'd like to see an example of a demonstration lesson, below are the materials I created for this portion of the teaching exam. I used `penguins` from the [`{palmerpenguins}`](https://allisonhorst.github.io/palmerpenguins/) package an example data set. (why? because penguins `r emo::ji("penguin")` `r emo::ji("penguin")` `r emo::ji("penguin")`). 
+If you'd like to see an example of a demonstration lesson, below are the materials I created for this portion of the teaching exam. I used `penguins` from the [`{palmerpenguins}`](https://allisonhorst.github.io/palmerpenguins/) package as an example data set. (why? because penguins `r emo::ji("penguin")` `r emo::ji("penguin")` `r emo::ji("penguin")`). 
 
 
 **Column-wise operations with `dplyr`: Old and New**
@@ -161,6 +161,7 @@ As online data science education is becoming increasingly the norm, it seems nat
 Another great reason to become a certified instructor is that, as a data science educator, you have a huge and ever-increasing bank of resources at your disposal. What's more, as a certified instructor, you are eligible for free licenses to [RStudio Pro products](https://rstudio.com/products/) and a significant discount for [RStudio Cloud](https://rstudio.cloud/). Here are just some of the great teaching tools from RStudio and the #rstats community. 
 
 :::bookmark
+<br>
 The [RStudio Education Blog](https://education.rstudio.com/blog/) is a `r emo::ji("gem")` TREASURE TROVE `r emo::ji("gem")` of resources. Add it to your bookmarks immediately. 
 :::
 
@@ -214,7 +215,7 @@ The focus of this training is not technical competency -- it's how be an effecti
 
 The [#rstats learning community](https://twitter.com/R4DScommunity) is known for being welcoming and inclusive, so it's no surprise that the training course emphasizes these values as well. What I appreciate most about this aspect of the training is that it will challenge you to think about questions and hypothetical scenarios to which there are no easy answers. 
 
-However, it is extremely important to be pushed out of your comfort zone to consciously and proactively reflect on how you will confront issues such as systemic racism and institutionalized violence against BIPOC communities, sexism and a deeply ingrained culture of sexual harassment. These issues will inevitably arise in one form or another in your classroom or teaching setting, and it's absolutely necessary that we confront these challenges now more than ever. 
+However, it is extremely important to be pushed out of your comfort zone to consciously and proactively reflect on how you will confront issues such as systemic racism and institutionalized violence against BIPOC communities, sexism and a deeply ingrained culture of sexual harassment. These issues will inevitably arise in one form or another in your classroom or teaching setting, and it's absolutely necessary that we confront these challenges now more than ever. Check out [this slide](https://docs.google.com/presentation/d/1uYQCbs88aao7Ho4d4mUfYi6hOXhgHWV6noR_-jOaE50/edit#slide=id.g56df7927dc_0_1) and [this talk](https://www.youtube.com/watch?v=EhNisFJPfrs) on effective allyship when you get a chance. 
 
 :::book
 <br>
