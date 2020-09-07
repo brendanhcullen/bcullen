@@ -51,7 +51,7 @@ The training course is an interactive introduction to applying evidence-based te
 
 ## Technical Exam `r fontawesome::fa("laptop-code")`
 
-The technical exam assesses your profiency in whatever topic for which you are attempting to become a certified instructor. Currently there are options to become a certified instructor in [tidyverse](https://www.tidyverse.org/) and [shiny](https://shiny.rstudio.com/), and each has its own accompanying technical exam. 
+The technical exam assesses your proficiency in whatever topic for which you are attempting to become a certified instructor. Currently there are options to become a certified instructor in [tidyverse](https://www.tidyverse.org/) and [shiny](https://shiny.rstudio.com/), and each has its own accompanying technical exam. 
 
 I took the tidyverse exam, which, broadly speaking, consists of a series of live coding challenges related to using core tidyverse packages for data cleaning and wrangling, data visualization, string manipulation, functional programming, basic statistical modeling, and creating reproducible documents with R Markdown. 
 
@@ -68,7 +68,7 @@ I highly recommend going through these sample exams from the RStudio Education B
 
 ## Teaching Exam `r fontawesome::fa("user-graduate")`
 
-The first certification exam assesses pedagogical skills related to teaching data science with R and requires giving a 15-minute demonstration lesson on a topic of your choide followed by a series of applied questions, which will likely involve creating formative assessments on unseen material (e.g. multiple choice questions and fill-in-the-blank coding exercises), developing concept maps on data science topics and giving feedback on example teaching based on pedagogical theory.
+The first certification exam assesses pedagogical skills related to teaching data science with R and requires giving a 15-minute demonstration lesson on a topic of your choice followed by a series of applied questions, which will likely involve creating formative assessments on unseen material (e.g. multiple choice questions and fill-in-the-blank coding exercises), developing concept maps on data science topics and giving feedback on example teaching based on pedagogical theory.
 
 :::note
 There are also sample teaching exams available.
@@ -79,7 +79,7 @@ There are also sample teaching exams available.
 
 ### Demonstration Lesson: Example
 
-If you'd like to see an example of a demonstration lesson, below are the materials I created for this portion of the teaching exam. I used `penguins` from the [`{palmerpenguins}`](https://allisonhorst.github.io/palmerpenguins/) package an example dataset. (why? because penguins `r emo::ji("penguin")` `r emo::ji("penguin")` `r emo::ji("penguin")`). 
+If you'd like to see an example of a demonstration lesson, below are the materials I created for this portion of the teaching exam. I used `penguins` from the [`{palmerpenguins}`](https://allisonhorst.github.io/palmerpenguins/) package an example data set. (why? because penguins `r emo::ji("penguin")` `r emo::ji("penguin")` `r emo::ji("penguin")`). 
 
 
 **Column-wise operations with `dplyr`: Old and New**
@@ -137,9 +137,9 @@ Here's a quick look.
 
 # The *why*
 
-Ok, this might all seem like quite a bit of time and effort. Why go to the trouble of doing this traning? In a word, [Greg Wilson](https://third-bit.com/about/). 
+Ok, this might all seem like quite a bit of time and effort. Why go to the trouble of doing this training? In a word, [Greg Wilson](https://third-bit.com/about/). 
 
-Greg, who co-founded the [Software Carpentry](https://software-carpentry.org/), has over 35 years of experience in education in data science and software engineering, and it shows. He is now part of the [RStudio Education](https://education.rstudio.com/) team, where he runs the the instructor training and certification program. One of the reasons this program stands out is that it benefits from Greg's unique expertise and careful curation of deacdes of research on evidence-based teaching methods that he has translated into clear and actionable advice. I can guarantee that you will learn a LOT from him.
+Greg, who co-founded the [Software Carpentry](https://software-carpentry.org/), has over 35 years of experience in education in data science and software engineering, and it shows. He is now part of the [RStudio Education](https://education.rstudio.com/) team, where he runs the the instructor training and certification program. One of the reasons this program stands out is that it benefits from Greg's unique expertise and careful curation of decades of research on evidence-based teaching methods that he has translated into clear and actionable advice. I can guarantee that you will learn a LOT from him.
 
 Greg's most important [advice for teaching](https://third-bit.com/10rules/#teaching), in my opinion: 
 
@@ -150,7 +150,7 @@ Greg's most important [advice for teaching](https://third-bit.com/10rules/#teach
 
 ## Surge in online teaching `r fontawesome::fa("cloud")`
 
-Interest in data science education seems to be ever-increasing. The fact that COVID-19 has forced most education to go online might actually present an opportunity to meet this demand in a more scalable and (hopefully more accessible way that doesn't incur the trditional limitations of travel costs or room capacity. Of course, online education comes with a host of inherent challenges. The training course includes a [whole section](https://docs.google.com/presentation/d/1kbYaHv47Vt59JxqXF7U7pQl5XOwsctzpP740iVM7Bc8/edit#slide=id.g55ddde1eae_0_2) on this. I also recommend you check out this [RStudio webinar](https://rstudio.com/resources/webinars/teaching-online-at-short-notice/) and accompanying [blog post](https://education.rstudio.com/blog/2020/03/teaching-online-on-short-notice/) along with answers to some [frequently asked questions](https://education.rstudio.com/blog/2020/03/online-teaching-qa/) about teaching online.  
+Interest in data science education seems to be ever-increasing. The fact that COVID-19 has forced most education to go online might actually present an opportunity to meet this demand in a more scalable and (hopefully more accessible way that doesn't incur the traditional limitations of travel costs or room capacity. Of course, online education comes with a host of inherent challenges. The training course includes a [whole section](https://docs.google.com/presentation/d/1kbYaHv47Vt59JxqXF7U7pQl5XOwsctzpP740iVM7Bc8/edit#slide=id.g55ddde1eae_0_2) on this. I also recommend you check out this [RStudio webinar](https://rstudio.com/resources/webinars/teaching-online-at-short-notice/) and accompanying [blog post](https://education.rstudio.com/blog/2020/03/teaching-online-on-short-notice/) along with answers to some [frequently asked questions](https://education.rstudio.com/blog/2020/03/online-teaching-qa/) about teaching online.  
 
 As online data science education is becoming increasingly the norm, it seems natural to assume that there will be a need for more certified instructors to meet the growing demand. 
 
@@ -187,7 +187,7 @@ The [RStudio Education Blog](https://education.rstudio.com/blog/) is a `r emo::j
   
   - [STAT 545](https://stat545.com/), courtesy of [Jenny Bryan](https://jennybryan.org/about/)
   
-  - [Many others](https://education.rstudio.com/teach/materials/#workshops), courtesty of the RStudio Education Team
+  - [Many others](https://education.rstudio.com/teach/materials/#workshops), courtesy of the RStudio Education Team
 
 **rstudio4edu**
 
@@ -199,7 +199,7 @@ The [RStudio Education Blog](https://education.rstudio.com/blog/) is a `r emo::j
 
 The instructor training program started back in February 2019 and [as of August 2020](https://education.rstudio.com/blog/2020/08/august-2020-instructors/) there are almost 150 certified tidyverse instructors and 20 shiny instructors. This means that the program has gone through multiple iterations and has made data-driven improvements based on [feedback from participants](https://education.rstudio.com/blog/2020/07/instructor-certification-findings/) -- especially in the realm of supporting online teaching in the aftermath of COVID-19. So you can rest assured that, while it is still a relatively new program, all the kinks have been worked out. 
 
-Plus, I'm sure tht the content and structure of the training will continue to adapt to the needs and priorities of the community, and you might even be lucky enough to catch a special guest presentation. For example...
+Plus, I'm sure that the content and structure of the training will continue to adapt to the needs and priorities of the community, and you might even be lucky enough to catch a special guest presentation. For example...
 
 <center>
 <blockquote class="twitter-tweet"><p lang="en" dir="ltr">Enjoyed sharing some tips today on &quot;Teaching in Production&quot; for our <a href="https://twitter.com/RStudioEDU?ref_src=twsrc%5Etfw">@RStudioEDU</a> certified-instructors-to-be (another <a href="https://twitter.com/thomas_mock?ref_src=twsrc%5Etfw">@thomas_mock</a> distill success story!) <br><br>Thx to <a href="https://twitter.com/gvwilson?ref_src=twsrc%5Etfw">@gvwilson</a> for the invite, <a href="https://twitter.com/allison_horst?ref_src=twsrc%5Etfw">@allison_horst</a> for <a href="https://twitter.com/hashtag/rmarkdown?src=hash&amp;ref_src=twsrc%5Etfw">#rmarkdown</a> 🦔(❣️), and <a href="https://twitter.com/dcossyle?ref_src=twsrc%5Etfw">@dcossyle</a> for all her 🎨.<a href="https://t.co/sngAwlcSqN">https://t.co/sngAwlcSqN</a></p>&mdash; Alison Presmanes Hill (@apreshill) <a href="https://twitter.com/apreshill/status/1296553009522962432?ref_src=twsrc%5Etfw">August 20, 2020</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
