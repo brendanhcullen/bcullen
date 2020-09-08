@@ -60,8 +60,8 @@ As many others have suggested, a great way to prepare for this exam is to work t
 :::note
 I highly recommend going through these sample exams from the RStudio Education Blog start to finish to get a sense of what you might need to review.
 
-* [Sample Tidyverse Exam 1](https://education.rstudio.com/blog/2020/02/instructor-certification-exams/#tidyverse-certification-exam) ([solutions](https://marlycormar.github.io/tidyverse_sample_exam/sample_exam_sols/sols.html)) 
-* [Sample Tidyverse Exam 2](https://education.rstudio.com/blog/2020/08/more-example-exams/#tidyverse-exam)
+* [Sample Tidyverse Exam 1](https://education.rstudio.com/blog/2020/02/instructor-certification-exams/#tidyverse-certification-exam) | [solutions](https://marlycormar.github.io/tidyverse_sample_exam/sample_exam_sols/sols.html)
+* [Sample Tidyverse Exam 2](https://education.rstudio.com/blog/2020/08/more-example-exams/#tidyverse-exam) | [solutions](https://tidyverse-exam-v2-solutions.netlify.app/)
 :::
 
 <br>
