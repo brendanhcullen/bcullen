@@ -79,10 +79,10 @@ There are also sample teaching exams available.
 
 ### Demonstration Lesson: Example
 
+*Column-wise operations with `dplyr`: Old and New*
+
 If you'd like to see an example of a demonstration lesson, below are the materials I created for this portion of the teaching exam. I used `penguins` from the [`{palmerpenguins}`](https://allisonhorst.github.io/palmerpenguins/) package as an example data set. (why? because penguins `r emo::ji("penguin")` `r emo::ji("penguin")` `r emo::ji("penguin")`). 
 
-
-**Column-wise operations with `dplyr`: Old and New**
 
 :::github
 <br>
@@ -91,7 +91,7 @@ You can find all of the materials for this lesson and the accompanying code on [
 
 #### Slides `r fontawesome::fa("film")`
 
-I made heavy use of [Yihui Xie](https://yihui.org/en/about/)'s [`{xaringan}`](https://slides.yihui.org/xaringan/) `r emo::ji("package")`, [Garrick Aden-Buie](https://www.garrickadenbuie.com/)'s [`{xaringanExtra}`](https://pkg.garrickadenbuie.com/xaringanExtra/#/) `r emo::ji("package")`, and [Kelly Bodwin](https://www.kelly-bodwin.com/)'s [`{flair}`](https://kbodwin.github.io/flair/index.html) `r emo::ji("package")`, along with [Allison Horst](https://www.allisonhorst.com/)'s unbeatable [artwork](https://github.com/allisonhorst/stats-illustrations). For an excellent `{xaringan}` tutorial, I recommend you check out [these slides](https://arm.rbind.io/slides/xaringan.html#1), from the R Markdown whisperer herself, [Alison Hill](https://alison.rbind.io/). 
+I made heavy use of [Yihui Xie](https://yihui.org/en/about/)'s [`{xaringan}`](https://slides.yihui.org/xaringan/) `r emo::ji("package")`, [Garrick Aden-Buie](https://www.garrickadenbuie.com/)'s [`{xaringanExtra}`](https://pkg.garrickadenbuie.com/xaringanExtra/#/) `r emo::ji("package")`, and [Kelly Bodwin](https://www.kelly-bodwin.com/)'s [`{flair}`](https://kbodwin.github.io/flair/index.html) `r emo::ji("package")`, along with [Allison Horst](https://www.allisonhorst.com/)'s unbeatable [artwork](https://github.com/allisonhorst/stats-illustrations). For an excellent `{xaringan}` tutorial, I recommend you check out [these slides](https://arm.rbind.io/slides/xaringan.html#1), from the R Markdown whisperer herself, [Alison Hill](https://alison.rbind.io/). Note: you absolutely do not have to use `{xaringan}` to make your slides, and if your lesson includes more images than code, another method for delivering your slides might be better. 
 
 ```{r echo=FALSE}
 xaringanExtra::embed_xaringan(
