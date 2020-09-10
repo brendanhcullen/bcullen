@@ -4,7 +4,7 @@ Adapted from code by Desirée De Leon: https://desiree.rbind.io/
 
 /* Whole document: */
 body {
-  font-weight: 100;
+  font-weight: 300;
 }
 
 /*----NAV LINK HOVER ANIMATION -----*/
@@ -25,7 +25,7 @@ padding: 1rem;
 #about .portrait-title h2 {
   text-transform: uppercase !important;
   margin-bottom: 30px;
-  font-weight: 200;
+  font-weight: 300;
 }
 
 a.navbar-brand { 
@@ -33,15 +33,22 @@ a.navbar-brand {
   font-weight: 100;
 }
 
+a.nav-link { 
+  font-family: Raleway;
+  font-weight: 200;
+}
+
+
 /* --------Blog posts--------- */
 /* Headers within blogs */
 
 .article-style .section.level1 h1,
 .article-style .section.level2 h2,
-.article-style .section.level3 h3 {
+.article-style .section.level3 h3,
+.article-style .section.level3 h4{
   padding-top: 0.75em;
   padding-bottom: 0.75em;
-  font-weight: 100;
+  font-weight: 300;
 }
 
 /* -----------div tips------------- */
