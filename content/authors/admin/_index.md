@@ -15,12 +15,11 @@ education:
     year: 2015
 email: "bcullen@uoregon.edu"
 interests:
-- Data science & statistics
-- Predictive modeling
-- R programming
+- Data science education
+- R & R Markdown
 - Health behavior change
 - Precision medicine
-- Personality and health
+- Translational neuroscience
 name: Brendan Cullen
 organizations:
 - name: Social and Affective Neuroscience Lab

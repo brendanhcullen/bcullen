@@ -1,24 +1,20 @@
 ---
-title: RStudio Instructor Certification
-summary: My experience training to be a certified instructor in the tidyverse.
+title: UO Psych R Bootcamp 2020
+summary: Materials from a 3-day bootcamp that introduces new learners to R, RStudio and the tidyverse.
 abstract: ""
-date: "2020-09-03T00:00:00Z"
+date: "2020-10-06T00:00:00Z"
 image:
   caption: 
   focal_point: Smart
 links:
-- icon: address-card
+- icon: link
   icon_pack: fas
-  name: Trainer Directory
-  url: https://education.rstudio.com/trainers/people/cullen+brendan/
+  name: Bootcamp Website
+  url: https://uopsych-r-bootcamp-2020.netlify.app/
 - icon: github
   icon_pack: fab
-  name: Demonstration Lesson Repo
-  url: https://github.com/brendanhcullen/rstudio-instructor-certification
-- icon: book
-  icon_pack: fas
-  name: Blog post
-  url: /post/2020-09-03-reflections-on-rstudio-instructor-training/index.html
+  name: Github Repo
+  url: https://github.com/uopsych/summeR-bootcamp-2020
 
 tags:
 - R
