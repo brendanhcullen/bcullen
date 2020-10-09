@@ -37,7 +37,7 @@ Credit for the vast majority of the original workshop materials goes to [Dani Co
 
 ### Undergraduate statistics
 
-In spring 2020, I taught online lab sections for [PSY302: Statistical Methods in Psychology](psy302/PSY_302_Spring_2020.pdf), an introductory undergraduate statistics course (~200 students total). Below are a couple selected examples of lab sections that I taught using the open-source statistical software [jamovi](https://www.jamovi.org/). 
+In spring 2020, I taught online lab sections for [PSY302: Statistical Methods in Psychology](psy302/PSY_302_Spring_2020.pdf) (~200 students total), an introductory undergraduate statistics course at the University of Oregon taught by [Dr. Sara Weston](https://psychology.uoregon.edu/profile/sweston2/). Below are a couple selected examples of lab sections that I taught using the open-source statistical software [jamovi](https://www.jamovi.org/). 
 
 #### One-sample t-tests
 
@@ -55,9 +55,8 @@ Download accompanying lab handout [here](psy302/20Spring_PSY302_Lab5_handout.pdf
 
 ### Graduate statistics
 
-During Fall 2019 and Winter 2020 served as a teaching assistant and lab instructor for the first two courses in a 3-term sequence of graduate statistics classes in the Department of Psychology at the University of Oregon. These classes are designed to provide a thorough grounding in statistical concepts, methods, and applications of relevance to psychological science and related fields. The lab sections of these classes involve learning the basics of the statistical programming language R and how to use this program to wrangle, visualize and, summarize data and test hypotheses with inferential statistics. 
+During Fall 2019 and Winter 2020 I served as a teaching assistant and lab instructor for the first two courses in a 3-term sequence of graduate statistics classes in the Department of Psychology at the University of Oregon, led by [Dr. Sara Weston](https://psychology.uoregon.edu/profile/sweston2/). These classes are designed to provide a thorough grounding in statistical concepts, methods, and applications of relevance to psychological science and related fields. The lab sections of these classes involve learning the basics of the statistical programming language R and how to use R to wrangle, visualize and summarize data as well as test hypotheses with inferential statistics. 
 
 
 >Click the links below to access my teaching materials :point_down:
 
-<br> 
