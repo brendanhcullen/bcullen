@@ -29,10 +29,10 @@ subtitle = "An assortment of different projects I have worked on during my time 
   [[content.filter_button]]
     name = "R"
     tag = "R"
-  
+    
   [[content.filter_button]]
-    name = "data science"
-    tag = "data science"
+    name = "education"
+    tag = "education"
 
   [[content.filter_button]]
     name = "data viz"

@@ -8,7 +8,6 @@ summary: A shiny dashboard that visualizes k-means clustering
 tags:
 - data viz
 - R
-- data science
 
 title: K-means Clustering Shiny Dashboard
 ---

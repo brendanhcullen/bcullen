@@ -134,7 +134,7 @@ Education {data-icon=graduation-cap data-concise=true}
 print_section(position_data, 'education')
 ```
 
-Certification {data-icon=award data-concise=true}
+Certification {data-icon=certificate data-concise=true}
 --------------------------------------------------------------------------------
 
 
@@ -159,7 +159,7 @@ print_section(position_data, 'research_positions')
 ```
 
 
-Teaching Experience {data-icon=chalkboard-teacher}
+Teaching Experience (Courses) {data-icon=chalkboard-teacher}
 --------------------------------------------------------------------------------
 
 ::: aside
@@ -172,14 +172,8 @@ print_text_block(text_blocks, 'teaching_experience_aside')
 print_section(position_data, 'teaching_positions')
 ```
 
-Workshops Taught {data-icon=code-branch}
+Workshops Taught {data-icon=laptop}
 --------------------------------------------------------------------------------
-
-::: aside
-```{r}
-print_text_block(text_blocks, 'workshop_experience_aside')
-```
-:::
 
 ```{r}
 print_section(position_data, 'workshops')
@@ -226,7 +220,7 @@ print_section(position_data, 'talks')
 
 <br><br><br><br>
 
-Additional Training {data-icon=laptop}
+Additional Training {data-icon=user-graduate}
 --------------------------------------------------------------------------------
 
 

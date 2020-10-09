@@ -7,14 +7,14 @@ menu:
   example:
     name: PSY611
     weight: 1
-summary: Labs taught include R basics and descriptives, Matrix Algebra in R, Data Transformation with dyplr, Pre-registration, and Paired samples t-tests.
+summary: Labs taught include R basics and descriptives, Matrix Algebra in R, Data Transformation with dplyr, Pre-registration, and Paired samples t-tests.
 title: "PSY611: Data Analysis I"
 toc: false
 type: docs
 weight: 1
 ---
 
->**Below are links to the labs that I created and taught in Fall 2019.** 
+#### **Below are links to the labs that I created and taught in Fall 2019.** 
 
 [R basics and descriptives](https://brendanhcullen.github.io/psy611/labs/lab-2.html)
 
@@ -24,7 +24,7 @@ weight: 1
 
 * The purpose of this lab is to learn how to create matrices in R and how to perform basic mathematical functions on matrices using R functions. We will also focus during the minihacks on applying what you learned in lecture to create linear combinations of data, including calculating some basic descriptive statistics
 
-[Data Transformation with dyplr](https://brendanhcullen.github.io/psy611/labs/lab-5.html)
+[Data Transformation with dplyr](https://brendanhcullen.github.io/psy611/labs/lab-5.html)
 
 * The purpose of this lab is to introduce you to the tidyverse as a framework for working with data structures in R. We will mostly focus on data wrangling (particularly data transformation), including how to extract specific observations and variables, how to generate new variables and how to summarize data.
 

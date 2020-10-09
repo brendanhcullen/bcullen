@@ -7,7 +7,7 @@ image:
 summary: A solution guide to the sample tidyverse exam v2.0 for the RStudio Instructor Training and Certification Program. 
 tags:
 - R
-- data science
+- education
 
 title: Tidyverse Sample Exam 2.0 Solutions
 ---

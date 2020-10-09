@@ -8,7 +8,6 @@ summary: A flexdashboard that visualizes data from the Big Cities Health Invento
 tags:
 - data viz
 - R
-- data science
 
 title: Data Vizualization Dashboard
 ---
