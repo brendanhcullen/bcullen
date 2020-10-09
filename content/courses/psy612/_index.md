@@ -14,7 +14,7 @@ type: docs
 weight: 1
 ---
 
->Below are links to the labs that I created and taught in Winter 2020. 
+#### Below are links to the labs that I created and taught in Winter 2020. 
 
 [Correlations](https://brendanhcullen.github.io/psy612/labs/lab-1/lab-1.html)
 
