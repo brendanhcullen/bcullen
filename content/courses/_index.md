@@ -28,7 +28,10 @@ I taught an introductory workshop for first-year psychology PhD and Master’s s
 
 Credit for the vast majority of the original workshop materials goes to [Dani Cosme](https://dcosme.github.io/).
 
+<br> 
+
 ***
+<br>
 
 ## University Courses <i class="fas fa-chalkboard-teacher"></i>
 
@@ -54,12 +57,7 @@ Download accompanying lab handout [here](psy302/20Spring_PSY302_Lab5_handout.pdf
 
 During Fall 2019 and Winter 2020 served as a teaching assistant and lab instructor for the first two courses in a 3-term sequence of graduate statistics classes in the Department of Psychology at the University of Oregon. These classes are designed to provide a thorough grounding in statistical concepts, methods, and applications of relevance to psychological science and related fields. The lab sections of these classes involve learning the basics of the statistical programming language R and how to use this program to wrangle, visualize and, summarize data and test hypotheses with inferential statistics. 
 
-<br>
 
-<center>
+>Click the links below to access my teaching materials :point_down:
 
-**Click the links below to access my teaching materials.**
-
-</center>
-
-<br>
+<br> 
