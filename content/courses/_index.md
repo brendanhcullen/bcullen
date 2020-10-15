@@ -8,7 +8,7 @@ title: Teaching
 
 <br>
 
-## Workshops <i class="fas fa-laptop-code"></i> 
+## Workshops & Shared Lessons <i class="fas fa-laptop-code"></i> 
 
 ### UO Psych R Bootcamp 2020 
 :link: https://uopsych-r-bootcamp-2020.netlify.app/
@@ -20,11 +20,22 @@ This bootcamp gives a gentle introduction to R and RStudio, transforming and vis
 <iframe src="https://uopsych-r-bootcamp-2020.netlify.app/"; 
 style="width:100%; height:500px"> </iframe>
 
+<br>
+
+### Column-wise operations with `dplyr`: Old and New
+
+While preparing to become an RStudio Certified Instructor, I put together a lesson on column-wise operations using the `dplyr` package -- in other words, how to apply data transformations to multiple columns of data simultaneously. This was a fun opportunity to not only learn about this topic in much greater depth but also to implement modern teaching methods I had recently learned, including [concept maps](https://github.com/brendanhcullen/rstudio-instructor-certification#concept-map), [learner personas](https://github.com/brendanhcullen/rstudio-instructor-certification/blob/master/README.md#learner-persona), and [formative assessment](https://brendancullen.shinyapps.io/columnwise_operations_formative_assessment), among others. You can find the source code and accompanying materials for this lesson on [Github](https://github.com/brendanhcullen/rstudio-instructor-certification). 
+
+<iframe src="https://columnwise-operations-dplyr.netlify.app/"; 
+style="width:100%; height:500px"> </iframe>
+
+<br> 
+
 ### Introduction to Git and Github
 
 :link: https://github.com/brendanhcullen/git-tutorial
 
-I taught an introductory workshop for first-year psychology PhD and Master’s students on basics of using Git and Github for version control in February 2020. I also taught a more advanced version of this workshop for University of Oregon’s Data Science Club in , including a discussion of merge conflicts, branching, pull requests, and best practices for collaborative Github projects. I [regularly use Github](https://github.com/brendanhcullen) to more easily track and share my work, and I have enjoyed the opportunity to help my fellow grad students get started with learning the "why" and "how" of using version control.
+I taught an introductory workshop for first-year psychology PhD and Master’s students on basics of using Git and Github for version control in February 2020. I also taught a more advanced version of this workshop for University of Oregon’s Data Science Club in 2019, including a discussion of merge conflicts, branching, pull requests, and best practices for collaborative Github projects. I [regularly use Github](https://github.com/brendanhcullen) to more easily track and share my work, and I have enjoyed the opportunity to help my fellow grad students get started with learning the "why" and "how" of using version control.
 
 Credit for the vast majority of the original workshop materials goes to [Dani Cosme](https://dcosme.github.io/).
 
