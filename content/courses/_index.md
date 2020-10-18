@@ -24,6 +24,8 @@ style="width:100%; height:500px"> </iframe>
 
 ### Column-wise operations with `dplyr`: Old and New
 
+:link: https://columnwise-operations-dplyr.netlify.app/
+
 While preparing to become an RStudio Certified Instructor, I put together a lesson on column-wise operations using the `dplyr` package -- in other words, how to apply data transformations to multiple columns of data simultaneously. This was a fun opportunity to not only learn about this topic in much greater depth but also to implement modern teaching methods I had recently learned, including [concept maps](https://github.com/brendanhcullen/rstudio-instructor-certification#concept-map), [learner personas](https://github.com/brendanhcullen/rstudio-instructor-certification/blob/master/README.md#learner-persona), and [formative assessment](https://brendancullen.shinyapps.io/columnwise_operations_formative_assessment), among others. You can find the source code and accompanying materials for this lesson on [Github](https://github.com/brendanhcullen/rstudio-instructor-certification). 
 
 <iframe src="https://columnwise-operations-dplyr.netlify.app/"; 
@@ -48,7 +50,7 @@ Credit for the vast majority of the original workshop materials goes to [Dani Co
 
 ### Undergraduate statistics
 
-In spring 2020, I taught online lab sections for [PSY302: Statistical Methods in Psychology](psy302/PSY_302_Spring_2020.pdf) (~200 students total), an introductory undergraduate statistics course at the University of Oregon taught by [Dr. Sara Weston](https://psychology.uoregon.edu/profile/sweston2/). Below are a couple selected examples of lab sections that I taught using the open-source statistical software [jamovi](https://www.jamovi.org/). 
+In spring 2020, I taught online lab sections for [PSY302: Statistical Methods in Psychology](psy302/PSY_302_Spring_2020.pdf), an introductory undergraduate statistics course at the University of Oregon (~200 students total) led by [Dr. Sara Weston](https://psychology.uoregon.edu/profile/sweston2/). See below for a couple selected examples of lab sections that I taught using the open-source statistical software [jamovi](https://www.jamovi.org/). 
 
 #### One-sample t-tests
 
@@ -64,10 +66,12 @@ Download accompanying lab handout [here](psy302/20Spring_PSY302_Lab4_handout.pdf
 
 Download accompanying lab handout [here](psy302/20Spring_PSY302_Lab5_handout.pdf).
 
+<br>
+
 ### Graduate statistics
 
 During Fall 2019 and Winter 2020 I served as a teaching assistant and lab instructor for the first two courses in a 3-term sequence of graduate statistics classes in the Department of Psychology at the University of Oregon, led by [Dr. Sara Weston](https://psychology.uoregon.edu/profile/sweston2/). These classes are designed to provide a thorough grounding in statistical concepts, methods, and applications of relevance to psychological science and related fields. The lab sections of these classes involve learning the basics of the statistical programming language R and how to use R to wrangle, visualize and summarize data as well as test hypotheses with inferential statistics. 
 
 
->Click the links below to access my teaching materials :point_down:
+**Click the links below to access my teaching materials** :point_down:
 
