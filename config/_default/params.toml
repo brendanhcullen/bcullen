@@ -74,6 +74,17 @@ privacy_pack = false
 edit_page = {repo_url = "https://github.com/gcushen/hugo-academic", content_dir = "", repo_branch = "master", editable = {docs = true, page = false, post = false}}
 
 ############################
+## Code folding
+############################
+
+# Set to true to disable code folding
+disable_codefolding = false
+# Set to "hide" or "show" all codes by default
+codefolding_show = "hide"
+# Set to true to exclude the "Show/hide all" button
+codefolding_nobutton = false
+
+############################
 ## Contact details
 ##
 ## These details power the Contact widget (if enabled).

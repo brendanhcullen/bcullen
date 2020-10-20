@@ -15,8 +15,12 @@ image:
   focal_point: ''
   preview_only: FALSE
 projects: []
+disable_codefolding: false
+codefolding_show: "show"
+codefolding_nobutton: true 
 ---
 
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
 
 
 <p>RStudio has recently released a cohesive suite of packages for modelling and machine learning, called <code>{tidymodels}</code>. The successor to Max Kuhn’s <code>{caret}</code> package, <code>{tidymodels}</code> allows for a tidy approach to your data from start to finish. We’re going to walk through the basics for getting off the ground with <code>{tidymodels}</code> and demonstrate its application to three different tree-based methods for predicting student test scores. For further information about the package, you can visit <a href="https://www.tidymodels.org/" class="uri">https://www.tidymodels.org/</a>.</p>
@@ -616,6 +620,26 @@ fit_bag &lt;- fit_resamples(
 <div id="visualize" class="section level3">
 <h3>Visualize</h3>
 <p>The plot below shows the root nodes from a bagged tree made of 100 trees (10 folds x 10 bootstrapped resamples). Root nodes are the 1st node in a decision tree, and they are determined by which variable best optimizes a loss function (e.g., minimizes mean square error [MSE] for continuous outcomes or Gini Index for categorical outcomes). Put roughly, the most common root nodes can be thought of as the most “important” predictors.</p>
+<pre class="r"><code># extract roots
+bag_roots &lt;-  function(x){
+  x %&gt;% 
+  select(.extracts) %&gt;% 
+  unnest(cols = c(.extracts)) %&gt;% 
+  mutate(models = map(.extracts,
+                  ~.x$model_df)) %&gt;% 
+  select(-.extracts) %&gt;% 
+  unnest(cols = c(models)) %&gt;% 
+  mutate(root = map_chr(model,
+                     ~as.character(.x$fit$frame[1, 1]))) %&gt;%
+  select(root)  
+}
+
+# plot
+bag_roots(fit_bag) %&gt;% 
+  ggplot(mapping = aes(x = fct_rev(fct_infreq(root)))) + 
+  geom_bar() + 
+  coord_flip() + 
+  labs(x = &quot;root&quot;, y = &quot;count&quot;)</code></pre>
 <p><img src="/post/2020-06-02-tidymodels-decision-tree-learning-in-r/index_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
 </div>
 </div>
@@ -656,6 +680,37 @@ fit_rf &lt;- fit_resamples(
 <div id="visualize-1" class="section level3">
 <h3>Visualize</h3>
 <p>The plot below shows the root nodes from a random forest with 1000 trees (specified using <code>set_args(trees = 1000)</code> in the parsnip model object).</p>
+<pre class="r"><code># extract roots
+rf_tree_roots &lt;- function(x){
+  map_chr(1:1000, 
+           ~ranger::treeInfo(x, tree = .)[1, &quot;splitvarName&quot;])
+}
+
+rf_roots &lt;- function(x){
+  x %&gt;% 
+  select(.extracts) %&gt;% 
+  unnest(cols = c(.extracts)) %&gt;% 
+  mutate(fit = map(.extracts,
+                   ~.x$fit$fit$fit),
+         oob_rmse = map_dbl(fit,
+                         ~sqrt(.x$prediction.error)),
+         roots = map(fit, 
+                        ~rf_tree_roots(.))
+         ) %&gt;% 
+  select(roots) %&gt;% 
+  unnest(cols = c(roots))
+}
+
+# plot
+rf_roots(fit_rf) %&gt;% 
+  group_by(roots) %&gt;% 
+  count() %&gt;% 
+  arrange(desc(n)) %&gt;% 
+  filter(n &gt; 75) %&gt;% 
+  ggplot(aes(fct_reorder(roots, n), n)) +
+           geom_col() + 
+           coord_flip() + 
+  labs(x = &quot;root&quot;, y = &quot;count&quot;)</code></pre>
 <p><img src="/post/2020-06-02-tidymodels-decision-tree-learning-in-r/index_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
 </div>
 </div>

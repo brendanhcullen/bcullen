@@ -15,6 +15,9 @@ image:
   focal_point: ''
   preview_only: FALSE
 projects: []
+disable_codefolding: false
+codefolding_show: "show"
+codefolding_nobutton: true 
 ---
 
 RStudio has recently released a cohesive suite of packages for modelling and machine learning, called `{tidymodels}`. The successor to Max Kuhn’s `{caret}` package, `{tidymodels}` allows for a tidy approach to your data from start to finish. We’re going to walk through the basics for getting off the ground with `{tidymodels}` and demonstrate its application to three different tree-based methods for predicting student test scores. For further information about the package, you can visit https://www.tidymodels.org/.
@@ -233,7 +236,7 @@ fit_bag <- fit_resamples(
 
 The plot below shows the root nodes from a bagged tree made of 100 trees (10 folds x 10 bootstrapped resamples). Root nodes are the 1st node in a decision tree, and they are determined by which variable best optimizes a loss function (e.g., minimizes mean square error [MSE] for continuous outcomes or Gini Index for categorical outcomes). Put roughly, the most common root nodes can be thought of as the most "important" predictors.
 
-```{r echo=FALSE}
+```{r}
 # extract roots
 bag_roots <-  function(x){
   x %>% 
@@ -301,7 +304,7 @@ fit_rf <- fit_resamples(
 
 The plot below shows the root nodes from a random forest with 1000 trees (specified using `set_args(trees = 1000)` in the parsnip model object).
 
-```{r echo=FALSE}
+```{r}
 # extract roots
 rf_tree_roots <- function(x){
   map_chr(1:1000, 

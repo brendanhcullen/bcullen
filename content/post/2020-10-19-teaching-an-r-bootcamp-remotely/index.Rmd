@@ -18,6 +18,9 @@ image:
   focal_point: ''
   preview_only: no
 projects: []
+disable_codefolding: false
+codefolding_show: "hide"
+codefolding_nobutton: true 
 ---
 
 ```{r echo=FALSE, message=FALSE}
