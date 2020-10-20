@@ -9,7 +9,7 @@ tags:
   - education
   - R
 subtitle: ''
-summary: 'Lessons learned from my first experience teaching R remotely and a collection of resources I found really useful'
+summary: 'Lessons learned from my first experience teaching R remotely and a collection of resources & tools I found really useful'
 authors: []
 lastmod: '2020-10-19T10:26:32-07:00'
 featured: no
@@ -19,3 +19,78 @@ image:
   preview_only: no
 projects: []
 ---
+
+```{r echo=FALSE, message=FALSE}
+library(tidyverse)
+library(googlesheets4)
+library(patchwork)
+```
+
+
+# Background
+
+September 2018 
+
+# Who attended? 
+
+```{r, warning=FALSE, message=FALSE}
+# suspend authorization so no need for a token
+gs4_deauth()
+
+# import bootcamp registration data 
+registration <- googlesheets4::read_sheet("https://docs.google.com/spreadsheets/d/1wcGdQU7Vkg3XLvu0mArQx_gcSt0xHztbXmAmnj_tqmE/edit?usp=sharing")
+
+# clean data
+plot_data <- registration %>% 
+  janitor::clean_names() %>% 
+  select(position = what_is_your_position_at_uo,
+         experience = do_you_have_any_experience_in_r_no_experience_is_required) %>%
+  mutate(position = factor(case_when(position %in% c("Undergraduate", "Undergraduate student") ~ "Undergrad Student", 
+                                     position == "RA" ~ "Research Assistant",
+                              TRUE ~ as.character(position))),
+         experience = factor(experience, levels = c(
+           "I've never heard of it",
+           "I've heard of it but have never used it",
+           "I've opened it before",
+           "I've used it to analyze data",
+           "I use it often to analyze data")))
+
+# plot positions at UO
+theme_set(theme_minimal(base_size = 15))
+
+plot_data %>% 
+  count(position) %>% 
+  ggplot(aes(fct_reorder(position, n), n, fill = position)) + 
+  geom_col() +
+  coord_flip() + 
+  scale_fill_viridis_d() + 
+  labs(x = "", y = "Count") + 
+  theme(legend.position = "none")
+```
+
+
+Prior experience
+
+```{r}
+# plot prior experience 
+plot_data %>% 
+  count(experience) %>% 
+  ggplot(aes(experience, n, fill = experience)) + 
+  geom_col() +
+  coord_flip() + 
+  scale_fill_viridis_d() + 
+  labs(x = "", y = "Count") + 
+  theme(legend.position = "none")
+```
+
+
+# Logistics 
+
+# Resources & Recommendations
+
+## Tools I learned 
+
+## Resources I used
+
+# Feedback 
+

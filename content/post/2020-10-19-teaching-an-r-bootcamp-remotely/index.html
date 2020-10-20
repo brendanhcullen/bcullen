@@ -9,7 +9,7 @@ tags:
   - education
   - R
 subtitle: ''
-summary: 'Lessons learned from my first experience teaching R remotely and a collection of resources I found really useful'
+summary: 'Lessons learned from my first experience teaching R remotely and a collection of resources & tools I found really useful'
 authors: []
 lastmod: '2020-10-19T10:26:32-07:00'
 featured: no
@@ -23,3 +23,69 @@ projects: []
 <script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
 
 
+<div id="background" class="section level1">
+<h1>Background</h1>
+<p>September 2018</p>
+</div>
+<div id="who-attended" class="section level1">
+<h1>Who attended?</h1>
+<pre class="r"><code># suspend authorization so no need for a token
+gs4_deauth()
+
+# import bootcamp registration data 
+registration &lt;- googlesheets4::read_sheet(&quot;https://docs.google.com/spreadsheets/d/1wcGdQU7Vkg3XLvu0mArQx_gcSt0xHztbXmAmnj_tqmE/edit?usp=sharing&quot;)
+
+# clean data
+plot_data &lt;- registration %&gt;% 
+  janitor::clean_names() %&gt;% 
+  select(position = what_is_your_position_at_uo,
+         experience = do_you_have_any_experience_in_r_no_experience_is_required) %&gt;%
+  mutate(position = factor(case_when(position %in% c(&quot;Undergraduate&quot;, &quot;Undergraduate student&quot;) ~ &quot;Undergrad Student&quot;, 
+                                     position == &quot;RA&quot; ~ &quot;Research Assistant&quot;,
+                              TRUE ~ as.character(position))),
+         experience = factor(experience, levels = c(
+           &quot;I&#39;ve never heard of it&quot;,
+           &quot;I&#39;ve heard of it but have never used it&quot;,
+           &quot;I&#39;ve opened it before&quot;,
+           &quot;I&#39;ve used it to analyze data&quot;,
+           &quot;I use it often to analyze data&quot;)))
+
+# plot positions at UO
+theme_set(theme_minimal(base_size = 15))
+
+plot_data %&gt;% 
+  count(position) %&gt;% 
+  ggplot(aes(fct_reorder(position, n), n, fill = position)) + 
+  geom_col() +
+  coord_flip() + 
+  scale_fill_viridis_d() + 
+  labs(x = &quot;&quot;, y = &quot;Count&quot;) + 
+  theme(legend.position = &quot;none&quot;)</code></pre>
+<p><img src="/post/2020-10-19-teaching-an-r-bootcamp-remotely/index_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p>Prior experience</p>
+<pre class="r"><code># plot prior experience 
+plot_data %&gt;% 
+  count(experience) %&gt;% 
+  ggplot(aes(experience, n, fill = experience)) + 
+  geom_col() +
+  coord_flip() + 
+  scale_fill_viridis_d() + 
+  labs(x = &quot;&quot;, y = &quot;Count&quot;) + 
+  theme(legend.position = &quot;none&quot;)</code></pre>
+<p><img src="/post/2020-10-19-teaching-an-r-bootcamp-remotely/index_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+</div>
+<div id="logistics" class="section level1">
+<h1>Logistics</h1>
+</div>
+<div id="resources-recommendations" class="section level1">
+<h1>Resources &amp; Recommendations</h1>
+<div id="tools-i-learned" class="section level2">
+<h2>Tools I learned</h2>
+</div>
+<div id="resources-i-used" class="section level2">
+<h2>Resources I used</h2>
+</div>
+</div>
+<div id="feedback" class="section level1">
+<h1>Feedback</h1>
+</div>
