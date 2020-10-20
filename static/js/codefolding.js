@@ -34,7 +34,7 @@ window.initializeCodeFolding = function(show) {
 
     // add a show code button right above
     var showCodeText = $('<span>' + (show ? 'Hide' : 'Code') + '</span>');
-    var showCodeButton = $('<button type="button" class="btn btn-light btn-sm code-folding-btn pull-right"></button>');
+    var showCodeButton = $('<button type="button" class="btn btn-light btn-lg code-folding-btn pull-right"></button>');
     showCodeButton.append(showCodeText);
     showCodeButton
         .attr('data-toggle', 'collapse')
