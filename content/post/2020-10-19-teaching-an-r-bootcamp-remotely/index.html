@@ -28,12 +28,12 @@ codefolding_nobutton: true
 
 <div id="background" class="section level1">
 <h1>Background</h1>
-<p>September 2018</p>
+<p>Back in Fall 2018, the Department of Psychology at the University of Oregon started to offer an introductory R Bootcamp the week before the start of the new academic year. It was my privilege to be able to lead the 3rd Annual UO Psych Bootcamp this year.</p>
 </div>
 <div id="who-attended" class="section level1">
 <h1>Who attended?</h1>
-<pre class="r"><code># suspend authorization so no need for a token
-gs4_deauth()
+<pre class="r"><code># suspend authorization so no need for a token for accessing Google Drive data
+googlesheets4::gs4_deauth()
 
 # import bootcamp registration data 
 registration &lt;- googlesheets4::read_sheet(&quot;https://docs.google.com/spreadsheets/d/1wcGdQU7Vkg3XLvu0mArQx_gcSt0xHztbXmAmnj_tqmE/edit?usp=sharing&quot;)
@@ -44,7 +44,7 @@ plot_data &lt;- registration %&gt;%
   select(position = what_is_your_position_at_uo,
          experience = do_you_have_any_experience_in_r_no_experience_is_required) %&gt;%
   mutate(position = factor(case_when(position %in% c(&quot;Undergraduate&quot;, &quot;Undergraduate student&quot;) ~ &quot;Undergrad Student&quot;, 
-                                     position == &quot;RA&quot; ~ &quot;Research Assistant&quot;,
+                                     position %in% c(&quot;RA&quot;, &quot;Lab Manager&quot;, &quot;Data Analyst&quot;) ~ &quot;Research Staff&quot;,
                               TRUE ~ as.character(position))),
          experience = factor(experience, levels = c(
            &quot;I&#39;ve never heard of it&quot;,
@@ -54,16 +54,18 @@ plot_data &lt;- registration %&gt;%
            &quot;I use it often to analyze data&quot;)))
 
 # plot positions at UO
-theme_set(theme_minimal(base_size = 15))
+theme_set(theme_minimal(base_size = 15)) 
+theme_update(legend.position = &quot;none&quot;, 
+          plot.title.position = &quot;plot&quot;,
+          panel.grid.minor.y = element_blank())
 
 plot_data %&gt;% 
   count(position) %&gt;% 
   ggplot(aes(fct_reorder(position, n), n, fill = position)) + 
   geom_col() +
   coord_flip() + 
-  scale_fill_viridis_d() + 
-  labs(x = &quot;&quot;, y = &quot;Count&quot;) + 
-  theme(legend.position = &quot;none&quot;)</code></pre>
+  scale_fill_manual(values = get_pal(&quot;Kotare&quot;)) + 
+  labs(x = &quot;&quot;, y = &quot;Count&quot;, title = &quot;Participants&#39; roles at University of Oregon&quot;)</code></pre>
 <p><img src="/post/2020-10-19-teaching-an-r-bootcamp-remotely/index_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
 <p>Prior experience</p>
 <pre class="r"><code># plot prior experience 
@@ -72,9 +74,8 @@ plot_data %&gt;%
   ggplot(aes(experience, n, fill = experience)) + 
   geom_col() +
   coord_flip() + 
-  scale_fill_viridis_d() + 
-  labs(x = &quot;&quot;, y = &quot;Count&quot;) + 
-  theme(legend.position = &quot;none&quot;)</code></pre>
+  scale_fill_manual(values = get_pal(&quot;Kotare&quot;))  + 
+  labs(x = &quot;&quot;, y = &quot;Count&quot;, title = &quot;Participants&#39; prior experience with R&quot;)</code></pre>
 <p><img src="/post/2020-10-19-teaching-an-r-bootcamp-remotely/index_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 </div>
 <div id="logistics" class="section level1">
