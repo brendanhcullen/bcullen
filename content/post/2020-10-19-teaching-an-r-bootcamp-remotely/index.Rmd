@@ -20,23 +20,20 @@ image:
 projects: []
 disable_codefolding: false
 codefolding_show: "hide"
-codefolding_nobutton: true 
+codefolding_nobutton: false
 ---
 
 ```{r echo=FALSE, message=FALSE}
 library(tidyverse)
 library(googlesheets4)
-library(patchwork)
 library(Manu)
 ```
 
-
 # Background
 
-Back in Fall 2018, the Department of Psychology at the University of Oregon started to offer an introductory R Bootcamp the week before the start of the new academic year. It was my privilege to be able to lead the 3rd Annual UO Psych Bootcamp this year. 
+Back in Fall 2018, the Department of Psychology at the University of Oregon started to offer an introductory R Bootcamp the week before the start of the new academic year. It was my privilege to be able to lead the 3rd Annual UO Psych Bootcamp this year.
 
-
-# Who attended? 
+# Who attended?
 
 ```{r, warning=FALSE, message=FALSE}
 # suspend authorization so no need for a token for accessing Google Drive data
@@ -75,7 +72,6 @@ plot_data %>%
   labs(x = "", y = "Count", title = "Participants' roles at University of Oregon")
 ```
 
-
 Prior experience
 
 ```{r}
@@ -89,14 +85,48 @@ plot_data %>%
   labs(x = "", y = "Count", title = "Participants' prior experience with R")
 ```
 
+# Logistics
 
-# Logistics 
+To make the bootcamp materials more accessible and shareable, I decided to package them into a website, which I created from the `blogdown` package.
+
+`r emo::ji("link")` <https://uopsych-r-bootcamp-2020.netlify.app/>
+
+```{r echo=FALSE}
+knitr::include_url("https://uopsych-r-bootcamp-2020.netlify.app/", height = "500px")
+```
 
 # Resources & Recommendations
 
-## Tools I learned 
+## Teaching tools
 
-## Resources I used
+Below is a demonstration of color-coding with `flair`. This also shows the "panelset" feature along with dynamic syntax highlighting from `xaringanExtra`.
 
-# Feedback 
+![](xaringan_demo1.mov)
 
+Here is a demo that shows "tile view" and `embed_xaringan()` in the context of a ggplot2 flipbook created with the `flipbookr` package.
+
+![](xaringan_demo.mp4)
+
+## Resources
+
+# Feedback
+
+It's a common experience for
+
+"When I learned R, my advisor sent me this [link](https://cran.r-project.org/bin/macosx/) and said 'get started'".
+
+> "I really appreciated the warm welcome/atmosphere the instructors set up- learning a new programming language can be frustrating, especially for a beginner, so I was really appreciative of the continuous encouragement throughout the bootcamp."
+
+> "I really enjoyed how supportive and encouraging the facilitators were. I understood learning R was no easy endeavor but hearing about their experiences was encouraging for me. Also, I greatly appreciate all the amazing resources they have compiled for future use. I definitely plan to continue looking into it!"
+
+A little time and effort goes a long way!
+
+<center>
+![Artwork by @allison_horst](time_effort.gif){width="417"}
+</center>
+
+<details><summary>Session Info</summary>
+```{r echo=FALSE}
+sessioninfo::session_info()
+```
+</details>

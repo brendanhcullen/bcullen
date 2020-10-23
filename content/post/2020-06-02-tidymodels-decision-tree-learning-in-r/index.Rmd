@@ -17,7 +17,7 @@ image:
 projects: []
 disable_codefolding: false
 codefolding_show: "show"
-codefolding_nobutton: true 
+codefolding_nobutton: false 
 ---
 
 RStudio has recently released a cohesive suite of packages for modelling and machine learning, called `{tidymodels}`. The successor to Max Kuhn’s `{caret}` package, `{tidymodels}` allows for a tidy approach to your data from start to finish. We’re going to walk through the basics for getting off the ground with `{tidymodels}` and demonstrate its application to three different tree-based methods for predicting student test scores. For further information about the package, you can visit https://www.tidymodels.org/.
@@ -431,3 +431,9 @@ collect_metrics(final_fit_bag) %>%
 ```
 
 After applying our 3 trained models to the unseen test data, it looks like random forest is the winner since it has the lowest RMSE. In this example, we only used 1% of the data to train these models, which could make it difficult to meaningfully compare their performance. However, the random forest model also results in the best out-of-sample prediction (RMSE = 83.47) when using all of the available data, which we did for the [Kaggle competition](https://www.kaggle.com/c/edld-654-spring-2020/leaderboard). 
+
+<details><summary>Session Info</summary>
+```{r echo=FALSE}
+sessioninfo::session_info()
+```
+</details>
