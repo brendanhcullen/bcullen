@@ -53,7 +53,7 @@ a.nav-link {
 
 /* -----------div tips------------- */
 
-  div.puzzle, div.fyi, div.demo, div.note, div.book, div.github, div.profile, div.bookmark, div.link, div.code{
+  div.puzzle, div.fyi, div.demo, div.note, div.book, div.github, div.profile, div.bookmark, div.link, div.code, div.quote{
     padding: 1em;
     margin: 1em 0;
     padding-left: 100px;
@@ -105,4 +105,8 @@ div.link {
 
 div.code {
   background-image: url("../note_box_icons/code.png");
+}
+
+div.quote {
+  background-image: url("../note_box_icons/quote.png");
 }
