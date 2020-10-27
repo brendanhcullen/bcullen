@@ -9,7 +9,7 @@ tags:
   - education
   - R
 subtitle: ''
-summary: 'Lessons learned from my first experience teaching R remotely and a collection of resources & tools I found really useful'
+summary: 'Lessons learned from my first experience teaching R online and a collection of resources & tools I found really useful'
 authors: []
 lastmod: '2020-10-19T10:26:32-07:00'
 featured: no
@@ -24,19 +24,28 @@ codefolding_nobutton: false
 ---
 
 <script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
+<link href="/rmarkdown-libs/panelset/panelset.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/panelset/panelset.js"></script>
+<script src="/rmarkdown-libs/fitvids/fitvids.min.js"></script>
 
 
+<style>.panelset{--panel-tab-foreground: var(--text-mild);--panel-tab-active-foreground: var(--text-dark);--panel-tab-active-background: var(--text-lightest);--panel-tab-active-border-color: var(--purple);--panel-tab-hover-background: #fafafa;--panel-tab-hover-border-color: var(--text-lightest);--panel-tabs_border-bottom: var(--text-lightest);--panel-tab-inactive-opacity: 1;--panel-tab-font-family: unset;}</style>
 <div id="background" class="section level1">
 <h1>Background</h1>
-<p>Back in Fall 2018, the Department of Psychology at the University of Oregon started to offer an introductory R Bootcamp the week before the start of the new academic year. It was my privilege to be able to lead the 3rd Annual UO Psych Bootcamp this year.</p>
+<p>Back in Fall 2018, the Department of Psychology at the University of Oregon started to offer an introductory R Bootcamp the week before the start of the new academic year. The bootcamp consists of three 3-4 hour-long sessions that take place over the course of a week. The idea behind the bootcamp is to give a first exposure to R and programming in general to incoming students who have little to no background in these tools before being launched headfirst into having to use R to analyze data for their first year project and to complete labs and homework assignments for <a href="https://uopsych.github.io/psy611/">PSY611</a>, the first in a series of graduate statistics courses taught entirely in R.</p>
+<p>In addition, as I’ve <a href="https://bcullen.rbind.io/post/2020-03-08-data-science-training-needs-in-grad-school/">written about previously</a>, current grad students, along with other members of the psychology department, have expressed interest in developing a stronger foundation in skills like basic programming, data wrangling, and data visualization. So the bootcamp also serves as an opportunity for those who want it to have a refresher and deeper dive into those topics.</p>
+<p>After spending lot of time thinking about how to improve the data science learning experience for my fellow grad students and having <a href="https://bcullen.rbind.io/post/2020-09-03-reflections-on-rstudio-instructor-training/">recently become</a> an <a href="https://education.rstudio.com/trainers/people/cullen+brendan/">RStudio Certified Instructor</a> in the tidyverse, it was my great privilege to be able to lead the 3rd Annual UO Psych Bootcamp this year. 🥳 However, I found myself with a rather significant challenge. The R Bootcamp, like many introductory workshops, usually happens in-person in a large room with a giant project screen, coffee + snacks, and the ability to run over and look over someone’s shoulder at their computer screen. Because of COVID-19, I found myself forced to design and deliver a bootcamp to a large group of beginners (many using R for the very first time) entirely over a webcam. Needless to say, this felt a little daunting 😨. Fortunately, there are many people out there who are experts in this sort of thing who have graciously shared their resources and advice, and this helped me immensely to prepare.</p>
+<div class="reader">
+<p>For anyone who is maybe new at teaching R, teaching online, or both, the goal of this post is to share with you some valuable lessons I learned and resources I used during this process to hopefully assist your own teaching experience.</p>
+</div>
 </div>
 <div id="who-attended" class="section level1">
 <h1>Who attended?</h1>
-<pre class="r"><code># suspend authorization so no need for a token for accessing Google Drive data
-googlesheets4::gs4_deauth()
-
-# import bootcamp registration data 
-registration &lt;- googlesheets4::read_sheet(&quot;https://docs.google.com/spreadsheets/d/1wcGdQU7Vkg3XLvu0mArQx_gcSt0xHztbXmAmnj_tqmE/edit?usp=sharing&quot;)
+<p>While the majority of those who attended were incoming first-year psychology grad students, we also had a mix of grad students at all levels, undergrads, research assistants, lab managers, staff data analysts, and faculty members from a variety of departments/centers, including Psychology, Linguistics, Economics and the Center for Translational Neuroscience.</p>
+<pre class="r"><code># import bootcamp registration data 
+registration &lt;- read_csv(&quot;uopsych_bootcamp_registration_deidentified.csv&quot;)
 
 # clean data
 plot_data &lt;- registration %&gt;% 
@@ -67,7 +76,6 @@ plot_data %&gt;%
   scale_fill_manual(values = get_pal(&quot;Kotare&quot;)) + 
   labs(x = &quot;&quot;, y = &quot;Count&quot;, title = &quot;Participants&#39; roles at University of Oregon&quot;)</code></pre>
 <p><img src="/post/2020-10-19-teaching-an-r-bootcamp-remotely/index_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
-<p>Prior experience</p>
 <pre class="r"><code># plot prior experience 
 plot_data %&gt;% 
   count(experience) %&gt;% 
@@ -80,35 +88,150 @@ plot_data %&gt;%
 </div>
 <div id="logistics" class="section level1">
 <h1>Logistics</h1>
-<p>To make the bootcamp materials more accessible and shareable, I decided to package them into a website, which I created from the <code>blogdown</code> package.</p>
+<p>To make the bootcamp materials more accessible and shareable, I decided to package them into a website, which I created using the <code>blogdown</code> package (see more on this below).</p>
 <p>🔗 <a href="https://uopsych-r-bootcamp-2020.netlify.app/" class="uri">https://uopsych-r-bootcamp-2020.netlify.app/</a></p>
 <iframe src="https://uopsych-r-bootcamp-2020.netlify.app/" width="672" height="500px">
 </iframe>
+<p>Zoom. slack, RStudio Cloud, TA’s</p>
 </div>
-<div id="resources-recommendations" class="section level1">
-<h1>Resources &amp; Recommendations</h1>
-<div id="teaching-tools" class="section level2">
-<h2>Teaching tools</h2>
+<div id="tools-i-learned" class="section level1">
+<h1>Tools I learned</h1>
+<div class="panelset">
+<div id="xaringanextra" class="section level3 panel">
+<h3><code>xaringanExtra</code> 📦</h3>
+<p>🔗 <a href="https://pkg.garrickadenbuie.com/xaringanExtra/" class="uri">https://pkg.garrickadenbuie.com/xaringanExtra/</a></p>
+<p><code>xaringanExtra</code>, by <a href="https://www.garrickadenbuie.com/">Garrick Aden‑Buie</a> is one of my all-time favorite packages. Here are the features I use most often.</p>
+<p><a href="https://pkg.garrickadenbuie.com/xaringanExtra/#/share-again">Share again</a></p>
+<p><a href="https://pkg.garrickadenbuie.com/xaringanExtra/#/panelset">Panelset</a></p>
+<p><a href="https://pkg.garrickadenbuie.com/xaringanExtra/#/tile-view">Tile view</a></p>
+<p><a href="https://pkg.garrickadenbuie.com/xaringanExtra/#/extra-styles">Extra styles</a></p>
+</div>
+<div id="flair" class="section level3 panel">
+<h3><code>flair</code> 📦</h3>
+<p>🔗 <a href="https://r-for-educators.github.io/flair/index.html" class="uri">https://r-for-educators.github.io/flair/index.html</a></p>
 <p>Below is a demonstration of color-coding with <code>flair</code>. This also shows the “panelset” feature along with dynamic syntax highlighting from <code>xaringanExtra</code>.</p>
 <p><video src="xaringan_demo1.mov" controls=""><a href="xaringan_demo1.mov">Video</a></video></p>
+<p>You can read more about other use cases for <code>flair</code> in this great <a href="https://education.rstudio.com/blog/2020/05/flair/">post</a> on the RStudio Education Blog.</p>
+</div>
+<div id="flipbookr" class="section level3 panel">
+<h3><code>flipbookr</code> 📦</h3>
+<p>🔗 <a href="https://evamaerey.github.io/flipbooks/about" class="uri">https://evamaerey.github.io/flipbooks/about</a></p>
 <p>Here is a demo that shows “tile view” and <code>embed_xaringan()</code> in the context of a ggplot2 flipbook created with the <code>flipbookr</code> package.</p>
 <p><video src="xaringan_demo.mp4" controls=""><a href="xaringan_demo.mp4">Video</a></video></p>
 </div>
-<div id="resources" class="section level2">
-<h2>Resources</h2>
+<div id="countdown" class="section level3 panel">
+<h3><code>countdown</code> 📦</h3>
+<p>🔗 <a href="https://pkg.garrickadenbuie.com/countdown/" class="uri">https://pkg.garrickadenbuie.com/countdown/</a></p>
 </div>
 </div>
-<div id="feedback" class="section level1">
-<h1>Feedback</h1>
+<p><br></p>
+</div>
+<div id="resources-i-recommend" class="section level1">
+<h1>Resources I recommend</h1>
+<div id="sharing-on-short-notice" class="section level2">
+<h2>Sharing on short notice</h2>
+<p><i class="fas fa-user"></i> <a href="https://alison.rbind.io/">Alison Hill</a>, <a href="https://desiree.rbind.io/">Desirée De Leon</a></p>
+<p>Description</p>
+<ul>
+<li><i class="fas fa-video"></i> <a href="https://rstudio.com/resources/webinars/sharing-on-short-notice-how-to-get-your-materials-online-with-r-markdown/">webinar</a></li>
+<li><i class="fas fa-images"></i> <a href="https://rstudio-education.github.io/sharing-short-notice/">slides</a></li>
+<li><i class="fab fa-github"></i> <a href="https://github.com/apreshill/share-blogdown">share-blogdown template</a></li>
+<li><i class="fas fa-book"></i> <a href="https://education.rstudio.com/blog/2020/04/sharing-on-short-notice/">blog post</a></li>
+</ul>
+</div>
+<div id="teaching-online-on-short-notice" class="section level2">
+<h2>Teaching online on short notice</h2>
+<p><i class="fas fa-user"></i> <a href="https://third-bit.com/">Greg Wilson</a></p>
+<p>Description</p>
+<ul>
+<li><i class="fas fa-video"></i> <a href="https://rstudio.com/resources/webinars/teaching-online-at-short-notice/">webinar</a></li>
+<li><i class="fas fa-images"></i> <a href="https://docs.google.com/presentation/d/1rE5e2kSFNICNkBJ4iIIgd9eqACi62gxahknKLtw9Hzs/edit#slide=id.g55ddde1eae_0_2">slides</a></li>
+<li><i class="fas fa-book"></i> <a href="https://education.rstudio.com/blog/2020/03/teaching-online-on-short-notice/">blog post</a></li>
+</ul>
+</div>
+<div id="teaching-r-online-with-rstudio-cloud" class="section level2">
+<h2>Teaching R online with RStudio Cloud</h2>
+<p><i class="fas fa-user"></i> <a href="https://www2.stat.duke.edu/~mc301/">Mine Çetinkaya-Rundel</a></p>
+<p>Description</p>
+<ul>
+<li><i class="fas fa-video"></i> <a href="https://rstudio.com/resources/webinars/teaching-r-online-with-rstudio-cloud/">webinar</a></li>
+<li><i class="fas fa-images"></i> <a href="https://mine-cetinkaya-rundel.github.io/rstudio-cloud-webinar/rstudio-cloud.html#1">slides</a></li>
+<li><i class="fas fa-book"></i> <a href="https://education.rstudio.com/blog/2020/04/teaching-with-rstudio-cloud-q-a/">blog post</a></li>
+</ul>
+</div>
+<div id="teaching-the-tidyverse-in-2020" class="section level2">
+<h2>Teaching the tidyverse in 2020</h2>
+<p><i class="fas fa-user"></i> <a href="https://www2.stat.duke.edu/~mc301/">Mine Çetinkaya-Rundel</a></p>
+<p>A series of blog posts</p>
+<ul>
+<li><i class="fas fa-book"></i> <a href="https://education.rstudio.com/blog/2020/07/teaching-the-tidyverse-in-2020-part-1-getting-started/">Part 1: Getting started</a></li>
+<li><i class="fas fa-book"></i> <a href="https://education.rstudio.com/blog/2020/07/teaching-the-tidyverse-in-2020-part-2-data-visualisation/">Part 2: Data visualization</a></li>
+<li><i class="fas fa-book"></i> <a href="https://education.rstudio.com/blog/2020/07/teaching-the-tidyverse-in-2020-part-3-data-wrangling-and-tidying/">Part 3: Data wrangling and tidying</a></li>
+<li><i class="fas fa-book"></i> <a href="https://education.rstudio.com/blog/2020/07/teaching-the-tidyverse-in-2020-part-4-when-to-purrr/">Part4: Part 4: When to purrr?</a></li>
+</ul>
+</div>
+<div id="concept-maps" class="section level2">
+<h2>Concept maps</h2>
+<p>Description</p>
+<p><i class="fas fa-users"></i> Community contributers, curated by <a href="https://third-bit.com/">Greg Wilson</a></p>
+<ul>
+<li><i class="fab fa-github"></i> <a href="https://github.com/rstudio/concept-maps">github repo</a></li>
+<li><i class="fab fa-google-drive"></i> <a href="https://docs.google.com/presentation/d/1ForBjP0pVhljBLuqOyYfyHw_1rrwJzpWW1ZHzCqAJpU/edit#slide=id.p">google drive folder</a></li>
+<li><i class="fas fa-book"></i> <a href="https://education.rstudio.com/blog/2020/09/concept-maps/">blog post</a></li>
+</ul>
+</div>
+<div id="rstats-artwork" class="section level2">
+<h2>rstats artwork</h2>
+<p><i class="fas fa-user"></i> <a href="https://www.allisonhorst.com/">Allison Horst</a></p>
+<p>Description</p>
+<ul>
+<li><i class="fab fa-github"></i> <a href="https://github.com/allisonhorst/stats-illustrations">github repo</a></li>
+<li><i class="fas fa-comments"></i> <a href="https://www.dataquest.io/blog/making-learning-to-code-friendlier-with-art-allison-horst-interview/">interview with Allison Horst</a></li>
+</ul>
+</div>
+</div>
+<div id="encouragement-positivity" class="section level1">
+<h1>Encouragement &amp; positivity</h1>
 <p>It’s a common experience for</p>
+<blockquote>
 <p>“When I learned R, my advisor sent me this <a href="https://cran.r-project.org/bin/macosx/">link</a> and said ‘get started’”.</p>
-<blockquote>
+</blockquote>
+<div id="anticipate-the-challenge" class="section level4">
+<h4>Anticipate the challenge</h4>
+<div class="shareagain" style="min-width:300px;margin:1em auto;">
+<iframe src="https://uopsych-r-bootcamp-2020.netlify.app/slides/00-slides.html#10" width="1600" height="900" style="border:2px solid currentColor;" loading="lazy" allowfullscreen></iframe>
+<script>fitvids('.shareagain', {players: 'iframe'});</script>
+</div>
+<p><br></p>
+</div>
+<div id="normalize-errors-mistakes" class="section level4">
+<h4>Normalize errors &amp; mistakes</h4>
+<div class="shareagain" style="min-width:300px;margin:1em auto;">
+<iframe src="https://uopsych-r-bootcamp-2020.netlify.app/slides/03-slides.html?panelset4=q14&amp;panelset5=nrow2&amp;panelset6=q15&amp;panelset7=q16#60" width="1600" height="900" style="border:2px solid currentColor;" loading="lazy" allowfullscreen></iframe>
+<script>fitvids('.shareagain', {players: 'iframe'});</script>
+</div>
+<p>c.f. “positive error framing”</p>
+<p><br></p>
+</div>
+<div id="make-your-materials-friendly-and-inviting" class="section level4">
+<h4>Make your materials friendly and inviting!</h4>
+<p><img src="monster_support.jpg" width="3802" /></p>
+</div>
+<div id="feedback" class="section level2">
+<h2>Feedback</h2>
+<div class="quote">
 <p>“I really appreciated the warm welcome/atmosphere the instructors set up- learning a new programming language can be frustrating, especially for a beginner, so I was really appreciative of the continuous encouragement throughout the bootcamp.”</p>
-</blockquote>
-<blockquote>
+</div>
+<div class="quote">
 <p>“I really enjoyed how supportive and encouraging the facilitators were. I understood learning R was no easy endeavor but hearing about their experiences was encouraging for me. Also, I greatly appreciate all the amazing resources they have compiled for future use. I definitely plan to continue looking into it!”</p>
-</blockquote>
-<p>A little time and effort goes a long way!</p>
+</div>
+<div class="quote">
+<p>“I appreciated the facilitators’ organization, support, encouragement, and instructional clarity. Thank you for providing this very warm and accessible introduction for an absolute first-time novice! It’s encouraged me to take more steps into learning R.”</p>
+</div>
+<p><br></p>
+<hr />
+<p><br></p>
+<p>No matter how long someone has been using R, it never hurts to remind them (or yourself) that a little time and effort can go a really long way!</p>
 <center>
 <img src="time_effort.gif" title="fig:" width="417" alt="Artwork by @allison_horst" />
 </center>
@@ -124,83 +247,152 @@ plot_data %&gt;%
 ##  collate  en_US.UTF-8                 
 ##  ctype    en_US.UTF-8                 
 ##  tz       America/Los_Angeles         
-##  date     2020-10-22                  
+##  date     2020-10-26                  
 ## 
 ## ─ Packages ───────────────────────────────────────────────────────────────────
-##  package       * version    date       lib source                         
-##  assertthat      0.2.1      2019-03-21 [1] CRAN (R 3.6.0)                 
-##  backports       1.1.10     2020-09-15 [1] CRAN (R 3.6.2)                 
-##  blogdown        0.17       2019-11-13 [1] CRAN (R 3.6.0)                 
-##  bookdown        0.21       2020-10-13 [1] CRAN (R 3.6.2)                 
-##  broom           0.5.5      2020-02-29 [1] CRAN (R 3.6.2)                 
-##  cellranger      1.1.0      2016-07-27 [1] CRAN (R 3.6.0)                 
-##  cli             2.1.0      2020-10-12 [1] CRAN (R 3.6.2)                 
-##  colorspace      1.4-1      2019-03-18 [1] CRAN (R 3.6.0)                 
-##  crayon          1.3.4      2017-09-16 [1] CRAN (R 3.6.0)                 
-##  curl            4.3        2019-12-02 [1] CRAN (R 3.6.0)                 
-##  DBI             1.1.0      2019-12-15 [1] CRAN (R 3.6.0)                 
-##  dbplyr          1.4.2      2019-06-17 [1] CRAN (R 3.6.0)                 
-##  digest          0.6.26     2020-10-17 [1] CRAN (R 3.6.2)                 
-##  dplyr         * 1.0.2      2020-08-18 [1] CRAN (R 3.6.2)                 
-##  ellipsis        0.3.1      2020-05-15 [1] CRAN (R 3.6.2)                 
-##  emo             0.0.0.9000 2020-08-26 [1] Github (hadley/emo@3f03b11)    
-##  evaluate        0.14       2019-05-28 [1] CRAN (R 3.6.0)                 
-##  fansi           0.4.1      2020-01-08 [1] CRAN (R 3.6.0)                 
-##  farver          2.0.3      2020-01-16 [1] CRAN (R 3.6.0)                 
-##  forcats       * 0.4.0      2019-02-17 [1] CRAN (R 3.6.0)                 
-##  fs              1.3.1      2019-05-06 [1] CRAN (R 3.6.0)                 
-##  gargle          0.5.0      2020-05-06 [1] CRAN (R 3.6.2)                 
-##  generics        0.0.2      2018-11-29 [1] CRAN (R 3.6.0)                 
-##  ggplot2       * 3.3.2      2020-06-19 [1] CRAN (R 3.6.2)                 
-##  glue            1.4.2      2020-08-27 [1] CRAN (R 3.6.2)                 
-##  googledrive     1.0.0      2019-08-19 [1] CRAN (R 3.6.0)                 
-##  googlesheets4 * 0.2.0      2020-05-08 [1] CRAN (R 3.6.2)                 
-##  gtable          0.3.0      2019-03-25 [1] CRAN (R 3.6.0)                 
-##  haven           2.2.0      2019-11-08 [1] CRAN (R 3.6.0)                 
-##  highr           0.8        2019-03-20 [1] CRAN (R 3.6.0)                 
-##  hms             0.5.3      2020-01-08 [1] CRAN (R 3.6.0)                 
-##  htmltools       0.5.0      2020-06-16 [1] CRAN (R 3.6.2)                 
-##  httr            1.4.2      2020-07-20 [1] CRAN (R 3.6.2)                 
-##  janitor         1.2.1      2020-01-22 [1] CRAN (R 3.6.0)                 
-##  jsonlite        1.7.1      2020-09-07 [1] CRAN (R 3.6.2)                 
-##  knitr           1.30       2020-09-22 [1] CRAN (R 3.6.2)                 
-##  labeling        0.4.2      2020-10-20 [1] CRAN (R 3.6.2)                 
-##  lattice         0.20-38    2018-11-04 [2] CRAN (R 3.6.2)                 
-##  lifecycle       0.2.0      2020-03-06 [1] CRAN (R 3.6.0)                 
-##  lubridate       1.7.9      2020-06-08 [1] CRAN (R 3.6.2)                 
-##  magrittr        1.5        2014-11-22 [1] CRAN (R 3.6.0)                 
-##  Manu          * 0.0.1      2020-10-20 [1] Github (G-Thomson/Manu@c5aa932)
-##  modelr          0.1.6      2020-02-22 [1] CRAN (R 3.6.0)                 
-##  munsell         0.5.0      2018-06-12 [1] CRAN (R 3.6.0)                 
-##  nlme            3.1-142    2019-11-07 [2] CRAN (R 3.6.2)                 
-##  pillar          1.4.6      2020-07-10 [1] CRAN (R 3.6.2)                 
-##  pkgconfig       2.0.3      2019-09-22 [1] CRAN (R 3.6.0)                 
-##  purrr         * 0.3.4      2020-04-17 [1] CRAN (R 3.6.2)                 
-##  R6              2.4.1      2019-11-12 [1] CRAN (R 3.6.0)                 
-##  Rcpp            1.0.5      2020-07-06 [1] CRAN (R 3.6.2)                 
-##  readr         * 1.3.1      2018-12-21 [1] CRAN (R 3.6.0)                 
-##  readxl          1.3.1      2019-03-13 [1] CRAN (R 3.6.0)                 
-##  reprex          0.3.0      2019-05-16 [1] CRAN (R 3.6.0)                 
-##  rlang           0.4.8      2020-10-08 [1] CRAN (R 3.6.2)                 
-##  rmarkdown       2.4        2020-09-30 [1] CRAN (R 3.6.2)                 
-##  rstudioapi      0.11       2020-02-07 [1] CRAN (R 3.6.0)                 
-##  rvest           0.3.5      2019-11-08 [1] CRAN (R 3.6.0)                 
-##  scales          1.1.1      2020-05-11 [1] CRAN (R 3.6.2)                 
-##  sessioninfo     1.1.1      2018-11-05 [1] CRAN (R 3.6.0)                 
-##  snakecase       0.11.0     2019-05-25 [1] CRAN (R 3.6.0)                 
-##  stringi         1.5.3      2020-09-09 [1] CRAN (R 3.6.2)                 
-##  stringr       * 1.4.0      2019-02-10 [1] CRAN (R 3.6.0)                 
-##  tibble        * 3.0.4      2020-10-12 [1] CRAN (R 3.6.2)                 
-##  tidyr         * 1.1.0      2020-05-20 [1] CRAN (R 3.6.2)                 
-##  tidyselect      1.1.0      2020-05-11 [1] CRAN (R 3.6.2)                 
-##  tidyverse     * 1.3.0      2019-11-21 [1] CRAN (R 3.6.0)                 
-##  vctrs           0.3.4      2020-08-29 [1] CRAN (R 3.6.2)                 
-##  withr           2.3.0      2020-09-22 [1] CRAN (R 3.6.2)                 
-##  xfun            0.18       2020-09-29 [1] CRAN (R 3.6.2)                 
-##  xml2            1.2.2      2019-08-09 [1] CRAN (R 3.6.0)                 
-##  yaml            2.2.1      2020-02-01 [1] CRAN (R 3.6.0)                 
+##  package       * version    date       lib
+##  assertthat      0.2.1      2019-03-21 [1]
+##  backports       1.1.10     2020-09-15 [1]
+##  blogdown        0.17       2019-11-13 [1]
+##  bookdown        0.21       2020-10-13 [1]
+##  broom           0.5.5      2020-02-29 [1]
+##  cellranger      1.1.0      2016-07-27 [1]
+##  cli             2.1.0      2020-10-12 [1]
+##  colorspace      1.4-1      2019-03-18 [1]
+##  crayon          1.3.4      2017-09-16 [1]
+##  DBI             1.1.0      2019-12-15 [1]
+##  dbplyr          1.4.2      2019-06-17 [1]
+##  digest          0.6.27     2020-10-24 [1]
+##  dplyr         * 1.0.2      2020-08-18 [1]
+##  ellipsis        0.3.1      2020-05-15 [1]
+##  emo             0.0.0.9000 2020-08-26 [1]
+##  evaluate        0.14       2019-05-28 [1]
+##  fansi           0.4.1      2020-01-08 [1]
+##  farver          2.0.3      2020-01-16 [1]
+##  forcats       * 0.4.0      2019-02-17 [1]
+##  fs              1.3.1      2019-05-06 [1]
+##  generics        0.0.2      2018-11-29 [1]
+##  ggplot2       * 3.3.2      2020-06-19 [1]
+##  glue            1.4.2      2020-08-27 [1]
+##  gtable          0.3.0      2019-03-25 [1]
+##  haven           2.2.0      2019-11-08 [1]
+##  highr           0.8        2019-03-20 [1]
+##  hms             0.5.3      2020-01-08 [1]
+##  htmltools       0.5.0      2020-06-16 [1]
+##  httr            1.4.2      2020-07-20 [1]
+##  janitor         1.2.1      2020-01-22 [1]
+##  jpeg            0.1-8.1    2019-10-24 [1]
+##  jsonlite        1.7.1      2020-09-07 [1]
+##  knitr           1.30       2020-09-22 [1]
+##  labeling        0.4.2      2020-10-20 [1]
+##  lattice         0.20-38    2018-11-04 [2]
+##  lifecycle       0.2.0      2020-03-06 [1]
+##  lubridate       1.7.9      2020-06-08 [1]
+##  magrittr        1.5        2014-11-22 [1]
+##  Manu          * 0.0.1      2020-10-20 [1]
+##  modelr          0.1.6      2020-02-22 [1]
+##  munsell         0.5.0      2018-06-12 [1]
+##  nlme            3.1-142    2019-11-07 [2]
+##  pillar          1.4.6      2020-07-10 [1]
+##  pkgconfig       2.0.3      2019-09-22 [1]
+##  purrr         * 0.3.4      2020-04-17 [1]
+##  R6              2.4.1      2019-11-12 [1]
+##  Rcpp            1.0.5      2020-07-06 [1]
+##  readr         * 1.3.1      2018-12-21 [1]
+##  readxl          1.3.1      2019-03-13 [1]
+##  reprex          0.3.0      2019-05-16 [1]
+##  rlang           0.4.8      2020-10-08 [1]
+##  rmarkdown       2.5        2020-10-21 [1]
+##  rstudioapi      0.11       2020-02-07 [1]
+##  rvest           0.3.5      2019-11-08 [1]
+##  scales          1.1.1      2020-05-11 [1]
+##  sessioninfo     1.1.1      2018-11-05 [1]
+##  snakecase       0.11.0     2019-05-25 [1]
+##  stringi         1.5.3      2020-09-09 [1]
+##  stringr       * 1.4.0      2019-02-10 [1]
+##  tibble        * 3.0.4      2020-10-12 [1]
+##  tidyr         * 1.1.0      2020-05-20 [1]
+##  tidyselect      1.1.0      2020-05-11 [1]
+##  tidyverse     * 1.3.0      2019-11-21 [1]
+##  vctrs           0.3.4      2020-08-29 [1]
+##  withr           2.3.0      2020-09-22 [1]
+##  xaringanExtra * 0.2.1      2020-08-23 [1]
+##  xfun            0.18       2020-09-29 [1]
+##  xml2            1.2.2      2019-08-09 [1]
+##  yaml            2.2.1      2020-02-01 [1]
+##  source                                  
+##  CRAN (R 3.6.0)                          
+##  CRAN (R 3.6.2)                          
+##  CRAN (R 3.6.0)                          
+##  CRAN (R 3.6.2)                          
+##  CRAN (R 3.6.2)                          
+##  CRAN (R 3.6.0)                          
+##  CRAN (R 3.6.2)                          
+##  CRAN (R 3.6.0)                          
+##  CRAN (R 3.6.0)                          
+##  CRAN (R 3.6.0)                          
+##  CRAN (R 3.6.0)                          
+##  CRAN (R 3.6.2)                          
+##  CRAN (R 3.6.2)                          
+##  CRAN (R 3.6.2)                          
+##  Github (hadley/emo@3f03b11)             
+##  CRAN (R 3.6.0)                          
+##  CRAN (R 3.6.0)                          
+##  CRAN (R 3.6.0)                          
+##  CRAN (R 3.6.0)                          
+##  CRAN (R 3.6.0)                          
+##  CRAN (R 3.6.0)                          
+##  CRAN (R 3.6.2)                          
+##  CRAN (R 3.6.2)                          
+##  CRAN (R 3.6.0)                          
+##  CRAN (R 3.6.0)                          
+##  CRAN (R 3.6.0)                          
+##  CRAN (R 3.6.0)                          
+##  CRAN (R 3.6.2)                          
+##  CRAN (R 3.6.2)                          
+##  CRAN (R 3.6.0)                          
+##  CRAN (R 3.6.0)                          
+##  CRAN (R 3.6.2)                          
+##  CRAN (R 3.6.2)                          
+##  CRAN (R 3.6.2)                          
+##  CRAN (R 3.6.2)                          
+##  CRAN (R 3.6.0)                          
+##  CRAN (R 3.6.2)                          
+##  CRAN (R 3.6.0)                          
+##  Github (G-Thomson/Manu@c5aa932)         
+##  CRAN (R 3.6.0)                          
+##  CRAN (R 3.6.0)                          
+##  CRAN (R 3.6.2)                          
+##  CRAN (R 3.6.2)                          
+##  CRAN (R 3.6.0)                          
+##  CRAN (R 3.6.2)                          
+##  CRAN (R 3.6.0)                          
+##  CRAN (R 3.6.2)                          
+##  CRAN (R 3.6.0)                          
+##  CRAN (R 3.6.0)                          
+##  CRAN (R 3.6.0)                          
+##  CRAN (R 3.6.2)                          
+##  CRAN (R 3.6.2)                          
+##  CRAN (R 3.6.0)                          
+##  CRAN (R 3.6.0)                          
+##  CRAN (R 3.6.2)                          
+##  CRAN (R 3.6.0)                          
+##  CRAN (R 3.6.0)                          
+##  CRAN (R 3.6.2)                          
+##  CRAN (R 3.6.0)                          
+##  CRAN (R 3.6.2)                          
+##  CRAN (R 3.6.2)                          
+##  CRAN (R 3.6.2)                          
+##  CRAN (R 3.6.0)                          
+##  CRAN (R 3.6.2)                          
+##  CRAN (R 3.6.2)                          
+##  Github (gadenbuie/xaringanExtra@f85b70a)
+##  CRAN (R 3.6.2)                          
+##  CRAN (R 3.6.0)                          
+##  CRAN (R 3.6.0)                          
 ## 
 ## [1] /Users/bcullen/Library/R/3.6/library
 ## [2] /Library/Frameworks/R.framework/Versions/3.6/Resources/library</code></pre>
 </details>
+</div>
 </div>

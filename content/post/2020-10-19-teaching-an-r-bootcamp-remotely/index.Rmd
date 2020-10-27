@@ -9,7 +9,7 @@ tags:
   - education
   - R
 subtitle: ''
-summary: 'Lessons learned from my first experience teaching R remotely and a collection of resources & tools I found really useful'
+summary: 'Lessons learned from my first experience teaching R online and a collection of resources & tools I found really useful'
 authors: []
 lastmod: '2020-10-19T10:26:32-07:00'
 featured: no
@@ -25,22 +25,43 @@ codefolding_nobutton: false
 
 ```{r echo=FALSE, message=FALSE}
 library(tidyverse)
-library(googlesheets4)
 library(Manu)
+library(xaringanExtra)
+
+# enable panelset
+use_panelset()
+xaringanExtra::style_panelset_tabs(
+  foreground = "var(--text-mild)",
+  active_foreground = "var(--text-dark)",
+  active_background =  "var(--text-lightest)",
+  active_border_color = "var(--purple)",
+  hover_background =  "#fafafa",
+  hover_border_color = "var(--text-lightest)",
+  inactive_opacity = 1,
+  tabs_border_bottom = "var(--text-lightest)",
+  font_family = 'unset'
+)
 ```
 
 # Background
 
-Back in Fall 2018, the Department of Psychology at the University of Oregon started to offer an introductory R Bootcamp the week before the start of the new academic year. It was my privilege to be able to lead the 3rd Annual UO Psych Bootcamp this year.
+Back in Fall 2018, the Department of Psychology at the University of Oregon started to offer an introductory R Bootcamp the week before the start of the new academic year. The bootcamp consists of three 3-4 hour-long sessions that take place over the course of a week. The idea behind the bootcamp is to give a first exposure to R and programming in general to incoming students who have little to no background in these tools before being launched headfirst into having to use R to analyze data for their first year project and to complete labs and homework assignments for [PSY611](https://uopsych.github.io/psy611/), the first in a series of graduate statistics courses taught entirely in R. 
+
+In addition, as I've [written about previously](https://bcullen.rbind.io/post/2020-03-08-data-science-training-needs-in-grad-school/), current grad students, along with other members of the psychology department, have expressed interest in developing a stronger foundation in skills like basic programming, data wrangling, and data visualization. So the bootcamp also serves as an opportunity for those who want it to have a refresher and deeper dive into those topics.
+
+After spending lot of time thinking about how to improve the data science learning experience for my fellow grad students and having [recently become](https://bcullen.rbind.io/post/2020-09-03-reflections-on-rstudio-instructor-training/) an [RStudio Certified Instructor](https://education.rstudio.com/trainers/people/cullen+brendan/) in the tidyverse, it was my great privilege to be able to lead the 3rd Annual UO Psych Bootcamp this year. `r emo::ji("partying_face")` However, I found myself with a rather significant challenge. The R Bootcamp, like many introductory workshops, usually happens in-person in a large room with a giant project screen, coffee + snacks, and the ability to run over and look over someone's shoulder at their computer screen. Because of COVID-19, I found myself forced to design and deliver a bootcamp to a large group of beginners (many using R for the very first time) entirely over a webcam. Needless to say, this felt a little daunting `r emo::ji("fearful")`. Fortunately, there are many people out there who are experts in this sort of thing who have graciously shared their resources and advice, and this helped me immensely to prepare. 
+
+:::reader
+For anyone who is maybe new at teaching R, teaching online, or both, the goal of this post is to share with you some valuable lessons I learned and resources I used during this process to hopefully assist your own teaching experience.
+:::
 
 # Who attended?
 
-```{r, warning=FALSE, message=FALSE}
-# suspend authorization so no need for a token for accessing Google Drive data
-googlesheets4::gs4_deauth()
+While the majority of those who attended were incoming first-year psychology grad students, we also had a mix of grad students at all levels, undergrads, research assistants, lab managers, staff data analysts, and faculty members from a variety of departments/centers, including Psychology, Linguistics, Economics and the Center for Translational Neuroscience.
 
+```{r, warning=FALSE, message=FALSE}
 # import bootcamp registration data 
-registration <- googlesheets4::read_sheet("https://docs.google.com/spreadsheets/d/1wcGdQU7Vkg3XLvu0mArQx_gcSt0xHztbXmAmnj_tqmE/edit?usp=sharing")
+registration <- read_csv("uopsych_bootcamp_registration_deidentified.csv")
 
 # clean data
 plot_data <- registration %>% 
@@ -72,7 +93,6 @@ plot_data %>%
   labs(x = "", y = "Count", title = "Participants' roles at University of Oregon")
 ```
 
-Prior experience
 
 ```{r}
 # plot prior experience 
@@ -87,7 +107,7 @@ plot_data %>%
 
 # Logistics
 
-To make the bootcamp materials more accessible and shareable, I decided to package them into a website, which I created from the `blogdown` package.
+To make the bootcamp materials more accessible and shareable, I decided to package them into a website, which I created using the `blogdown` package (see more on this below).
 
 `r emo::ji("link")` <https://uopsych-r-bootcamp-2020.netlify.app/>
 
@@ -95,31 +115,169 @@ To make the bootcamp materials more accessible and shareable, I decided to packa
 knitr::include_url("https://uopsych-r-bootcamp-2020.netlify.app/", height = "500px")
 ```
 
-# Resources & Recommendations
+Zoom. slack, RStudio Cloud, TA's
 
-## Teaching tools
+# Tools I learned
+
+:::: {.panelset}
+
+### `xaringanExtra` `r emo::ji("package")` {.panel}
+
+`r emo::ji("link")` https://pkg.garrickadenbuie.com/xaringanExtra/
+
+`xaringanExtra`, by [Garrick Aden‑Buie](https://www.garrickadenbuie.com/) is one of my all-time favorite packages. Here are the features I use most often.
+
+[Share again](https://pkg.garrickadenbuie.com/xaringanExtra/#/share-again)
+
+[Panelset](https://pkg.garrickadenbuie.com/xaringanExtra/#/panelset)
+
+[Tile view](https://pkg.garrickadenbuie.com/xaringanExtra/#/tile-view)
+
+[Extra styles](https://pkg.garrickadenbuie.com/xaringanExtra/#/extra-styles)
+
+
+### `flair` `r emo::ji("package")` {.panel}
+
+`r emo::ji("link")` https://r-for-educators.github.io/flair/index.html
 
 Below is a demonstration of color-coding with `flair`. This also shows the "panelset" feature along with dynamic syntax highlighting from `xaringanExtra`.
 
 ![](xaringan_demo1.mov)
 
+You can read more about other use cases for `flair` in this great [post](https://education.rstudio.com/blog/2020/05/flair/) on the RStudio Education Blog.
+
+### `flipbookr` `r emo::ji("package")` {.panel}
+
+`r emo::ji("link")` https://evamaerey.github.io/flipbooks/about
+
 Here is a demo that shows "tile view" and `embed_xaringan()` in the context of a ggplot2 flipbook created with the `flipbookr` package.
 
 ![](xaringan_demo.mp4)
 
-## Resources
+### `countdown` `r emo::ji("package")` {.panel}
 
-# Feedback
+`r emo::ji("link")` https://pkg.garrickadenbuie.com/countdown/
+
+::::
+
+<br>
+
+# Resources I recommend
+
+## Sharing on short notice 
+
+<i class="fas fa-user"></i> [Alison Hill](https://alison.rbind.io/), [Desirée De Leon](https://desiree.rbind.io/)
+
+Description
+
+- <i class="fas fa-video"></i> [webinar](https://rstudio.com/resources/webinars/sharing-on-short-notice-how-to-get-your-materials-online-with-r-markdown/)
+- <i class="fas fa-images"></i> [slides](https://rstudio-education.github.io/sharing-short-notice/)
+- <i class="fab fa-github"></i> [share-blogdown template](https://github.com/apreshill/share-blogdown)
+- <i class="fas fa-book"></i> [blog post](https://education.rstudio.com/blog/2020/04/sharing-on-short-notice/)
+
+## Teaching online on short notice
+
+<i class="fas fa-user"></i> [Greg Wilson](https://third-bit.com/)
+
+Description
+
+- <i class="fas fa-video"></i> [webinar](https://rstudio.com/resources/webinars/teaching-online-at-short-notice/)
+- <i class="fas fa-images"></i> [slides](https://docs.google.com/presentation/d/1rE5e2kSFNICNkBJ4iIIgd9eqACi62gxahknKLtw9Hzs/edit#slide=id.g55ddde1eae_0_2)
+- <i class="fas fa-book"></i> [blog post](https://education.rstudio.com/blog/2020/03/teaching-online-on-short-notice/)
+
+## Teaching R online with RStudio Cloud
+
+<i class="fas fa-user"></i> [Mine Çetinkaya-Rundel](https://www2.stat.duke.edu/~mc301/)
+
+Description
+
+- <i class="fas fa-video"></i> [webinar](https://rstudio.com/resources/webinars/teaching-r-online-with-rstudio-cloud/)
+- <i class="fas fa-images"></i> [slides](https://mine-cetinkaya-rundel.github.io/rstudio-cloud-webinar/rstudio-cloud.html#1)
+- <i class="fas fa-book"></i> [blog post](https://education.rstudio.com/blog/2020/04/teaching-with-rstudio-cloud-q-a/)
+
+## Teaching the tidyverse in 2020
+
+<i class="fas fa-user"></i> [Mine Çetinkaya-Rundel](https://www2.stat.duke.edu/~mc301/)
+
+A series of blog posts 
+
+- <i class="fas fa-book"></i> [Part 1: Getting started](https://education.rstudio.com/blog/2020/07/teaching-the-tidyverse-in-2020-part-1-getting-started/)
+- <i class="fas fa-book"></i> [Part 2: Data visualization](https://education.rstudio.com/blog/2020/07/teaching-the-tidyverse-in-2020-part-2-data-visualisation/)
+- <i class="fas fa-book"></i> [Part 3: Data wrangling and tidying](https://education.rstudio.com/blog/2020/07/teaching-the-tidyverse-in-2020-part-3-data-wrangling-and-tidying/)
+- <i class="fas fa-book"></i> [Part4: Part 4: When to purrr?](https://education.rstudio.com/blog/2020/07/teaching-the-tidyverse-in-2020-part-4-when-to-purrr/)
+
+## Concept maps
+
+Description
+
+<i class="fas fa-users"></i> Community contributers, curated by [Greg Wilson](https://third-bit.com/)
+
+- <i class="fab fa-github"></i> [github repo](https://github.com/rstudio/concept-maps)
+- <i class="fab fa-google-drive"></i> [google drive folder](https://docs.google.com/presentation/d/1ForBjP0pVhljBLuqOyYfyHw_1rrwJzpWW1ZHzCqAJpU/edit#slide=id.p)
+- <i class="fas fa-book"></i> [blog post](https://education.rstudio.com/blog/2020/09/concept-maps/)
+
+## rstats artwork
+
+<i class="fas fa-user"></i> [Allison Horst](https://www.allisonhorst.com/)
+
+Description
+
+- <i class="fab fa-github"></i> [github repo](https://github.com/allisonhorst/stats-illustrations)
+- <i class="fas fa-comments"></i> [interview with Allison Horst](https://www.dataquest.io/blog/making-learning-to-code-friendlier-with-art-allison-horst-interview/)
+
+
+# Encouragement & positivity
 
 It's a common experience for
 
-"When I learned R, my advisor sent me this [link](https://cran.r-project.org/bin/macosx/) and said 'get started'".
+> "When I learned R, my advisor sent me this [link](https://cran.r-project.org/bin/macosx/) and said 'get started'".
 
-> "I really appreciated the warm welcome/atmosphere the instructors set up- learning a new programming language can be frustrating, especially for a beginner, so I was really appreciative of the continuous encouragement throughout the bootcamp."
 
-> "I really enjoyed how supportive and encouraging the facilitators were. I understood learning R was no easy endeavor but hearing about their experiences was encouraging for me. Also, I greatly appreciate all the amazing resources they have compiled for future use. I definitely plan to continue looking into it!"
+#### Anticipate the challenge 
 
-A little time and effort goes a long way!
+```{r echo=FALSE}
+xaringanExtra::embed_xaringan("https://uopsych-r-bootcamp-2020.netlify.app/slides/00-slides.html#10")
+```
+
+<br> 
+
+#### Normalize errors & mistakes
+
+```{r echo=FALSE}
+xaringanExtra::embed_xaringan("https://uopsych-r-bootcamp-2020.netlify.app/slides/03-slides.html?panelset4=q14&panelset5=nrow2&panelset6=q15&panelset7=q16#60")
+```
+
+c.f. "positive error framing" 
+
+<br> 
+
+#### Make your materials friendly and inviting! 
+
+```{r echo=FALSE}
+knitr::include_graphics("monster_support.jpg")
+```
+
+## Feedback
+
+:::quote
+"I really appreciated the warm welcome/atmosphere the instructors set up- learning a new programming language can be frustrating, especially for a beginner, so I was really appreciative of the continuous encouragement throughout the bootcamp."
+:::
+
+:::quote
+"I really enjoyed how supportive and encouraging the facilitators were. I understood learning R was no easy endeavor but hearing about their experiences was encouraging for me. Also, I greatly appreciate all the amazing resources they have compiled for future use. I definitely plan to continue looking into it!"
+:::
+
+:::quote
+"I appreciated the facilitators' organization, support, encouragement, and instructional clarity. Thank you for providing this very warm and accessible introduction for an absolute first-time novice! It's encouraged me to take more steps into learning R."
+:::
+
+<br> 
+
+***
+
+<br>
+
+No matter how long someone has been using R, it never hurts to remind them (or yourself) that a little time and effort can go a really long way!
 
 <center>
 ![Artwork by @allison_horst](time_effort.gif){width="417"}
