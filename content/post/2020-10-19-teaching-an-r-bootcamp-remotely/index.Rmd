@@ -206,11 +206,11 @@ A series of blog posts
 - <i class="fas fa-book"></i> [Part 3: Data wrangling and tidying](https://education.rstudio.com/blog/2020/07/teaching-the-tidyverse-in-2020-part-3-data-wrangling-and-tidying/)
 - <i class="fas fa-book"></i> [Part4: Part 4: When to purrr?](https://education.rstudio.com/blog/2020/07/teaching-the-tidyverse-in-2020-part-4-when-to-purrr/)
 
-## Concept maps
+## Data science concept maps
 
 Description
 
-<i class="fas fa-users"></i> Community contributers, curated by [Greg Wilson](https://third-bit.com/)
+<i class="fas fa-users"></i> Community contributors, curated by [Greg Wilson](https://third-bit.com/)
 
 - <i class="fab fa-github"></i> [github repo](https://github.com/rstudio/concept-maps)
 - <i class="fab fa-google-drive"></i> [google drive folder](https://docs.google.com/presentation/d/1ForBjP0pVhljBLuqOyYfyHw_1rrwJzpWW1ZHzCqAJpU/edit#slide=id.p)

@@ -6,7 +6,7 @@ slug: []
 categories: []
 tags: []
 subtitle: 'Cianna Bedford-Petersen, Christopher Loan & Brendan Cullen'
-summary: ''
+summary: 'An overview and worked example of tree-based machine learning methods in R using `tidymodels`'
 authors: []
 lastmod: '2020-06-02T10:57:23-07:00'
 featured: no
@@ -21,6 +21,8 @@ codefolding_nobutton: false
 ---
 
 <script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
 
 
 <p>RStudio has recently released a cohesive suite of packages for modelling and machine learning, called <code>{tidymodels}</code>. The successor to Max Kuhn’s <code>{caret}</code> package, <code>{tidymodels}</code> allows for a tidy approach to your data from start to finish. We’re going to walk through the basics for getting off the ground with <code>{tidymodels}</code> and demonstrate its application to three different tree-based methods for predicting student test scores. For further information about the package, you can visit <a href="https://www.tidymodels.org/" class="uri">https://www.tidymodels.org/</a>.</p>
@@ -870,7 +872,7 @@ collect_metrics(final_fit_bag) %&gt;%
 ##  collate  en_US.UTF-8                 
 ##  ctype    en_US.UTF-8                 
 ##  tz       America/Los_Angeles         
-##  date     2020-10-22                  
+##  date     2020-10-26                  
 ## 
 ## ─ Packages ───────────────────────────────────────────────────────────────────
 ##  package       * version    date       lib
@@ -900,7 +902,7 @@ collect_metrics(final_fit_bag) %&gt;%
 ##  dbplyr          1.4.2      2019-06-17 [1]
 ##  dials         * 0.0.8.9000 2020-07-23 [1]
 ##  DiceDesign      1.8-1      2019-07-31 [1]
-##  digest          0.6.26     2020-10-17 [1]
+##  digest          0.6.27     2020-10-24 [1]
 ##  dplyr         * 1.0.2      2020-08-18 [1]
 ##  DT              0.16       2020-10-13 [1]
 ##  dygraphs        1.1.1.6    2018-07-11 [1]
@@ -993,7 +995,7 @@ collect_metrics(final_fit_bag) %&gt;%
 ##  reprex          0.3.0      2019-05-16 [1]
 ##  reshape2        1.4.3      2017-12-11 [1]
 ##  rlang           0.4.8      2020-10-08 [1]
-##  rmarkdown       2.4        2020-09-30 [1]
+##  rmarkdown       2.5        2020-10-21 [1]
 ##  rpart           4.1-15     2019-04-12 [1]
 ##  rsample       * 0.0.7      2020-06-04 [1]
 ##  rsconnect       0.8.16     2019-12-13 [1]

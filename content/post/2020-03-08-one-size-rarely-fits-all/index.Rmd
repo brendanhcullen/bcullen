@@ -9,7 +9,7 @@ tags:
   - health
   - psychology
 subtitle: ''
-summary: ''
+summary: 'A case for a precision medicine approach to behavioral health in psychology'
 authors: []
 lastmod: '2020-03-08T16:36:57-07:00'
 featured: no
