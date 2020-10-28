@@ -1,5 +1,5 @@
 ---
-title: Teaching an R Bootcamp Remotely
+title: "Flattening the leaRning curve: Teaching R online during COVID-19"
 author: Brendan Cullen
 date: '2020-10-19'
 slug: []
@@ -9,7 +9,7 @@ tags:
   - education
   - R
 subtitle: ''
-summary: 'Lessons learned from my first experience teaching R online and a collection of resources & tools I found really useful'
+summary: 'Lessons learned from my first experience teaching an R bootcamp remotely & a collection of tools and resources I found useful'
 authors: []
 lastmod: '2020-10-19T10:26:32-07:00'
 featured: no
@@ -43,21 +43,31 @@ xaringanExtra::style_panelset_tabs(
 )
 ```
 
-# Background
+At this point, you’re probably familiar with the phrase “flatten the curve” —  remember back in March when we were all talking about this? It was part of a public health messaging campaign aimed at preventing the spread of COVID-19 by encouraging behaviors like social distancing and mask-wearing to prevent hospitals from becoming overwhelmed beyond their capacity. Allow me to unabashedly steal this catchphrase as a deeply flawed metaphor for learning R during the era of this pandemic... 
 
-Back in Fall 2018, the Department of Psychology at the University of Oregon started to offer an introductory R Bootcamp the week before the start of the new academic year. The bootcamp consists of three 3-4 hour-long sessions that take place over the course of a week. The idea behind the bootcamp is to give a first exposure to R and programming in general to incoming students who have little to no background in these tools before being launched headfirst into having to use R to analyze data for their first year project and to complete labs and homework assignments for [PSY611](https://uopsych.github.io/psy611/), the first in a series of graduate statistics courses taught entirely in R. 
-
-In addition, as I've [written about previously](https://bcullen.rbind.io/post/2020-03-08-data-science-training-needs-in-grad-school/), current grad students, along with other members of the psychology department, have expressed interest in developing a stronger foundation in skills like basic programming, data wrangling, and data visualization. So the bootcamp also serves as an opportunity for those who want it to have a refresher and deeper dive into those topics.
-
-After spending lot of time thinking about how to improve the data science learning experience for my fellow grad students and having [recently become](https://bcullen.rbind.io/post/2020-09-03-reflections-on-rstudio-instructor-training/) an [RStudio Certified Instructor](https://education.rstudio.com/trainers/people/cullen+brendan/) in the tidyverse, it was my great privilege to be able to lead the 3rd Annual UO Psych Bootcamp this year. `r emo::ji("partying_face")` However, I found myself with a rather significant challenge. The R Bootcamp, like many introductory workshops, usually happens in-person in a large room with a giant project screen, coffee + snacks, and the ability to run over and look over someone's shoulder at their computer screen. Because of COVID-19, I found myself forced to design and deliver a bootcamp to a large group of beginners (many using R for the very first time) entirely over a webcam. Needless to say, this felt a little daunting `r emo::ji("fearful")`. Fortunately, there are many people out there who are experts in this sort of thing who have graciously shared their resources and advice, and this helped me immensely to prepare. 
+It’s no secret that R has a significant leaRning curve — and, while it seems that more people than ever are now learning R, almost everyone is having to do it in an online format of some kind. For those who are used to a traditional classroom learning environment, having a first introduction to R in an online format might make the leaRning curve even steeper (as I said, a flawed metaphor -- the concept of a steep learning curve is actually the [opposite](https://www.valamis.com/hub/learning-curve#steep-learning-curve) of what most people think, but we’ll run with it for the sake of satisfaction). After recently teaching an introductory [R Bootcamp](https://uopsych-r-bootcamp-2020.netlify.app/) online, I've spent a lot of time thinking about strategies to lower the learning threshold and make it easier to conquer any potential fear of learning R -- to "flatten the leaRning curve", as it were.
 
 :::reader
-For anyone who is maybe new at teaching R, teaching online, or both, the goal of this post is to share with you some valuable lessons I learned and resources I used during this process to hopefully assist your own teaching experience.
+For anyone who might be new to teaching R, teaching online, or both, the goal of this post is to share some valuable lessons I learned and resources I used during this online teaching experience, which I hope may be of some benefit for your own teaching and help maximize the learning potential of your students.
 :::
+
+# Background
+
+Back in Fall 2018, the Department of Psychology at the University of Oregon started to offer an introductory R Bootcamp the week before the start of the new academic year. The bootcamp consists of three 3-4 hour sessions that take place over the course of a week. The idea behind the bootcamp is to give a first exposure to R and programming in general to incoming students who have little to no background in these tools before being launched headfirst into using R to analyze data for their first year project and to complete labs and homework assignments for [PSY611](https://uopsych.github.io/psy611/), the first in a series of graduate statistics courses taught entirely in R. 
+
+In addition, as I've [written about previously](https://bcullen.rbind.io/post/2020-03-08-data-science-training-needs-in-grad-school/), current grad students, along with other members of the psychology department, have expressed interest in developing a stronger foundation in skills like basic programming, data wrangling, and data visualization. So the bootcamp also serves as an opportunity for existing R users to have a refresher and deeper dive into those topics for those who want it.
+
+After spending lot of time thinking about how to improve the data science learning experience for my fellow grad students and having [recently become](https://bcullen.rbind.io/post/2020-09-03-reflections-on-rstudio-instructor-training/) an [RStudio Certified Instructor](https://education.rstudio.com/trainers/people/cullen+brendan/) in the tidyverse, it was my great privilege to be able to put all of this into action by leading the 3rd Annual UO Psych Bootcamp this year. `r emo::ji("partying_face")` 
+
+# The challenge
+
+However, I found myself facing a rather significant challenge. The R Bootcamp, like many introductory workshops, usually happens in-person in a large room with a giant project screen, coffee and snacks, and the ability to run over and look over someone's shoulder at their computer screen when they need help. Because of COVID-19, I needed to design and deliver a bootcamp for a large group of beginners (many using R for the very first time) entirely over a webcam. Moreover, I assumed that student motivation would be at an all-time low and feelings of anxiety and uncertainty would be at an all-time high -- especially for those about to start their graduate school journey entirely online. There was a LOT going on in the world in September 2020, roughly 6 months into the COVID-19 pandemic in the U.S. -- people's loved ones were getting sick, systemic racism and the killing of innocent Black lives continued unchecked, a bitter presidential race was in full swing, not to mention wildfires raging all along the west coast. (Of course, while I wish I could actually write about these in the past tense, all of these problems continue). So how do you get people excited about learning R amidst all of *that*? 
+
+Needless to say, this felt a little daunting `r emo::ji("fearful")`. Fortunately, there are many people out there who are experts in this sort of thing who have graciously shared their resources and advice, and this helped me immensely to run a successful bootcamp. 
 
 # Who attended?
 
-While the majority of those who attended were incoming first-year psychology grad students, we also had a mix of grad students at all levels, undergrads, research assistants, lab managers, staff data analysts, and faculty members from a variety of departments/centers, including Psychology, Linguistics, Economics and the Center for Translational Neuroscience.
+52 people registered for the bootcamp. While the majority of those who attended were incoming first-year psychology grad students, we also had a mix of grad students at all levels, undergrads, research assistants, lab managers, staff data analysts, and faculty members from a variety of departments/centers, including Psychology, Linguistics, Economics and the Center for Translational Neuroscience.
 
 ```{r, warning=FALSE, message=FALSE}
 # import bootcamp registration data 
@@ -107,15 +117,20 @@ plot_data %>%
 
 # Logistics
 
-To make the bootcamp materials more accessible and shareable, I decided to package them into a website, which I created using the `blogdown` package (see more on this below).
+We ran synchronous sessions live over Zoom, but rather than use the Zoom chat for communicating with each other and asking questions, we used Slack. A few reasons for this: 1) this way people could continue to ask questions outside of the live sessions and a permanent record of questions and answers would be available for posterity, 2) The Zoom chat can get easily cluttered and doesn't easily allow you to make threads, which keep things more organizes, and 3) Slack has better emojis `r emo::ji("nerd")`. 
 
-`r emo::ji("link")` <https://uopsych-r-bootcamp-2020.netlify.app/>
+I was fortunate to have the very knowledgable and talented [Cameron Kay](http://cameronstuartkay.com/) and [Cianna Bedford-Petersen](https://ciannabp.com/) as teaching assistants -- a real dream team! Cam and Cianna graciously gave feedback on the bootcamp materials and remained on deck throughout the sessions to answer questions on Slack.
+
+For live interactive exercises, we used RStudio Cloud.
+
+To make the bootcamp materials more accessible and shareable, I decided to package them into a website, which I created using the `blogdown` package (see more on this [below](#ssn)).
+
+`r emo::ji("link")` [uopsych-r-bootcamp-2020.netlify.app](https://uopsych-r-bootcamp-2020.netlify.app/)
 
 ```{r echo=FALSE}
 knitr::include_url("https://uopsych-r-bootcamp-2020.netlify.app/", height = "500px")
 ```
 
-Zoom. slack, RStudio Cloud, TA's
 
 # Tools I learned
 
@@ -160,11 +175,9 @@ Here is a demo that shows "tile view" and `embed_xaringan()` in the context of a
 
 ::::
 
-<br>
+# Resources I recommend 
 
-# Resources I recommend
-
-## Sharing on short notice 
+## Sharing on short notice {#ssn}
 
 <i class="fas fa-user"></i> [Alison Hill](https://alison.rbind.io/), [Desirée De Leon](https://desiree.rbind.io/)
 
@@ -216,7 +229,7 @@ Description
 - <i class="fab fa-google-drive"></i> [google drive folder](https://docs.google.com/presentation/d/1ForBjP0pVhljBLuqOyYfyHw_1rrwJzpWW1ZHzCqAJpU/edit#slide=id.p)
 - <i class="fas fa-book"></i> [blog post](https://education.rstudio.com/blog/2020/09/concept-maps/)
 
-## rstats artwork
+## rstats artwork {#artwork}
 
 <i class="fas fa-user"></i> [Allison Horst](https://www.allisonhorst.com/)
 
@@ -226,22 +239,20 @@ Description
 - <i class="fas fa-comments"></i> [interview with Allison Horst](https://www.dataquest.io/blog/making-learning-to-code-friendlier-with-art-allison-horst-interview/)
 
 
-# Encouragement & positivity
+# A note on encouragement
 
-It's a common experience for
+The leaRning curve is no secret. I hadn't touched R before starting grad school in 2017, but I had heard whispers here and there that learning R 
 
 > "When I learned R, my advisor sent me this [link](https://cran.r-project.org/bin/macosx/) and said 'get started'".
 
 
-#### Anticipate the challenge 
+## Anticipate the challenge 
 
 ```{r echo=FALSE}
 xaringanExtra::embed_xaringan("https://uopsych-r-bootcamp-2020.netlify.app/slides/00-slides.html#10")
 ```
 
-<br> 
-
-#### Normalize errors & mistakes
+## Normalize errors & mistakes
 
 ```{r echo=FALSE}
 xaringanExtra::embed_xaringan("https://uopsych-r-bootcamp-2020.netlify.app/slides/03-slides.html?panelset4=q14&panelset5=nrow2&panelset6=q15&panelset7=q16#60")
@@ -249,9 +260,11 @@ xaringanExtra::embed_xaringan("https://uopsych-r-bootcamp-2020.netlify.app/slide
 
 c.f. "positive error framing" 
 
-<br> 
+## Make your materials friendly and inviting! 
 
-#### Make your materials friendly and inviting! 
+While some might find it to be over the top, I think a few emojis and gifs here and there can go a long way to make your learning materials more inviting and approachable. If your slides read like one long piece of dense help documentation, people are not going to feel inclined to engage with it. 
+
+One of the most powerful tools out there, in my opinion, is the incredible artwork by Allison Horst, RStudio's first [artist-in-residence](https://blog.rstudio.com/2019/11/18/artist-in-residence/) (see more [above](#artwork)). The bigger picture behind the artwork, in Allison's words -- "All of it is towards a goal of trying to make R, and data science in general, more approachable, welcoming, and engaging to diverse learners".
 
 ```{r echo=FALSE}
 knitr::include_graphics("monster_support.jpg")
@@ -259,19 +272,31 @@ knitr::include_graphics("monster_support.jpg")
 
 ## Feedback
 
-:::quote
-"I really appreciated the warm welcome/atmosphere the instructors set up- learning a new programming language can be frustrating, especially for a beginner, so I was really appreciative of the continuous encouragement throughout the bootcamp."
-:::
+I was really happy to see that people seemed to appreciate the learning atmosphere I was striving for and, especially because this was only an introductory workshop, that this made them excited to learn more:
 
 :::quote
-"I really enjoyed how supportive and encouraging the facilitators were. I understood learning R was no easy endeavor but hearing about their experiences was encouraging for me. Also, I greatly appreciate all the amazing resources they have compiled for future use. I definitely plan to continue looking into it!"
+
+`r emo::ji("writing_hand")` "I really appreciated the warm welcome/atmosphere the instructors set up- learning a new programming language can be frustrating, especially for a beginner, so I was really appreciative of the continuous encouragement throughout the bootcamp."
+
+
+`r emo::ji("writing_hand")` "I really enjoyed how supportive and encouraging the facilitators were. I understood learning R was no easy endeavor but hearing about their experiences was encouraging for me. Also, I greatly appreciate all the amazing resources they have compiled for future use. I definitely plan to continue looking into it!"
+
+
+`r emo::ji("writing_hand")` "I appreciated the facilitators' organization, support, encouragement, and instructional clarity. Thank you for providing this very warm and accessible introduction for an absolute first-time novice! It's encouraged me to take more steps into learning R."
+
+
+`r emo::ji("writing_hand")` "I am now in my third year of struggling through R and this was the first presentation of material that really clicked for me. I frequently refer to the dplyr and ggplot presentations in my work and will continue to work my way through these exercises until I am truly fluent in these basics. THANK YOU"
+
+
+`r emo::ji("writing_hand")` "I loved the comprehensive nature of the bootcamp. You truly laid out the foundational tenets of R, and made me appreciate its expansive capacity to do magical things. And I am now very inspired to pursue the Educational Data Science Specialization with the intention of teaching this bootcamp someday. So thank you!"
 :::
 
-:::quote
-"I appreciated the facilitators' organization, support, encouragement, and instructional clarity. Thank you for providing this very warm and accessible introduction for an absolute first-time novice! It's encouraged me to take more steps into learning R."
-:::
+So we did we flatten the leaRning curve? Only time will tell. But the most gratifying feedback, in my opinion, is that folks felt inspired to *keep learning* and continue riding the R roller coaster (as illustrated by [Allison Horst](https://twitter.com/allison_horst)):
 
-<br> 
+```{r echo=FALSE}
+knitr::include_graphics("r_rollercoaster.png")
+```
+
 
 ***
 
@@ -288,3 +313,4 @@ No matter how long someone has been using R, it never hurts to remind them (or y
 sessioninfo::session_info()
 ```
 </details>
+

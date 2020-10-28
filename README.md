@@ -5,3 +5,4 @@ Welcome to the repo for my personal website! I created this website following [A
 Attribution for icons: 
 "bonsai"" by Hey Rabbit from the Noun Project
 "read"" by Laymik from the Noun Project
+"quote" by Adrien Coquet from the Noun Project
