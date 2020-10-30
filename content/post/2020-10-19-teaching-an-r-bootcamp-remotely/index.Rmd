@@ -180,6 +180,8 @@ embed_xaringan("https://uopsych-r-bootcamp-2020.netlify.app/slides/07-slides.htm
 
 You can read more about other use cases for `flair` in this great [post](https://education.rstudio.com/blog/2020/05/flair/) on the RStudio Education Blog.
 
+[Jump back up to see more tools](#tools) `r emo::ji("right_arrow_curving_up")`
+
 ### `flipbookr` {.panel}
 
 `r emo::ji("package")` `r emo::ji("link")` https://evamaerey.github.io/flipbooks/about
@@ -188,11 +190,15 @@ Here is a demo that shows "tile view" and `embed_xaringan()` in the context of a
 
 ![](flipbook.mov)
 
+[Jump back up to see more tools](#tools) `r emo::ji("right_arrow_curving_up")`
+
 ### `countdown` {.panel}
 
 `r emo::ji("package")` `r emo::ji("link")` https://pkg.garrickadenbuie.com/countdown/
 
 ![](countdown.mov)
+
+[Jump back up to see more tools](#tools) `r emo::ji("right_arrow_curving_up")`
 
 ::::
 
