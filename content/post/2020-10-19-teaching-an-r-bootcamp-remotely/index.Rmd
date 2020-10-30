@@ -373,6 +373,8 @@ Thanks again to [Cameron Kay](https://twitter.com/cameronskay) and [Cianna Bedfo
 
 I also wouldn't know half of what I know about learning and teaching R if it weren't for the RStudio Education team -- in particular, [Alison Hill](https://twitter.com/apreshill), [Greg Wilson](https://twitter.com/gvwilson), [Desirée De Leon](https://twitter.com/dcossyle), [Mine Çetinkaya-Rundel](https://twitter.com/minebocek), and [Garrett Grolemund](https://twitter.com/StatGarrett). 
 
+Artwork included in the post is by [Allison Horst](https://twitter.com/allison_horst).
+
 <details><summary>Session Info</summary>
 ```{r echo=FALSE}
 sessioninfo::session_info()
