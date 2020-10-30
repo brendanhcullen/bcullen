@@ -32,9 +32,9 @@ library(xaringanExtra)
 use_panelset()
 ```
 
-At this point, you’re probably familiar with the phrase “flatten the curve” —  remember back in March when we were all talking about that? It was part of a critical public health messaging campaign aimed at slowing the spread of COVID-19 to prevent hospitals from becoming overwhelmed beyond their capacity. Based on how things are going, we really should *still* be talking about that. So allow me to unabashedly steal this catchphrase as a flawed metaphor for learning R during the era of this pandemic... 
+At this point, you’re probably familiar with the phrase “flatten the curve” —  remember back in March when we were all talking about that? It was part of a critical public health messaging campaign aimed at slowing the spread of COVID-19 to prevent hospitals from becoming overwhelmed beyond their capacity. Based on how things are going, we really should *still* be talking about that. So allow me to unabashedly steal this catchphrase as a flawed metaphor for teaching and learning R during the era of this pandemic... 
 
-It’s no secret that R has a significant leaRning curve — and, while it seems that more people than ever are now learning R, almost everyone is having to do it in an online format of some kind. For those who are used to a traditional classroom learning environment, having a first introduction to R in an online format might make the leaRning curve even steeper (as I said, a flawed metaphor -- the concept of a "steep learning curve" is actually the [opposite](https://www.valamis.com/hub/learning-curve#steep-learning-curve) of what most people think, but we’ll run with it for the sake of satisfaction). After recently teaching an introductory [R Bootcamp](https://uopsych-r-bootcamp-2020.netlify.app/) online, I've spent a lot of time thinking about strategies to lower the learning threshold and make it easier to conquer any potential fear of learning R -- to "flatten the leaRning curve", as it were.
+It’s no secret that R has a significant leaRning curve — and, while it seems that more people than ever are now wanting to learn R, almost everyone is having to do it in an online format of some kind. For those who are used to a traditional in-person classroom environment, having a first introduction to R in an online format might make the leaRning curve even steeper (as I said, a flawed metaphor -- the concept of a "steep learning curve" is actually the [opposite](https://www.valamis.com/hub/learning-curve#steep-learning-curve) of what most people think, but we’ll run with it anyway). After recently teaching an introductory [R Bootcamp](https://uopsych-r-bootcamp-2020.netlify.app/) online, I've spent a lot of time thinking about strategies to lower the learning threshold and make it easier to conquer any potential fear of learning R -- to "flatten the leaRning curve", as it were.
 
 :::reader
 For anyone who might be new to teaching R, teaching online, or both, the goal of this post is to share some valuable lessons I learned and resources I used during this online teaching experience. I hope it may be of some benefit for your own teaching.
@@ -102,7 +102,7 @@ plot_data %>%
   ggplot(aes(experience, n, fill = experience)) + 
   geom_col() +
   coord_flip() + 
-  scale_fill_manual(values = get_pal("Kotare"))  + 
+  scale_fill_manual(values = get_pal("Kaka"))  + 
   labs(x = "", y = "Count", title = "Participants' prior experience with R")
 ```
 
