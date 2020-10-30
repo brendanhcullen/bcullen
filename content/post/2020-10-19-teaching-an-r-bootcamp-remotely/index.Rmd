@@ -236,7 +236,7 @@ A super helpful webinar on how best to share your teaching materials online.
 
 <i class="fas fa-user"></i> [Greg Wilson](https://third-bit.com/)
 
-Concrete tips and advice on making the most most of teaching via a webcam. There's a ton of great stuff in here you wouldn't necessarily think of. 
+Concrete tips and advice on making the most of teaching via a webcam. There's a ton of great stuff in here you wouldn't necessarily think of, including important advice on making your teaching accessible and inclusive in an online format.
 
 - <i class="fas fa-video"></i> [webinar](https://rstudio.com/resources/webinars/teaching-online-at-short-notice/)
 - <i class="fas fa-images"></i> [slides](https://docs.google.com/presentation/d/1rE5e2kSFNICNkBJ4iIIgd9eqACi62gxahknKLtw9Hzs/edit#slide=id.g55ddde1eae_0_2)
@@ -246,7 +246,7 @@ Concrete tips and advice on making the most most of teaching via a webcam. There
 
 <i class="fas fa-user"></i> [Mine Çetinkaya-Rundel](https://www2.stat.duke.edu/~mc301/)
 
-A very thorough and easy-to-follow walk-through of using RStudio Cloud for teaching, highlighting its most useful features. 
+A very thorough and easy to follow walk-through of using RStudio Cloud for teaching, highlighting its most useful features. 
 
 - <i class="fas fa-video"></i> [webinar](https://rstudio.com/resources/webinars/teaching-r-online-with-rstudio-cloud/)
 - <i class="fas fa-images"></i> [slides](https://mine-cetinkaya-rundel.github.io/rstudio-cloud-webinar/rstudio-cloud.html#1)
