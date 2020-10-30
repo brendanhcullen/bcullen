@@ -7,6 +7,9 @@ education:
   - course: PhD - Psychology 
     institution: University of Oregon
     year: expected 2022
+  - course: Data Science Specialization in Educational Leadership
+    institution: University of Oregon
+    year: expected 2021  
   - course: MS - Psychology 
     institution: University of Oregon
     year: 2019
