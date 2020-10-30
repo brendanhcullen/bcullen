@@ -15,6 +15,10 @@ links:
   icon_pack: fab
   name: Github Repo
   url: https://github.com/uopsych/summeR-bootcamp-2020
+- icon: book
+  icon_pack: fas
+  name: Blog post
+  url: /post/2020-10-19-teaching-an-r-bootcamp-remotely/index.html
 
 tags:
 - R
@@ -45,4 +49,6 @@ Specific topics include:
 
 ***
 
-This work is [licensed](https://github.com/uopsych/summeR-bootcamp-2020/blob/master/LICENSE.md) under a Creative Commons Attribution 4.0 International License. Please feel free to share and/or adapt and re-use for your own teaching!
+This work is [licensed](https://github.com/uopsych/summeR-bootcamp-2020/blob/master/LICENSE.md) under a Creative Commons Attribution 4.0 International License. Please feel free to share and/or adapt and re-use any of the [materials](https://github.com/uopsych/summeR-bootcamp-2020) for your own teaching!
+
+You can read more about the bootcamp in this [blog post](/post/2020-10-19-teaching-an-r-bootcamp-remotely/index.html).

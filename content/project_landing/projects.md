@@ -6,7 +6,7 @@ active = true  # Activate this widget? true/false
 weight = 65  # Order that this section will appear.
 
 title = "Projects"
-subtitle = "An assortment of different projects I have worked on during my time in graduate school. Wherever possible, I have shared the code for each of these projects on [Github](https://github.com/brendanhcullen) -- any comments, pull requests, feedback, etc. are more than welcome!"
+subtitle = "An assortment of different projects I have worked on during my time in graduate school. Wherever possible, I have shared the code for each of these projects on [Github](https://github.com/brendanhcullen) -- any comments, pull requests, or feedback of any kind are more than welcome!"
 
 
 [content]
