@@ -256,7 +256,7 @@ A very thorough and easy to follow walk-through of using RStudio Cloud for teach
 
 <i class="fas fa-user"></i> [Mine Çetinkaya-Rundel](https://www2.stat.duke.edu/~mc301/)
 
-A series of blog posts 
+A series of blog posts describing a recommended order in which to teach tidyverse topics to beginners, including very recent tidyverse features that are useful for R users at all levels to learn
 
 - <i class="fas fa-book"></i> [Part 1: Getting started](https://education.rstudio.com/blog/2020/07/teaching-the-tidyverse-in-2020-part-1-getting-started/)
 - <i class="fas fa-book"></i> [Part 2: Data visualization](https://education.rstudio.com/blog/2020/07/teaching-the-tidyverse-in-2020-part-2-data-visualisation/)
