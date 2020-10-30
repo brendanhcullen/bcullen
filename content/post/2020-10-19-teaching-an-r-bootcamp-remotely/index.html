@@ -31,7 +31,7 @@ codefolding_nobutton: false
 <script src="/rmarkdown-libs/fitvids/fitvids.min.js"></script>
 
 
-<p>At this point, you’re probably familiar with the phrase “flatten the curve” — remember back in March when we were all talking about that? It was part of a public health messaging campaign aimed at preventing the spread of COVID-19 by encouraging behaviors like social distancing and mask-wearing to prevent hospitals from becoming overwhelmed beyond their capacity. Based on how things are going, we really should <em>still</em> be talking about that. So allow me to unabashedly steal this catchphrase as a flawed metaphor for learning R during the era of this pandemic…</p>
+<p>At this point, you’re probably familiar with the phrase “flatten the curve” — remember back in March when we were all talking about that? It was part of a critical public health messaging campaign aimed at slowing the spread of COVID-19 to prevent hospitals from becoming overwhelmed beyond their capacity. Based on how things are going, we really should <em>still</em> be talking about that. So allow me to unabashedly steal this catchphrase as a flawed metaphor for learning R during the era of this pandemic…</p>
 <p>It’s no secret that R has a significant leaRning curve — and, while it seems that more people than ever are now learning R, almost everyone is having to do it in an online format of some kind. For those who are used to a traditional classroom learning environment, having a first introduction to R in an online format might make the leaRning curve even steeper (as I said, a flawed metaphor – the concept of a “steep learning curve” is actually the <a href="https://www.valamis.com/hub/learning-curve#steep-learning-curve">opposite</a> of what most people think, but we’ll run with it for the sake of satisfaction). After recently teaching an introductory <a href="https://uopsych-r-bootcamp-2020.netlify.app/">R Bootcamp</a> online, I’ve spent a lot of time thinking about strategies to lower the learning threshold and make it easier to conquer any potential fear of learning R – to “flatten the leaRning curve”, as it were.</p>
 <div class="reader">
 <p>For anyone who might be new to teaching R, teaching online, or both, the goal of this post is to share some valuable lessons I learned and resources I used during this online teaching experience. I hope it may be of some benefit for your own teaching.</p>
@@ -111,7 +111,12 @@ plot_data %&gt;%
 </div>
 <div id="blogdown-site" class="section level2">
 <h2>Blogdown site</h2>
-<p>To make the bootcamp materials more accessible and shareable, I decided to package them into a website, which I created using the <a href="https://github.com/rstudio/blogdown">blogdown</a> package (see more on this <a href="#ssn">below</a>).</p>
+<p>To make the bootcamp materials more accessible and shareable, I decided to package them into a website, which I created using the <a href="https://github.com/rstudio/blogdown">blogdown</a> package (see more on this <a href="#ssn">below</a>). Organizing your teaching materials into a website has three clear advantages in my mind:</p>
+<ol style="list-style-type: decimal">
+<li><p>A website makes your materials easier to access and more shareable – you send someone a single link they can access on their phone or computer, no need to download anything</p></li>
+<li><p>A website is highly sustainable in the sense that it’s easy for students to bookmark and refer back to over and over, and if you push changes to Github with continuous deployment (e.g. via <a href="https://www.netlify.com/">Netlify</a>), students will always have access to the most updated materials. This avoids having to introduce Github and version control, which is a whole other beast to teach to beginners.</p></li>
+<li><p>Websites are pretty and highly customizble ✨</p></li>
+</ol>
 <p>🔗 <a href="https://uopsych-r-bootcamp-2020.netlify.app/">uopsych-r-bootcamp-2020.netlify.app</a></p>
 <iframe src="https://uopsych-r-bootcamp-2020.netlify.app/" width="672" height="500px">
 </iframe>
@@ -122,8 +127,9 @@ plot_data %&gt;%
 <div class="panelset">
 <div id="xaringanextra" class="section level3 panel">
 <h3><code>xaringanExtra</code></h3>
-<p>📦 🔗 <a href="https://pkg.garrickadenbuie.com/xaringanExtra/" class="uri">https://pkg.garrickadenbuie.com/xaringanExtra/</a></p>
-<p><code>xaringanExtra</code>, by <a href="https://www.garrickadenbuie.com/">Garrick Aden‑Buie</a> is one of my all-time favorite packages. Here are the features I use most often and <em>highly</em> recommend.</p>
+<p>📦 <a href="https://pkg.garrickadenbuie.com/xaringanExtra/">pkg.garrickadenbuie.com/xaringanExtra</a></p>
+<p><i class="fas fa-user"></i> <a href="https://www.garrickadenbuie.com/">Garrick Aden-Buie</a></p>
+<p><code>{xaringanExtra}</code> extends the functionality of the already amazing <code>{xaringan}</code> package by <a href="https://yihui.org/en/about/">Yihuie Xie</a>, and it has become one of my all-time favorite packages. Here are the features I use most often and <em>highly</em> recommend.</p>
 <p>📖 <a href="https://pkg.garrickadenbuie.com/xaringanExtra/#/share-again">Share again</a></p>
 <p><video src="share_again.mov" controls=""><a href="share_again.mov">Video</a></video></p>
 <p>📖 <a href="https://pkg.garrickadenbuie.com/xaringanExtra/#/panelset">Panelset</a></p>
@@ -144,25 +150,30 @@ Ok, {xaringanExtra} continues to blow my freakin' mind 🤯 Here's a quick demo 
 </div>
 <div id="flair" class="section level3 panel">
 <h3><code>flair</code></h3>
-<p>📦 🔗 <a href="https://r-for-educators.github.io/flair/index.html" class="uri">https://r-for-educators.github.io/flair/index.html</a></p>
-<p>Below is a demonstration of color-coding with <code>flair</code>. This also shows the “panelset” feature along with dynamic syntax highlighting from <code>xaringanExtra</code>.</p>
+<p>📦 <a href="https://r-for-educators.github.io/flair/index.html">r-for-educators.github.io/flair</a></p>
+<p><i class="fas fa-user"></i> <a href="https://www.kelly-bodwin.com/">Kelly Bodwin</a></p>
+<p><code>{flair}</code> allows you to spice up your code with color-coding and dynamic syntax highlighting. One of the most useful applications is to match colors to concepts – e.g. giving each argument of a function a unique color. I feel like I’ve only scratched the surface with <code>{flair}</code> and can’t wait to use it more in my teaching going forward.</p>
+<p>Below is a demonstration of color-coding with <code>flair</code> to introduce <code>dplyr::filter()</code> and its arguments.</p>
 <div class="shareagain" style="min-width:300px;margin:1em auto;">
 <iframe src="https://uopsych-r-bootcamp-2020.netlify.app/slides/07-slides.html?panelset=arguments&amp;panelset9=arguments6&amp;panelset10=arguments7&amp;panelset11=q14&amp;panelset12=arguments8&amp;panelset13=arguments9&amp;panelset14=q15&amp;panelset15=arguments10&amp;panelset16=example-110&amp;panelset17=q16#22" width="1600" height="900" style="border:2px solid currentColor;" loading="lazy" allowfullscreen></iframe>
 <script>fitvids('.shareagain', {players: 'iframe'});</script>
 </div>
-<p>You can read more about other use cases for <code>flair</code> in this great <a href="https://education.rstudio.com/blog/2020/05/flair/">post</a> on the RStudio Education Blog.</p>
+<p>You can read more about other educational use cases for <code>flair</code> in this great <a href="https://education.rstudio.com/blog/2020/05/flair/">post</a> on the RStudio Education Blog.</p>
 <p><a href="#tools">Jump back up to see more tools</a> ⤴️</p>
 </div>
 <div id="flipbookr" class="section level3 panel">
 <h3><code>flipbookr</code></h3>
-<p>📦 🔗 <a href="https://evamaerey.github.io/flipbooks/about" class="uri">https://evamaerey.github.io/flipbooks/about</a></p>
-<p>Here is a demo that shows “tile view” and <code>embed_xaringan()</code> in the context of a ggplot2 flipbook created with the <code>flipbookr</code> package.</p>
+<p>📦 <a href="https://evamaerey.github.io/flipbooks/about">evamaerey.github.io/flipbooks/about</a></p>
+<p><i class="fas fa-user"></i> <a href="https://evangelinereynolds.netlify.app/">Gina Reynolds</a></p>
+<p><code>{flipbookr}</code> is an amazing teaching tool – it allows you to incrementally build up a plot line by line, which capitalizes on the “blink comparator” method. This means that students are able to easily map a specific change in code to a specific visual change in the corresponding plot output. Flipbooks are also great for demonstrating incremental changes in a data wrangling pipeline, and they’re relatively easy to make!</p>
 <p><video src="flipbook.mov" controls=""><a href="flipbook.mov">Video</a></video></p>
 <p><a href="#tools">Jump back up to see more tools</a> ⤴️</p>
 </div>
 <div id="countdown" class="section level3 panel">
 <h3><code>countdown</code></h3>
-<p>📦 🔗 <a href="https://pkg.garrickadenbuie.com/countdown/" class="uri">https://pkg.garrickadenbuie.com/countdown/</a></p>
+<p>📦 <a href="https://pkg.garrickadenbuie.com/countdown/">pkg.garrickadenbuie.com/countdown</a></p>
+<p><i class="fas fa-user"></i> <a href="https://www.garrickadenbuie.com/">Garrick Aden-Buie</a></p>
+<p><code>{coundown}</code> is another great gem from Garrick and allows you to put timers directly on your slides. This is really useful for timed “Your Turn” exercises or to make sure you stay on track with Q &amp; A sessions or breaks.</p>
 <p><video src="countdown.mov" controls=""><a href="countdown.mov">Video</a></video></p>
 <p><a href="#tools">Jump back up to see more tools</a> ⤴️</p>
 </div>
@@ -248,13 +259,13 @@ Ok, {xaringanExtra} continues to blow my freakin' mind 🤯 Here's a quick demo 
 <div id="normalize-errors-mistakes" class="section level2">
 <h2>Normalize errors &amp; mistakes</h2>
 <p>The first time someone uses R, error messages are one of the first things that they’ll see. As we all know, this feels frustrating, especially as a beginner. So it makes sense to acknowledge that up front and discuss what error messages are and why they occur. As error messages go hand-in-hand with debugging, it’s also a good idea to at least introduce that concept as well, without necessarily going into great depth since that’s a whole other topic of it’s own. As debugging is commonly considered part of <a href="https://rstats.wtf/debugging-r-code.html">“what they forgot to teach you about R”</a>, I’m sure I’m not alone in wishing that I had been introduced to debugging much earlier on in my R learning experience.</p>
-<p>While developing a systematic approach to debugging is important down the line, it’s more important at first for beginners to not feel. So it’s worth spending some effort to convince your students that error messages should not be cause for discouragement or giving up. Simply put, error messages are part and parcel of programming. Sometimes they take a matter of seconds to fix, sometimes a matter of weeks, but everyone who uses R will regularly encounter error messages, no matter your level of experience.</p>
+<p>While learning a systematic approach to debugging is important down the line, it’s more important at first for beginners to seeing lots of error messages at first is not a bad thing. So it’s worth spending some effort to convince your students that error messages should not be cause for discouragement or giving up. Simply put, error messages are part and parcel of programming. Sometimes they take a matter of seconds to fix, sometimes a matter of weeks, but everyone who uses R will regularly encounter error messages, no matter your level of experience. And when it really comes down to it, every error message is an opporunity to learn something!</p>
 <div class="shareagain" style="min-width:300px;margin:1em auto;">
 <iframe src="https://uopsych-r-bootcamp-2020.netlify.app/slides/03-slides.html?panelset4=q14&amp;panelset5=nrow2&amp;panelset6=q15&amp;panelset7=q16#60" width="1600" height="900" style="border:2px solid currentColor;" loading="lazy" allowfullscreen></iframe>
 <script>fitvids('.shareagain', {players: 'iframe'});</script>
 </div>
 <p><br></p>
-<p>Taking this one step further, it’s a good idea to deliberately incorporate making mistakes into your own teaching and use error messages as a teachable moment. And even use unintentional mistakes as teachable moments – demonstrates for your students how you fix the mistake, and invite them to give their thoughts and feedback. This not only makes your presentation less rehearsed, but it provides a really valuable context for learning.</p>
+<p>Taking this one step further, it’s a good idea to deliberately incorporate making mistakes into your own teaching and use error messages as a teachable moment. And even use unintentional mistakes as teachable moments – demonstrate for your students how you fix the mistake and invite them to give their thoughts and feedback. This not only makes your presentation less rehearsed, but it provides a really valuable “real-world” context for learning.</p>
 <div class="note">
 <p>This idea is referred to as “positive error framing” – and if you want to learn more about this topic in depth I recommend you check out <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1008090#sec011">this section</a> from the recent article <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1008090">“Ten quick tips for teaching with participatory live coding”</a> (really you should read the whole article – it’s packed full of great advice).</p>
 </div>
