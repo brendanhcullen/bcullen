@@ -302,7 +302,7 @@ xaringanExtra::embed_xaringan("https://uopsych-r-bootcamp-2020.netlify.app/slide
 
 The first time someone uses R, error messages are one of the first things that they'll see. As we all know, this feels frustrating, especially as a beginner. So it makes sense to acknowledge that up front and discuss what error messages are and why they occur. As error messages go hand-in-hand with debugging, it's also a good idea to at least introduce that concept as well, without necessarily going into great depth since that's a whole other topic of it's own. As debugging is commonly considered part of ["what they forgot to teach you about R"](https://rstats.wtf/debugging-r-code.html), I'm sure I'm not alone in wishing that I had been introduced to debugging much earlier on in my R learning experience. 
 
-While learning a systematic approach to debugging is important down the line, it's more important at first for beginners to seeing lots of error messages at first is not a bad thing. So it's worth spending some effort to convince your students that error messages should not be cause for discouragement or giving up. Simply put, error messages are part and parcel of programming. Sometimes they take a matter of seconds to fix, sometimes a matter of weeks, but everyone who uses R will regularly encounter error messages, no matter your level of experience. And when it really comes down to it, every error message is an opporunity to learn something!
+While learning a systematic approach to debugging is important down the line, it's more important at first for beginners to understand that seeing lots of error messages at first is not a bad thing. It's worth spending some effort to convince your students that error messages should not be cause for discouragement or giving up. Simply put, error messages are part and parcel of programming. Sometimes they take a matter of seconds to fix, sometimes a matter of weeks, but everyone who uses R will regularly encounter error messages, no matter your level of experience. And when it really comes down to it, every error message is an opportunity to learn something!
 
 ```{r echo=FALSE}
 xaringanExtra::embed_xaringan("https://uopsych-r-bootcamp-2020.netlify.app/slides/03-slides.html?panelset4=q14&panelset5=nrow2&panelset6=q15&panelset7=q16#60")
@@ -310,7 +310,7 @@ xaringanExtra::embed_xaringan("https://uopsych-r-bootcamp-2020.netlify.app/slide
 
 <br> 
 
-Taking this one step further, it's a good idea to deliberately incorporate making mistakes into your own teaching and use error messages as a teachable moment. And even use unintentional mistakes as teachable moments -- demonstrate for your students how you fix the mistake and invite them to give their thoughts and feedback. This not only makes your presentation less rehearsed, but it provides a really valuable "real-world" context for learning. 
+Taking this one step further, it's a good idea to deliberately incorporate making mistakes into your own teaching and use error messages as a teachable moment. You can even use unintentional mistakes as teachable moments -- demonstrate for your students how you fix the mistake and invite them to give their thoughts and feedback. This not only makes your presentation less rehearsed, but it provides a really valuable "real-world" context for learning. 
 
 :::note
 This idea is referred to as "positive error framing" -- and if you want to learn more about this topic in depth I recommend you check out [this section](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1008090#sec011) from the recent article ["Ten quick tips for teaching with participatory live coding"](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1008090) (really you should read the whole article -- it's packed full of great advice).
@@ -373,7 +373,7 @@ Thanks again to [Cameron Kay](https://twitter.com/cameronskay) and [Cianna Bedfo
 
 I also wouldn't know half of what I know about learning and teaching R if it weren't for the RStudio Education team -- in particular, [Alison Hill](https://twitter.com/apreshill), [Greg Wilson](https://twitter.com/gvwilson), [Desirée De Leon](https://twitter.com/dcossyle), [Mine Çetinkaya-Rundel](https://twitter.com/minebocek), and [Garrett Grolemund](https://twitter.com/StatGarrett). 
 
-Artwork included in the post is by [Allison Horst](https://twitter.com/allison_horst).
+Artwork included in this post is by [Allison Horst](https://twitter.com/allison_horst).
 
 <details><summary>Session Info</summary>
 ```{r echo=FALSE}
