@@ -15,8 +15,21 @@
 
 [[main]]
   name = "TEACHING"
-  url = "/courses/"
+  identifier = "teaching"
+  url = "#"
   weight = 30
+  
+[[main]]
+  name = "Workshops <i class='fas fa-laptop-code'></i>"
+  parent = "teaching"
+  url = "/courses/workshops/"
+  weight = 30.1
+  
+[[main]]
+  name = "University Courses <i class='fas fa-university'></i>"
+  parent = "teaching"
+  url = "/courses/university/"
+  weight = 30.2
 
 [[main]]
   name = "BLOG"
@@ -30,13 +43,13 @@
   weight = 50
   
 [[main]]
-  name = "CV"
+  name = "CV <i class='fas fa-copy'></i>"
   parent = "cv"
   url = "/cv/index.html"
   weight = 50.1
   
 [[main]]
-  name = "RÉSUMÉ"
+  name = "RÉSUMÉ <i class='fas fa-file'></i>"
   parent = "cv"
   url = "/cv/resume.html"
   weight = 50.2
