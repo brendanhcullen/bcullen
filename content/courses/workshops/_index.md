@@ -13,13 +13,13 @@ Workshop for [R-Ladies Algiers](https://www.meetup.com/rladies-algiers/events/27
 <iframe src="https://dplyr-wisely.netlify.app/"; 
 style="width:100%; height:500px"> </iframe>
 
-<br>
+<br><br>
 
 ## Lesser-known tips & tricks in R Markdown
 
 <i class="fab fa-github"></i> [brendanhcullen/rmd-tips](https://github.com/brendanhcullen/rmd-tips)
 
-A collection of "lesser known" tips and tricks in R Markdown, prepared for the [Portland R User Group](https://www.meetup.com/portland-r-user-group/events/274774392/).
+A collection of "lesser known" tips and tricks in R Markdown, prepared for the [Portland R User Group](https://www.meetup.com/portland-r-user-group/events/274774392/). RStudio Cloud project available [here](rstudio.cloud/project/2007413).
 
 <br>
 
@@ -32,7 +32,7 @@ I organized and taught a 3-day introductory R Bootcamp for my fellow ducks in th
 <iframe src="https://uopsych-r-bootcamp-2020.netlify.app/"; 
 style="width:100%; height:500px"> </iframe>
 
-<br>
+<br><br>
 
 ## Column-wise operations with dplyr: Old and New
 
@@ -44,7 +44,7 @@ While preparing to become an RStudio Certified Instructor, I put together a less
 <iframe src="https://columnwise-operations-dplyr.netlify.app/"; 
 style="width:100%; height:500px"> </iframe>
 
-<br>
+<br><br>
 
 ## Introduction to Git and Github
 
