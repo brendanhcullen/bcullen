@@ -19,7 +19,7 @@ style="width:100%; height:500px"> </iframe>
 
 <i class="fab fa-github"></i> [brendanhcullen/rmd-tips](https://github.com/brendanhcullen/rmd-tips)
 
-A collection of "lesser known" tips and tricks in R Markdown, prepared for the [Portland R User Group](https://www.meetup.com/portland-r-user-group/events/274774392/). RStudio Cloud project available [here](rstudio.cloud/project/2007413).
+A collection of "lesser known" tips and tricks in R Markdown, prepared for the [Portland R User Group](https://www.meetup.com/portland-r-user-group/events/274774392/). RStudio Cloud project available [here](https://rstudio.cloud/project/2007413).
 
 <br>
 
