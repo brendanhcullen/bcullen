@@ -88,7 +88,7 @@ contact_info %>%
 Certification <i class="fab fa-r-project"></i> {#certification}
 --------------------------------------------------------------------------------
 
-I am an [RStudio Certified Instructor](https://education.rstudio.com/trainers/people/cullen+brendan/) in the [tidyverse](https://www.tidyverse.org/) (see [certificate](https://github.com/brendanhcullen/rstudio-instructor-certification/blob/master/certificate.png)).
+I am an [RStudio Certified Instructor](https://education.rstudio.com/trainers/people/cullen+brendan/) in the [tidyverse](https://www.tidyverse.org/) (see [certificate](https://github.com/brendanhcullen/rstudio-instructor-certification/blob/main/certificate.png)).
 
 <br>
 
@@ -126,9 +126,8 @@ Disclaimer {#disclaimer}
 --------------------------------------------------------------------------------
 
 Created with [pagedown](https://github.com/rstudio/pagedown).
-<br>Source code on [GitHub](https://github.com/brendanhcullen/bcullen/tree/master/static/cv). <i class="fa fa-github"></i>
+<br>Source code on [GitHub](https://github.com/brendanhcullen/bcullen/tree/main/static/cv). <i class="fa fa-github"></i>
 <br>Last updated on `r Sys.Date()`.
-
 
 ```{r}
 RESUME_PDF_LOC <- "cullen_resume.pdf"
