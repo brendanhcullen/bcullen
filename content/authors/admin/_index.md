@@ -9,7 +9,7 @@ education:
     year: expected 2022
   - course: Data Science Specialization in Educational Leadership
     institution: University of Oregon
-    year: expected 2021  
+    year: 2021  
   - course: MS - Psychology 
     institution: University of Oregon
     year: 2019
@@ -18,8 +18,8 @@ education:
     year: 2015
 email: "bcullen@uoregon.edu"
 interests:
-- Data science education
 - R & R Markdown
+- Data science education
 - Health behavior change
 - Precision medicine
 - Translational neuroscience
