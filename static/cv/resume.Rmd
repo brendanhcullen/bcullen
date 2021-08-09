@@ -85,17 +85,17 @@ contact_info %>%
 
 <br>
 
-Certification <i class="fab fa-r-project"></i> {#certification}
+Data Science Specialization <i class="fa fa-user-graduate"></i> {#training}
 --------------------------------------------------------------------------------
 
-I am an [RStudio Certified Instructor](https://education.rstudio.com/trainers/people/cullen+brendan/) in the [tidyverse](https://www.tidyverse.org/) (see [certificate](https://github.com/brendanhcullen/rstudio-instructor-certification/blob/main/certificate.png)).
+As part of my graduate training, I completed a 5-course [Data Science Specialization in Educational Leadership](https://github.com/uo-datasci-specialization) focused on data visualization, functional programming, and machine learning within a tidyverse framework.
 
 <br>
 
-Other Training <i class="fa fa-user-graduate"></i> {#training}
+Certification <i class="fab fa-r-project"></i> {#certification}
 --------------------------------------------------------------------------------
 
-As part of my doctoral training, I am currently pursuing a 5-course [Data Science Specialization](https://github.com/uo-datasci-specialization) taught entirely in R, focused on reproducible analysis, data visualization, functional programming, and machine learning within a tidyverse framework.
+I am an [RStudio Certified Instructor](https://education.rstudio.com/trainers/people/cullen+brendan/) in the [tidyverse](https://www.tidyverse.org/).
 
 <br>
 

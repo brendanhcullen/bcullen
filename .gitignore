@@ -5,3 +5,6 @@
 public/
 .DS_Store
 .secrets
+Thumbs.db
+public/
+resources/
