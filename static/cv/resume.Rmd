@@ -129,10 +129,10 @@ Created with [pagedown](https://github.com/rstudio/pagedown).
 <br>Source code on [GitHub](https://github.com/brendanhcullen/bcullen/tree/main/static/cv). <i class="fa fa-github"></i>
 <br>Last updated on `r Sys.Date()`.
 
-```{r}
-RESUME_PDF_LOC <- "cullen_resume.pdf"
-glue("[<i class='fas fa-download'></i> Download a PDF copy]({RESUME_PDF_LOC})")
-```
+<!-- ```{r} -->
+<!-- RESUME_PDF_LOC <- "cullen_resume.pdf" -->
+<!-- glue("[<i class='fas fa-download'></i> Download a PDF copy]({RESUME_PDF_LOC})") -->
+<!-- ``` -->
 
 Main
 ================================================================================

@@ -102,14 +102,14 @@ Created with [pagedown](https://github.com/rstudio/pagedown).
 <br>Last updated on `r Sys.Date()`.
 
 
-```{r}
-# When in export mode the little dots are unaligned, so fix that.
-if(PDF_EXPORT){
-  glue("View this CV online with links at _{CV_HTML_LOC}_")
-} else {
-  glue("[<i class='fas fa-download'></i> Download a PDF of this CV]({CV_PDF_LOC})")
-}
-```
+<!-- ```{r} -->
+<!-- # When in export mode the little dots are unaligned, so fix that. -->
+<!-- if(PDF_EXPORT){ -->
+<!--   glue("View this CV online with links at _{CV_HTML_LOC}_") -->
+<!-- } else { -->
+<!--   glue("[<i class='fas fa-download'></i> Download a PDF of this CV]({CV_PDF_LOC})") -->
+<!-- } -->
+<!-- ``` -->
 
 
 Main
