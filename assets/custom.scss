@@ -1,0 +1,256 @@
+@font-face {
+  font-family: 'Ilisarniq-Light';
+  src: url('fonts/Ilisarniq-Light.eot');
+  src: url('fonts/Ilisarniq-Light.eot?#iefix') format('embedded-opentype'),
+       url('fonts/Ilisarniq-Light.woff2') format('woff2'),
+       url('fonts/Ilisarniq-Light.woff') format('woff'),
+       url('fonts/Ilisarniq-Light.ttf')  format('truetype');
+  font-weight: 200;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Ilisarniq-LightItalic';
+  src: url('fonts/Ilisarniq-LightItalic.eot');
+  src: url('fonts/Ilisarniq-LightItalic.eot?#iefix') format('embedded-opentype'),
+       url('fonts/Ilisarniq-LightItalic.woff2') format('woff2'),
+       url('fonts/Ilisarniq-LightItalic.woff') format('woff'),
+       url('fonts/Ilisarniq-LightItalic.ttf')  format('truetype');
+  font-weight: 200;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Ilisarniq-Regular';
+  src: url('fonts/Ilisarniq-Regular.eot');
+  src: url('fonts/Ilisarniq-Regular.eot?#iefix') format('embedded-opentype'),
+       url('fonts/Ilisarniq-Regular.woff2') format('woff2'),
+       url('fonts/Ilisarniq-Regular.woff') format('woff'),
+       url('fonts/Ilisarniq-Regular.ttf')  format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Ilisarniq-Italic';
+  src: url('fonts/Ilisarniq-Italic.eot');
+  src: url('fonts/Ilisarniq-Italic.eot?#iefix') format('embedded-opentype'),
+       url('fonts/Ilisarniq-Italic.woff2') format('woff2'),
+       url('fonts/Ilisarniq-Italic.woff') format('woff'),
+       url('fonts/Ilisarniq-Italic.ttf')  format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Ilisarniq-Demi';
+  src: url('fonts/Ilisarniq-Demi.eot');
+  src: url('fonts/Ilisarniq-Demi.eot?#iefix') format('embedded-opentype'),
+       url('fonts/Ilisarniq-Demi.woff2') format('woff2'),
+       url('fonts/Ilisarniq-Demi.woff') format('woff'),
+       url('fonts/Ilisarniq-Demi.ttf')  format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Ilisarniq-DemiItalic';
+  src: url('fonts/Ilisarniq-DemiItalic.eot');
+  src: url('fonts/Ilisarniq-DemiItalic.eot?#iefix') format('embedded-opentype'),
+       url('fonts/Ilisarniq-DemiItalic.woff2') format('woff2'),
+       url('fonts/Ilisarniq-DemiItalic.woff') format('woff'),
+       url('fonts/Ilisarniq-DemiItalic.ttf')  format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Ilisarniq-Bold';
+  src: url('fonts/Ilisarniq-Bold.eot');
+  src: url('fonts/Ilisarniq-Bold.eot?#iefix') format('embedded-opentype'),
+       url('fonts/Ilisarniq-Bold.woff2') format('woff2'),
+       url('fonts/Ilisarniq-Bold.woff') format('woff'),
+       url('fonts/Ilisarniq-Bold.ttf')  format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Ilisarniq-BoldItalic';
+  src: url('fonts/Ilisarniq-BoldItalic.eot');
+  src: url('fonts/Ilisarniq-BoldItalic.eot?#iefix') format('embedded-opentype'),
+       url('fonts/Ilisarniq-BoldItalic.woff2') format('woff2'),
+       url('fonts/Ilisarniq-BoldItalic.woff') format('woff'),
+       url('fonts/Ilisarniq-BoldItalic.ttf')  format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Ilisarniq-Black';
+  src: url('fonts/Ilisarniq-Black.eot');
+  src: url('fonts/Ilisarniq-Black.eot?#iefix') format('embedded-opentype'),
+       url('fonts/Ilisarniq-Black.woff2') format('woff2'),
+       url('fonts/Ilisarniq-Black.woff') format('woff'),
+       url('fonts/Ilisarniq-Black.ttf')  format('truetype');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Ilisarniq-BlackItalic';
+  src: url('fonts/Ilisarniq-BlackItalic.eot');
+  src: url('fonts/Ilisarniq-BlackItalic.eot?#iefix') format('embedded-opentype'),
+       url('fonts/Ilisarniq-BlackItalic.woff2') format('woff2'),
+       url('fonts/Ilisarniq-BlackItalic.woff') format('woff'),
+       url('fonts/Ilisarniq-BlackItalic.ttf')  format('truetype');
+  font-weight: 600;
+  font-style: normal;
+}
+
+
+@font-face {
+    font-family: 'Petrona';
+    src: url('fonts/Petrona-VariableFont_wght.eot');
+    src: url('fonts/Petrona-VariableFont_wght.eot?#iefix') format('embedded-opentype'),
+        url('fonts/Petrona-VariableFont_wght.woff2') format('woff2'),
+        url('fonts/Petrona-VariableFont_wght.woff') format('woff'),
+        url('fonts/Petrona-VariableFont_wght.ttf')  format('truetype');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Petrona';
+    src: url('fonts/Petrona-Italic-VariableFont_wght.eot');
+    src: url('fonts/Petrona-Italic-VariableFont_wght.eot?#iefix') format('embedded-opentype'),
+        url('fonts/Petrona-Italic-VariableFont_wght.woff2') format('woff2'),
+        url('fonts/Petrona-Italic-VariableFont_wght.woff') format('woff'),
+        url('fonts/Petrona-Italic-VariableFont_wght.ttf')  format('truetype');
+    font-weight: 300;
+    font-style: italic;
+    font-display: swap;
+}
+
+:root {
+	--decorator-outer-offset-top: .3rem;
+	--decorator-outer-offset-left: -.475rem;
+	--decorator-border-width: 1px;
+	--decorator-outer-dim: 12px;
+	--decorator-border: 4px solid #F3E0E1;
+}
+
+.decorator {
+ flex:0 0 0;
+ position:relative;
+ width:2pt;
+ min-height:100%;
+ border-left:var(--decorator-border);
+}
+.decorator::before {
+ position:absolute;
+ top:var(--decorator-outer-offset-top);
+ left:var(--decorator-outer-offset-left);
+ content:' ';
+ display:block;
+ width:var(--decorator-outer-dim);
+ height:var(--decorator-outer-dim);
+ border-radius:calc(var(--decorator-outer-dim) / 2);
+ background-color:#e8987f
+}
+.decorator::after {
+ position:absolute;
+ top:calc(var(--decorator-outer-offset-top) + var(--decorator-border-width));
+ left:calc(var(--decorator-outer-offset-left) + var(--decorator-border-width));
+ content:' ';
+ display:block;
+ width:calc(var(--decorator-outer-dim) - (var(--decorator-border-width) * 2));
+ height:calc(var(--decorator-outer-dim) - (var(--decorator-border-width) * 2));
+ border-radius:calc((var(--decorator-outer-dim) - (var(--decorator-border-width) * 2)) / 2);
+ background-color:#e8987f
+}
+.blocks:last-child .decorator {
+ margin-bottom:0.25in
+}
+
+
+/*----CSS Credit: 
+Adapted from code by Desirée De Leon: https://desiree.rbind.io/ 
+-----*/
+
+/* --------Blog posts--------- */
+/* Headers within blogs */
+
+.article-style .section.level1 h1,
+.article-style .section.level2 h2,
+.article-style .section.level3 h3,
+.article-style .section.level3 h4{
+  padding-top: 0.75em;
+  padding-bottom: 0.75em;
+  font-weight: 300;
+}
+
+/* -----------div tips------------- */
+
+div.puzzle, div.fyi, div.demo, div.note, div.book, div.github, div.profile, div.bookmark, div.link, div.code, div.quote, div.reader{
+    padding: 1em;
+    margin: 1em 0;
+    padding-left: 100px;
+    background-size: 70px;
+    background-repeat: no-repeat;
+    background-position: 15px center;
+    min-height: 120px;
+    color: #FFFFFF;
+    background-color: #5a9998;
+    border: dashed 5px #32807f;
+  }
+  
+
+div.puzzle {
+  background-image: url("../note_box_icons/Your-turn.png");
+}
+
+div.fyi {
+ background-image: url("../note_box_icons/fyi.png");
+}
+
+div.demo {
+  background-image: url("../note_box_icons/Live-code.png");
+}
+
+div.note {
+  background-image: url("../note_box_icons/lightbulb.png");
+}
+
+div.book {
+  background-image: url("../note_box_icons/book.png");
+}
+
+div.github {
+  background-image: url("../note_box_icons/github.png");
+}
+
+div.profile {
+  background-image: url("../note_box_icons/profile.png");
+}
+
+div.bookmark {
+  background-image: url("../note_box_icons/bookmark.png");
+}
+
+div.link {
+  background-image: url("../note_box_icons/link.png");
+}
+
+div.code {
+  background-image: url("../note_box_icons/code.png");
+}
+
+div.quote {
+  background-image: url("../note_box_icons/quote.png");
+}
+
+div.reader {
+  background-image: url("../note_box_icons/reader.png");
+}
