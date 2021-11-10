@@ -53,7 +53,7 @@ Back in Fall 2018, the Department of Psychology at the University of Oregon star
 
 In addition, as I've [written about previously](/post/2020-03-08-data-science-training-needs-in-grad-school/index.html), current grad students, along with other members of the psychology department, have expressed a keen interest in developing a stronger foundation in skills such as basic programming, data wrangling, and data visualization. So the bootcamp also serves as an opportunity for existing R users to get a refresher and deeper dive into those topics for those who want it.
 
-After spending lot of time thinking about how to improve the data science learning experience for my fellow grad students and having [recently become](https://bcullen.rbind.io/post/2020-09-03-reflections-on-rstudio-instructor-training/) an [RStudio Certified Instructor](https://education.rstudio.com/trainers/people/cullen+brendan/) in the tidyverse, it was my great privilege to be able to put all of this into action by leading the 3rd Annual UO Psych Bootcamp this year. 🥳 
+After spending lot of time thinking about how to improve the data science learning experience for my fellow grad students and having [recently become](https://bcullen.rbind.io/post/2020-09-03-reflections-on-rstudio-instructor-training/) an [RStudio Certified Instructor](https://education.rstudio.com/trainers/people/cullen+brendan/) in the tidyverse, it was my great privilege to be able to put all of this into action by leading the 3rd Annual UO Psych Bootcamp this year.
 
 ## The challenge
 
@@ -61,7 +61,7 @@ However, I found myself facing a rather significant challenge. The R Bootcamp, l
 
 Moreover, I assumed that student motivation would be at an all-time low and feelings of anxiety and uncertainty would be at an all-time high -- especially for those about to start their graduate school journey entirely online, very much contrary to plan. There were a lot of horrible things going on in the world in September 2020, which marked 6 months into the COVID-19 pandemic in the U.S. -- people's loved ones were getting sick, the killing of innocent Black lives continued, a bitter presidential race reached full swing -- not to mention devastating wildfires that raged all along the west coast. (Of course, while I wish I could actually write about these events in the past tense, all of these problems continue). 
 
-So, how do you get people excited about learning R amidst all of *that*? Needless to say, this felt a little daunting 😨. Fortunately, though, there are people out there who are experts in this sort of thing who have graciously shared their resources and advice, and this helped me immensely to run a successful bootcamp. 
+So, how do you get people excited about learning R amidst all of *that*? Needless to say, this felt a little daunting. Fortunately, though, there are people out there who are experts in this sort of thing who have graciously shared their resources and advice, and this helped me immensely to run a successful bootcamp. 
 
 ## Who attended?
 
@@ -99,7 +99,7 @@ To make the bootcamp materials more accessible and shareable, I decided to packa
 
 2) A website is highly sustainable in the sense that it's easy for students to bookmark and refer back to over and over, and if you push changes to Github with continuous deployment (e.g. via [Netlify](https://www.netlify.com/)), students will always have access to the most updated materials. This avoids having to introduce Github and version control, which is a whole other beast to teach to beginners.
 
-3) Websites are pretty and highly customizble ✨
+3) Websites are pretty and highly customizble
 
 🔗 [uopsych-r-bootcamp-2020.netlify.app](https://uopsych-r-bootcamp-2020.netlify.app/)
 
@@ -276,7 +276,7 @@ It was very much with Daniel's model in mind that I found inspiration for making
 
 ### Anticipate the challenge 
 
-Recognize the fact that learning R is *hard*. Don't pretend it's a walk in the park -- it isn't. But at the same time, emphasize that the investment of time it takes is worth it! And be sure to remind people of that more than once 😉.
+Recognize the fact that learning R is *hard*. Don't pretend it's a walk in the park -- it isn't. But at the same time, emphasize that the investment of time it takes is worth it!
 
 <div class="shareagain" style="min-width:300px;margin:1em auto;">
 <iframe src="https://uopsych-r-bootcamp-2020.netlify.app/slides/00-slides.html#10" width="1600" height="900" style="border:2px solid currentColor;" loading="lazy" allowfullscreen></iframe>
