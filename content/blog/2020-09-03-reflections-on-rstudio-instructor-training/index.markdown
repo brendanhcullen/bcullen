@@ -1,5 +1,6 @@
 ---
 title: Reflections on RStudio Instructor Training
+layout: single-sidebar
 author: Brendan Cullen
 date: '2020-09-03'
 slug: []

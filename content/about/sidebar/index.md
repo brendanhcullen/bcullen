@@ -1,7 +1,7 @@
 ---
 ## Configure sidebar content in narrow column
 author: "Brendan Cullen"
-role: "Data Science Educator, RStudio, PBC"
+role: "Data Science Educator, [RStudio, PBC](https://www.rstudio.com/)"
 avatar_shape: rounded # circle, square, rounded, leave blank to exclude
 show_social_links: true # specify social accounts in site config
 audio_link_label: "" # leave blank to exclude

@@ -1,26 +1,37 @@
 ---
+# title: "Flattening the leaRning curve: Teaching R online during COVID-19"
+# author: Brendan Cullen
+# date: '2020-10-19'
+# tags:
+#   - data science
+#   - education
+#   - R
+# subtitle: ''
+# summary: 'Lessons learned from my first experience teaching an R bootcamp remotely & a collection of tools and resources I found useful'
+# lastmod: '2020-10-19'
+# featured: no
+# image:
+#   caption: '<span>Photo by <a href="https://unsplash.com/@martinadams?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Martin Adams</a> on <a href="https://unsplash.com/s/photos/sky?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></span>'
+#   focal_point: ''
+#   preview_only: no
+# projects: []
+# disable_codefolding: false
+# codefolding_show: "hide"
+# codefolding_nobutton: false
 title: "Flattening the leaRning curve: Teaching R online during COVID-19"
-author: Brendan Cullen
-date: '2020-10-19'
-slug: []
-categories: []
+subtitle: ""
+summary: "Lessons learned from my first experience teaching an R bootcamp remotely & a collection of tools and resources I found useful"
+date: 2020-10-19
+author: "Brendan Cullen"
+draft: false
+images:
+series:
 tags:
-  - data science
-  - education
   - R
-subtitle: ''
-summary: 'Lessons learned from my first experience teaching an R bootcamp remotely & a collection of tools and resources I found useful'
-authors: []
-lastmod: '2020-10-19T10:26:32-07:00'
-featured: no
-image:
-  caption: '<span>Photo by <a href="https://unsplash.com/@martinadams?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Martin Adams</a> on <a href="https://unsplash.com/s/photos/sky?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></span>'
-  focal_point: ''
-  preview_only: no
-projects: []
-disable_codefolding: false
-codefolding_show: "hide"
-codefolding_nobutton: false
+  - tidyverse
+  - education
+categories:
+layout: single-sidebar
 ---
 <script src="{{< blogdown/postref >}}index_files/fitvids/fitvids.min.js"></script>
 <script src="{{< blogdown/postref >}}index_files/fitvids/fitvids.min.js"></script>
@@ -44,7 +55,7 @@ In addition, as I've [written about previously](/post/2020-03-08-data-science-tr
 
 After spending lot of time thinking about how to improve the data science learning experience for my fellow grad students and having [recently become](https://bcullen.rbind.io/post/2020-09-03-reflections-on-rstudio-instructor-training/) an [RStudio Certified Instructor](https://education.rstudio.com/trainers/people/cullen+brendan/) in the tidyverse, it was my great privilege to be able to put all of this into action by leading the 3rd Annual UO Psych Bootcamp this year. 🥳 
 
-# The challenge
+## The challenge
 
 However, I found myself facing a rather significant challenge. The R Bootcamp, like many intro R workshops, usually occurs in-person in a large room with a giant projector screen, coffee and snacks, and, most importantly, the ability to run over and look over someone's shoulder at their computer screen when they need help. Because of COVID-19, I needed to design and deliver a bootcamp for a large group of beginners (many using R for the very first time) entirely over a webcam. 
 
@@ -52,65 +63,19 @@ Moreover, I assumed that student motivation would be at an all-time low and feel
 
 So, how do you get people excited about learning R amidst all of *that*? Needless to say, this felt a little daunting 😨. Fortunately, though, there are people out there who are experts in this sort of thing who have graciously shared their resources and advice, and this helped me immensely to run a successful bootcamp. 
 
-# Who attended?
+## Who attended?
 
 52 people registered for the bootcamp. While the majority of those who attended were incoming first-year psychology grad students, we also had a mix of more advanced grad students, undergrads, research assistants, lab managers, staff data analysts, and faculty members from a variety of departments/centers across the University, including the Departments of Psychology, Linguistics, Economics and the Center for Translational Neuroscience.
 
-
-```r
-# import bootcamp registration data 
-registration <- read_csv("uopsych_bootcamp_registration_deidentified.csv")
-
-# clean data
-plot_data <- registration %>% 
-  janitor::clean_names() %>% 
-  select(position = what_is_your_position_at_uo,
-         experience = do_you_have_any_experience_in_r_no_experience_is_required) %>%
-  mutate(position = factor(case_when(position %in% c("Undergraduate", "Undergraduate student") ~ "Undergrad Student", 
-                                     position %in% c("RA", "Lab Manager", "Data Analyst") ~ "Research Staff",
-                              TRUE ~ as.character(position))),
-         experience = factor(experience, levels = c(
-           "I've never heard of it",
-           "I've heard of it but have never used it",
-           "I've opened it before",
-           "I've used it to analyze data",
-           "I use it often to analyze data")))
-
-# plot positions at UO
-theme_set(theme_minimal(base_size = 15)) 
-theme_update(legend.position = "none", 
-          plot.title.position = "plot",
-          panel.grid.minor.y = element_blank())
-
-plot_data %>% 
-  count(position) %>% 
-  ggplot(aes(fct_reorder(position, n), n, fill = position)) + 
-  geom_col() +
-  coord_flip() + 
-  scale_fill_manual(values = get_pal("Kotare")) + 
-  labs(x = "", y = "Count", title = "Participants' roles at University of Oregon")
-```
-
 <img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-2-1.png" width="672" />
 
-
-
-```r
-# plot prior experience 
-plot_data %>% 
-  count(experience) %>% 
-  ggplot(aes(experience, n, fill = experience)) + 
-  geom_col() +
-  coord_flip() + 
-  scale_fill_manual(values = get_pal("Kaka"))  + 
-  labs(x = "", y = "Count", title = "Participants' prior experience with R")
-```
+<br><br>
 
 <img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-3-1.png" width="672" />
 
-# Logistics
+## Logistics
 
-## Zoom + Slack = 👌
+### Zoom + Slack = 👌
 
 We ran synchronous sessions live over Zoom. However, rather than use the Zoom chat for communicating with each other and asking questions, we used Slack. A few reasons for this: 
 
@@ -122,11 +87,11 @@ We ran synchronous sessions live over Zoom. However, rather than use the Zoom ch
 
 I was fortunate to have the very knowledgeable and talented [Cameron Kay](http://cameronstuartkay.com/) and [Cianna Bedford-Petersen](https://ciannabp.com/) as teaching assistants. Cam and Cianna remained on deck throughout the sessions to answer questions on Slack while we went through the material. We also decided that if a student ran into technical issues or felt completely lost, then one of the TA's would pull them into a breakout room on Zoom to offer one-on-one help. 
 
-## RStudio Cloud 
+### RStudio Cloud 
 
 For "Your Turn" exercises, an idea I stole from Alison Hill's excellent rstudio::conf(2020) [workshop](https://conf20-intro-ml.netlify.app/), we used [RStudio Cloud](https://rstudio.com/products/cloud/), a hosted version of the RStudio IDE available in the web browser. We did this to avoid issues with students installing RStudio on their local machines, as troubleshooting technical issues over Zoom in a large group is not something we felt prepared for. Using RStudio Cloud also allowed me to configure specific IDE settings and pre-load specific packages to allow students to initially avoid technical issues. Lastly, sharing a workspace on RStudio Cloud allowed each student to save their own copy of the projects containing the Your Turn exercises, which in turn made it possible for myself or the TA's to "peek" into a student's exercises and help them figure out where their errors were coming from. Overall it went really smoothly, and everyone who filled out the feedback survey said they had no issues using it. I highly recommend using this for your teaching, even if it's in-person.
 
-## Blogdown site
+### Blogdown site
 
 To make the bootcamp materials more accessible and shareable, I decided to package them into a website, which I created using the [blogdown](https://github.com/rstudio/blogdown) package (see more on this [below](#ssn)). Organizing your teaching materials into a website has three clear advantages in my mind: 
 
@@ -141,7 +106,7 @@ To make the bootcamp materials more accessible and shareable, I decided to packa
 <iframe src="https://uopsych-r-bootcamp-2020.netlify.app/" width="672" height="500px"></iframe>
 
 
-# Tools I learned {#tools}
+## Tools I learned {#tools}
 
 {{< panelset class="tools" >}}
 {{< panel name="`xaringanExtra`" >}}
@@ -154,19 +119,27 @@ To make the bootcamp materials more accessible and shareable, I decided to packa
 
 📖 [Share again](https://pkg.garrickadenbuie.com/xaringanExtra/#/share-again)
 
-![](share_again.mov)
+<video width="700" height="533" controls>
+  <source src="share_again.mov" type="video/mp4">
+</video>
 
 📖 [Panelset](https://pkg.garrickadenbuie.com/xaringanExtra/#/panelset)
 
-![](panelset.mov)
+<video width="700" height="533" controls>
+  <source src="panelset.mov" type="video/mp4">
+</video>
 
 📖 [Tile view](https://pkg.garrickadenbuie.com/xaringanExtra/#/tile-view)
 
-![](tile_view.mov)
+<video width="700" height="533" controls>
+  <source src="tile_view.mov" type="video/mp4">
+</video>
 
 📖 [Extra styles](https://pkg.garrickadenbuie.com/xaringanExtra/#/extra-styles)
 
-![](extra_style.mov)
+<video width="700" height="533" controls>
+  <source src="extra_style.mov" type="video/mp4">
+</video>
 
 In case it still isn't obvious enough how much I love this package...
 
@@ -205,7 +178,9 @@ You can read more about other educational use cases for `flair` in this great [p
 
 `{flipbookr}` is an amazing teaching tool -- it allows you to incrementally build up a plot line by line, which capitalizes on the "blink comparator" method. This means that students are able to easily map a specific change in code to a specific visual change in the corresponding plot output. Flipbooks are also great for demonstrating incremental changes in a data wrangling pipeline, and they're relatively easy to make!
 
-![](flipbook.mov)
+<video width="700" height="533" controls>
+  <source src="flipbook.mov" type="video/mp4">
+</video>
 
 [Jump back up to see more tools](#tools) ⤴️
 
@@ -217,18 +192,20 @@ You can read more about other educational use cases for `flair` in this great [p
 
 <i class="fas fa-user"></i> [Garrick Aden-Buie](https://www.garrickadenbuie.com/)
 
-`{coundown}` is another great gem from Garrick and allows you to put timers directly on your slides. This is really useful for timed "Your Turn" exercises or to make sure you stay on track with Q & A sessions or breaks.
+`{countdown}` is another great gem from Garrick and allows you to put timers directly on your slides. This is really useful for timed "Your Turn" exercises or to make sure you stay on track with Q & A sessions or breaks.
 
-![](countdown.mov)
+<video width="700" height="533" controls>
+  <source src="countdown.mov" type="video/mp4">
+</video>
 
 [Jump back up to see more tools](#tools) ⤴️
 
 {{< /panel >}}
 {{< /panelset >}}
 
-# Resources I recommend 
+## Resources I recommend 
 
-## Sharing on short notice {#ssn}
+### Sharing on short notice {#ssn}
 
 <i class="fas fa-user"></i> [Alison Hill](https://alison.rbind.io/), [Desirée De Leon](https://desiree.rbind.io/)
 
@@ -239,7 +216,7 @@ A super helpful webinar on how best to share your teaching materials online.
 - <i class="fab fa-github"></i> [share-blogdown template](https://github.com/apreshill/share-blogdown)
 - <i class="fas fa-book"></i> [blog post](https://education.rstudio.com/blog/2020/04/sharing-on-short-notice/)
 
-## Teaching online on short notice
+### Teaching online on short notice
 
 <i class="fas fa-user"></i> [Greg Wilson](https://third-bit.com/)
 
@@ -249,7 +226,7 @@ Concrete tips and advice on making the most of teaching via a webcam. There's a 
 - <i class="fas fa-images"></i> [slides](https://docs.google.com/presentation/d/1rE5e2kSFNICNkBJ4iIIgd9eqACi62gxahknKLtw9Hzs/edit#slide=id.g55ddde1eae_0_2)
 - <i class="fas fa-book"></i> [blog post](https://education.rstudio.com/blog/2020/03/teaching-online-on-short-notice/)
 
-## Teaching R online with RStudio Cloud
+### Teaching R online with RStudio Cloud
 
 <i class="fas fa-user"></i> [Mine Çetinkaya-Rundel](https://www2.stat.duke.edu/~mc301/)
 
@@ -259,7 +236,7 @@ A very thorough and easy to follow walk-through of using RStudio Cloud for teach
 - <i class="fas fa-images"></i> [slides](https://mine-cetinkaya-rundel.github.io/rstudio-cloud-webinar/rstudio-cloud.html#1)
 - <i class="fas fa-book"></i> [blog post](https://education.rstudio.com/blog/2020/04/teaching-with-rstudio-cloud-q-a/)
 
-## Teaching the tidyverse in 2020
+### Teaching the tidyverse in 2020
 
 <i class="fas fa-user"></i> [Mine Çetinkaya-Rundel](https://www2.stat.duke.edu/~mc301/)
 
@@ -270,7 +247,7 @@ A series of blog posts describing a recommended order in which to teach tidyvers
 - <i class="fas fa-book"></i> [Part 3: Data wrangling and tidying](https://education.rstudio.com/blog/2020/07/teaching-the-tidyverse-in-2020-part-3-data-wrangling-and-tidying/)
 - <i class="fas fa-book"></i> [Part4: Part 4: When to purrr?](https://education.rstudio.com/blog/2020/07/teaching-the-tidyverse-in-2020-part-4-when-to-purrr/)
 
-## Data science concept maps
+### Data science concept maps
 
 A growing list of concept maps related to data science topics in R. Great for planning your lessons and/or sharing in your slides to summarize topics, no matter how seemingly simple or complex.
 
@@ -280,7 +257,7 @@ A growing list of concept maps related to data science topics in R. Great for pl
 - <i class="fab fa-google-drive"></i> [google drive folder](https://docs.google.com/presentation/d/1ForBjP0pVhljBLuqOyYfyHw_1rrwJzpWW1ZHzCqAJpU/edit#slide=id.p)
 - <i class="fas fa-book"></i> [blog post](https://education.rstudio.com/blog/2020/09/concept-maps/)
 
-## rstats artwork {#artwork}
+### rstats artwork {#artwork}
 
 <i class="fas fa-user"></i> [Allison Horst](https://www.allisonhorst.com/)
 
@@ -289,7 +266,7 @@ A collection of mind-blowing art that makes it 1000% more fun to learn R.
 - <i class="fab fa-github"></i> [github repo](https://github.com/allisonhorst/stats-illustrations)
 - <i class="fas fa-comments"></i> [interview with Allison Horst](https://www.dataquest.io/blog/making-learning-to-code-friendlier-with-art-allison-horst-interview/)
 
-# The importance of encouragement & positivity
+## The importance of encouragement & positivity
 
 The leaRning curve is no secret. I hadn't touched R before starting grad school in 2017, but I had heard whispers here and there that learning R is really difficult. But I think there's an element of self-fulfilling prophecy here. If you expect it to be impossible, then it will feel impossible. I more or less started my journey with that expectation. 
 
@@ -297,7 +274,7 @@ Things changed for me when I took my first course with [Daniel Anderson](https:/
 
 It was very much with Daniel's model in mind that I found inspiration for making learning R feel more inviting and less daunting. Here are a few things that came to mind that can be abstracted to some general advice...
 
-## Anticipate the challenge 
+### Anticipate the challenge 
 
 Recognize the fact that learning R is *hard*. Don't pretend it's a walk in the park -- it isn't. But at the same time, emphasize that the investment of time it takes is worth it! And be sure to remind people of that more than once 😉.
 
@@ -306,7 +283,7 @@ Recognize the fact that learning R is *hard*. Don't pretend it's a walk in the p
 <script>fitvids('.shareagain', {players: 'iframe'});</script>
 </div>
 
-## Normalize errors & mistakes
+### Normalize errors & mistakes
 
 The first time someone uses R, error messages are one of the first things that they'll see. As we all know, this feels frustrating, especially as a beginner. So it makes sense to acknowledge that up front and discuss what error messages are and why they occur. As error messages go hand-in-hand with debugging, it's also a good idea to at least introduce that concept as well, without necessarily going into great depth since that's a whole other topic of it's own. As debugging is commonly considered part of ["what they forgot to teach you about R"](https://rstats.wtf/debugging-r-code.html), I'm sure I'm not alone in wishing that I had been introduced to debugging much earlier on in my R learning experience. 
 
@@ -322,7 +299,7 @@ While learning a systematic approach to debugging is important down the line, it
 Taking this one step further, it's a good idea to deliberately incorporate making mistakes into your own teaching and use error messages as a teachable moment. You can even use unintentional mistakes as teachable moments -- demonstrate for your students how you fix the mistake and invite them to give their thoughts and feedback. This not only makes your presentation less rehearsed, but it provides a really valuable "real-world" context for learning. 
 
 <div class="note">
-This idea is referred to as "positive error framing" -- and if you want to learn more about this topic in depth I recommend you check out [this section](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1008090#sec011) from the recent article ["Ten quick tips for teaching with participatory live coding"](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1008090) (really you should read the whole article -- it's packed full of great advice).
+This idea is referred to as "positive error framing" -- and if you want to learn more about this topic in depth I recommend you check out <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1008090#sec011">this section</a> from the recent article <a href = "https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1008090">"Ten quick tips for teaching with participatory live coding"</a>.
 </div>
 
 
@@ -336,37 +313,17 @@ One of the most powerful tools out there, in my opinion, is the incredible artwo
 
 <img src="monster_support.jpg" width="3802" />
 
-# Feedback
+## A final thought
 
-I was really happy to see that people seemed to appreciate the positive learning atmosphere and, especially because this was only an introductory workshop, that this made them excited to learn more:
-
-<div class="quote">
-
-✍️ "I really appreciated the warm welcome/atmosphere the instructors set up- learning a new programming language can be frustrating, especially for a beginner, so I was really appreciative of the continuous encouragement throughout the bootcamp."
-
-***
-✍️ "I really enjoyed how supportive and encouraging the facilitators were. I understood learning R was no easy endeavor but hearing about their experiences was encouraging for me. Also, I greatly appreciate all the amazing resources they have compiled for future use. I definitely plan to continue looking into it!"
-
-***
-✍️ "I appreciated the facilitators' organization, support, encouragement, and instructional clarity. Thank you for providing this very warm and accessible introduction for an absolute first-time novice! It's encouraged me to take more steps into learning R."
-
-***
-✍️ "I am now in my third year of struggling through R and this was the first presentation of material that really clicked for me. I frequently refer to the dplyr and ggplot presentations in my work and will continue to work my way through these exercises until I am truly fluent in these basics. THANK YOU"
-</div>
-
-So we did we flatten the leaRning curve? Only time will tell. But the most gratifying feedback, in my opinion, is that people who attended felt inspired to *keep learning* and continue riding the R roller coaster. That's really the best outcome I could have hoped for!
-
-<img src="r_rollercoaster.png" width="3712" />
-
-# A final thought
-
-In short, no matter how long someone has been using R, it never hurts to remind them (yourself included) that a little time and effort can go a long way.
+No matter how long someone has been using R, it never hurts to remind them (yourself included) that a little time and effort can go a long way.
 
 <center>
-![](time_effort.gif){width="417"}
+
+<img src="time_effort.gif"  width = 417/>
+
 </center>
 
-# Acknowledgements 
+## Acknowledgements 
 
 I owe a huge debt of gratitude to all the people who were instrumental in my initial experience of learning R: [Daniel Anderson](https://twitter.com/datalorax_), [Dani Cosme](https://twitter.com/danicosme), [Krista DeStasio](https://twitter.com/PsychNeurd), [Cory Costello](https://twitter.com/CostelloCK), [Jessica Kosie](https://twitter.com/JessKosie), and [Sara Weston](https://twitter.com/saraweston09), to name only a few. 
 
@@ -389,7 +346,7 @@ Artwork included in this post is by [Allison Horst](https://twitter.com/allison_
 ##  collate  en_US.UTF-8                 
 ##  ctype    en_US.UTF-8                 
 ##  tz       America/Los_Angeles         
-##  date     2021-11-08                  
+##  date     2021-11-09                  
 ## 
 ## ─ Packages ───────────────────────────────────────────────────────────────────
 ##  package       * version    date       lib
@@ -436,7 +393,6 @@ Artwork included in this post is by [Allison Horst](https://twitter.com/allison_
 ##  munsell         0.5.0      2018-06-12 [1]
 ##  pillar          1.4.7      2020-11-20 [1]
 ##  pkgconfig       2.0.3      2019-09-22 [1]
-##  png             0.1-7      2013-12-03 [1]
 ##  purrr         * 0.3.4      2020-04-17 [1]
 ##  R6              2.5.0      2020-10-28 [1]
 ##  Rcpp            1.0.5      2020-07-06 [1]
@@ -502,7 +458,6 @@ Artwork included in this post is by [Allison Horst](https://twitter.com/allison_
 ##  CRAN (R 4.0.2)                          
 ##  CRAN (R 4.0.3)                          
 ##  Github (G-Thomson/Manu@a12062f)         
-##  CRAN (R 4.0.2)                          
 ##  CRAN (R 4.0.2)                          
 ##  CRAN (R 4.0.2)                          
 ##  CRAN (R 4.0.2)                          
