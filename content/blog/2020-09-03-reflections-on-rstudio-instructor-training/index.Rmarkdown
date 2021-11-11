@@ -9,7 +9,7 @@ tags:
   - data science
   - education
   - R
-subtitle: 'tl;dr You should definitely look into it.'
+subtitle: ''
 summary: "The 'what' and 'why' of RStudio Instructor Training and resources for those interested in pursuing it."
 authors: []
 lastmod: '2020-09-03T21:28:31-07:00'
@@ -36,7 +36,7 @@ As a small way of paying it forward, I wanted to offer a reflection on what I th
 # The *what*
 
 <div class="note">
-The best place the start is to read about the RStudio Instructor Training and Certification Program [here](https://education.rstudio.com/trainers/#info). The [RStudio Education Blog](https://education.rstudio.com/categories/certify/) also has lots of helpful posts about the program.
+The best place the start is to read about the RStudio Instructor Training and Certification Program <a href= "https://education.rstudio.com/trainers/#info">here</a>. The <a href= "https://education.rstudio.com/categories/certify/">RStudio Education Blog</a> also has lots of helpful posts about the program.
 </div>
 
 The process boils down to three steps.
@@ -84,7 +84,8 @@ There are also sample teaching exams available.
 If you'd like to see an example of a demonstration lesson, below are the materials I created for this portion of the teaching exam. I used `penguins` from the [`{palmerpenguins}`](https://allisonhorst.github.io/palmerpenguins/) package as an example data set.
 
 <div class="github">
-You can find all of the materials for this lesson and the accompanying code on [Github](https://github.com/brendanhcullen/rstudio-instructor-certification). Feel free to share, adapt and re-use for your own teaching.
+<br>
+You can find all of the materials for this lesson and the accompanying code on <a href= "https://github.com/brendanhcullen/rstudio-instructor-certification">Github</a>. Feel free to share, adapt and re-use for your own teaching.
 </div>
 
 #### Slides `r fontawesome::fa("film")`
@@ -173,10 +174,6 @@ As online data science education is becoming increasingly the norm, it seems nat
 
 Another great reason to become a certified instructor is that, as a data science educator, you have a huge and ever-increasing bank of resources at your disposal. What's more, as a certified instructor, you are eligible for free licenses to [RStudio Pro products](https://rstudio.com/products/) and a significant discount for [RStudio Cloud](https://rstudio.cloud/). Here are just some of the great teaching tools from RStudio and the \#rstats community.
 
-<div class="bookmark">
-The [RStudio Education Blog](https://education.rstudio.com/blog/) is a `r emo::ji("gem")` treasure trove `r emo::ji("gem")` of resources. Add it to your bookmarks immediately.
-</div>
-
 **Teaching with RStudio Cloud**
 
 -   [webinar](https://rstudio.com/resources/webinars/teaching-r-online-with-rstudio-cloud/) and accompanying [blog post](https://education.rstudio.com/blog/2020/04/teaching-with-rstudio-cloud-q-a/), courtesy of [Mine Çetinkaya-Rundel](https://www2.stat.duke.edu/~mc301/)
@@ -215,27 +212,6 @@ The [RStudio Education Blog](https://education.rstudio.com/blog/) is a `r emo::j
 
 The instructor training program started back in February 2019 and [as of August 2020](https://education.rstudio.com/blog/2020/08/august-2020-instructors/) there are almost 150 certified tidyverse instructors and 20 shiny instructors. This means that the program has gone through multiple iterations and has made data-driven improvements based on [feedback from participants](https://education.rstudio.com/blog/2020/07/instructor-certification-findings/) -- especially in the realm of supporting online teaching in the aftermath of COVID-19. So you can rest assured that, while it is still a relatively new program, all the kinks have been worked out.
 
-Plus, I'm sure that the content and structure of the training will continue to adapt to the needs and priorities of the community, and you might even be lucky enough to catch a special guest presentation. For example...
-
-<center>
-
-<blockquote class="twitter-tweet">
-
-<p lang="en" dir="ltr">
-
-Enjoyed sharing some tips today on "Teaching in Production" for our <a href="https://twitter.com/RStudioEDU?ref_src=twsrc%5Etfw">[@RStudioEDU]</a> certified-instructors-to-be (another <a href="https://twitter.com/thomas_mock?ref_src=twsrc%5Etfw">[@thomas_mock]</a> distill success story!) <br><br>Thx to <a href="https://twitter.com/gvwilson?ref_src=twsrc%5Etfw">[@gvwilson]</a> for the invite, <a href="https://twitter.com/allison_horst?ref_src=twsrc%5Etfw">[@allison_horst]</a> for <a href="https://twitter.com/hashtag/rmarkdown?src=hash&amp;ref_src=twsrc%5Etfw">\#rmarkdown</a> 🦔(❣️), and <a href="https://twitter.com/dcossyle?ref_src=twsrc%5Etfw">[@dcossyle]</a> for all her 🎨.<a href="https://t.co/sngAwlcSqN">https://t.co/sngAwlcSqN</a>
-
-</p>
-
---- Alison Presmanes Hill ([@apreshill]) <a href="https://twitter.com/apreshill/status/1296553009522962432?ref_src=twsrc%5Etfw">August 20, 2020</a>
-
-</blockquote>
-
-```{=html}
-<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-```
-</center>
-
 <center>
 
 <br>❖ ❖ ❖<br>
@@ -248,10 +224,10 @@ The focus of this training is not technical competency -- it's how be an effecti
 
 The [\#rstats learning community](https://twitter.com/R4DScommunity) is known for being welcoming and inclusive, so it's no surprise that the training course emphasizes these values as well. What I appreciate most about this aspect of the training is that it will challenge you to think about questions and hypothetical scenarios to which there are no easy answers.
 
-However, it is extremely important to be pushed out of your comfort zone to consciously and proactively reflect on how you will confront issues such as systemic racism and institutionalized violence against BIPOC communities, sexism and a deeply ingrained culture of sexual harassment. These issues will inevitably arise in one form or another in your classroom or teaching setting, and it's absolutely necessary that we confront these challenges now more than ever. Check out [this slide](https://docs.google.com/presentation/d/1uYQCbs88aao7Ho4d4mUfYi6hOXhgHWV6noR_-jOaE50/edit#slide=id.g56df7927dc_0_1) and [this talk](https://www.youtube.com/watch?v=EhNisFJPfrs) on effective allyship when you get a chance.
+However, it is important to be pushed out of your comfort zone to consciously and proactively reflect on how you will confront issues such as systemic racism and institutionalized violence against BIPOC communities, sexism and a deeply ingrained culture of sexual harassment. These issues will inevitably arise in one form or another in your classroom or teaching setting, and it's necessary that we confront these challenges now more than ever. Check out [this slide](https://docs.google.com/presentation/d/1uYQCbs88aao7Ho4d4mUfYi6hOXhgHWV6noR_-jOaE50/edit#slide=id.g56df7927dc_0_1) and [this talk](https://www.youtube.com/watch?v=EhNisFJPfrs) on effective allyship when you get a chance.
 
 <div class="book">
-For further reading on inclusivity and social justice in data science education, I recommend you read [this post](https://education.rstudio.com/blog/2020/06/native-classroom/) by [Nicole Thompson Gonzalez](http://www.nicolethompsongonzalez.com/) and [this one](https://medium.com/@yimregister/10-ways-to-integrate-social-justice-into-teaching-data-science-f48d13f2337c) by [Yim Register](http://students.washington.edu/yreg/). Also check out the amazing work that [JooYoung Seo](https://jooyoungseo.com/), the first blind RStudio Certified Instructor, has been doing to make data science tools [more accessible](https://education.rstudio.com/blog/2020/07/a11y-midterm/).
+For further reading on inclusivity and social justice in data science education, I recommend you read <a href="https://education.rstudio.com/blog/2020/06/native-classroom/">this post</a> by Nicole Thompson Gonzalez. Also check out the work that JooYoung Seo has been doing to make data science tools <a href="https://education.rstudio.com/blog/2020/07/a11y-midterm/">more accessible</a>.
 </div>
 
 Another exciting feature is that the training materials are now [available in Spanish](https://drive.google.com/drive/folders/1qwTEMqoqphF9qu7f0lSCSTmikIf5chBi), courtesy of [Laura Acion](https://lacion.rbind.io/), and hopefully other languages soon, as interest in the training seems to be growing around the world. A similar ongoing project to check out is [`glosario`](https://carpentries.github.io/glosario/), an open source glossary of data science terms translated in multiple languages that can be used for teaching (read more [here](https://education.rstudio.com/blog/2020/07/announcing-glosario/)).
@@ -266,26 +242,18 @@ Another exciting feature is that the training materials are now [available in Sp
 
 To extend the idea of including *everyone* who wants to learn data science, we must be active in building teaching communities that extend beyond just the walls of academic institutions.
 
-RStudio's [mission](https://education.rstudio.com/teach/#:~:text=RStudio's%20mission%20is%20to%20equip,economy%20that%20rewards%20data%20literacy.&text=All%20of%20RStudio's%20resources%20are,materials%20in%20their%20own%20ways.) is to
+RStudio's [mission](https://education.rstudio.com/teach/) is to
 
 > "equip everyone, regardless of means, to participate in a global economy that rewards data literacy."
 
 A more concrete goal, put forth by [Carl Howe](https://education.rstudio.com/trainers/people/howe+carl/), Director of Education at RStudio, is to train the [next million R users](https://rstudio.com/resources/rstudioconf-2019/the-next-million-r-users/). In becoming an RStudio certified instructor, you can better position yourself to actively participate in reaching this goal. But it's worth reflecting on the fact that teaching and learning doesn't happen in a vacuum -- this is where the idea of community comes in. In my opinion, the fact that R users around the world already have a strong sense of community will make it that much easier to welcome new learners into the fold and make it more likely that they themselves will start to train others one day.
 
 <div class="book">
-<br> Read more about building a community of practice [here](https://teachtogether.tech/en/index.html#s:community).
+<br> Read more about building a community of practice <a href="https://teachtogether.tech/en/index.html#s:community">here</a>.
 </div>
-
-------------------------------------------------------------------------
-
-*P.S.* If you need yet another reason to do this training, you get a fancy certificate at the end. `r emo::ji("sparkles")`
-
-![](certificate.png)
 
 ------------------------------------------------------------------------
 
 # Get in touch
 
 Please feel free to [reach out](https://twitter.com/_bcullen) if you are thinking of participating in the training yourself and want to hear more from someone who's gone through it recently. I would be glad to chat any time!
-
-![](https://media.giphy.com/media/3o7btQsLqXMJAPu6Na/giphy.gif)
