@@ -346,7 +346,7 @@ Artwork included in this post is by [Allison Horst](https://twitter.com/allison_
 ##  collate  en_US.UTF-8                 
 ##  ctype    en_US.UTF-8                 
 ##  tz       America/Los_Angeles         
-##  date     2021-11-09                  
+##  date     2021-11-11                  
 ## 
 ## ─ Packages ───────────────────────────────────────────────────────────────────
 ##  package       * version    date       lib

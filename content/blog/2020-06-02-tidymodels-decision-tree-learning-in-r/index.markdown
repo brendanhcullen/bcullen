@@ -1,14 +1,15 @@
 ---
-title: 'Tidymodels: Decision Tree Learning in R'
-author: Cianna Bedford-Petersen, Christopher Loan & Brendan Cullen
+title: 'Decision Tree Learning in R'
+layout: single-sidebar
+author: Brendan Cullen, Cianna Bedford-Petersen & Christopher Loan
 date: '2020-06-02'
 slug: []
 categories: []
 tags: []
-subtitle: 'Cianna Bedford-Petersen, Christopher Loan & Brendan Cullen'
-summary: 'An overview and worked example of tree-based machine learning methods in R using `tidymodels`'
+subtitle: ''
+summary: 'An overview and worked example of tree-based machine learning methods in R using tidymodels'
 authors: []
-lastmod: '2020-06-02T10:57:23-07:00'
+lastmod: ''
 featured: no
 image:
   caption: 'Image by <a href="https://pixabay.com/users/ilyessuti-3558510/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=4634225">Ilona Ilyés</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=4634225">Pixabay</a>'
@@ -20,14 +21,14 @@ codefolding_show: "show"
 codefolding_nobutton: false 
 ---
 
-RStudio has recently released a cohesive suite of packages for modelling and machine learning, called `{tidymodels}`. The successor to Max Kuhn’s `{caret}` package, `{tidymodels}` allows for a tidy approach to your data from start to finish. We’re going to walk through the basics for getting off the ground with `{tidymodels}` and demonstrate its application to three different tree-based methods for predicting student test scores. For further information about the package, you can visit https://www.tidymodels.org/.
+RStudio has recently released a cohesive suite of packages for modelling and machine learning, called tidymodels. The successor to Max Kuhn’s caret package, tidymodels allows for a tidy approach to your data from start to finish. We’re going to walk through the basics for getting off the ground with tidymodels and demonstrate its application to three different tree-based methods for predicting student test scores. For further information about the package, you can visit https://www.tidymodels.org/.
 
 # Setup
 
 
 
 
-Load both the `{tidyverse}` and `{tidymodels}` packages into your environment. We’ll also load in the `{skimr}` package to help us with some descriptives for our data and a host of other packages that will be required to run our machine learning models.
+Load both the tidyverse and tidymodels packages into your environment. We’ll also load in the skimr package to help us with some descriptives for our data and a host of other packages that will be required to run our machine learning models.
 
 
 ```r
@@ -105,13 +106,13 @@ frl <- left_join(frl, stu_counts)
 dat <- left_join(dat, frl)
 ```
 
-After loading in our three datasets, we’ll join them together to make one cohesive data set to use for modelling.  After joining, the data contains both student-level variables (e.g. gender, ethnicity, enrollment in special education/talented and gifted programs, etc.) and district-level variables (e.g. school longitude and latitude, proportion of students who qualify for free and reduced-price lunch, etc.), all of which will be included for each 3 of our `{tidymodels}` tree-based examples. 
+After loading in our three datasets, we’ll join them together to make one cohesive data set to use for modelling.  After joining, the data contains both student-level variables (e.g. gender, ethnicity, enrollment in special education/talented and gifted programs, etc.) and district-level variables (e.g. school longitude and latitude, proportion of students who qualify for free and reduced-price lunch, etc.), all of which will be included for each 3 of our tidymodels tree-based examples. 
 
 For a more complete description of the variables, you can download the data dictionary [here](data_dictionary.csv).
 
 # Explore the data
 
-We’ll use the `skim()` function from `{skimr}` to take a closer look at our variables. Many numeric predictors are clearly non-normal (see histograms below), but this is no problem as tree-based methods are robust to non-normality.
+We’ll use the `skimr::skim()` to take a closer look at our variables. Many numeric predictors are clearly non-normal (see histograms below), but this is no problem as tree-based methods are robust to non-normality.
 
 
 ```r
@@ -198,7 +199,7 @@ Table: Table 1: Data summary
 |no_category_codes                  |         0|             1|  263.63| 151.80|▆▇▃▁▁ |
 |n                                  |         0|             1|  793.78| 532.54|▇▃▂▁▁ |
 
-While most of our predictors are categorical, we can use `{corrplot}` to better visualize the relationships among the numeric variables.
+While most of our predictors are categorical, we can use corrplot to better visualize the relationships among the numeric variables.
 
 
 ```r
@@ -215,7 +216,7 @@ dat %>%
 
 # Split data and resample
 
-The first step of our analysis is to split our data into two separate sets: a "training" set and a "testing" set. The training set is used to train a model and, if desired, to adjust (i.e., "tune") the model's hyperparameters before evaluating its final performance on our test data. By allowing us to test a model on a new sample, we assess "out of sample" accuracy (i.e., unseen data-—what all predictive models are interested in) and limit overfitting to the training set. We can do this efficiently with the `initial_split()` function. This comes from the `{rsample}` package, which is part of the `{tidymodels}` package that we already loaded. Defaults put 75% of the data in the training set and 25% in the test set, but this can be adjusted with the `prop` argument. Then, we’ll extract the training data from our split object and assign it a name. 
+The first step of our analysis is to split our data into two separate sets: a "training" set and a "testing" set. The training set is used to train a model and, if desired, to adjust (i.e., "tune") the model's hyperparameters before evaluating its final performance on our test data. By allowing us to test a model on a new sample, we assess "out of sample" accuracy (i.e., unseen data-—what all predictive models are interested in) and limit overfitting to the training set. We can do this efficiently with the `initial_split()` function. This comes from the rsample package, which is part of the tidymodels package that we already loaded. Defaults put 75% of the data in the training set and 25% in the test set, but this can be adjusted with the `prop` argument. Then, we’ll extract the training data from our split object and assign it a name. 
 
 To further prevent over-fitting, we’ll resample our data using `vfold_cv()`. This function outputs k-*fold* cross-validated versions of our training data, where k = the number of times we resample (unsure why v- is used instead of k- here). By using k = 10 data sets, we get a better estimate of the model's out-of-sample accuracy. On top of decreasing bias from over-fitting, this is essential when tuning hyperparameters (though we plan to apply defaults and not tune here, for brevity). Though our use of 10-fold cross validation is both frequently used and effective, it should be noted that other methods (e.g., bootstrap resampling) or other k-values are sometimes used to accomplish the same goal.
 
@@ -253,7 +254,7 @@ rec <- recipe(score ~ ., train) %>%
 
 # Create a model
 
-The last step before bringing in our data is to specify our model. This will call upon functions from the `{parsnip}` package, which standardizes language for specifying a multitude of statistical models. There are a few core elements that you will need to specify for each model 
+The last step before bringing in our data is to specify our model. This will call upon functions from the parsnip package, which standardizes language for specifying a multitude of statistical models. There are a few core elements that you will need to specify for each model 
 
 ## The type of model
 
@@ -471,7 +472,7 @@ fit_boost <- fit_resamples(
 
 ### Visualize
 
-One of the few downfalls of `{tidymodels}` is its (current) inability to plot these tree-based models. For the past two models, it was simpler to extract root nodes and plot them, but their interpretation (as we're fitting to residuals instead of data sets) are not straightforward. For that reason, we don't have any pretty plots here. Instead, we'll skip to evaluating the metrics of all models. 
+One of the few downfalls of tidymodels is its (current) inability to plot these tree-based models. For the past two models, it was simpler to extract root nodes and plot them, but their interpretation (as we're fitting to residuals instead of data sets) are not straightforward. For that reason, we don't have any pretty plots here. Instead, we'll skip to evaluating the metrics of all models. 
 
 # Evaluate metrics
 
@@ -545,7 +546,7 @@ collect_metrics(final_fit_bag) %>%
 |rf    |rmse    |standard   |  93.80719|
 |boost |rmse    |standard   |  90.30180|
 
-After applying our 3 trained models to the unseen test data, it looks like random forest is the winner since it has the lowest RMSE. In this example, we only used 1% of the data to train these models, which could make it difficult to meaningfully compare their performance. However, the random forest model also results in the best out-of-sample prediction (RMSE = 83.47) when using all of the available data, which we did for the [Kaggle competition](https://www.kaggle.com/c/edld-654-spring-2020/leaderboard). 
+After applying our 3 trained models to the unseen test data, it looks like the boosted tree model is the winner since it has the lowest RMSE. In this example, we only used 1% of the data to train these models, which could make it difficult to meaningfully compare their performance. In practice, the random forest model results in the best out-of-sample prediction when using all of the available data, which we did for the [Kaggle competition](https://www.kaggle.com/c/edld-654-spring-2020/leaderboard). 
 
 <details><summary>Session Info</summary>
 
@@ -560,7 +561,7 @@ After applying our 3 trained models to the unseen test data, it looks like rando
 ##  collate  en_US.UTF-8                 
 ##  ctype    en_US.UTF-8                 
 ##  tz       America/Los_Angeles         
-##  date     2021-11-09                  
+##  date     2021-11-11                  
 ## 
 ## ─ Packages ───────────────────────────────────────────────────────────────────
 ##  package       * version    date       lib source                           

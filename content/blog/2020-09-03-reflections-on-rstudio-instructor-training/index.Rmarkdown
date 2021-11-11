@@ -12,7 +12,7 @@ tags:
 subtitle: ''
 summary: "The 'what' and 'why' of RStudio Instructor Training and resources for those interested in pursuing it."
 authors: []
-lastmod: '2020-09-03T21:28:31-07:00'
+lastmod: ''
 featured: no
 image:
   caption: '<span>Photo by <a href="https://www.istockphoto.com/portfolio/oatawa?assettype=image&mediatype=photography&sort=mostpopular">oatawa</a> on <a href="https://www.istockphoto.com/">iStock</a></span>'
