@@ -1,6 +1,6 @@
 ---
 title: "Brendan Cullen"
-subtitle: "Data Science Educator | RStudio, PBC"
+subtitle: "Data Science Educator, RStudio, PBC"
 description: "Brief blurb."
 images:
   - img/headshot.jpg

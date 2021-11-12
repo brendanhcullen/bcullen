@@ -32,12 +32,7 @@ Indeed, the combination of random variation ("noise") in how we humans respond t
 
 The Department of Psychology at the University of Oregon requires first-year graduate students to take a 3-course series of classes on statistics and data analysis. (You can access the materials for these classes [here.](https://github.com/uopsych)) As I'm sure used to be the case in psychology departments across many universities, the labs for these classes were originally taught in SPSS. However, thanks to the efforts of some hard-working graduate teaching assistants who served as lab instructors at the time, the labs eventually transitioned to being taught entirely in R. 
 
-<center>
-<blockquote class="twitter-tweet"><p lang="en" dir="ltr">When I started TA-ing for graduate stats, we (<a href="https://twitter.com/roseberrymaier?ref_src=twsrc%5Etfw">@roseberrymaier</a>, <a href="https://twitter.com/flourneuro?ref_src=twsrc%5Etfw">@flourneuro</a>) translated the labs from SPSS to R. We created a bunch of .Rmd files for students to work from. It&#39;s so cool to see that those students are the TAs now, and they&#39;re creating these amazing materials! <a href="https://t.co/myMGefLxQX">https://t.co/myMGefLxQX</a></p>&mdash; Dr. Jessica Kosie (@JessKosie) <a href="https://twitter.com/JessKosie/status/1236017394260348930?ref_src=twsrc%5Etfw">March 6, 2020</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-</center>
-
-<br> 
-While learning R in first-year grad stats has immense benefits, it is also really challenging. This was certainly my experience, anyway. In addition to grappling with the dense conceptual material, learning a programming language and using it to do statistics felt really daunting since I had very little programming background before graduate school. And the reality is, given that many (myself included) tend to experience a large learning curve with programming, combined with the already hefty gradstats curriculum, there just isn't space in these classes to teach students much beyond the basics of R. 
+While learning R in first-year grad stats has immense benefits, it is also really challenging. In addition to grappling with the dense conceptual material, learning a programming language and using it to do statistics felt really daunting since I had very little programming background before graduate school. And the reality is, given that many (myself included) tend to experience a large learning curve with programming, combined with the already hefty gradstats curriculum, there just isn't space in these classes to teach students much beyond the basics of R. 
 
 ***
 

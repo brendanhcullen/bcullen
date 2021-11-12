@@ -1,4 +1,4 @@
-baseURL = "https://silvia.rbind.io/"
+baseURL = "https://bcullen.rbind.io/"
 theme = "hugo-apero"
 languageCode = "en"
 title = "Brendan Cullen"
