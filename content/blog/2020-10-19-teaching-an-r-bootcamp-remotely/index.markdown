@@ -1,23 +1,4 @@
 ---
-# title: "Flattening the leaRning curve: Teaching R online during COVID-19"
-# author: Brendan Cullen
-# date: '2020-10-19'
-# tags:
-#   - data science
-#   - education
-#   - R
-# subtitle: ''
-# summary: 'Lessons learned from my first experience teaching an R bootcamp remotely & a collection of tools and resources I found useful'
-# lastmod: '2020-10-19'
-# featured: no
-# image:
-#   caption: '<span>Photo by <a href="https://unsplash.com/@martinadams?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Martin Adams</a> on <a href="https://unsplash.com/s/photos/sky?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></span>'
-#   focal_point: ''
-#   preview_only: no
-# projects: []
-# disable_codefolding: false
-# codefolding_show: "hide"
-# codefolding_nobutton: false
 title: "Flattening the leaRning curve: Teaching R online during COVID-19"
 subtitle: ""
 summary: "Lessons learned from my first experience teaching an R bootcamp remotely & a collection of tools and resources I found useful"
@@ -346,7 +327,7 @@ Artwork included in this post is by [Allison Horst](https://twitter.com/allison_
 ##  collate  en_US.UTF-8                 
 ##  ctype    en_US.UTF-8                 
 ##  tz       America/Los_Angeles         
-##  date     2021-11-11                  
+##  date     2021-11-17                  
 ## 
 ## ─ Packages ───────────────────────────────────────────────────────────────────
 ##  package       * version    date       lib

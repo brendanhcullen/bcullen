@@ -37,6 +37,14 @@ I organized and taught a 3-day introductory R Bootcamp for the Department of Psy
 
 The materials have been designed such that you should be able to work through the slides and exercises at your own pace if you were not able to attend the bootcamp sessions. All materials are available on the bootcamp website: https://uopsych-r-bootcamp-2021.netlify.app/
 
+<div>
+  <iframe
+      width="700"
+      height="500"
+      src="https://uopsych-r-bootcamp-2021.netlify.app/">
+  </iframe>
+</div>
+
 ***
 
 This bootcamp gives a gentle introduction to R and RStudio, transforming and visualizing data with the tidyverse, and the basics of R Markdown. It assumes no prior experience with R or any other programming language and is designed to get learners up and running with the most widely useful tools for reproducible data analysis in R while emphasizing best practices for writing code and organizing project-oriented workflows. 
@@ -50,9 +58,9 @@ Specific topics include:
 3. [Functions & Debugging](https://uopsych-r-bootcamp-2021.netlify.app/post/03-functions/)
 4. [Introduction to the Tidyverse](https://uopsych-r-bootcamp-2021.netlify.app/post/04-intro-tidyverse/)
 5. [Importing Data & Project-oriented Workflows](https://uopsych-r-bootcamp-2021.netlify.app/post/05-importing-workflows/)
-6. [Data Visualization with {ggplot2}](https://uopsych-r-bootcamp-2021.netlify.app/post/06-ggplot2/)
-7. [Data Wrangling with {dplyr}](https://uopsych-r-bootcamp-2021.netlify.app/post/07-dplyr/)
-8. [Data Tidying with {tidyr}](https://uopsych-r-bootcamp-2021.netlify.app/post/08-tidyr/)
+6. [Data Visualization with ggplot2](https://uopsych-r-bootcamp-2021.netlify.app/post/06-ggplot2/)
+7. [Data Wrangling with dplyr](https://uopsych-r-bootcamp-2021.netlify.app/post/07-dplyr/)
+8. [Data Tidying with tidyr](https://uopsych-r-bootcamp-2021.netlify.app/post/08-tidyr/)
 9. [Reproducible Reporting with R Markdown](https://uopsych-r-bootcamp-2021.netlify.app/post/09-rmarkdown/)
 
 ***

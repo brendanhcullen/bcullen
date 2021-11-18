@@ -28,6 +28,7 @@ tags:
 - R
 - education
 ---
+![](certificate.jpeg)
 
 I recently went through RStudio's [Instructor Training and Certification Program](https://education.rstudio.com/trainers/), and I am now an RStudio Certified Instructor in the [tidyverse](https://www.tidyverse.org/). You can read more details in the links above. 
 
