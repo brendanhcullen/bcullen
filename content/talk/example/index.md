@@ -1,52 +1,47 @@
 ---
-abstract: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere tellusac
-  convallis placerat. Proin tincidunt magna sed ex sollicitudin condimentum. Sed ac
-  faucibus dolor, scelerisque sollicitudin nisi. Cras purus urna, suscipit quis sapien
-  eu, pulvinar tempor diam.
-address:
-  city: Stanford
-  country: United States
-  postcode: "94305"
-  region: CA
-  street: 450 Serra Mall
+title: 'Using R more "wisely": Column-wise & row-wise operations with dplyr'
+draft: false
+event: 
+event_url:
+location:
+summary: "Workshop for R-Ladies Algiers on column-wise and row-wise operations with dplyr for more efficient data wrangling and summarizing."
+show_post_thumbnail: true
+show_author_byline: false
+show_post_date: false
+show_post_time: false
+
+# Talk start and end times.
+#   End time can optionally be hidden by prefixing the line with `#`.
+date: "2020-11-24"
+date_end:
 all_day: false
-authors: []
-date: "2030-06-01T13:00:00Z"
-date_end: "2030-06-01T15:00:00Z"
-event: Academic Theme Conference
-event_url: https://example.org
-featured: false
+publishdate: 
+categories:
+  - workshop
+tags:
+  - dplyr
+lastmod:
+featured: no
 image:
-  caption: 'Image credit: [**Unsplash**](https://unsplash.com/photos/bzdhc5b3Bxs)'
-  focal_point: Right
+  focal_point: 'center'
+  preview_only: no
+projects: []
 links:
-- icon: twitter
+- icon: door-open
+  icon_pack: fas
+  name: slides
+  url: https://dplyr-wisely.netlify.app/
+- icon: github
   icon_pack: fab
-  name: Follow
-  url: https://twitter.com/georgecushen
-location: Source Themes HQ
-math: true
-projects:
-- internal-project
-publishDate: "2017-01-01T00:00:00Z"
-slides: example
-summary: An example talk using Academic's Markdown slides feature.
-tags: []
-title: Example Talk
-url_code: ""
-url_pdf: ""
-url_slides: ""
-url_video: ""
+  name: materials
+  url: https://github.com/brendanhcullen/wisely
 ---
 
-{{% alert note %}}
-Click on the **Slides** button above to view the built-in slides feature.
-{{% /alert %}}
+<div>
+  <iframe
+      width="700"
+      height="500"
+      src="https://dplyr-wisely.netlify.app/">
+  </iframe>
+</div>
 
-Slides can be added in a few ways:
-
-- **Create** slides using Academic's [*Slides*](https://sourcethemes.com/academic/docs/managing-content/#create-slides) feature and link using `slides` parameter in the front matter of the talk file
-- **Upload** an existing slide deck to `static/` and link using `url_slides` parameter in the front matter of the talk file
-- **Embed** your slides (e.g. Google Slides) or presentation video on this page using [shortcodes](https://sourcethemes.com/academic/docs/writing-markdown-latex/).
-
-Further talk details can easily be added to this page using *Markdown* and $\rm \LaTeX$ math code.
