@@ -1,6 +1,6 @@
 ---
 title: 'Decision Tree Learning in R'
-layout: single-sidebar
+layout: single
 author: Brendan Cullen, Cianna Bedford-Petersen & Christopher Loan
 date: '2020-06-02'
 slug: []
@@ -16,14 +16,16 @@ image:
   focal_point: ''
   preview_only: FALSE
 projects: []
-disable_codefolding: false
-codefolding_show: "show"
-codefolding_nobutton: false 
 ---
+
+<center>
+<img src="featured.jpg">
+</center>
+<br>
 
 RStudio has recently released a cohesive suite of packages for modelling and machine learning, called tidymodels. The successor to Max Kuhn’s caret package, tidymodels allows for a tidy approach to your data from start to finish. We’re going to walk through the basics for getting off the ground with tidymodels and demonstrate its application to three different tree-based methods for predicting student test scores. For further information about the package, you can visit https://www.tidymodels.org/.
 
-# Setup
+## Setup
 
 
 
@@ -40,7 +42,7 @@ library(future) # parallel processing & decrease computation time
 library(xgboost) # boosted trees
 ```
 
-# Import the data
+## Import the data
 
 We use simulated data which approximates reading and math scores for ~189,000 3rd-8th grade students in Oregon public schools see [this Kaggle page](https://www.kaggle.com/c/edld-654-spring-2020) for details. For the purpose of demonstration, we’ll be sampling 1% of the data with `sample_frac()` to keep computer processing time manageable. All school IDs in the data are real, so we can use that information to link the data with other sources. Specifically, we’re also going to pull in some data on student enrollment in free and reduced lunch from the National Center for Education Statistics and some ethnicity data from the Oregon Department of Education. 
 
@@ -110,7 +112,7 @@ After loading in our three datasets, we’ll join them together to make one cohe
 
 For a more complete description of the variables, you can download the data dictionary [here](data_dictionary.csv).
 
-# Explore the data
+## Explore the data
 
 We’ll use the `skimr::skim()` to take a closer look at our variables. Many numeric predictors are clearly non-normal (see histograms below), but this is no problem as tree-based methods are robust to non-normality.
 
@@ -214,7 +216,7 @@ dat %>%
 <img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-5-1.png" width="672" />
 
 
-# Split data and resample
+## Split data and resample
 
 The first step of our analysis is to split our data into two separate sets: a "training" set and a "testing" set. The training set is used to train a model and, if desired, to adjust (i.e., "tune") the model's hyperparameters before evaluating its final performance on our test data. By allowing us to test a model on a new sample, we assess "out of sample" accuracy (i.e., unseen data-—what all predictive models are interested in) and limit overfitting to the training set. We can do this efficiently with the `initial_split()` function. This comes from the rsample package, which is part of the tidymodels package that we already loaded. Defaults put 75% of the data in the training set and 25% in the test set, but this can be adjusted with the `prop` argument. Then, we’ll extract the training data from our split object and assign it a name. 
 
@@ -232,7 +234,7 @@ train <- training(split)
 cv <- vfold_cv(train)
 ```
 
-# Pre-processing
+## Pre-processing
 
 Before we add in our data to the model, we’re going to set up an object that pre-processes our data. This is called a *recipe*. To create a recipe, you’ll first specify a formula for your model, indicating which variable is your outcome and which are your predictors. Using `~.` here will indicate that we want to use all variables other than `score` as predictors. Then, we can specify a series of pre-processing steps for our data that directs our recipe to assign our variables a role or performs feature engineering steps. Pre-processing may be sound uncommon, but if you've ever used `lm()` (or several other `R` functions) you've done some of this by simply calling the function (e.g., automatic dummy-coding to handle categorical data). This is beneficial because it gives the analyst more control, despite adding complexity to the process.
 
@@ -252,37 +254,37 @@ rec <- recipe(score ~ ., train) %>%
 ```
 
 
-# Create a model
+## Create a model
 
 The last step before bringing in our data is to specify our model. This will call upon functions from the parsnip package, which standardizes language for specifying a multitude of statistical models. There are a few core elements that you will need to specify for each model 
 
-## The type of model
+### The type of model
 
 This indicates what type of model you choose to fit, each of which will be a different function. We’ll be focusing on decision tree methods using `bag_tree()`, `random_forest()`, and `boost_tree()`. A full list of models can be found here https://www.tidymodels.org/find/parsnip/
 
-## The engine 
+### The engine 
 
 `set_engine()` calls the package to support the model you specified above.
 
-## The mode
+### The mode
 
 `set_mode()` indicates the type of prediction you’d like to use in your model, you’ll choose between regression and classification. Since we are looking to predict student scores, which is a continuous predictor, we’ll be choosing regression. 
 
-## The arguments 
+### The arguments 
 
 `set_args()` allows you to set values for various parameters for your model, each model type will have a specific set of parameters that can be altered. For these parameters, you can either set a particular value or you can use the tune function to search for the optimal value of each parameter. Tuning requires a few extra steps, so we will leave the default arguments for clarity. For more information on tuning check out https://tune.tidymodels.org/.
 
-# Create a workflow
+## Create a workflow
 
 Up to this point we’ve been setting up a lot of individual elements and now it is time to combine them to create a cohesive framework, called a *workflow*, so we can run our desired models. First, we’ll use the `workflow()` command and then we’ll pulling the recipe and model we already created. The next section shows three examples of specifying models and creating a workflow for different decision tree methods.
 
-# Model Examples
+## Model Examples
 
-## Bagged trees
+### Bagged trees
 
 A bagged tree approach creates multiple subsets of data from the training set which are randomly chosen with replacement. Each subset of data is used to train a given decision tree. In the end, we have an ensemble of different models. The predictions from all the different trees are averaged together, giving us a stronger prediction than one tree could independently. 
 
-### Specify model
+#### Specify model
 
 
 ```r
@@ -292,7 +294,7 @@ mod_bag <- bag_tree() %>%
   set_engine("rpart", times = 10) # 10 bootstrap resamples
 ```
 
-### Create workflow
+#### Create workflow
 
 
 ```r
@@ -301,7 +303,7 @@ wflow_bag <- workflow() %>%
   add_model(mod_bag)
 ```
 
-### Fit the model
+#### Fit the model
 
 
 ```r
@@ -317,7 +319,7 @@ fit_bag <- fit_resamples(
                               extract = function(x) extract_model(x)))
 ```
 
-### Visualize
+#### Visualize
 
 The plot below shows the root nodes from a bagged tree made of 100 trees (10 folds x 10 bootstrapped resamples). Root nodes are the 1st node in a decision tree, and they are determined by which variable best optimizes a loss function (e.g., minimizes mean square error [MSE] for continuous outcomes or Gini Index for categorical outcomes). Put roughly, the most common root nodes can be thought of as the most "important" predictors.
 
@@ -347,11 +349,11 @@ bag_roots(fit_bag) %>%
 
 <img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-11-1.png" width="672" />
 
-## Random forest
+### Random forest
 
 Random forest is similar to bagged tree methodology but goes one step further. In addition to taking random subsets of data, the model also draws a random selection of features. Instead of utilizing all features, the random subset of features allows more predictors to be eligible root nodes. This is particularly useful for handling high dimensionality data (e.g., have more variables than participants/cases).
 
-### Specify the model
+#### Specify the model
 
 
 ```r
@@ -365,7 +367,7 @@ mod_rf <-rand_forest() %>%
   set_args(trees = 1000)
 ```
 
-### Create workflow
+#### Create workflow
 
 
 ```r
@@ -374,7 +376,7 @@ wflow_rf <- workflow() %>%
   add_recipe(rec)
 ```
 
-### Fit the model
+#### Fit the model
 
 
 ```r
@@ -391,7 +393,7 @@ fit_rf <- fit_resamples(
 )
 ```
 
-### Visualize
+#### Visualize
 
 The plot below shows the root nodes from a random forest with 1000 trees (specified using `set_args(trees = 1000)` in the parsnip model object).
 
@@ -432,11 +434,11 @@ rf_roots(fit_rf) %>%
 
 <img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-15-1.png" width="672" />
 
-## Boosted trees
+### Boosted trees
 
 Boosted trees, like bagged trees, are an ensemble model. Instead of applying successive models to resampled data and pooling estimates, boosted trees fit the next tree to the residuals (i.e., error term) of the prior tree. The goal is to minimize residual error through multiple trees, and is typically done with fairly "shallow" decision tree (i.e., 1-6 splits in each tree). Though each model is only slightly improving the error rate, the sequential use of many shallow trees makes computationally efficient (i.e. reduced run time) and highly accurate predictions.
 
-### Specify the model
+#### Specify the model
 
 
 ```r
@@ -445,7 +447,7 @@ mod_boost <- boost_tree() %>%
   set_mode("regression")
 ```
 
-### Create workflow
+#### Create workflow
 
 
 ```r
@@ -454,7 +456,7 @@ wflow_boost <- workflow() %>%
   add_model(mod_boost)
 ```
 
-### Fit the model
+#### Fit the model
 
 
 ```r
@@ -470,11 +472,11 @@ fit_boost <- fit_resamples(
 )
 ```
 
-### Visualize
+#### Visualize
 
 One of the few downfalls of tidymodels is its (current) inability to plot these tree-based models. For the past two models, it was simpler to extract root nodes and plot them, but their interpretation (as we're fitting to residuals instead of data sets) are not straightforward. For that reason, we don't have any pretty plots here. Instead, we'll skip to evaluating the metrics of all models. 
 
-# Evaluate metrics
+## Evaluate metrics
 
 After running these three models, it’s time to evaluate their performance. We can do this with `tune::collect_metrics()`. The table below shows the estimate of the out-of-sample performance for each of our 3 models.
 
@@ -499,7 +501,7 @@ collect_metrics(fit_bag) %>%
 
 Here, we are faced with a common problem in the machine learning world: choosing between models that perform similarly (see overlapping standard errors). Whether we would prefer random forests or bagged trees may depend on computational efficiency (i.e., time) or other factors. In practice, tuning several hyperparameters may have made one model clearly preferable over the others, but in our case - relying on all defaults - we would probably have similar performance with both models on a new data set and would prefer random forest or boosted tree models for their efficiency.
 
-# Out-of-sample performance
+## Out-of-sample performance
 
 The final step is to apply each trained model to our test data using `last_fit()`.
 
@@ -561,7 +563,7 @@ After applying our 3 trained models to the unseen test data, it looks like the b
 ##  collate  en_US.UTF-8                 
 ##  ctype    en_US.UTF-8                 
 ##  tz       America/Los_Angeles         
-##  date     2021-11-11                  
+##  date     2021-12-01                  
 ## 
 ## ─ Packages ───────────────────────────────────────────────────────────────────
 ##  package       * version    date       lib source                           

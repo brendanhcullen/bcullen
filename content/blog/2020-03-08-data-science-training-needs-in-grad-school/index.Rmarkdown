@@ -1,6 +1,6 @@
 ---
 title: Data Science Training in Psychology
-layout: single-sidebar
+layout: single
 author: Brendan Cullen
 date: '2020-03-08'
 slug: []
@@ -22,13 +22,18 @@ image:
 projects: []
 ---
 
+<center>
+<img src="featured.jpg">
+</center>
+<br>
+
 Psychology is generally considered a "soft" science, on the opposite end of the spectrum from the "hard" sciences of physics, chemistry, and biology. This often creates a misconception that psychology is somehow not as quantitative, computational, or rigorous, methodologically. To the contrary, psychology is in fact very "hard" (some might even say ["the hardest"](https://thehardestscience.com/2009/03/14/making-progress-in-the-hardest-science/)). Why? Because explaining human cognition and behavior is really difficult. People do not think and behave in predictable and consistent ways like atoms and molecules. 
 
 Indeed, the combination of random variation ("noise") in how we humans respond to our environment on an given day/hour/minute, combined with the inherent challenge of proper sampling, reliable measurement and accurate model building makes data analysis for a psychologist no easy feat. Explaining variance in psychological data has required centuries of refining statistical methods and computational tools. Fortunately, today's scientists have access to open-source software like R and Python that have *vastly* enhanced our ability to work with data in a way that is more transparent and reproducible. As a result, the teaching of these tools is becoming increasingly more common in psychology graduate programs (and many other fields), particularly in statistics classes.
 
 ***
 
-# Graduate statistics
+## Graduate statistics
 
 The Department of Psychology at the University of Oregon requires first-year graduate students to take a 3-course series of classes on statistics and data analysis. (You can access the materials for these classes [here.](https://github.com/uopsych)) As I'm sure used to be the case in psychology departments across many universities, the labs for these classes were originally taught in SPSS. However, thanks to the efforts of some hard-working graduate teaching assistants who served as lab instructors at the time, the labs eventually transitioned to being taught entirely in R. 
 
@@ -36,7 +41,7 @@ While learning R in first-year grad stats has immense benefits, it is also reall
 
 ***
 
-# Training needs
+## Training needs
 
 But the way things seem to be moving, it's becoming more common for many students to need more general data science skills in grad school. Current psychology grad students at UO (n = 28) were recently surveyed about the degree to which they perceive they will need different data science-related skills for their desired careers and how much training in those skills is available at UO to their knowledge. Specifically, they were asked, 
 
@@ -151,7 +156,7 @@ data_diff %>%
 On the whole, it seems that that there are bigger training gaps for more general data science skills (e.g., programming in R and Python, data wrangling, data visualization). In contrast, the smallest gaps exist for more specialized skills like advanced statistics (e.g., computational modeling, network analysis, structural equation modeling) -- likely because our department has an entire class devoted to each of these topics. 
 
 ***
-# Learning Resources
+## Learning Resources
 
 For the most part, it seems that grad students in our department want more training in general data science skills above and beyond the training they are currently receiving through coursework. Often what this means is that grad students end up teaching themselves (and each other) these skills. Some of my peers have made really incredible tutorials on new tools and methodologies they've recently learned. Sometimes students also attend specialized methods workshops and take detailed notes that could greatly benefit others who want to learn the same kind of methods.
 
@@ -159,7 +164,7 @@ What I would love to see is a central, searchable repository of data science res
 
 ***
 
-# A final thought 
+## A final thought 
 
 Reflecting on all this has brought home a thought that I think is worth sharing -- as grad students, one of the best resources we have access to during our time in grad school is *each other*. Personally, I have learned so much over the years from my [fellow lab members](https://sanlab.uoregon.edu/people/). Without them, I would not have conquered my fear of Github or felt inspired to learn more about R and other programming languages. Perhaps the most impactful benefit I've received from them, though, is their encouragement -- and that, in particular, is something I hope to pay forward as much as possible. 
 
