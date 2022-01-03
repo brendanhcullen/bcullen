@@ -1,21 +1,17 @@
 ---
 title: 'Using R more "wisely": Column-wise & row-wise operations with dplyr'
 draft: false
-event: 
-event_url:
+event: 'R Ladies Algiers'
+event_url: https://www.meetup.com/rladies-algiers/events/274647307/
 location:
 summary: "Workshop for R-Ladies Algiers on column-wise and row-wise operations with dplyr for more efficient data wrangling and summarizing."
-show_post_thumbnail: true
-show_author_byline: false
-show_post_date: false
-show_post_time: false
 
 # Talk start and end times.
 #   End time can optionally be hidden by prefixing the line with `#`.
-date: "2020-11-24"
+date: "2020-11-24T09:30:00Z"
 date_end:
 all_day: false
-publishdate: 
+publishdate:
 categories:
   - workshop
 tags:
