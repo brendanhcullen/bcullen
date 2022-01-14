@@ -1,0 +1,165 @@
+---
+title: Reflections on RStudio Instructor Training
+layout: single
+author: Brendan Cullen
+date: '2020-09-03'
+slug: []
+categories: []
+tags:
+  - data science
+  - education
+  - R
+subtitle: ''
+summary: "The 'what' and 'why' of RStudio Instructor Training and resources for those interested in pursuing it."
+authors: []
+lastmod: ''
+featured: no
+image:
+  caption: '<span>Photo by <a href="https://www.istockphoto.com/portfolio/oatawa?assettype=image&mediatype=photography&sort=mostpopular">oatawa</a> on <a href="https://www.istockphoto.com/">iStock</a></span>'
+  focal_point: ''
+  preview_only: no
+projects: []
+---
+
+<center>
+<img src="featured.jpg">
+</center>
+<br>
+
+A while back I wrote about how we [need more data science training](https://bcullen.rbind.io/post/2020-03-08-data-science-training-needs-in-grad-school/) as grad students in psychology and that one of the best ways for us to get this training is to [learn from each other](https://twitter.com/_bcullen/status/1237414725081653249). This is just one of many reasons why I'm so humbled and excited to have recently become an [RStudio Certified Instructor](https://education.rstudio.com/trainers/people/cullen+brendan/) in the tidyverse.
+
+I'm looking forward to start implementing and sharing what I learned with my fellow grad students, especially at the end of this month when I will be leading an introductory R workshop for the new cohort of first year PhD and master's students in my department.
+
+As a small way of paying it forward, I wanted to offer a reflection on what I think makes this training so unique and worthwhile along with a summary of what's involved and some resources for those who might be interested in knowing more.
+
+------------------------------------------------------------------------
+
+## The *what*
+
+<div class="note">
+The best place the start is to read about the RStudio Instructor Training and Certification Program <a href= "https://education.rstudio.com/trainers/#info">here</a>. The <a href= "https://education.rstudio.com/categories/certify/">RStudio Education Blog</a> also has lots of helpful posts about the program.
+</div>
+
+The process boils down to three steps.
+
+### Training Course `r fontawesome::fa("chalkboard-teacher")`
+
+The first step is to sign up for the training course, which will likely be held over Zoom and chunked into 3-4 hour segments across 2-3 days. You can access the training materials [here](https://drive.google.com/drive/folders/13ohFt3D0EJ5PDbMaWTxnHH-hwA7G0IvY).
+
+The training course is an interactive introduction to applying evidence-based teaching methods to data science education, such as [learner personas](https://docs.google.com/presentation/d/1aOnX-B9XlAzkrlIeZa5db3_X2Dk8cS27k3klvPn1SQI/edit), [concept maps](https://docs.google.com/presentation/d/1k45SqyM-w4DtK7dmedeX7pk_r8B9Aq0FKKCxC04pTRM/edit), and [formative assessment](https://docs.google.com/presentation/d/1PBxBFpkB4w-C3_l2rWdGMtjxaxDeu8gVP0K0CHJfbdQ/edit) (i.e. short, diagnostic questions or exercises to figure out if learners are forming accurate mental models). The course also covers how to design teaching materials with [reverse instructional design](https://docs.google.com/presentation/d/1PBxBFpkB4w-C3_l2rWdGMtjxaxDeu8gVP0K0CHJfbdQ/edit#slide=id.g5501944768_0_197) that takes into account [cognitive load](https://docs.google.com/presentation/d/1t9QTkRfGP9WYQjiXoaVAuceFe3ySVe_wLT7j2MYC8bE/edit#slide=id.g39e398e252_0_14), [multiple learning strategies](https://docs.google.com/presentation/d/1bq599QkDdaWXmw-B8JM5jwdl5In9O-NTxLPT2iES0vY/edit#slide=id.g5479673425_0_87), and issues of [inclusivity and student motivation](https://docs.google.com/presentation/d/1uYQCbs88aao7Ho4d4mUfYi6hOXhgHWV6noR_-jOaE50/edit) in the classroom.
+
+<br>
+
+### Technical Exam `r fontawesome::fa("laptop-code")`
+
+The technical exam assesses your proficiency in whatever topic for which you are attempting to become a certified instructor. Currently there are options to become a certified instructor in [tidyverse](https://www.tidyverse.org/) and [shiny](https://shiny.rstudio.com/), and each has its own accompanying technical exam.
+
+I took the tidyverse exam, which, broadly speaking, consists of a series of live coding challenges related to using core tidyverse packages for data cleaning and wrangling, data visualization, string manipulation, functional programming, basic statistical modeling, and creating reproducible documents with R Markdown.
+
+As many others have suggested, a great way to prepare for this exam is to work through the exercises [R for Data Science](https://r4ds.had.co.nz/), particularly for topics that feel rusty to you, and review the community-contributed [solutions](https://jrnold.github.io/r4ds-exercise-solutions/).
+
+<div class="note">
+I highly recommend going through these sample exams from the RStudio Education Blog start to finish to get a sense of what you might need to review.
+
+-   [Sample Tidyverse Exam 1](https://education.rstudio.com/blog/2020/02/instructor-certification-exams/#tidyverse-certification-exam) \| [solutions](https://marlycormar.github.io/tidyverse_sample_exam/sample_exam_sols/sols.html)
+-   [Sample Tidyverse Exam 2](https://education.rstudio.com/blog/2020/08/more-example-exams/#tidyverse-exam) \| [solutions](https://tidyverse-exam-v2-solutions.netlify.app/)
+</div>
+
+<br>
+
+
+### Teaching Exam `r fontawesome::fa("user-graduate")`
+
+The first certification exam assesses pedagogical skills related to teaching data science with R and requires giving a 15-minute demonstration lesson on a topic of your choice followed by a series of applied questions, which will likely involve creating formative assessments on unseen material (e.g. multiple choice questions and fill-in-the-blank coding exercises), developing concept maps on data science topics and giving feedback on example teaching based on pedagogical theory.
+
+<div class="note">
+There are also sample teaching exams available.
+
+-   [Sample Teaching Exam 1](https://education.rstudio.com/blog/2020/02/instructor-certification-exams/#teaching-exam)
+-   [Sample Teaching Exam 2](https://education.rstudio.com/blog/2020/08/more-example-exams/#teaching-exam)
+
+</div>
+
+### Example Lesson
+
+If you'd like to see an example of a demonstration lesson, below are the materials I created for this portion of the teaching exam. You can find all of the source code for this lesson on <a href= "https://github.com/brendanhcullen/rstudio-instructor-certification">Github</a>. Feel free to share, adapt and re-use for your own teaching.
+
+```{r echo=FALSE}
+xaringanExtra::embed_xaringan(
+  url = "https://columnwise-operations-dplyr.netlify.app/"
+)
+```
+
+Full slides available [here](https://columnwise-operations-dplyr.netlify.app/).
+
+------------------------------------------------------------------------
+
+## The *why*
+
+Why go to the trouble of doing this training? Here are a few reasons that come to mind.
+
+### Surge in online teaching `r fontawesome::fa("cloud")`
+
+Interest in data science education seems to be ever-increasing. The fact that COVID-19 has forced most education to go online might actually present an opportunity to meet this demand in a more scalable and (hopefully more accessible way that doesn't incur the traditional limitations of travel costs or room capacity. Of course, online education comes with a host of inherent challenges. The training course includes a [whole section](https://docs.google.com/presentation/d/1kbYaHv47Vt59JxqXF7U7pQl5XOwsctzpP740iVM7Bc8/edit#slide=id.g55ddde1eae_0_2) on this. I also recommend you check out this [RStudio webinar](https://rstudio.com/resources/webinars/teaching-online-at-short-notice/) and accompanying [blog post](https://education.rstudio.com/blog/2020/03/teaching-online-on-short-notice/) along with answers to some [frequently asked questions](https://education.rstudio.com/blog/2020/03/online-teaching-qa/) about teaching online.
+
+As online data science education is becoming increasingly the norm, it seems natural to assume that there will be a need for more certified instructors to meet the growing demand.
+
+### Teaching resources galore `r fontawesome::fa("gem")`
+
+Another great reason to become a certified instructor is that, as a data science educator, you have a huge and ever-increasing bank of resources at your disposal. What's more, as a certified instructor, you are eligible for free licenses to [RStudio Pro products](https://rstudio.com/products/) and a significant discount for [RStudio Cloud](https://rstudio.cloud/). Here are just some of the great teaching tools from RStudio and the \#rstats community.
+
+**Teaching with RStudio Cloud**
+
+-   [webinar](https://rstudio.com/resources/webinars/teaching-r-online-with-rstudio-cloud/) and accompanying [blog post](https://education.rstudio.com/blog/2020/04/teaching-with-rstudio-cloud-q-a/), courtesy of [Mine Çetinkaya-Rundel](https://www2.stat.duke.edu/~mc301/)
+
+**Interactive lessons with `learnr`**
+
+-   [tutorial and demonstration](https://education.rstudio.com/blog/2020/05/learnr-for-remote/), courtesy of [Allison Horst](https://www.allisonhorst.com/)
+
+-   [lessons learned](https://education.rstudio.com/blog/2020/06/summer-camp-hs/) from using `learnr` to teach high schoolers, courtesy of [Ezgi Karaesmen](https://www.ezgikaraesmen.com/)
+
+-   [a deep dive](https://education.rstudio.com/blog/2020/07/learning-learnr/) into `learnr`, courtesy of [Nischal Shrestha](http://nischalshrestha.me/)
+
+-   [{gradethis} package](https://rstudio-education.github.io/gradethis/) for easily grading `learnr` exercises
+
+**Openly licensed teaching materials**
+
+-   [a thorough summary](https://education.rstudio.com/blog/2020/05/remote-roundup/) of recent online courses/workshops, courtesy of [Alison Hill](https://alison.rbind.io/)
+
+-   [Data Science in a Box](https://datasciencebox.org/), courtesy of [Mine Çetinkaya-Rundel](https://www2.stat.duke.edu/~mc301/)
+
+-   [STAT 545](https://stat545.com/), courtesy of [Jenny Bryan](https://jennybryan.org/about/)
+
+-   [Many others](https://education.rstudio.com/teach/materials/#workshops), courtesy of the RStudio Education Team
+
+**rstudio4edu**
+
+-   a [book-in-progress](https://rstudio4edu.github.io/rstudio4edu-book/), courtesy of [Desirée De Leon](https://desiree.rbind.io/) and [Alison Hill](https://alison.rbind.io/). This is in a category of its own because it's an absolute gold mine.
+
+### Tried and tested `r fontawesome::fa("comments")`
+
+The instructor training program started back in February 2019 and [as of August 2020](https://education.rstudio.com/blog/2020/08/august-2020-instructors/) there are almost 150 certified tidyverse instructors and 20 shiny instructors. This means that the program has gone through multiple iterations and has made data-driven improvements based on [feedback from participants](https://education.rstudio.com/blog/2020/07/instructor-certification-findings/) -- especially in the realm of supporting online teaching in the aftermath of COVID-19. So you can rest assured that, while it is still a relatively new program, all the kinks have been worked out.
+
+### A focus on inclusivity `r fontawesome::fa("hands-helping")`
+
+The focus of this training is not technical competency -- it's how be an effective teacher. One of the most critical components of teaching effectively is to be inclusive of all learners, regardless of race, religion, sexual orientation, gender identity, disability, etc.
+
+The [\#rstats learning community](https://twitter.com/R4DScommunity) is known for being welcoming and inclusive, so it's no surprise that the training course emphasizes these values as well. What I appreciate most about this aspect of the training is that it will challenge you to think about questions and hypothetical scenarios to which there are no easy answers.
+
+However, it is important to be pushed out of your comfort zone to consciously and proactively reflect on how you will confront issues such as systemic racism and institutionalized violence against BIPOC communities, sexism and a deeply ingrained culture of sexual harassment. These issues will inevitably arise in one form or another in your classroom or teaching setting, and it's necessary that we confront these challenges now more than ever. Check out [this slide](https://docs.google.com/presentation/d/1uYQCbs88aao7Ho4d4mUfYi6hOXhgHWV6noR_-jOaE50/edit#slide=id.g56df7927dc_0_1) and [this talk](https://www.youtube.com/watch?v=EhNisFJPfrs) on effective allyship when you get a chance.
+
+<div class="book">
+For further reading on inclusivity and social justice in data science education, I recommend you read <a href="https://education.rstudio.com/blog/2020/06/native-classroom/">this post</a> by Nicole Thompson Gonzalez. Also check out the work that JooYoung Seo has been doing to make data science tools <a href="https://education.rstudio.com/blog/2020/07/a11y-midterm/">more accessible</a>.
+</div>
+
+Another exciting feature is that the training materials are now [available in Spanish](https://drive.google.com/drive/folders/1qwTEMqoqphF9qu7f0lSCSTmikIf5chBi), courtesy of [Laura Acion](https://lacion.rbind.io/), and hopefully other languages soon, as interest in the training seems to be growing around the world. A similar ongoing project to check out is [`glosario`](https://carpentries.github.io/glosario/), an open source glossary of data science terms translated in multiple languages that can be used for teaching (read more [here](https://education.rstudio.com/blog/2020/07/announcing-glosario/)).
+
+### Community of practice `r fontawesome::fa("users")`
+
+To extend the idea of including *everyone* who wants to learn data science, we must be active in building teaching communities that extend beyond just the walls of academic institutions.
+
+RStudio's [mission](https://education.rstudio.com/teach/) is to
+
+> "equip everyone, regardless of means, to participate in a global economy that rewards data literacy."
+
+A more concrete goal, put forth by [Carl Howe](https://education.rstudio.com/trainers/people/howe+carl/), Director of Education at RStudio, is to train the [next million R users](https://rstudio.com/resources/rstudioconf-2019/the-next-million-r-users/). In becoming an RStudio certified instructor, you can better position yourself to actively participate in reaching this goal. But it's worth reflecting on the fact that teaching and learning doesn't happen in a vacuum -- this is where the idea of community comes in. In my opinion, the fact that R users around the world already have a strong sense of community will make it that much easier to welcome new learners into the fold and make it more likely that they themselves will start to train others one day.

@@ -3,6 +3,7 @@ if (file.exists("~/.Rprofile")) {
 }
 
 options(
+  blogdown.hugo.version = "0.89.1",
   blogdown.author = "Brendan Cullen",
   blogdown.ext = ".Rmd",
   blogdown.subdir = "post",

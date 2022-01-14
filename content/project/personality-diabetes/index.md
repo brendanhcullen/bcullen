@@ -1,6 +1,6 @@
 ---
 title: Predicting diabetes status from personality
-summary: A machine learning project
+summary: A machine learning project exploring the relationship between diabetes and personality 
 abstract: ""
 date: "2020-04-24T00:00:00Z"
 image:
@@ -15,11 +15,16 @@ links:
   icon_pack: fas
   name: Pre-registration
   url: https://osf.io/nqs8e/
-
+- icon: info-circle
+  icon_pack: fas
+  name: SAPA Project
+  url: https://www.sapa-project.org/
+  
 tags:
 - machine learning
 - health
 - R
 ---
+![](model_performance.png)
 
 Prior research suggests that diabetes is both a cause and consequence of various health behaviors and thus has complex links to personality. This study investigates the utility of personality in predicting diabetes status (Type 1, Type 2 or none) using a subset of items from the Synthetic Aperture Personality Assessment (SAPA) Project (N ≈ 645,000). We estimate the classification accuracy of various personality measures, including low- and high-dimensional data, using supervised machine learning techniques, e.g. random forests, support vector machines and neural networks. Results are compared across machine learning models and dimensionality of personality predictors. This project involves the automated generation of executable R scripts using non-standard evaluation within a tidyverse framework, allowing for parallel processing on high-performance computing clusters. This analysis informs the extent to which personality measurement could be applied in clinical contexts related to diabetes.
